@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".auth.SelectLanguageActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_background">
+
+
+        <TextView
+            android:id="@+id/tvWelcome"
+           style="@style/TextView20ssp"
+            android:gravity="center"
+            android:textSize="@dimen/_22sdp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/_80sdp"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/welcome"/>
+
+        <TextView
+            android:id="@+id/tvTo"
+           style="@style/TextView20ssp"
+            android:gravity="center"
+            android:layout_below="@+id/tvWelcome"
+            android:textSize="@dimen/_22sdp"
+            android:layout_width="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/to_bandhan"/>
+
+        <TextView
+           style="@style/TextView14ssp"
+            android:gravity="center"
+            android:layout_below="@+id/tvTo"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/shopkeeper"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_shop"/>
+    </RelativeLayout>
+</layout>
