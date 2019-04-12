@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".auth.LoginActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/_20sdp">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_50sdp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/TextView12ssp"
+                            android:fontFamily="@font/latobold"
+                            android:text="@string/welcome_"
+                            android:textSize="@dimen/_22sdp" />
+
+                        <TextView
+                            style="@style/TextView14ssp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:fontFamily="@font/latomedium"
+                            android:text="@string/login_to_continue_acc"
+                            android:textColor="@color/colorHint" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_bucket" />
+                </LinearLayout>
+
+                <EditText
+                    style="@style/EditText12ssp"
+                    android:layout_marginTop="@dimen/_60sdp"
+                    android:background="@drawable/rect_back_with_corner"
+                    android:hint="@string/mobile_no"
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:minHeight="@dimen/_50sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:singleLine="true" />
+
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/material_button"
+                    android:layout_marginTop="@dimen/_100sdp"
+                    android:minHeight="@dimen/_50sdp"
+                    android:text="@string/login"
+                    android:textSize="@dimen/_12ssp"
+                    app:cornerRadius="@dimen/_3sdp" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/material_button"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:backgroundTint="@color/color_sky_blue"
+                    android:minHeight="@dimen/_50sdp"
+                    android:text="@string/login_with_true_caller"
+                    android:textSize="@dimen/_12ssp"
+                    app:cornerRadius="@dimen/_3sdp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_60sdp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextView12ssp"
+                        android:text="@string/dont_have_an_account"
+                        android:textColor="@color/colorHint" />
+
+                    <TextView
+                        style="@style/TextView12ssp"
+                        android:fontFamily="@font/latoregular"
+                        android:text="@string/sign_up" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
+</layout>

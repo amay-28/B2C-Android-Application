@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".auth.OtpVerificationActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/_20sdp">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_50sdp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/TextView12ssp"
+                            android:fontFamily="@font/latobold"
+                            android:text="@string/otp_verification"
+                            android:textSize="@dimen/_22sdp" />
+
+                        <TextView
+                            style="@style/TextView14ssp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:fontFamily="@font/latomedium"
+                            android:text="@string/to_verify_phone_no"
+                            android:textColor="@color/colorHint" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_bucket" />
+                </LinearLayout>
+
+                <com.mukesh.OtpView
+                    android:id="@+id/otp_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_100sdp"
+                    android:inputType="number"
+                    android:itemBackground="@color/white_lite"
+                    android:textColor="@color/black"
+                    app:itemCount="4"
+                    app:lineColor="@color/transparent"
+                    app:viewType="rectangle" />
+
+
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/material_button"
+                    android:layout_marginTop="@dimen/_100sdp"
+                    android:minHeight="@dimen/_50sdp"
+                    android:text="@string/verify_continue"
+                    android:textSize="@dimen/_12ssp"
+                    app:cornerRadius="@dimen/_3sdp" />
+
+
+                <TextView
+                    style="@style/TextView12ssp"
+                    android:text="@string/resend_otp"
+                    android:layout_marginTop="@dimen/_40sdp"
+                    android:layout_gravity="center"/>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
+</layout>

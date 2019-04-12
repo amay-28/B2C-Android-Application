@@ -6,6 +6,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="@dimen/_20sdp"
         android:background="@drawable/ic_background">
 
 
@@ -15,7 +16,7 @@
             android:gravity="center"
             android:textSize="@dimen/_22sdp"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/_80sdp"
+            android:layout_marginTop="@dimen/_40sdp"
             android:textColor="@color/colorPrimary"
             android:text="@string/welcome"/>
 
@@ -39,9 +40,54 @@
             android:text="@string/shopkeeper"/>
 
         <ImageView
+            android:id="@+id/imgShop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:src="@drawable/ic_shop"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_below="@+id/imgShop"
+                android:layout_marginTop="@dimen/_40sdp"
+                android:background="@drawable/rect_back_with_corner"
+                android:layout_gravity="center">
+                <Spinner
+                    android:id="@+id/spnLanguage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"></Spinner>
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/material_button"
+                android:layout_weight="1"
+                android:textSize="@dimen/_10ssp"
+                android:minHeight="@dimen/_50sdp"
+                android:onClick="startLoginScreen"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:text="@string/login"/>
+
+             <com.google.android.material.button.MaterialButton
+                style="@style/material_button"
+                 android:layout_weight="1"
+                 android:textSize="@dimen/_10ssp"
+                 android:backgroundTint="@color/yellow"
+                 android:layout_marginStart="@dimen/_3sdp"
+                 android:minHeight="@dimen/_50sdp"
+                 android:onClick="startSignUpScreen"
+                 android:text="@string/create_account"/>
+
+        </LinearLayout>
+
     </RelativeLayout>
 </layout>
