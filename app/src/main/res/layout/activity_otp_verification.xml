@@ -6,8 +6,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/_20sdp">
+        android:layout_height="match_parent">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -17,12 +16,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/ic_back_white"
+                android:padding="@dimen/_20sdp"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_50sdp"
+                    android:layout_marginTop="@dimen/_80sdp"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -59,6 +60,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_100sdp"
                     android:inputType="number"
+                    app:itemSpacing="@dimen/_20sdp"
                     android:itemBackground="@color/white_lite"
                     android:textColor="@color/black"
                     app:itemCount="4"

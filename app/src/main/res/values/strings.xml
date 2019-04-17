@@ -21,4 +21,15 @@
     <string name="to_verify_phone_no">To verify your phone no.</string>
     <string name="resend_otp">Resend OTP</string>
     <string name="verify_continue"><![CDATA[VERIFY & CONTINUE]]></string>
+    <string name="shop_name">Shop Name</string>
+    <string name="address_line_one">Address Line 1</string>
+    <string name="address_line_two">Address Line 2</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="email_optional">Email (Optional)</string>
+    <string name="thankyou">Thankyou!</string>
+    <string name="for_registring">for Registering</string>
+    <string name="admin_will_contact">Our admin will contact you for  Offline verification after that you will  be able to login into the platform</string>
+    <string name="to_know_more">To know more:</string>
+    <string name="contact_us">Contact us</string>
 </resources>

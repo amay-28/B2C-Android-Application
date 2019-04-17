@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".auth.ThankYouActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/_20sdp">
+
+        <TextView
+            android:id="@+id/tvThankYou"
+            style="@style/TextView20ssp"
+            android:gravity="center"
+            android:fontFamily="@font/latobold"
+            android:textSize="@dimen/_22sdp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/thankyou"/>
+
+        <TextView
+            android:id="@+id/tvRegistration"
+            style="@style/TextView20ssp"
+            android:gravity="center"
+            android:fontFamily="@font/latobold"
+            android:layout_below="@+id/tvThankYou"
+            android:textSize="@dimen/_22sdp"
+            android:layout_width="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/for_registring"/>
+
+        <ImageView
+            android:id="@+id/imgThnkYou"
+            android:layout_below="@+id/tvRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:src="@drawable/ic_thank_you"/>
+
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_below="@+id/imgThnkYou"
+            style="@style/TextView14ssp"
+            android:fontFamily="@font/latomedium"
+            android:gravity="center"
+            android:textColor="@color/colorHint"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="@string/admin_will_contact"/>
+
+        <TextView
+            android:id="@+id/tvToKnow"
+            style="@style/TextView14ssp"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/tvContent"
+            android:text="@string/to_know_more"
+            android:textColor="@color/colorHint"
+            android:fontFamily="@font/latosemibold"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/tvContactUS"
+            style="@style/TextView14ssp"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/tvToKnow"
+            android:text="@string/contact_us"
+            android:textColor="@color/colorPrimary"
+            android:fontFamily="@font/latosemibold"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"/>
+    </RelativeLayout>
+</layout>
