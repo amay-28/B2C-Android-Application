@@ -14,7 +14,11 @@ import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.eb.onebandhan.apiCalling.ResponseData;
+import com.google.gson.Gson;
+
 import java.io.File;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
@@ -28,6 +32,7 @@ import java.util.TimeZone;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.adapter.rxjava2.HttpException;
 
 public class Utils implements Constant {
     private static String newToken;
@@ -230,5 +235,14 @@ public class Utils implements Constant {
         editText.requestFocus();
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+    }
+
+    public static  ResponseData<String> errorMessageParsing(Throwable e) {
+        try {
+            return new Gson().fromJson(((HttpException)e).response().errorBody().string(), ResponseData.class);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        return null;
     }
 }

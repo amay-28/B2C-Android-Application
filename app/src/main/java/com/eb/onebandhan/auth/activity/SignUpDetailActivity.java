@@ -1,4 +1,4 @@
-package com.eb.onebandhan.auth;
+package com.eb.onebandhan.auth.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,11 +7,12 @@ import android.os.Bundle;
 
 import com.eb.onebandhan.R;
 
-public class OtpVerificationActivity extends AppCompatActivity {
-     private Activity activity;
+public class SignUpDetailActivity extends AppCompatActivity {
+    private Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_otp_verification);
+        activity=this;
+        setContentView(R.layout.activity_sign_up_detail);
     }
 }

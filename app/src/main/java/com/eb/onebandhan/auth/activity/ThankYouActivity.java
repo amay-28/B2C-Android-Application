@@ -1,4 +1,4 @@
-package com.eb.onebandhan.auth;
+package com.eb.onebandhan.auth.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;

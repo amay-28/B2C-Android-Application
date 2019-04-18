@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".auth.OtpVerificationActivity">
+    tools:context=".auth.activity.OtpVerificationActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -70,6 +70,7 @@
 
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnVerifyUser"
                     style="@style/material_button"
                     android:layout_marginTop="@dimen/_100sdp"
                     android:minHeight="@dimen/_50sdp"
@@ -79,6 +80,7 @@
 
 
                 <TextView
+                    android:id="@+id/tvResendOtp"
                     style="@style/TextView12ssp"
                     android:text="@string/resend_otp"
                     android:layout_marginTop="@dimen/_40sdp"

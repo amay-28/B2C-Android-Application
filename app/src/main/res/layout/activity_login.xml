@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".auth.LoginActivity">
+    tools:context=".auth.activity.LoginActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -67,6 +67,7 @@
                 </LinearLayout>
 
                 <EditText
+                    android:id="@+id/etMobileNo"
                     style="@style/EditText12ssp"
                     android:layout_marginTop="@dimen/_60sdp"
                     android:background="@drawable/rect_back_with_corner"
@@ -81,6 +82,7 @@
 
 
                 <com.google.android.material.button.MaterialButton
+                   android:id="@+id/btnLogin"
                     style="@style/material_button"
                     android:layout_marginTop="@dimen/_100sdp"
                     android:minHeight="@dimen/_50sdp"

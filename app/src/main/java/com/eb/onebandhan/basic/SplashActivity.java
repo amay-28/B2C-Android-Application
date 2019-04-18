@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.eb.onebandhan.R;
-import com.eb.onebandhan.auth.SelectLanguageActivity;
+import com.eb.onebandhan.auth.activity.SelectLanguageActivity;
 
 public class SplashActivity extends AppCompatActivity {
     private Activity activity;
