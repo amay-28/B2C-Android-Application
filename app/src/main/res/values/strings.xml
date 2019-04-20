@@ -32,4 +32,10 @@
     <string name="admin_will_contact">Our admin will contact you for  Offline verification after that you will  be able to login into the platform</string>
     <string name="to_know_more">To know more:</string>
     <string name="contact_us">Contact us</string>
+    <string name="please_enter_name">Please enter name</string>
+    <string name="please_enter_mobile_no">Please enter Mobile No.</string>
+    <string name="please_enter_valid_mobile_no">Please enter valid mobile no.</string>
+    <string name="please_enter_valid_name">Please enter valid name</string>
+    <string name="please_enter_otp">Please enter otp</string>
+    <string name="please_enter_valid_otp">Please enter valid otp</string>
 </resources>

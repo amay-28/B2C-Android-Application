@@ -13,11 +13,12 @@ import com.eb.onebandhan.databinding.ActivityThankYouBinding;
 public class ThankYouActivity extends AppCompatActivity {
     private Activity activity;
     private ActivityThankYouBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity=this;
-        binding= DataBindingUtil.setContentView(activity,R.layout.activity_thank_you);
+        activity = this;
+        binding = DataBindingUtil.setContentView(activity, R.layout.activity_thank_you);
         listner();
     }
 

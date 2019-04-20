@@ -6,7 +6,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
     </style>
+
 
     <style name="TextView10ssp">
         <item name="android:textColor">@color/black</item>
@@ -145,6 +147,7 @@
     </style>
 
     Button style black
+
     <style name="material_button" parent="Widget.MaterialComponents.Button">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -159,6 +162,7 @@
 
 
     Button style black
+
     <style name="material_button_outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -171,5 +175,6 @@
         <item name="strokeColor">@color/black</item>
         <item name="rippleColor">@color/white_dark</item>
         <item name="android:fontFamily">@font/latosemibold</item>
-    </style>Button style black
+    </style>
+    Button style black
 </resources>

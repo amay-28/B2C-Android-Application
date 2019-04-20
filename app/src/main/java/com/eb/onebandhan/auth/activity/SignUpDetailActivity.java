@@ -9,10 +9,11 @@ import com.eb.onebandhan.R;
 
 public class SignUpDetailActivity extends AppCompatActivity {
     private Activity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity=this;
+        activity = this;
         setContentView(R.layout.activity_sign_up_detail);
     }
 }

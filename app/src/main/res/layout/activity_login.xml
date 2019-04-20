@@ -112,6 +112,7 @@
                         android:textColor="@color/colorHint" />
 
                     <TextView
+                        android:id="@+id/tvSignUp"
                         style="@style/TextView12ssp"
                         android:fontFamily="@font/latoregular"
                         android:text="@string/sign_up" />

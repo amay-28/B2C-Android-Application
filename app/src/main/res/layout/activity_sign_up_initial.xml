@@ -66,6 +66,7 @@
                 </LinearLayout>
 
                 <EditText
+                    android:id="@+id/etName"
                     style="@style/EditText12ssp"
                     android:layout_marginTop="@dimen/_60sdp"
                     android:background="@drawable/rect_back_with_corner"
@@ -77,7 +78,9 @@
                     android:paddingStart="@dimen/_10sdp"
                     android:paddingEnd="@dimen/_10sdp"
                     android:singleLine="true" />
+
                 <EditText
+                    android:id="@+id/etMobileNo"
                     style="@style/EditText12ssp"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:background="@drawable/rect_back_with_corner"

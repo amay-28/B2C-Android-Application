@@ -6,4 +6,5 @@ public interface Constant {
     String IS_FROM_SIGNUP="FROM_SIGNUP";
     String YES="YES";
     String NO="NO";
+    String MOBILE_NO="MOBILE_NO";
 }

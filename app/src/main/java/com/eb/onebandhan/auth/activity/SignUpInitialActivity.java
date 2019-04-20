@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.eb.onebandhan.R;
@@ -37,9 +38,19 @@ public class SignUpInitialActivity extends AppCompatActivity implements SignUpVi
     }
 
     private void performSignUp() {
-        mSignUp.setName("aaddiiii");
-        mSignUp.setMobileNumber("9407072257");
-        signUpPresenter.performSignUpTask(mSignUp);
+        if (TextUtils.isEmpty(binding.etName.getText()))
+            Toast.makeText(activity, getResources().getString(R.string.please_enter_name), Toast.LENGTH_SHORT).show();
+        else if (TextUtils.isEmpty(binding.etMobileNo.getText()))
+            Toast.makeText(activity, getResources().getString(R.string.please_enter_mobile_no), Toast.LENGTH_SHORT).show();
+        else if (binding.etName.getText().toString().length()<3)
+            Toast.makeText(activity, getResources().getString(R.string.please_enter_valid_name), Toast.LENGTH_SHORT).show();
+         else if (binding.etMobileNo.getText().toString().length()<10)
+            Toast.makeText(activity, getResources().getString(R.string.please_enter_valid_mobile_no), Toast.LENGTH_SHORT).show();
+         else {
+            mSignUp.setName(binding.etName.getText().toString());
+            mSignUp.setMobileNumber(binding.etMobileNo.getText().toString());
+            signUpPresenter.performSignUpTask(mSignUp);
+        }
     }
 
     private void initialization() {
@@ -49,8 +60,7 @@ public class SignUpInitialActivity extends AppCompatActivity implements SignUpVi
     @Override
     public void onSucessfullySignUp(MUser mUser, String message) {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(activity,OtpVerificationActivity.class).putExtra(IS_FROM_SIGNUP,YES));
-        finish();
+        startActivity(new Intent(activity, OtpVerificationActivity.class).putExtra(IS_FROM_SIGNUP, YES).putExtra(MOBILE_NO,mUser.getMobileNumber()));
     }
 
     @Override

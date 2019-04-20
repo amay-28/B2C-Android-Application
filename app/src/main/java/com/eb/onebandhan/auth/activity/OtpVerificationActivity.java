@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.eb.onebandhan.R;
@@ -17,6 +19,7 @@ import com.eb.onebandhan.auth.viewinterface.LoginViewInterface;
 import com.eb.onebandhan.auth.viewinterface.OtpViewInterface;
 import com.eb.onebandhan.databinding.ActivityOtpVerificationBinding;
 import com.eb.onebandhan.util.Constant;
+import com.mukesh.OnOtpCompletionListener;
 
 public class OtpVerificationActivity extends AppCompatActivity implements OtpViewInterface, LoginViewInterface, Constant {
     private Activity activity;
@@ -24,7 +27,8 @@ public class OtpVerificationActivity extends AppCompatActivity implements OtpVie
     private LoginPresenter loginPresenter;
     private ActivityOtpVerificationBinding binding;
     private MSignUp mSignUp = new MSignUp();
-    private String isFromSignUp="";
+    private String isFromSignUp = "";
+    private Boolean isResendOtp = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,26 +41,45 @@ public class OtpVerificationActivity extends AppCompatActivity implements OtpVie
 
     private void listner() {
         binding.btnVerifyUser.setOnClickListener(view -> performOtpVerification());
-        binding.tvResendOtp.setOnClickListener(view -> performOtpVerification());
+        binding.tvResendOtp.setOnClickListener(view -> resendOpt());
+
+    }
+
+    private void resendOpt() {
+        binding.otpView.setText("");
+        isResendOtp = true;
+        loginPresenter.performLoginTask(mSignUp, TYPE_LOGIN_REQUEST_OTP);
     }
 
     private void performOtpVerification() {
-        mSignUp.setMobileNumber("8109059062");
-        mSignUp.setOtp("1234");
-        if (isFromSignUp.equals(YES))
-        otpPresenter.performOtpVerificationTask(mSignUp);
-        else loginPresenter.performLoginTask(mSignUp,TYPE_LOGIN_ONLY);
+        if (TextUtils.isEmpty(binding.otpView.getText().toString()))
+            Toast.makeText(activity, getResources().getString(R.string.please_enter_otp), Toast.LENGTH_SHORT).show();
+        else if (binding.otpView.getText().toString().length() != 4)
+            Toast.makeText(activity, getResources().getString(R.string.please_enter_valid_otp), Toast.LENGTH_SHORT).show();
+        else {
+            mSignUp.setOtp(binding.otpView.getText().toString());
+            if (isFromSignUp.equals(YES))
+                otpPresenter.performOtpVerificationTask(mSignUp);
+            else {
+                isResendOtp = false;
+                loginPresenter.performLoginTask(mSignUp, TYPE_LOGIN_ONLY);
+            }
+        }
+
     }
 
     private void initialization() {
-        isFromSignUp=getIntent().getStringExtra(IS_FROM_SIGNUP);
+        mSignUp.setMobileNumber(getIntent().getStringExtra(MOBILE_NO));
+        isFromSignUp = getIntent().getStringExtra(IS_FROM_SIGNUP);
         otpPresenter = new OtpPresenter(this, activity);
         loginPresenter = new LoginPresenter(this, activity);
     }
 
     @Override
     public void onSucessfullyVerified(String message) {
+        // do waht u want after signup
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(activity, SignUpDetailActivity.class));
     }
 
     @Override
@@ -66,7 +89,8 @@ public class OtpVerificationActivity extends AppCompatActivity implements OtpVie
 
     @Override
     public void onSucessfullyLogin(MUser mUser, String message) {
-
+        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+//        if (isResendOtp)
     }
 
     @Override

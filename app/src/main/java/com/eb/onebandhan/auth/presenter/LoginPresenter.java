@@ -60,5 +60,4 @@ public class LoginPresenter implements LoginPresenterInterface, Constant {
     public void performLoginTask(MSignUp mSignUp, String requestType) {
         getObservable(mSignUp, requestType).subscribeWith(getObserver());
     }
-
 }
