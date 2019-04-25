@@ -17,4 +17,5 @@ public class MCategory {
     private String created_at;
     private String updated_at;
     private List<MCategory> children;
+    private Boolean isSelected=false;
 }

@@ -2,6 +2,7 @@ package com.eb.onebandhan.apiCalling;
 
 
 import com.eb.onebandhan.auth.model.MCategory;
+import com.eb.onebandhan.auth.model.MProfile;
 import com.eb.onebandhan.auth.model.MSignUp;
 import com.eb.onebandhan.auth.model.MUser;
 
@@ -13,6 +14,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
+import retrofit2.http.Url;
 
 public interface APIInterface {
     @POST("signup")
@@ -27,9 +29,10 @@ public interface APIInterface {
     @POST("login-send-otp")
     Observable<ResponseData<MUser>> loginToSendOtp(@Body MSignUp mSignUp);
 
-    @GET("categories")
-    Observable<ResponseData<List<MCategory>>> getCategoryRelatedData(@QueryMap Map<String, String> map);
+    // here we are using dynamic url for fetching category
+    @GET
+    Observable<ResponseData<List<MCategory>>> getCategoryRelatedData(@Url String url, @QueryMap Map<String, String> map);
 
-   /*@POST("update-profile")
-    Observable<ResponseData<MUser>> loginToSendOtp(@Body MSignUp mSignUp);*/
+    @POST("update-profile")
+    Observable<ResponseData<MUser>> updateShopDetail(@Body MProfile mProfile);
 }

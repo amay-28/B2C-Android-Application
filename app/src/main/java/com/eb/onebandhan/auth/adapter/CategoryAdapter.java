@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.eb.onebandhan.R;
 import com.eb.onebandhan.auth.model.MCategory;
@@ -19,7 +20,7 @@ public class CategoryAdapter extends ArrayAdapter<MCategory> {
     private List<MCategory> categoryList;
 
     public CategoryAdapter(@NonNull Activity activity, int resource, List<MCategory> categoryList) {
-        super(activity, resource);
+        super(activity, resource,categoryList);
         this.categoryList = categoryList;
     }
 

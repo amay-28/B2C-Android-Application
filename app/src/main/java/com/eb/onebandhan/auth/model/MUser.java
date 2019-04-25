@@ -18,6 +18,8 @@ public class MUser {
     private String created_at;
     private String updated_at;
     private MUserType userType;
+    //extra params for detailde info
+    private MProfile retailerDetails;
 
     @Data
     public static class MUserType {

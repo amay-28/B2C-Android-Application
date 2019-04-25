@@ -38,4 +38,33 @@
     <string name="please_enter_valid_name">Please enter valid name</string>
     <string name="please_enter_otp">Please enter otp</string>
     <string name="please_enter_valid_otp">Please enter valid otp</string>
+    <string name="deals_in_category">Deals in (Category)</string>
+    <string name="please_enter_shop_name">Please enter Shop Name</string>
+    <string name="please_enter_address">Please enter address</string>
+    <string name="please_enter_city">Please enter City</string>
+    <string name="please_enter_state">Please enter State</string>
+
+    <!--Validation-->
+    <string name="error_please_enter_a">Please enter a %1$s</string>
+    <string name="error_please_enter">Please enter %1$s</string>
+    <string name="error_please_enter_valid">Please enter valid %1$s</string>
+    <string name="error_about_yourself">Please add something about yourself.</string>
+    <string name="error_valid">Please provide valid %1$s</string>
+    <string name="error_valid_password">Please enter a %1$s Min 6 char, 1 letter &amp; 1 number </string>
+    <string name="error_password_toshort">%1$s too short, min 6 character </string>
+    <string name="error_password_short">Password should be at least 6 characters long.</string>
+    <string name="error_confirm_password_short">Confirm Password should be at least 6 characters long.</string>
+    <string name="error_name_to_long">%1$s too long, max %2$d characters</string>
+    <string name="error_name_to_short">%1$s too short, min %2$d characters</string>
+    <string name="error_otp_toshort">%1$s too short, min 4 character </string>
+    <string name="error_name_toshort">%1$s too short, min 3 character </string>
+    <string name="error_pass_match">Password and confirm password does not match.</string>
+
+    <!--Error Msg-->
+    <string name="error_connection">Please check your internet connection.</string>
+    <string name="error_auth_failed">Authentication Failed</string>
+    <string name="error_auth_cancelled">Authentication Cancelled</string>
+    <string name="error_something_wrong">Something went wrong, please try again later.</string>
+    <string name="error_coming_soon">Coming Soon</string>
+    <string name="password">PASSWORD</string>
 </resources>
