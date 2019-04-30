@@ -14,12 +14,11 @@ import com.eb.onebandhan.auth.model.MSignUp;
 import com.eb.onebandhan.auth.model.MUser;
 import com.eb.onebandhan.auth.presenter.LoginPresenter;
 import com.eb.onebandhan.auth.presenter.OtpPresenter;
-import com.eb.onebandhan.auth.presenter.SignUpPresenter;
 import com.eb.onebandhan.auth.viewinterface.LoginViewInterface;
 import com.eb.onebandhan.auth.viewinterface.OtpViewInterface;
+import com.eb.onebandhan.dashboard.activity.DashboardActivity;
 import com.eb.onebandhan.databinding.ActivityOtpVerificationBinding;
 import com.eb.onebandhan.util.Constant;
-import com.mukesh.OnOtpCompletionListener;
 
 public class OtpVerificationActivity extends AppCompatActivity implements OtpViewInterface, LoginViewInterface, Constant {
     private Activity activity;
@@ -89,6 +88,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements OtpVie
 
     @Override
     public void onSucessfullyLogin(MUser mUser, String message) {
+        startActivity(new Intent(activity, DashboardActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
 //        if (isResendOtp)
     }

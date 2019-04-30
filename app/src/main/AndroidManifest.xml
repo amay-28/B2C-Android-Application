@@ -16,26 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".auth.activity.ThankYouActivity"></activity>
-        <activity android:name=".auth.activity.SignUpDetailActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".auth.activity.OtpVerificationActivity">
-
-            <!--
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            -->
-        </activity>
-        <activity android:name=".auth.activity.SignUpInitialActivity" />
-        <activity android:name=".auth.activity.LoginActivity" />
+        <activity android:name=".dashboard.activity.CategoryActivity"></activity>
         <activity
             android:name=".basic.SplashActivity"
             android:screenOrientation="portrait">
@@ -45,6 +26,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".dashboard.activity.DashboardActivity"
+            android:label="@string/title_activity_dashboard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".auth.activity.ThankYouActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".auth.activity.SignUpDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".auth.activity.OtpVerificationActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".auth.activity.SignUpInitialActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".auth.activity.LoginActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".auth.activity.SelectLanguageActivity"
             android:screenOrientation="portrait" />
