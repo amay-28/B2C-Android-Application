@@ -7,4 +7,8 @@ public interface Constant {
     String YES="YES";
     String NO="NO";
     String MOBILE_NO="MOBILE_NO";
+    String AUTHORIZATION_KEY="AUTHORIZATION_KEY";
+    String BEARER = "Bearer ";
+    String IS_LOGIN = "IS_LOGIN";
+    String ALL_CATEGORY_LIST = "ALL_CATEGORY_LIST";
 }

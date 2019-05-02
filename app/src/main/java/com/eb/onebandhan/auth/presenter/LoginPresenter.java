@@ -1,6 +1,7 @@
 package com.eb.onebandhan.auth.presenter;
 
 import android.app.Activity;
+import android.util.Log;
 
 import com.eb.onebandhan.apiCalling.APIClient;
 import com.eb.onebandhan.apiCalling.APIInterface;
@@ -12,29 +13,38 @@ import com.eb.onebandhan.auth.presenterinterface.SignUpPresenterInterface;
 import com.eb.onebandhan.auth.viewinterface.LoginViewInterface;
 import com.eb.onebandhan.auth.viewinterface.SignUpViewInterface;
 import com.eb.onebandhan.util.Constant;
+import com.eb.onebandhan.util.Session;
 import com.eb.onebandhan.util.Utils;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Response;
 import retrofit2.adapter.rxjava2.HttpException;
 
 public class LoginPresenter implements LoginPresenterInterface, Constant {
     private LoginViewInterface viewInterface;
     private Activity activity;
+    private String requestType="";
 
     public LoginPresenter(LoginViewInterface viewInterface, Activity activity) {
         this.viewInterface = viewInterface;
         this.activity = activity;
     }
 
-    public DisposableObserver<ResponseData> getObserver() {
-        return new DisposableObserver<ResponseData>() {
+    public DisposableObserver<Response<ResponseData<MUser>>> getObserver() {
+        return new DisposableObserver<Response<ResponseData<MUser>>>() {
             @Override
-            public void onNext(ResponseData response) {
-                viewInterface.onSucessfullyLogin((MUser) response.getData(), response.getMessage());
+            public void onNext(Response<ResponseData<MUser>> response) {
+                if (requestType.equals(TYPE_LOGIN_ONLY)){
+                    new Session(activity).setString(IS_LOGIN, YES);
+                    new Session(activity).setString(AUTHORIZATION_KEY,BEARER+ response.headers().get("AuthToken"));
+                }
+                viewInterface.onSucessfullyLogin(response.body().getData(), response.body().getMessage());
+
             }
+
 
             @Override
             public void onError(Throwable e) {
@@ -58,6 +68,7 @@ public class LoginPresenter implements LoginPresenterInterface, Constant {
 
     @Override
     public void performLoginTask(MSignUp mSignUp, String requestType) {
+        this.requestType=requestType;
         getObservable(mSignUp, requestType).subscribeWith(getObserver());
     }
 }

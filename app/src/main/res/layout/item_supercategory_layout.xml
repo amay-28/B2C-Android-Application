@@ -1,26 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout
-        android:layout_width="@dimen/_70sdp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imgSuperCat"
-            android:layout_centerInParent="true"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:src="@drawable/ic_splash"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:padding="@dimen/_10sdp">
 
+        <ImageView
+            android:id="@+id/imgSuperCat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_dummy_banner"
+            android:scaleType="fitXY"/>
         <TextView
-            android:id="@+id/tvSuperCatName"
-            android:layout_below="@+id/imgSuperCat"
-            style="@style/TextView10ssp"
-            android:maxLines="2"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:id="@+id/tvCategoryName"
+            style="@style/TextView20ssp"
+            android:fontFamily="@font/latomedium"
+            android:text="@string/category"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"/>
+
+        <LinearLayout
+            android:id="@+id/llExplore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
             android:layout_centerHorizontal="true"
-            android:text="@string/sign_up"
-            android:ellipsize="marquee"/>
+            android:gravity="center"
+            android:layout_below="@+id/tvCategoryName">
+
+            <TextView
+                style="@style/TextView12ssp"
+                android:text="@string/explore"
+                android:textColor="@color/white" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:paddingStart="@dimen/_5sdp"
+                app:srcCompat="@drawable/ic_home" />
+        </LinearLayout>
+
     </RelativeLayout>
+
+        <ExpandableListView
+            android:id="@+id/expandableListView"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorRight"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="0.5dp" />
+
+    </LinearLayout>
 </layout>

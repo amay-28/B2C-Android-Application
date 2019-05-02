@@ -9,11 +9,15 @@
         <TextView
             android:id="@+id/tvCategory"
            style="@style/TextView14ssp"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:paddingStart="@dimen/_5sdp"
             android:fontFamily="@font/latosemibold"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSubCategory"
-            android:layout_width="match_parent"
+            android:padding="@dimen/_5sdp"
+            android:layout_width="@dimen/_110sdp"
             android:layout_height="wrap_content">
 
         </androidx.recyclerview.widget.RecyclerView>

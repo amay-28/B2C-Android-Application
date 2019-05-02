@@ -60,7 +60,7 @@ public class SignUpDetailPresenter implements SignUpDetailPresenterInterface, Ca
     }
 
     private <T> Observable getObservable(Map<String, String> map) {
-        return  APIClient.getClient(activity).create(APIInterface.class).getCategoryRelatedData(WebService.BASE_URL_2+CATEGORIES_KEY,map)
+        return  APIClient.getClient(activity).create(APIInterface.class).getCategoryRelatedData(map)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 

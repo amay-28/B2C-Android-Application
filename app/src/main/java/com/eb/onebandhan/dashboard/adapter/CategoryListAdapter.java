@@ -54,6 +54,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         return CategoryList.size();
     }
 
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         ItemCategoryLayoutBinding binding;
         public ViewHolder(@NonNull ItemCategoryLayoutBinding itemView) {
