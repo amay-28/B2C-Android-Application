@@ -1,6 +1,7 @@
 package com.eb.onebandhan.dashboard.adapter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class ExpandableCategoryAdapter extends BaseExpandableListAdapter {
         this.categoryList=categoryList;
         this.categoryMap=categoryMap;
         this.callBack=callBack;
+        mLayoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
