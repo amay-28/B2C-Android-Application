@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".dashboard.activity.CategoryActivity"></activity>
+        <activity android:name=".services.AddServiceActivity"></activity>
+        <activity android:name=".product.AddProductActivity" />
         <activity
             android:name=".basic.SplashActivity"
             android:screenOrientation="portrait">
@@ -26,6 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".dashboard.activity.CategoryActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".dashboard.activity.DashboardActivity"
             android:label="@string/title_activity_dashboard"
@@ -38,7 +42,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".auth.activity.OtpVerificationActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".auth.activity.SignUpInitialActivity"
             android:screenOrientation="portrait" />

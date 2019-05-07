@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
+        android:id="@+id/llCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -18,8 +19,9 @@
             android:layout_height="match_parent"
             android:src="@mipmap/ic_dummy_banner"
             android:scaleType="fitXY"/>
+
         <TextView
-            android:id="@+id/tvCategoryName"
+            android:id="@+id/tvSuperCategoryName"
             style="@style/TextView20ssp"
             android:fontFamily="@font/latomedium"
             android:text="@string/category"
@@ -33,7 +35,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:layout_below="@+id/tvCategoryName">
+            android:layout_below="@+id/tvSuperCategoryName">
 
             <TextView
                 style="@style/TextView12ssp"
@@ -50,13 +52,20 @@
 
     </RelativeLayout>
 
-        <ExpandableListView
-            android:id="@+id/expandableListView"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorRight"
-            android:divider="@android:color/darker_gray"
-            android:dividerHeight="0.5dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <ExpandableListView
+                android:id="@+id/expandableListView"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:groupIndicator="@null"
+                android:nestedScrollingEnabled="true"
+                android:indicatorRight="?android:attr/expandableListPreferredItemIndicatorRight"
+                android:divider="@android:color/darker_gray"
+                android:dividerHeight="0.5dp" />
+        </LinearLayout>
 
     </LinearLayout>
 </layout>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="addProduct"
+            type="com.eb.onebandhan.product.AddProductActivity" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@color/white">
+
+
+            <EditText
+                android:id="@+id/etProductName"
+                style="@style/EditText12ssp"
+                android:layout_below="@+id/header"
+                android:layout_marginLeft="@dimen/_34sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginRight="@dimen/_34sdp"
+                android:background="@drawable/rect_back_with_corner"
+                android:fontFamily="@font/robotoregular"
+                android:hint="@string/product_name"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLength="30"
+                android:padding="@dimen/_15sdp"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/etCategory"
+                style="@style/EditText12ssp"
+                android:layout_below="@+id/etProductName"
+                android:layout_marginLeft="@dimen/_34sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginRight="@dimen/_34sdp"
+                android:background="@drawable/rect_back_spinner"
+                android:drawableEnd="@drawable/ic_down_arrow"
+                android:drawablePadding="@dimen/_20sdp"
+                android:hint="@string/category"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLength="30"
+                android:minHeight="@dimen/_50sdp"
+                android:paddingLeft="@dimen/_15sdp"
+                android:paddingRight="@dimen/_15sdp"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/etSubCategory"
+                style="@style/EditText12ssp"
+                android:layout_below="@+id/etCategory"
+                android:layout_marginLeft="@dimen/_34sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginRight="@dimen/_34sdp"
+                android:background="@drawable/rect_back_spinner"
+                android:drawableEnd="@drawable/ic_down_arrow"
+                android:drawablePadding="@dimen/_20sdp"
+                android:fontFamily="@font/latoregular"
+                android:hint="@string/sub_category"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLength="30"
+                android:minHeight="@dimen/_50sdp"
+                android:paddingLeft="@dimen/_15sdp"
+                android:paddingRight="@dimen/_15sdp"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/etSubSubCategory"
+                style="@style/EditText12ssp"
+                android:layout_below="@+id/etSubCategory"
+                android:layout_marginLeft="@dimen/_34sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginRight="@dimen/_34sdp"
+                android:background="@drawable/rect_back_spinner"
+                android:drawableEnd="@drawable/ic_down_arrow"
+                android:drawablePadding="@dimen/_20sdp"
+                android:fontFamily="@font/latoregular"
+                android:hint="@string/sub_sub_category"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLength="30"
+                android:minHeight="@dimen/_50sdp"
+                android:paddingLeft="@dimen/_15sdp"
+                android:paddingRight="@dimen/_15sdp"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/etSellingPrice"
+                style="@style/EditText12ssp"
+                android:layout_below="@+id/etSubSubCategory"
+                android:layout_marginLeft="@dimen/_34sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginRight="@dimen/_34sdp"
+                android:background="@drawable/rect_back_with_corner"
+                android:fontFamily="@font/latoregular"
+                android:hint="@string/selling_price"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLength="30"
+                android:minHeight="@dimen/_50sdp"
+                android:paddingLeft="@dimen/_15sdp"
+                android:paddingRight="@dimen/_15sdp"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/etPaymentOption"
+                style="@style/EditText12ssp"
+                android:layout_below="@+id/etSellingPrice"
+                android:layout_marginLeft="@dimen/_34sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginRight="@dimen/_34sdp"
+                android:background="@drawable/rect_back_with_corner"
+                android:fontFamily="@font/latoregular"
+                android:hint="@string/payment_options"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLength="30"
+                android:minHeight="@dimen/_50sdp"
+                android:paddingLeft="@dimen/_15sdp"
+                android:paddingRight="@dimen/_15sdp"
+                android:singleLine="true" />
+
+
+            <TextView
+                android:id="@+id/tvUploadImage"
+                style="@style/TextView12ssp"
+                android:layout_below="@+id/etPaymentOption"
+                android:layout_marginLeft="@dimen/_34sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginRight="@dimen/_34sdp"
+                android:paddingLeft="@dimen/_15sdp"
+                android:paddingRight="@dimen/_15sdp"
+                android:text="Upload Image(Max. 4)"
+                android:textColor="@color/colorHint" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvImages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvUploadImage"
+                android:layout_marginLeft="@dimen/_34sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginRight="@dimen/_34sdp"
+                android:orientation="horizontal" />
+
+            <EditText
+                android:id="@+id/etDescription"
+                style="@style/EditText12ssp"
+                android:layout_below="@+id/rvImages"
+                android:layout_marginLeft="@dimen/_34sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginRight="@dimen/_34sdp"
+                android:background="@drawable/rect_back_with_corner"
+                android:fontFamily="@font/latoregular"
+                android:gravity="top"
+                android:hint="@string/add_description"
+                android:imeOptions="actionNext"
+                android:inputType="text|textMultiLine"
+                android:maxLength="30"
+                android:minHeight="@dimen/_60sdp"
+                android:paddingLeft="@dimen/_15sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingRight="@dimen/_15sdp"
+                android:singleLine="true" />
+
+
+            <Button
+                android:id="@+id/btnSubmit"
+                style="@style/material_button"
+                android:layout_below="@+id/etDescription"
+                android:layout_marginLeft="@dimen/_34sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginRight="@dimen/_34sdp"
+                android:minHeight="@dimen/_40sdp"
+                android:paddingLeft="@dimen/_15sdp"
+                android:paddingRight="@dimen/_15sdp"
+                android:text="@string/add_product"
+                android:textAllCaps="true"
+                android:textSize="@dimen/_12ssp" />
+
+            <include
+                android:id="@+id/header"
+                layout="@layout/header_with_back"
+                bind:addProduct="@{addProduct}"></include>
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+</layout>

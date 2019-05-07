@@ -79,4 +79,18 @@
     <string name="category">Categories</string>
     <string name="view_all">View All</string>
     <string name="explore">Explore</string>
+    <string name="categories">Categories</string>
+    <string name="product_name">Product Name</string>
+    <string name="sub_category">Sub Category</string>
+    <string name="sub_sub_category">Sub Sub Category</string>
+    <string name="selling_price">Selling Price</string>
+    <string name="payment_options">Payment Option</string>
+    <string name="add_description">Add Description</string>
+    <string name="add_product">Add Product</string>
+    <string name="add_service">Add Service</string>
+    <string name="service_name">Service Name</string>
+    <string name="service_price">Service Price</string>
+    <string name="service_description">Service Description</string>
+    <string name="product_listing">Product Listing</string>
+
 </resources>

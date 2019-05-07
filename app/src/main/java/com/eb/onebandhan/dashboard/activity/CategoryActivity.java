@@ -13,6 +13,7 @@ import com.eb.onebandhan.auth.model.MCategory;
 import com.eb.onebandhan.dashboard.adapter.SuperCategoryListAdapter;
 import com.eb.onebandhan.dashboard.adapter.SuperCategoryListHomeAdapter;
 import com.eb.onebandhan.databinding.ActivityCategoryBinding;
+import com.eb.onebandhan.util.CommonClickHandler;
 import com.eb.onebandhan.util.Constant;
 
 import java.util.ArrayList;
@@ -33,6 +34,8 @@ public class CategoryActivity extends AppCompatActivity implements Constant,Supe
     }
 
     private void initialization() {
+        binding.header.setHandler(new CommonClickHandler(activity));
+        binding.header.tvMainHeading.setText(getResources().getString(R.string.categories));
         superCategoryList.addAll(getIntent().getParcelableArrayListExtra(ALL_CATEGORY_LIST));
         binding.rvSuperCategory.setLayoutManager(new LinearLayoutManager(activity));
         binding.rvSuperCategory.setHasFixedSize(true);

@@ -6,30 +6,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.TextView;
-
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.eb.onebandhan.R;
 import com.eb.onebandhan.auth.model.MCategory;
 import com.eb.onebandhan.databinding.CategoryExpandableItemBinding;
 import com.eb.onebandhan.databinding.SubcategoryChildItemBinding;
 import java.util.List;
-import java.util.Map;
 import androidx.databinding.DataBindingUtil;
 
 public class ExpandableCategoryAdapter extends BaseExpandableListAdapter {
     private Activity activity;
     private List<MCategory> categoryList;
-    private  Map<String, List<MCategory>> categoryMap;
     private CallBack callBack;
     private CategoryExpandableItemBinding bindingCategory;
     private SubcategoryChildItemBinding bindingSubCategory;
-    private  LayoutInflater  mLayoutInflater;
+    private LayoutInflater mLayoutInflater;
 
-    public ExpandableCategoryAdapter(Activity activity, List<MCategory> categoryList, Map<String, List<MCategory>> categoryMap, CallBack callBack) {
-        this.activity=activity;
-        this.categoryList=categoryList;
-        this.categoryMap=categoryMap;
-        this.callBack=callBack;
+    public ExpandableCategoryAdapter(Activity activity, List<MCategory> categoryList, CallBack callBack) {
+        this.activity = activity;
+        this.categoryList = categoryList;
+        this.callBack = callBack;
         mLayoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -40,8 +37,7 @@ public class ExpandableCategoryAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int i) {
-        List<MCategory> subCategories = categoryMap.get(categoryList.get(i).getId());
-        return subCategories == null ? 0 : subCategories.size();
+        return categoryList.get(i).getChildren() == null ? 0 : categoryList.get(i).getChildren().size();
     }
 
     @Override
@@ -51,7 +47,7 @@ public class ExpandableCategoryAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return null;
+        return categoryList.get(groupPosition).getChildren().get(childPosition);
     }
 
     @Override
@@ -71,42 +67,35 @@ public class ExpandableCategoryAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean b, View convertView, ViewGroup viewGroup) {
+     MCategory mCategory= categoryList.get(groupPosition);
         if (convertView == null) {
-            convertView = mLayoutInflater.inflate(R.layout.category_expandable_item, viewGroup, false);
-
-               /* bindingSubCategory = DataBindingUtil.inflate(inflater, R.layout.subcategory_child_item, viewGroup, false);
-                convertView = bindingSubCategory.getRoot();*/
+                bindingCategory = DataBindingUtil.inflate(mLayoutInflater, R.layout.category_expandable_item, viewGroup, false);
+                convertView = bindingCategory.getRoot();
         }
-        ((TextView)convertView.findViewById(R.id.tvCategory)).setText(categoryList.get(groupPosition).getName());
-
+        Glide.with(activity).load(mCategory.getImage()).apply(new RequestOptions().placeholder(R.drawable.ic_t_shirt).error(R.drawable.ic_t_shirt)).into(bindingCategory.imgCategory);
+        bindingCategory.tvCategory.setText(mCategory.getName());
         return convertView;
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup viewGroup) {
-        List<MCategory> subCategories = categoryMap.get(categoryList.get(groupPosition).getId());
-        MCategory subCategory = null;
-
-
+        List<MCategory> subCategories = categoryList.get(groupPosition).getChildren();
         if (subCategories != null) {
-            subCategory = subCategories.get(childPosition);
+            MCategory subCategory = subCategories.get(childPosition);
 
             if (convertView == null) {
-
-                convertView = mLayoutInflater.inflate(R.layout.subcategory_child_item, viewGroup, false);
-
-               /* bindingSubCategory = DataBindingUtil.inflate(inflater, R.layout.subcategory_child_item, viewGroup, false);
-                convertView = bindingSubCategory.getRoot();*/
-
-                 ((TextView)convertView.findViewById(R.id.tvSubCategory)).setText(subCategories.get(childPosition).getName());
+                bindingSubCategory = DataBindingUtil.inflate(mLayoutInflater, R.layout.subcategory_child_item, viewGroup, false);
+                convertView = bindingSubCategory.getRoot();
             }
+            Glide.with(activity).load(subCategory.getImage()).apply(new RequestOptions().placeholder(R.drawable.ic_t_shirt).error(R.drawable.ic_t_shirt)).into(bindingSubCategory.imgSubCategory);
+            bindingSubCategory.tvSubCategory.setText(subCategory.getName());
         }
         return convertView;
     }
 
     @Override
     public boolean isChildSelectable(int i, int i1) {
-        return false;
+        return true;
     }
 
     public interface CallBack {
