@@ -93,4 +93,32 @@
     <string name="service_description">Service Description</string>
     <string name="product_listing">Product Listing</string>
 
+    <!-- Add_Bank_Details String -->
+    <string name="Account_Holder_Name">Account Holder Name</string>
+    <string name="IFSC_Code">IFSC Code</string>
+    <string name="Account_Type">Account Type</string>
+    <string name="Account_Number">Account Number</string>
+    <string name="Upload">Upload</string>
+    <string name="Disclaimer">Disclaimer :</string>
+    <string name="Dummy_Text">Lorem ipsum is a dummy text lorem ipsum is a dummy text</string>
+    <string name="Bank_Details">Bank Details</string>
+    <string name="order_placed_successfully">Your order placed successfully</string>
+    <string name="dummy_time">10 min ago</string>
+    <string name="notification">Notification</string>
+    <string name="no_notification_yet">No Notification Yet!</string>
+    <string name="simply_browse">Simply browse, create a whishlist or make a purchase.</string>
+    <string name="continue_shopping">CONTINUE SHOPPING</string>
+    <string name="about_shop">About the Shop</string>
+    <string name="pan_no">PAN Number</string>
+    <string name="gst">GST</string>
+    <string name="gst_percent">Set GST%</string>
+    <string name="save">SAVE</string>
+    <string name="edit">Edit</string>
+    <string name="add_items_to_your_physical_inventory">Add Items to your Physical Inventory</string>
+    <string name="orders">Orders</string>
+    <string name="total_earnings">Total Earnings</string>
+    <string name="my_bank_details">My Bank Details</string>
+    <string name="faqs">FAQ\'s</string>
+    <string name="help">Help</string>
+    <string name="settings">Settings</string>
 </resources>

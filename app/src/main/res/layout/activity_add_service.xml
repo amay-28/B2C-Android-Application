@@ -138,12 +138,13 @@
             style="@style/material_button"
             android:layout_marginTop="@dimen/_30sdp"
             android:layout_below="@+id/etDescription"
-            android:minHeight="@dimen/_40sdp"
+            android:minHeight="@dimen/_50sdp"
             android:text="@string/add_service"
             android:textAllCaps="true"
             android:textSize="@dimen/_12ssp"
             android:layout_marginLeft="@dimen/_34sdp"
             android:layout_marginRight="@dimen/_34sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
             android:paddingLeft="@dimen/_15sdp"
             android:paddingRight="@dimen/_15sdp"/>
 

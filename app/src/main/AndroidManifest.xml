@@ -16,7 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".services.AddServiceActivity"></activity>
+        <activity android:name=".dashboard.activity.EditProfileActivity"></activity>
+        <activity android:name=".notification.activity.NotificationListingActivity" />
+        <activity android:name=".bankDetail.activity.AddBankDetailActivity" />
+        <activity android:name=".services.AddServiceActivity" />
         <activity android:name=".product.AddProductActivity" />
         <activity
             android:name=".basic.SplashActivity"

@@ -18,6 +18,14 @@
             name="addService"
             type="com.eb.onebandhan.service.AddServiceActivity"/>
 
+        <variable
+            name="bankDetail"
+            type="com.eb.onebandhan.bankDetail.activity.AddBankDetailActivity"/>
+
+        <variable
+            name="notification"
+            type="com.eb.onebandhan.notification.activity.NotificationListingActivity"/>
+
     </data>
 
     <com.google.android.material.appbar.AppBarLayout

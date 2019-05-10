@@ -16,6 +16,7 @@ import com.eb.onebandhan.dashboard.adapter.CategoryListAdapter;
 import com.eb.onebandhan.dashboard.adapter.CollectionListAdapter;
 import com.eb.onebandhan.dashboard.adapter.SuperCategoryListHomeAdapter;
 import com.eb.onebandhan.dashboard.model.MBanner;
+import com.eb.onebandhan.dashboard.model.MCollection;
 import com.eb.onebandhan.dashboard.presenter.HomePresenter;
 import com.eb.onebandhan.dashboard.viewinterface.HomeViewInterface;
 import com.eb.onebandhan.databinding.HomeFragmentLayoutBinding;
@@ -36,24 +37,25 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import static com.eb.onebandhan.auth.util.Categoryutil.ZERO;
 
-public class HomeFragment extends Fragment implements Constant,HomeViewInterface,CollectionListAdapter.CallBack, BannerListAdapter.CallBack, SuperCategoryListHomeAdapter.CallBack, CategoryListAdapter.CallBack {
+public class HomeFragment extends Fragment implements Constant, HomeViewInterface, CollectionListAdapter.CallBack, BannerListAdapter.CallBack, SuperCategoryListHomeAdapter.CallBack, CategoryListAdapter.CallBack {
     private Activity activity;
     private HomeFragmentLayoutBinding binding;
     private List<MCategory> superCategoryList = new ArrayList<>();
     private List<MCategory> categoryList = new ArrayList<>();
     private List<MBanner> bannerList = new ArrayList<>();
-    private List<String> collectionList = new ArrayList<>();
+    private List<MCollection> collectionList = new ArrayList<>();
     private SuperCategoryListHomeAdapter superCategoryListAdapter;
     private BannerListAdapter bannerListAdapter;
     private CategoryListAdapter categoryListAdapter;
     private CollectionListAdapter collectionListAdapter;
     private HomePresenter homePresenter;
-    private Map<String,String> map=new HashMap<>();
+    private Map<String, String> map = new HashMap<>();
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-         super.onCreateView(inflater, container, savedInstanceState);
-        activity=getActivity();
+        super.onCreateView(inflater, container, savedInstanceState);
+        activity = getActivity();
         binding = DataBindingUtil.inflate(inflater, R.layout.home_fragment_layout, container, false);
         View view = binding.getRoot();
         initialization();
@@ -62,13 +64,16 @@ public class HomeFragment extends Fragment implements Constant,HomeViewInterface
     }
 
 
-
     private void initialization() {
-        homePresenter=new HomePresenter(this,activity);
-        map.put("level",ZERO);
-        map.put("eager","children.children");
+        homePresenter = new HomePresenter(this, activity);
+        map.put("level", ZERO);
+        map.put("eager", "children.children");
         homePresenter.getBannerListTask();
         homePresenter.getCategoryListTask(map);
+
+        Map<String, String> mapCollection = new HashMap<>();
+        mapCollection.put("eager", "products");
+        homePresenter.getCollectionListTask(mapCollection);
         binding.rvSuperCategories.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
         binding.rvSuperCategories.setHasFixedSize(true);
         binding.rvSuperCategories.setItemAnimator(new DefaultItemAnimator());
@@ -103,31 +108,42 @@ public class HomeFragment extends Fragment implements Constant,HomeViewInterface
 
     @Override
     public void onSucessfullyGetBannerList(List<MBanner> bannerList, String message) {
-     this.bannerList.addAll(bannerList);
+        this.bannerList.addAll(bannerList);
         bannerListAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onFailToGetBannerList(String errorMessage) {
-        ShowToast.toastMsg(activity,errorMessage);
+        ShowToast.toastMsg(activity, errorMessage);
 
     }
 
     @Override
     public void onSucessfullyGetCategoryList(List<MCategory> categoryList, String message) {
-         if (categoryList!=null){
-             superCategoryList.addAll(categoryList);
-             for (MCategory mCategory:superCategoryList){
-                 if (mCategory.getChildren()!=null)
-                 this.categoryList.addAll(mCategory.getChildren());
-             }
-             superCategoryListAdapter.notifyDataSetChanged();
-             if (this.categoryList!=null) categoryListAdapter.notifyDataSetChanged();
-         }
+        if (categoryList != null) {
+            superCategoryList.addAll(categoryList);
+            for (MCategory mCategory : superCategoryList) {
+                if (mCategory.getChildren() != null)
+                    this.categoryList.addAll(mCategory.getChildren());
+            }
+            superCategoryListAdapter.notifyDataSetChanged();
+            if (this.categoryList != null) categoryListAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
     public void onFailToGetCategoryList(String errorMessage) {
-        ShowToast.toastMsg(activity,errorMessage);
+        ShowToast.toastMsg(activity, errorMessage);
+    }
+
+    @Override
+    public void onFailToGetCollectionList(String message) {
+        ShowToast.toastMsg(activity, message);
+    }
+
+    @Override
+    public void onSucessfullyGetCollectionList(List<MCollection> collectionList, String message) {
+        this.collectionList.addAll(collectionList);
+        collectionListAdapter.notifyDataSetChanged();
     }
 }

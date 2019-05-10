@@ -6,6 +6,7 @@ import com.eb.onebandhan.auth.model.MProfile;
 import com.eb.onebandhan.auth.model.MSignUp;
 import com.eb.onebandhan.auth.model.MUser;
 import com.eb.onebandhan.dashboard.model.MBanner;
+import com.eb.onebandhan.dashboard.model.MCollection;
 
 import java.util.List;
 import java.util.Map;
@@ -45,6 +46,9 @@ public interface APIInterface {
     // with auth token
     @GET("categories")
     Observable<ResponseData<List<MCategory>>> getUserCategoryRelatedData(@Header("Authorization") String token, @QueryMap Map<String, String> map);
+
+  @GET("collections")
+    Observable<ResponseData<List<MCollection>>> getCollectionData(@QueryMap Map<String, String> map);
 
 
 }

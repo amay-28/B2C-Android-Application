@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="@dimen/_2sdp"
+        app:cardPreventCornerOverlap="true"
+        android:padding="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_3sdp"
+        app:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_12sdp">
+
+            <ImageView
+                android:id="@+id/ImageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_notification_bell"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextView10ssp"
+                android:padding="@dimen/_1sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_toRightOf="@id/ImageView1"
+                android:text="@string/order_placed_successfully" />
+
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_height="wrap_content"
+                style="@style/TextView10ssp"
+                android:textColor="@color/color_grey_text"
+                android:textSize="@dimen/_8sdp"
+                android:padding="@dimen/_1sdp"
+                android:layout_below="@id/text"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_toRightOf="@id/ImageView1"
+                android:text="@string/dummy_time" />
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</layout>

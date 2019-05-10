@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    tools:context=".bankDetail.activity.AddBankDetailActivity">
+
+    <data>
+        <variable
+            name="bankDetail"
+            type="com.eb.onebandhan.bankDetail.activity.AddBankDetailActivity"/>
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/header"
+            android:fillViewport="true"
+            android:scrollbars="none">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_34sdp"
+                android:layout_marginRight="@dimen/_34sdp">
+
+                <EditText
+                    android:id="@+id/etAccountHolderName"
+                    style="@style/EditText12ssp"
+                    android:fontFamily="@font/latoregular"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:background="@drawable/rect_back_with_corner"
+                    android:hint="@string/Account_Holder_Name"
+                    android:imeOptions="actionNext"
+                    android:padding="@dimen/_10sdp"
+                    android:minHeight="@dimen/_40sdp"
+                    android:singleLine="true"
+                    android:inputType="text" />
+
+                <EditText
+                    android:id="@+id/etAccountNumber"
+                    style="@style/EditText12ssp"
+                    android:fontFamily="@font/latoregular"
+                    android:layout_below="@+id/etAccountHolderName"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="@drawable/rect_back_with_corner"
+                    android:hint="@string/Account_Number"
+                    android:imeOptions="actionNext"
+                    android:padding="@dimen/_10sdp"
+                    android:minHeight="@dimen/_40sdp"
+                    android:inputType="text" />
+
+                <EditText
+                    android:id="@+id/etIFSC_Code"
+                    style="@style/EditText12ssp"
+                    android:fontFamily="@font/latoregular"
+                    android:layout_below="@+id/etAccountNumber"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="@drawable/rect_back_spinner"
+                    android:hint="@string/IFSC_Code"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:padding="@dimen/_10sdp"
+                    android:minHeight="@dimen/_40sdp" />
+
+                <EditText
+                    android:id="@+id/etAccountType"
+                    style="@style/EditText12ssp"
+                    android:fontFamily="@font/latoregular"
+                    android:layout_below="@+id/etIFSC_Code"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="@drawable/rect_back_spinner"
+                    android:drawableEnd="@drawable/ic_down_arrow"
+                    android:drawablePadding="@dimen/_20sdp"
+                    android:hint="@string/Account_Type"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:padding="@dimen/_10sdp"
+                    android:minHeight="@dimen/_40sdp"/>
+
+                <TextView
+                    android:id="@+id/tvDisclaimer"
+                    style="@style/TextView12ssp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/etAccountType"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:text="@string/Disclaimer"
+                    android:textColor="@color/color_grey_text" />
+
+                <TextView
+                    android:id="@+id/tvDummyText"
+                    style="@style/TextView12ssp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvDisclaimer"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="@string/Dummy_Text"
+                    android:textColor="@color/color_grey_text" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnUpload"
+                    style="@style/material_button"
+                    android:layout_below="@id/tvDummyText"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:minHeight="@dimen/_50sdp"
+                    android:paddingLeft="@dimen/_15sdp"
+                    android:paddingRight="@dimen/_15sdp"
+                    android:text="@string/Upload"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/_12ssp"/>
+
+            </RelativeLayout>
+        </ScrollView>
+
+        <include android:id="@+id/header"
+            bind:bankDetail="@{bankDetail}"
+            layout="@layout/header_with_back"></include>
+    </RelativeLayout>
+</layout>

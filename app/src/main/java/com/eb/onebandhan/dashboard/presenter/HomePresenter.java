@@ -11,6 +11,7 @@ import com.eb.onebandhan.auth.model.MUser;
 import com.eb.onebandhan.auth.presenterinterface.LoginPresenterInterface;
 import com.eb.onebandhan.auth.viewinterface.LoginViewInterface;
 import com.eb.onebandhan.dashboard.model.MBanner;
+import com.eb.onebandhan.dashboard.model.MCollection;
 import com.eb.onebandhan.dashboard.presenterinterface.HomePresenterInterface;
 import com.eb.onebandhan.dashboard.viewinterface.HomeViewInterface;
 import com.eb.onebandhan.util.Constant;
@@ -70,6 +71,35 @@ public class HomePresenter implements HomePresenterInterface, Constant {
         getObservableForCategory(map).subscribeWith(getObserverForCategory());
     }
 
+    @Override
+    public void getCollectionListTask(Map<String, String> map) {
+        getObservableForCollection(map).subscribeWith(getObserverForCollection());
+    }
+
+    private DisposableObserver<ResponseData<List<MCollection>>> getObserverForCollection() {
+        return new DisposableObserver<ResponseData<List<MCollection>>>() {
+            @Override
+            public void onNext(ResponseData<List<MCollection>> response) {
+                viewInterface.onSucessfullyGetCollectionList(response.getData(), response.getMessage());
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                if (e instanceof HttpException)
+                    viewInterface.onFailToGetCollectionList(Utils.errorMessageParsing(e).getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+    }
+
+    private <T> Observable getObservableForCollection(Map<String, String> map) {
+        return APIClient.getClient(activity).create(APIInterface.class).getCollectionData(map).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
     private DisposableObserver<ResponseData<List<MCategory>>> getObserverForCategory() {
         return new DisposableObserver<ResponseData<List<MCategory>>>() {
             @Override
@@ -80,7 +110,7 @@ public class HomePresenter implements HomePresenterInterface, Constant {
             @Override
             public void onError(Throwable e) {
                 if (e instanceof HttpException)
-                    viewInterface.onFailToGetBannerList(Utils.errorMessageParsing(e).getMessage());
+                    viewInterface.onFailToGetCategoryList(Utils.errorMessageParsing(e).getMessage());
             }
 
             @Override

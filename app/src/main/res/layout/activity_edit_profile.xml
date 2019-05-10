@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".dashboard.activity.EditProfileActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/header"
+            android:fillViewport="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_34sdp"
+                android:layout_marginTop="?attr/actionBarSize"
+                android:layout_marginRight="@dimen/_34sdp">
+
+                <RelativeLayout
+                    android:id="@+id/rlImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgUser"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_80sdp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@color/colorHint" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@id/imgUser"
+                        android:layout_alignBottom="@+id/imgUser"
+                        android:src="@drawable/ic_edit_pencil" />
+
+
+                </RelativeLayout>
+
+
+                <TextView
+                    android:id="@+id/general_detail"
+                    style="@style/TextView12ssp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rlImage"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="@dimen/_36sdp"
+                    android:fontFamily="@font/latosemibold"
+                    android:text="General Detail"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/etName"
+                    style="@style/EditText12ssp"
+                    android:layout_below="@id/general_detail"
+                    android:layout_marginTop="@dimen/_13sdp"
+                    android:background="@drawable/rect_back_with_corner"
+                    android:fontFamily="@font/latoregular"
+                    android:hint="@string/name"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:padding="@dimen/_15sdp"
+                    android:singleLine="true" />
+
+                <EditText
+                    android:id="@+id/etMobileNo"
+                    style="@style/EditText12ssp"
+                    android:layout_below="@id/etName"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="@drawable/rect_back_with_corner"
+                    android:fontFamily="@font/latoregular"
+                    android:hint="@string/mobile_no"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:padding="@dimen/_15sdp"
+                    android:singleLine="true" />
+
+                <EditText
+                    android:id="@+id/etEmail"
+                    style="@style/EditText12ssp"
+                    android:layout_below="@id/etMobileNo"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="@drawable/rect_back_with_corner"
+                    android:fontFamily="@font/latoregular"
+                    android:hint="@string/email_optional"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:padding="@dimen/_15sdp"
+                    android:singleLine="true" />
+
+
+                <TextView
+                    android:id="@+id/tvEditGeneral"
+                    style="@style/TextView12ssp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rlImage"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/_36sdp"
+                    android:fontFamily="@font/latosemibold"
+                    android:text="Edit"
+                    android:textColor="@color/yellow" />
+
+                <TextView
+                    android:id="@+id/business_detail"
+                    style="@style/TextView12ssp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/etEmail"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="@dimen/_28sdp"
+                    android:fontFamily="@font/latosemibold"
+                    android:text="Business Detail"
+                    android:textColor="@color/black" />
+                <!--add 12ssp for latosemibold in style file-->
+
+                <TextView
+                    android:id="@+id/tvEditBusiness"
+                    style="@style/TextView12ssp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/etEmail"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/_28sdp"
+                    android:fontFamily="@font/latosemibold"
+                    android:text="Edit"
+                    android:textColor="@color/yellow" />
+
+                <EditText
+                    android:id="@+id/etShopName"
+                    style="@style/EditText12ssp"
+                    android:layout_below="@+id/business_detail"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:background="@drawable/rect_back_with_corner"
+                    android:fontFamily="@font/latoregular"
+                    android:hint="@string/shop_name"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:padding="@dimen/_15sdp"
+                    android:singleLine="true" />
+
+                <EditText
+                    android:id="@+id/etAddLine1"
+                    style="@style/EditText12ssp"
+                    android:layout_below="@id/etShopName"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:background="@drawable/rect_back_with_corner"
+                    android:fontFamily="@font/latoregular"
+                    android:hint="@string/address_line_one"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:padding="@dimen/_15sdp"
+                    android:singleLine="true" />
+
+                <EditText
+                    android:id="@+id/etAddLine2"
+                    style="@style/EditText12ssp"
+                    android:layout_below="@id/etAddLine1"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:background="@drawable/rect_back_with_corner"
+                    android:fontFamily="@font/latoregular"
+                    android:hint="@string/address_line_two"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:padding="@dimen/_15sdp"
+                    android:singleLine="true" />
+
+                <EditText
+                    android:id="@+id/etCity"
+                    style="@style/EditText12ssp"
+                    android:layout_below="@id/etAddLine2"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:background="@drawable/rect_back_with_corner"
+                    android:fontFamily="@font/latoregular"
+                    android:hint="@string/city"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:padding="@dimen/_15sdp"
+                    android:singleLine="true" />
+
+                <EditText
+                    android:id="@+id/state"
+                    style="@style/EditText12ssp"
+                    android:layout_below="@id/etCity"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:background="@drawable/rect_back_with_corner"
+                    android:fontFamily="@font/latoregular"
+                    android:hint="@string/state"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:padding="@dimen/_15sdp"
+                    android:singleLine="true" />
+
+                <EditText
+                    android:id="@+id/etAboutShop"
+                    style="@style/EditText12ssp"
+                    android:layout_below="@id/state"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:background="@drawable/rect_back_with_corner"
+                    android:fontFamily="@font/latoregular"
+                    android:hint="@string/about_shop"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:padding="@dimen/_15sdp"
+                    android:singleLine="true" />
+
+                <EditText
+                    android:id="@+id/etPanNumber"
+                    style="@style/EditText12ssp"
+                    android:layout_below="@id/etAboutShop"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:background="@drawable/rect_back_with_corner"
+                    android:fontFamily="@font/latoregular"
+                    android:hint="@string/pan_no"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:padding="@dimen/_15sdp"
+                    android:singleLine="true" />
+
+                <EditText
+                    android:id="@+id/etGst"
+                    style="@style/EditText12ssp"
+                    android:layout_below="@id/etPanNumber"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:background="@drawable/rect_back_with_corner"
+                    android:fontFamily="@font/latoregular"
+                    android:hint="@string/gst"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:padding="@dimen/_15sdp"
+                    android:singleLine="true" />
+
+                <EditText
+                    android:id="@+id/etGstPercent"
+                    style="@style/EditText12ssp"
+                    android:layout_below="@id/etGst"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:background="@drawable/rect_back_with_corner"
+                    android:fontFamily="@font/latoregular"
+                    android:hint="@string/gst_percent"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:padding="@dimen/_15sdp"
+                    android:singleLine="true" />
+
+                <Button
+                    android:id="@+id/btnSubmit"
+                    style="@style/material_button"
+                    android:layout_below="@+id/etGstPercent"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_60sdp"
+                    android:minHeight="@dimen/_50sdp"
+                    android:text="@string/save"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+
+        </ScrollView>
+    </RelativeLayout>
+</layout>

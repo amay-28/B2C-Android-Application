@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".notification.activity.NotificationListingActivity">
+
+    <data>
+
+        <variable
+            name="notification"
+            type="com.eb.onebandhan.notification.activity.NotificationListingActivity" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/llNoNotification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                android:src="@drawable/ic_notification_big" />
+
+            <TextView
+                style="@style/TextView16ssp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="@string/no_notification_yet"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                style="@style/TextView12ssp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:gravity="center"
+                android:text="@string/simply_browse"
+                android:textColor="@color/colorHint" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnContinueShopping"
+               style="@style/material_button"
+                android:text="@string/continue_shopping"
+                android:paddingStart="@dimen/_30sdp"
+                android:paddingEnd="@dimen/_30sdp"
+                android:minHeight="@dimen/_50sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_width="wrap_content"/>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvNotification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/header">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <include
+            android:id="@+id/header"
+            layout="@layout/header_with_back"
+            bind:notification="@{notification}"></include>
+    </RelativeLayout>
+</layout>
