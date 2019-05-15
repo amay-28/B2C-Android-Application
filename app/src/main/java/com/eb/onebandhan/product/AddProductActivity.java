@@ -9,8 +9,10 @@ import android.widget.Toast;
 
 import com.eb.onebandhan.R;
 import com.eb.onebandhan.auth.model.MCategory;
+import com.eb.onebandhan.dashboard.adapter.SuperCategoryListAdapter;
 import com.eb.onebandhan.databinding.ActivityAddProductBinding;
 import com.eb.onebandhan.product.adapter.DialogListAdapter;
+import com.eb.onebandhan.product.adapter.ImageAdapter;
 import com.eb.onebandhan.product.presenter.DialogPresenter;
 import com.eb.onebandhan.product.viewinterface.DialogViewInterface;
 import com.eb.onebandhan.util.CommonClickHandler;
@@ -24,10 +26,12 @@ import java.util.Map;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import static com.eb.onebandhan.auth.util.Categoryutil.ZERO;
 
-public class AddProductActivity extends AppCompatActivity implements DialogViewInterface {
+public class AddProductActivity extends AppCompatActivity implements DialogViewInterface, ImageAdapter.CallBack {
     private Activity activity;
     private ActivityAddProductBinding binding;
     private int OPEN_DIALOG_FOR_CATEGORY = 1;
@@ -40,6 +44,8 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
     private List<MCategory> subCategoryList = new ArrayList<>();
     private List<MCategory> subSubCategoryList = new ArrayList<>();
     private List<MCategory> categoryList = new ArrayList<>();
+    private List<String> imageList = new ArrayList<>();
+    private ImageAdapter imageAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,6 +62,13 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         map.put("level", ZERO);
         map.put("eager", "children.children");
         dialogPresenter.getCategoryListTask(map);
+
+        binding.rvImages.setLayoutManager(new LinearLayoutManager(activity));
+        binding.rvImages.setHasFixedSize(true);
+        binding.rvImages.setItemAnimator(new DefaultItemAnimator());
+        imageAdapter = new ImageAdapter(activity, imageList, this);
+        binding.rvImages.setAdapter(imageAdapter);
+        //TODO
     }
 
     private void listeners() {
@@ -118,6 +131,7 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
             return false;
         }
        // prepareData();
+
         return true;
     }
 
@@ -148,6 +162,15 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         }
     }
 
+
+
+
+
+
+
+
+
+
     @Override
     public void onSuccessfullyGetCategoryList(List<MCategory> mCategoryList, String message) {
         if (mCategoryList != null) {
@@ -175,4 +198,8 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
     }
 
 
+    @Override
+    public void onDeleteImage(int position) {
+
+    }
 }
