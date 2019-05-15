@@ -26,18 +26,11 @@
                     android:layout_height="wrap_content">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/imgUser"
+                        android:id="@+id/ivProfile"
                         android:layout_width="@dimen/_80sdp"
                         android:layout_height="@dimen/_80sdp"
                         android:layout_centerHorizontal="true"
                         android:src="@color/colorHint" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignRight="@id/imgUser"
-                        android:layout_alignBottom="@+id/imgUser"
-                        android:src="@drawable/ic_edit_pencil" />
 
                 </RelativeLayout>
 
@@ -53,8 +46,8 @@
                     android:text="General Detail"
                     android:textColor="@color/black" />
 
-                <EditText
-                    android:id="@+id/etName"
+                <TextView
+                    android:id="@+id/tvName"
                     style="@style/EditText12ssp"
                     android:layout_below="@id/general_detail"
                     android:layout_marginTop="@dimen/_13sdp"
@@ -66,13 +59,12 @@
                     android:enabled="false"
                     android:maxLength="30"
                     android:padding="@dimen/_15sdp"
-                    android:textColor="@color/colorHint"
                     android:singleLine="true" />
 
-                <EditText
-                    android:id="@+id/etMobileNo"
+                <TextView
+                    android:id="@+id/tvMobileNo"
                     style="@style/EditText12ssp"
-                    android:layout_below="@id/etName"
+                    android:layout_below="@id/tvName"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:fontFamily="@font/latoregular"
@@ -82,13 +74,12 @@
                     android:inputType="text"
                     android:maxLength="30"
                     android:padding="@dimen/_15sdp"
-                    android:textColor="@color/colorHint"
                     android:singleLine="true" />
 
-                <EditText
-                    android:id="@+id/etEmail"
+                <TextView
+                    android:id="@+id/tvEmail"
                     style="@style/EditText12ssp"
-                    android:layout_below="@id/etMobileNo"
+                    android:layout_below="@id/tvMobileNo"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:fontFamily="@font/latoregular"
@@ -98,27 +89,14 @@
                     android:maxLength="30"
                     android:padding="@dimen/_15sdp"
                     android:enabled="false"
-                    android:textColor="@color/colorHint"
                     android:singleLine="true" />
-
-                <TextView
-                    android:id="@+id/tvEditGeneral"
-                    style="@style/TextView12ssp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/rlImage"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="@dimen/_36sdp"
-                    android:fontFamily="@font/latosemibold"
-                    android:text="Edit"
-                    android:textColor="@color/yellow" />
 
                 <TextView
                     android:id="@+id/business_detail"
                     style="@style/TextView12ssp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/etEmail"
+                    android:layout_below="@id/tvEmail"
                     android:layout_alignParentLeft="true"
                     android:layout_marginTop="@dimen/_28sdp"
                     android:fontFamily="@font/latosemibold"
@@ -127,19 +105,7 @@
                 <!--add 12ssp for latosemibold in style file-->
 
                 <TextView
-                    android:id="@+id/tvEditBusiness"
-                    style="@style/TextView12ssp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/etEmail"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="@dimen/_28sdp"
-                    android:fontFamily="@font/latosemibold"
-                    android:text="Edit"
-                    android:textColor="@color/yellow" />
-
-                <EditText
-                    android:id="@+id/etShopName"
+                    android:id="@+id/tvShopName"
                     style="@style/EditText12ssp"
                     android:layout_below="@+id/business_detail"
                     android:layout_marginTop="@dimen/_11sdp"
@@ -150,14 +116,13 @@
                     android:inputType="text"
                     android:maxLength="30"
                     android:enabled="false"
-                    android:textColor="@color/colorHint"
                     android:padding="@dimen/_15sdp"
                     android:singleLine="true" />
 
-                <EditText
-                    android:id="@+id/etAddLine1"
+                <TextView
+                    android:id="@+id/tvAddLine1"
                     style="@style/EditText12ssp"
-                    android:layout_below="@id/etShopName"
+                    android:layout_below="@id/tvShopName"
                     android:layout_marginTop="@dimen/_11sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:fontFamily="@font/latoregular"
@@ -166,14 +131,13 @@
                     android:inputType="text"
                     android:maxLength="30"
                     android:enabled="false"
-                    android:textColor="@color/colorHint"
                     android:padding="@dimen/_15sdp"
                     android:singleLine="true" />
 
-                <EditText
-                    android:id="@+id/etAddLine2"
+                <TextView
+                    android:id="@+id/tvAddLine2"
                     style="@style/EditText12ssp"
-                    android:layout_below="@id/etAddLine1"
+                    android:layout_below="@id/tvAddLine1"
                     android:layout_marginTop="@dimen/_11sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:fontFamily="@font/latoregular"
@@ -182,14 +146,13 @@
                     android:inputType="text"
                     android:maxLength="30"
                     android:enabled="false"
-                    android:textColor="@color/colorHint"
                     android:padding="@dimen/_15sdp"
                     android:singleLine="true" />
 
-                <EditText
-                    android:id="@+id/etCity"
+                <TextView
+                    android:id="@+id/tvCity"
                     style="@style/EditText12ssp"
-                    android:layout_below="@id/etAddLine2"
+                    android:layout_below="@id/tvAddLine2"
                     android:layout_marginTop="@dimen/_11sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:fontFamily="@font/latoregular"
@@ -198,14 +161,13 @@
                     android:inputType="text"
                     android:maxLength="30"
                     android:enabled="false"
-                    android:textColor="@color/colorHint"
                     android:padding="@dimen/_15sdp"
                     android:singleLine="true" />
 
-                <EditText
-                    android:id="@+id/etState"
+                <TextView
+                    android:id="@+id/tvState"
                     style="@style/EditText12ssp"
-                    android:layout_below="@id/etCity"
+                    android:layout_below="@id/tvCity"
                     android:layout_marginTop="@dimen/_11sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:fontFamily="@font/latoregular"
@@ -215,13 +177,12 @@
                     android:maxLength="30"
                     android:padding="@dimen/_15sdp"
                     android:enabled="false"
-                    android:textColor="@color/colorHint"
                     android:singleLine="true" />
 
-                <EditText
-                    android:id="@+id/etAboutShop"
+                <TextView
+                    android:id="@+id/tvAboutShop"
                     style="@style/EditText12ssp"
-                    android:layout_below="@id/etState"
+                    android:layout_below="@id/tvState"
                     android:layout_marginTop="@dimen/_11sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:fontFamily="@font/latoregular"
@@ -231,13 +192,12 @@
                     android:maxLength="30"
                     android:padding="@dimen/_15sdp"
                     android:enabled="false"
-                    android:textColor="@color/colorHint"
                     android:singleLine="true" />
 
-                <EditText
-                    android:id="@+id/etPanNumber"
+                <TextView
+                    android:id="@+id/tvPanNumber"
                     style="@style/EditText12ssp"
-                    android:layout_below="@id/etAboutShop"
+                    android:layout_below="@id/tvAboutShop"
                     android:layout_marginTop="@dimen/_11sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:fontFamily="@font/latoregular"
@@ -247,13 +207,12 @@
                     android:maxLength="30"
                     android:padding="@dimen/_15sdp"
                     android:enabled="false"
-                    android:textColor="@color/colorHint"
                     android:singleLine="true" />
 
-                <EditText
-                    android:id="@+id/etGst"
+                <TextView
+                    android:id="@+id/tvGst"
                     style="@style/EditText12ssp"
-                    android:layout_below="@id/etPanNumber"
+                    android:layout_below="@id/tvPanNumber"
                     android:layout_marginTop="@dimen/_11sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:fontFamily="@font/latoregular"
@@ -266,10 +225,10 @@
                     android:textColor="@color/colorHint"
                     android:singleLine="true" />
 
-                <EditText
-                    android:id="@+id/etGstPercent"
+                <TextView
+                    android:id="@+id/tvGstPercent"
                     style="@style/EditText12ssp"
-                    android:layout_below="@id/etGst"
+                    android:layout_below="@id/tvGst"
                     android:layout_marginTop="@dimen/_11sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:fontFamily="@font/latoregular"
@@ -279,18 +238,17 @@
                     android:maxLength="30"
                     android:padding="@dimen/_15sdp"
                     android:enabled="false"
-                    android:textColor="@color/colorHint"
                     android:singleLine="true" />
 
                 <Button
                     android:id="@+id/btnSubmit"
                     style="@style/material_button"
-                    android:layout_below="@+id/etGstPercent"
+                    android:layout_below="@+id/tvGstPercent"
                     android:layout_centerInParent="true"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:layout_marginBottom="@dimen/_60sdp"
                     android:minHeight="@dimen/_50sdp"
-                    android:text="@string/save"
+                    android:text="@string/edit"
                     android:textSize="@dimen/_12ssp"
                     android:textColor="@color/white" />
             </RelativeLayout>

@@ -43,6 +43,17 @@
     <string name="please_enter_address">Please enter address</string>
     <string name="please_enter_city">Please enter City</string>
     <string name="please_enter_state">Please enter State</string>
+    <string name="please_enter_about_the_shop">Please enter something about shop</string>
+    <string name="please_enter_pan_number">Please enter PAN Number</string>
+    <string name="please_enter_gst">Please enter GST</string>
+    <string name="please_enter_gst_percent">Please enter GST%</string>
+    <string name="please_select_category_first">Please select category</string>
+    <string name="please_select_sub_category_first">Please select sub category</string>
+    <string name="please_select_sub_sub_category_first">Please select sub sub category</string>
+
+    <string name="please_enter_product_name">Please enter product name</string>
+    <string name="please_enter_selling_price">Please enter selling price</string>
+    <string name="please_enter_description">Please enter description</string>
 
     <!--Validation-->
     <string name="error_please_enter_a">Please enter a %1$s</string>

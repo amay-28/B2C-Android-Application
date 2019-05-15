@@ -21,6 +21,8 @@
         <activity android:name=".bankDetail.activity.AddBankDetailActivity" />
         <activity android:name=".services.AddServiceActivity" />
         <activity android:name=".product.AddProductActivity" />
+        <activity android:name=".dashboard.activity.MyProfileActivity" />
+
         <activity
             android:name=".basic.SplashActivity"
             android:screenOrientation="portrait">
@@ -55,6 +57,11 @@
         <activity
             android:name=".auth.activity.SelectLanguageActivity"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".product.DialogActivity"
+            android:theme="@style/TransparentBackground" />
+
+
     </application>
 
 </manifest>

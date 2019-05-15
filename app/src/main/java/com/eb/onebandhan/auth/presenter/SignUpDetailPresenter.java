@@ -15,6 +15,7 @@ import com.eb.onebandhan.auth.presenterinterface.SignUpPresenterInterface;
 import com.eb.onebandhan.auth.util.Categoryutil;
 import com.eb.onebandhan.auth.viewinterface.SignUpDetailViewInterface;
 import com.eb.onebandhan.auth.viewinterface.SignUpViewInterface;
+import com.eb.onebandhan.util.Session;
 import com.eb.onebandhan.util.Utils;
 import com.eb.onebandhan.util.WebService;
 
@@ -79,6 +80,8 @@ public class SignUpDetailPresenter implements SignUpDetailPresenterInterface, Ca
         return new DisposableObserver<ResponseData<MUser>>() {
             @Override
             public void onNext(ResponseData<MUser> response) {
+                new Session(activity).getUserProfile().setRetailerDetails(response.getData().getRetailerDetails());
+
                 viewInterface.onSucessfullySubmitShopDetail(response.getData(),response.getMessage());
 
             }

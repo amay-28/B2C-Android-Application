@@ -26,7 +26,7 @@ import retrofit2.adapter.rxjava2.HttpException;
 public class LoginPresenter implements LoginPresenterInterface, Constant {
     private LoginViewInterface viewInterface;
     private Activity activity;
-    private String requestType="";
+    private String requestType = "";
 
     public LoginPresenter(LoginViewInterface viewInterface, Activity activity) {
         this.viewInterface = viewInterface;
@@ -37,9 +37,10 @@ public class LoginPresenter implements LoginPresenterInterface, Constant {
         return new DisposableObserver<Response<ResponseData<MUser>>>() {
             @Override
             public void onNext(Response<ResponseData<MUser>> response) {
-                if (requestType.equals(TYPE_LOGIN_ONLY)){
+                if (requestType.equals(TYPE_LOGIN_ONLY)) {
                     new Session(activity).setString(IS_LOGIN, YES);
-                    new Session(activity).setString(AUTHORIZATION_KEY,BEARER+ response.headers().get("AuthToken"));
+                    new Session(activity).setString(AUTHORIZATION_KEY, BEARER + response.headers().get("AuthToken"));
+                    new Session(activity).setUserProfile(response.body().getData());
                 }
                 viewInterface.onSucessfullyLogin(response.body().getData(), response.body().getMessage());
 
@@ -68,7 +69,7 @@ public class LoginPresenter implements LoginPresenterInterface, Constant {
 
     @Override
     public void performLoginTask(MSignUp mSignUp, String requestType) {
-        this.requestType=requestType;
+        this.requestType = requestType;
         getObservable(mSignUp, requestType).subscribeWith(getObserver());
     }
 }

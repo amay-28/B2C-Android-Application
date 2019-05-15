@@ -16,8 +16,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="?attr/actionBarSize"
-                android:layout_marginLeft="@dimen/_34sdp"
+                android:layout_marginLeft="@dimen/_19sdp"
                 android:layout_marginRight="@dimen/_19sdp">
 
                 <TextView
@@ -25,56 +24,62 @@
                     style="@style/TextView12ssp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/latosemibold"
                     android:singleLine="true"
                     android:textColor="@color/yellow"
                     android:layout_alignParentRight="true"
-                    android:layout_marginBottom="@dimen/_17sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
                     android:text="@string/edit" />
 
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imgUserProfile"
-                    android:layout_width="@dimen/_80sdp"
-                    android:layout_height="@dimen/_80sdp"
-                    android:layout_below="@+id/tvEdit"
-                    android:src="@color/colorPrimary" />
-
                 <RelativeLayout
+                    android:id="@+id/rlProfile"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_80sdp"
-                    android:layout_toRightOf="@+id/imgUserProfile"
-                    android:layout_below="@+id/tvEdit"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/_13sdp">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvEdit">
 
-                    <TextView
-                        android:id="@+id/tvName"
-                        style="@style/TextView16ssp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/latosemibold"
-                        android:singleLine="true"
-                        android:text="Yash Raj Verma" />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgUserProfile"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_80sdp"
+                        android:src="@color/colorPrimary" />
 
-                    <TextView
-                        android:id="@+id/tvPhone"
-                        style="@style/TextView12ssp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/tvName"
-                        android:layout_marginTop="@dimen/_7sdp"
-                        android:fontFamily="@font/latosemibold"
-                        android:singleLine="true"
-                        android:textColor="@color/colorHint"
-                        android:text="9755253699" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_80sdp"
+                        android:layout_toRightOf="@+id/imgUserProfile"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/_13sdp">
+
+                        <TextView
+                            android:id="@+id/tvName"
+                            style="@style/TextView16ssp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/latosemibold"
+                            android:singleLine="true"
+                            android:text="Yash Raj Verma" />
+
+                        <TextView
+                            android:id="@+id/tvPhone"
+                            style="@style/TextView12ssp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tvName"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            android:fontFamily="@font/latosemibold"
+                            android:singleLine="true"
+                            android:textColor="@color/colorHint"
+                            android:text="9755253699" />
+
+                    </RelativeLayout>
 
                 </RelativeLayout>
 
+
                 <View
                     android:id="@+id/viewProfile"
-                    android:layout_below="@+id/imgUserProfile"
+                    android:layout_below="@+id/rlProfile"
                     android:layout_width="match_parent"
                     android:background="@color/white_dark"
                     android:layout_marginTop="@dimen/_10sdp"

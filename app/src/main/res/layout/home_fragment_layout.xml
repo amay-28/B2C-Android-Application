@@ -26,6 +26,7 @@
                     android:background="@drawable/curve_back_right_flat">
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnWholesale"
                         style="@style/CustomButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -45,6 +46,7 @@
                     android:background="@drawable/curve_back_left_flat">
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSinglePiece"
                         style="@style/CustomButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

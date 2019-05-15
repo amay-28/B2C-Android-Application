@@ -36,9 +36,9 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
     private ActivitySignUpDetailBinding binding;
     private SignUpDetailPresenter signUpDetailPresenter;
     private Map<String, String> map = new HashMap<>();
-    private List<MCategory> categoryList=new ArrayList<>();
+    private List<MCategory> categoryList = new ArrayList<>();
     private CategoryAdapter categoryAdapter;
-    private MProfile mProfile=new MProfile();
+    private MProfile mProfile = new MProfile();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +51,10 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
 
     private void initialization() {
         signUpDetailPresenter = new SignUpDetailPresenter(this, activity);
-        map.put(LEVEL,ZERO);
-        map.put(LIMIT,INFINITE_LIMIT);
+        map.put(LEVEL, ZERO);
+        map.put(LIMIT, INFINITE_LIMIT);
         signUpDetailPresenter.loadCategoryTask(map);
-        MCategory mCategory=new MCategory();
+        MCategory mCategory = new MCategory();
         mCategory.setId("00");
         mCategory.setName(getResources().getString(R.string.deals_in_category));
         categoryList.add(mCategory);
@@ -63,13 +63,13 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
     }
 
     private void listner() {
-   binding.btnSubmit.setOnClickListener(view -> {
-       if (validation())signUpDetailPresenter.submitShopDetailTask(mProfile);
-   });
+        binding.btnSubmit.setOnClickListener(view -> {
+            if (validation()) signUpDetailPresenter.submitShopDetailTask(mProfile);
+        });
         binding.spnCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                if (!categoryList.get(position).getIsSelected()){
+                if (!categoryList.get(position).getIsSelected()) {
                     Chip chip = new Chip(activity);
                     categoryList.get(position).setIsSelected(true);
                     chip.setText(categoryList.get(position).getName());
@@ -93,26 +93,26 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
     }
 
     private boolean validation() {
-        Resources resources=getResources();
-        if (TextUtils.isEmpty(binding.etShopName.getText().toString())){
-            Toast.makeText(activity,resources.getString(R.string.please_enter_shop_name) , Toast.LENGTH_SHORT).show();
+        Resources resources = getResources();
+        if (TextUtils.isEmpty(binding.etShopName.getText().toString())) {
+            Toast.makeText(activity, resources.getString(R.string.please_enter_shop_name), Toast.LENGTH_SHORT).show();
             return false;
-        } else if (TextUtils.isEmpty(binding.etAddressOne.getText().toString())){
-            Toast.makeText(activity,resources.getString(R.string.please_enter_address) , Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(binding.etAddressOne.getText().toString())) {
+            Toast.makeText(activity, resources.getString(R.string.please_enter_address), Toast.LENGTH_SHORT).show();
             return false;
-        } else if (TextUtils.isEmpty(binding.etAddressTwo.getText().toString())){
-            Toast.makeText(activity,resources.getString(R.string.please_enter_address) , Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(binding.etAddressTwo.getText().toString())) {
+            Toast.makeText(activity, resources.getString(R.string.please_enter_address), Toast.LENGTH_SHORT).show();
             return false;
-        }else if (TextUtils.isEmpty(binding.etCity.getText().toString())){
-            Toast.makeText(activity,resources.getString(R.string.please_enter_city) , Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(binding.etCity.getText().toString())) {
+            Toast.makeText(activity, resources.getString(R.string.please_enter_city), Toast.LENGTH_SHORT).show();
             return false;
-        }else if (TextUtils.isEmpty(binding.etState.getText().toString())){
-            Toast.makeText(activity,resources.getString(R.string.please_enter_state) , Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(binding.etState.getText().toString())) {
+            Toast.makeText(activity, resources.getString(R.string.please_enter_state), Toast.LENGTH_SHORT).show();
             return false;
-        }else if (!TextUtils.isEmpty(binding.etEmail.getText().toString())&& !ValidationUtil.emailValidator(activity,binding.etEmail,"email")){
+        } else if (!TextUtils.isEmpty(binding.etEmail.getText().toString()) && !ValidationUtil.emailValidator(activity, binding.etEmail, "email")) {
             return false;
         }
-         prepareData();
+        prepareData();
         return true;
     }
 
@@ -124,11 +124,11 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
         mProfile.setCity(binding.etCity.getText().toString());
         mProfile.setState(binding.etState.getText().toString());
         mProfile.setEmail(binding.etEmail.getText().toString());
-        List<MProfile.MDealsIn> dealsInList=new ArrayList<>();
-        if (!categoryList.isEmpty()){
-            for (MCategory mCategory : categoryList){
-                if (mCategory.getIsSelected()){
-                    MProfile.MDealsIn mDealsIn=new MProfile.MDealsIn();
+        List<MProfile.MDealsIn> dealsInList = new ArrayList<>();
+        if (!categoryList.isEmpty()) {
+            for (MCategory mCategory : categoryList) {
+                if (mCategory.getIsSelected()) {
+                    MProfile.MDealsIn mDealsIn = new MProfile.MDealsIn();
                     mDealsIn.setId(mCategory.getId());
                     dealsInList.add(mDealsIn);
                 }
@@ -139,22 +139,22 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
 
     @Override
     public void onFailTogetCategories(String message) {
-        ShowToast.toastMsg(activity,message);
+        ShowToast.toastMsg(activity, message);
     }
 
     @Override
     public void onSucessfullygetCategories(List<MCategory> categoryList, String message) {
-         this.categoryList.addAll(categoryList);
-         categoryAdapter.notifyDataSetChanged();
+        this.categoryList.addAll(categoryList);
+        categoryAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onSucessfullySubmitShopDetail(MUser data, String message) {
-        ShowToast.toastMsg(activity,message);
+        ShowToast.toastMsg(activity, message);
     }
 
     @Override
     public void onFailToSubmitShopDetail(String message) {
-        ShowToast.toastMsg(activity,message);
+        ShowToast.toastMsg(activity, message);
     }
 }

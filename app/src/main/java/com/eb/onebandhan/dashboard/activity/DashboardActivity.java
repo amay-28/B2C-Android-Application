@@ -3,10 +3,15 @@ package com.eb.onebandhan.dashboard.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.eb.onebandhan.R;
 import com.eb.onebandhan.dashboard.fragment.HomeFragment;
+import com.eb.onebandhan.dashboard.fragment.MoreFragment;
 import com.eb.onebandhan.databinding.ActivityDashboardBinding;
+import com.eb.onebandhan.util.Session;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -26,9 +31,13 @@ public class DashboardActivity extends AppCompatActivity {
                 return true;
             case R.id.navHome:
                 //                    mTextMessage.setText(R.string.title_dashboard);
+                fragment = new HomeFragment();
+                switchFragment(fragment, fragmentClass);
                 return true;
             case R.id.navMore:
                 //                    mTextMessage.setText(R.string.title_notifications);
+                fragment = new MoreFragment();
+                switchFragment(fragment, fragmentClass);
                 return true;
         }
         return false;
@@ -42,16 +51,19 @@ public class DashboardActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(activity, R.layout.activity_dashboard);
         initialization();
         listner();
+//        new Session(activity).getUserProfile().setRetailerDetails();
+//        Toast.makeText(activity, "retailer: "+, Toast.LENGTH_SHORT).show();
     }
 
     private void initialization() {
         fragment = new HomeFragment();
-        switchFragment(fragment,fragmentClass);
+        switchFragment(fragment, fragmentClass);
     }
 
     private void listner() {
         binding.navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
+
     private void switchFragment(Fragment fragment, Class fragmentClass) {
         try {
             fragment = (Fragment) fragmentClass.newInstance();

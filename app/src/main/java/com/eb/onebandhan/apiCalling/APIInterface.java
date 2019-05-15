@@ -35,7 +35,7 @@ public interface APIInterface {
 
     // for withouth auth token
     @GET("categories")
-    Observable<ResponseData<List<MCategory>>> getCategoryRelatedData( @QueryMap Map<String, String> map);
+    Observable<ResponseData<List<MCategory>>> getCategoryRelatedData(@QueryMap Map<String, String> map);
 
     @POST("retailer/update-profile")
     Observable<ResponseData<MUser>> updateShopDetail(@Body MProfile mProfile);
@@ -47,8 +47,10 @@ public interface APIInterface {
     @GET("categories")
     Observable<ResponseData<List<MCategory>>> getUserCategoryRelatedData(@Header("Authorization") String token, @QueryMap Map<String, String> map);
 
-  @GET("collections")
+    @GET("collections")
     Observable<ResponseData<List<MCollection>>> getCollectionData(@QueryMap Map<String, String> map);
 
+    @POST("retailer/update-profile")
+    Observable<ResponseData<MUser>> updateProfile(@Body MUser mUser);
 
 }

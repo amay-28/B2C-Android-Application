@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:id="@+id/rlRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/tvCategory"
+            style="@style/TextView14ssp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:fontFamily="@font/latosemibold"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/color_grey_text"
+            android:text="Clothing" />
+
+        <ImageView
+            android:id="@+id/ivTick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="end"
+            android:visibility="gone"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:src="@drawable/ic_tick" />
+
+    </RelativeLayout>
+</layout>

@@ -3,6 +3,9 @@ package com.eb.onebandhan.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.eb.onebandhan.auth.model.MUser;
+import com.google.gson.Gson;
+
 public class Session {
 
     private SharedPreferences pref;
@@ -39,6 +42,30 @@ public class Session {
 
         String json = pref.getString(name, "");
         return json;
+    }
+
+    public MUser getUserProfile() {
+
+        Gson gson = new Gson();
+        String json = pref.getString(USER_PROFILE_DATA, "");
+
+        MUser userProfile;
+
+        if (json.isEmpty()) {
+            userProfile = new MUser();
+        } else {
+            userProfile = gson.fromJson(json, MUser.class);
+        }
+        return userProfile;
+    }
+
+    public void setUserProfile(MUser UserProfile) {
+
+        Gson gson = new Gson();
+        String json = gson.toJson(UserProfile);
+        prefsEditor.putString(USER_PROFILE_DATA, json);
+        prefsEditor.commit();
+
     }
 
 }
