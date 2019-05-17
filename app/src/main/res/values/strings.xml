@@ -148,4 +148,16 @@
     <string name="pan_number_length">PAN number is too short.</string>
     <string name="gst_length">GST is too short.</string>
 
+    <!--name (max length is 25 AND minimum is 3)
+    mobile (max length is 10 AND minimum is 10)
+    shop name (max length is 30 AND minimum is 3)
+    address1 (max length is 50 AND minimum is 3)
+    address2 (max length is 50 AND minimum is 3)
+    city (max length is 30 AND minimum is 2)
+    state (max length is 30 AND minimum is 2)
+    about shop (max length is 50 AND minimum is 3)
+    pan (max length is 30 AND minimum is 2)
+    GST (max length is 30 AND minimum is 2)
+    GST% (max length is 10 AND minimum is 1)-->
+
 </resources>

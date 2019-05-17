@@ -9,6 +9,7 @@ import com.eb.onebandhan.R;
 import com.eb.onebandhan.auth.model.MCategory;
 import com.eb.onebandhan.dashboard.adapter.SubCategoryListAdapter;
 import com.eb.onebandhan.databinding.ItemDialogActivityBinding;
+import com.eb.onebandhan.product.model.MImage;
 
 import java.util.List;
 
@@ -18,11 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> implements SubCategoryListAdapter.CallBack {
     private Activity activity;
-    private List<String> imageList;
+    private List<MImage> imageList;
     private CallBack callBack;
     private String selectedCategory;
 
-    public ImageAdapter(Activity activity, List<String> imageList, CallBack callBack) {
+    public ImageAdapter(Activity activity, List<MImage> imageList, CallBack callBack) {
         this.activity = activity;
         this.imageList = imageList;
         this.callBack = callBack;
@@ -37,11 +38,16 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String imageUrl = imageList.get(position);
+        MImage mImage = imageList.get(position);
+        if (mImage.isLocal()) {
+            //TODO
+        }
+        //  String imageUrl = imageList.get(position);
         //holder.binding.tvCategory.setText(mCategory.getName());
        /* if (selectedCategory.equalsIgnoreCase(mCategory.getName())) {
             holder.binding.ivTick.setVisibility(View.VISIBLE);
         }*/
+
 
     }
 

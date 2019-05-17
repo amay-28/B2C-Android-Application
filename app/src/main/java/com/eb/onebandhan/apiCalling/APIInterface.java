@@ -7,6 +7,7 @@ import com.eb.onebandhan.auth.model.MSignUp;
 import com.eb.onebandhan.auth.model.MUser;
 import com.eb.onebandhan.dashboard.model.MBanner;
 import com.eb.onebandhan.dashboard.model.MCollection;
+import com.eb.onebandhan.product.model.MAddProduct;
 import com.google.gson.JsonElement;
 
 import java.util.List;
@@ -37,6 +38,9 @@ public interface APIInterface {
     @POST("retailer/login-send-otp")
     Observable<Response<ResponseData<MUser>>> loginToSendOtp(@Body MSignUp mSignUp);
 
+    @POST("product")
+    Observable<ResponseData> addProduct(@Header("Authorization") String token, @Body MAddProduct mAddProduct);
+
     // for withouth auth token
     @GET("categories")
     Observable<ResponseData<List<MCategory>>> getCategoryRelatedData(@QueryMap Map<String, String> map);
@@ -56,9 +60,9 @@ public interface APIInterface {
 
     @Multipart
     @POST("upload/file")
-    Observable<ResponseData<JsonElement>> uploadImage(@Header("Authorization") String token,@Part MultipartBody.Part file);
+    Observable<ResponseData<JsonElement>> uploadImage(@Header("Authorization") String token, @Part MultipartBody.Part file);
 
     @POST("retailer/update-profile")
-    Observable<ResponseData<MUser>> updateProfile(@Header("Authorization") String token,@Body MUser mUser);
+    Observable<ResponseData<MUser>> updateProfile(@Header("Authorization") String token, @Body MUser mUser);
 
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.eb.onebandhan.R;
@@ -13,7 +14,11 @@ import com.eb.onebandhan.dashboard.adapter.SuperCategoryListAdapter;
 import com.eb.onebandhan.databinding.ActivityAddProductBinding;
 import com.eb.onebandhan.product.adapter.DialogListAdapter;
 import com.eb.onebandhan.product.adapter.ImageAdapter;
+import com.eb.onebandhan.product.model.MAddProduct;
+import com.eb.onebandhan.product.model.MImage;
+import com.eb.onebandhan.product.presenter.AddProductPresenter;
 import com.eb.onebandhan.product.presenter.DialogPresenter;
+import com.eb.onebandhan.product.viewinterface.AddProductViewInterface;
 import com.eb.onebandhan.product.viewinterface.DialogViewInterface;
 import com.eb.onebandhan.util.CommonClickHandler;
 import com.eb.onebandhan.util.ShowToast;
@@ -29,23 +34,30 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import static com.eb.onebandhan.auth.util.Categoryutil.INFINITE_LIMIT;
+import static com.eb.onebandhan.auth.util.Categoryutil.LEVEL;
+import static com.eb.onebandhan.auth.util.Categoryutil.LIMIT;
 import static com.eb.onebandhan.auth.util.Categoryutil.ZERO;
 
-public class AddProductActivity extends AppCompatActivity implements DialogViewInterface, ImageAdapter.CallBack {
+public class AddProductActivity extends AppCompatActivity implements DialogViewInterface, AddProductViewInterface,
+        ImageAdapter.CallBack {
     private Activity activity;
     private ActivityAddProductBinding binding;
     private int OPEN_DIALOG_FOR_CATEGORY = 1;
     private int OPEN_DIALOG_FOR_SUBCATEGORY = 2;
     private int OPEN_DIALOG_FOR_SUBSUBCATEGORY = 3;
     MCategory mCategory = new MCategory();
+    MCategory mSubSubCategory = new MCategory();
     private DialogPresenter dialogPresenter;
+    private AddProductPresenter addProductPresenter;
     private Map<String, String> map = new HashMap<>();
     private List<MCategory> superCategoryList = new ArrayList<>();
     private List<MCategory> subCategoryList = new ArrayList<>();
     private List<MCategory> subSubCategoryList = new ArrayList<>();
     private List<MCategory> categoryList = new ArrayList<>();
-    private List<String> imageList = new ArrayList<>();
+    private List<MImage> imageList = new ArrayList<>();
     private ImageAdapter imageAdapter;
+    private MAddProduct mAddProduct = new MAddProduct();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,12 +75,26 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         map.put("eager", "children.children");
         dialogPresenter.getCategoryListTask(map);
 
+        addProductPresenter = new AddProductPresenter(this, activity);
+        map.put(LEVEL, ZERO);
+        map.put(LIMIT, INFINITE_LIMIT);
+
         binding.rvImages.setLayoutManager(new LinearLayoutManager(activity));
         binding.rvImages.setHasFixedSize(true);
         binding.rvImages.setItemAnimator(new DefaultItemAnimator());
-        imageAdapter = new ImageAdapter(activity, imageList, this);
+        imageAdapter = new ImageAdapter(activity, getImageList(), this);
         binding.rvImages.setAdapter(imageAdapter);
-        //TODO
+    }
+
+    public List<MImage> getImageList() {
+         MImage mImage ;
+        if (imageList != null && imageList.size() < 4) {
+            mImage = new MImage();
+            mImage.setLocal(true);
+            imageList.add(mImage);
+        }
+
+        return imageList;
     }
 
     private void listeners() {
@@ -102,7 +128,7 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         });
 
         binding.btnSubmit.setOnClickListener(v -> {
-           // if (checkValidate()) editProfilePresenter.onUpdateProfile(mUser);
+            if (checkValidate()) addProductPresenter.addProductTask(mAddProduct);
         });
     }
 
@@ -130,11 +156,18 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
             Toast.makeText(activity, resources.getString(R.string.please_enter_description), Toast.LENGTH_SHORT).show();
             return false;
         }
-       // prepareData();
+        prepareData();
 
         return true;
     }
 
+    private void prepareData() {
+        mAddProduct.setName(binding.etProductName.getText().toString());
+        mAddProduct.setCategory(mSubSubCategory);
+        mAddProduct.setPrice(binding.etSellingPrice.getText().toString());
+        mAddProduct.setCost_price(binding.etSellingPrice.getText().toString());
+        mAddProduct.setDescription(binding.etDescription.getText().toString());
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -158,17 +191,11 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
             if (requestCode == OPEN_DIALOG_FOR_SUBSUBCATEGORY) {
                 mCategory = data.getParcelableExtra("MCategory");
                 binding.etSubSubCategory.setText(mCategory.getName());
+
+                mSubSubCategory = mCategory;
             }
         }
     }
-
-
-
-
-
-
-
-
 
 
     @Override
@@ -200,6 +227,17 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
 
     @Override
     public void onDeleteImage(int position) {
+
+    }
+
+    @Override
+    public void onSuccessfullyAddProduct(MAddProduct mAddProduct, String message) {
+        //Log.d("AddProduct", mAddProduct.getName());
+        finish();
+    }
+
+    @Override
+    public void onFailToAddProduct(String errorMessage) {
 
     }
 }
