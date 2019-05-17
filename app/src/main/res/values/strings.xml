@@ -132,4 +132,20 @@
     <string name="faqs">FAQ\'s</string>
     <string name="help">Help</string>
     <string name="settings">Settings</string>
+
+    <!--PROFILE SCREEN-->
+    <string name="general_detail">General Detail</string>
+    <string name="business_detail">Business Detail</string>
+    <string name="txt_profile">Profile</string>
+    <string name="txt_editprofile">Edit Profile</string>
+    <string name="name_length">Name is too short.</string>
+    <string name="shop_name_length">Shop name is too short.</string>
+    <string name="address_line1_blank">Please enter address line1.</string>
+    <string name="address_line2_blank">Please enter address line2.</string>
+    <string name="city_name_length">City name is too short.</string>
+    <string name="state_name_length">State name is too short.</string>
+    <string name="about_shop_length">About shop is too short.</string>
+    <string name="pan_number_length">PAN number is too short.</string>
+    <string name="gst_length">GST is too short.</string>
+
 </resources>

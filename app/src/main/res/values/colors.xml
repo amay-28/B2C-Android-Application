@@ -12,4 +12,5 @@
     <color name="yellow">#e29c00</color>
     <color name="color_sky_blue">#4b9eff</color>
     <color name="color_grey_text">#707070</color>
+    <color name="colorMobileProfile">#9a9a9a</color>
 </resources>

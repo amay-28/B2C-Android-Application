@@ -26,6 +26,14 @@
             name="notification"
             type="com.eb.onebandhan.notification.activity.NotificationListingActivity"/>
 
+        <variable
+            name="myProfile"
+            type="com.eb.onebandhan.dashboard.activity.MyProfileActivity"/>
+
+        <variable
+            name="editProfile"
+            type="com.eb.onebandhan.dashboard.activity.EditProfileActivity"/>
+
     </data>
 
     <com.google.android.material.appbar.AppBarLayout

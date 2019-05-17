@@ -9,6 +9,19 @@
         <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
     </style>
 
+// use for crop image
+    <style name="AppThemeActionbar" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
+        <item name="titleTextColor">@color/black</item>
+        <item name="actionMenuTextColor">@color/black</item>
+        <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="android:fontFamily">@font/robotoregular</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_back</item>
+    </style>
+
 
     <style name="TextView10ssp">
         <item name="android:textColor">@color/black</item>

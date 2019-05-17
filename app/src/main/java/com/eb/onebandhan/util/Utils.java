@@ -5,10 +5,15 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
@@ -18,7 +23,9 @@ import android.widget.Toast;
 import com.eb.onebandhan.apiCalling.ResponseData;
 import com.google.gson.Gson;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -258,5 +265,52 @@ public class Utils implements Constant {
             return;
 
         inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    }
+
+    // Show Toast
+    public static void ShowToast(Context context,String msg,int duration) {
+
+        int gravity = Gravity.CENTER; // the position of toast
+        int xOffset = 0; // horizontal offset from current gravity
+        int yOffset = 0;
+
+        Toast toast = Toast.makeText(context, msg, duration);
+        toast.setGravity(gravity, xOffset, yOffset);
+        toast.show();
+
+    }
+
+    // Uri compress method and return file
+    public static File compressURI(Context context, Uri URI, String mili_second) {
+
+        File imageFile = null;
+        try {
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), URI);
+
+            ByteArrayOutputStream datasecond = new ByteArrayOutputStream();
+
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, datasecond);
+
+            byte[] bitmapdata = datasecond.toByteArray();
+
+            // write the bytes in file
+            imageFile = new File(Environment.getExternalStorageDirectory() + File.separator + mili_second+"waitty_profile.jpeg");
+
+            FileOutputStream fo = new FileOutputStream(imageFile);
+            fo.write(bitmapdata);
+            fo.close();
+
+            return imageFile;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return imageFile;
+    }
+
+    // Check value null and return
+    public static String checkNull(String value) {
+        return value==null?"":value;
     }
 }

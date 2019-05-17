@@ -19,6 +19,8 @@ public class MProfile {
     private String postalCode;
     private String created_at;
     private String updated_at;
+    private String aboutShop;
+    private String gstPercent;
     private Boolean isComposite;
 
     @Data

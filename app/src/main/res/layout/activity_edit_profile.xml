@@ -1,70 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     tools:context=".dashboard.activity.EditProfileActivity">
 
-    <RelativeLayout
+    <data>
+
+        <variable
+            name="editProfile"
+            type="com.eb.onebandhan.dashboard.activity.EditProfileActivity" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/header"
+            layout="@layout/header_with_back"
+            bind:editProfile="@{editProfile}"/>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/header"
+            android:background="@color/white"
             android:fillViewport="true">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/_34sdp"
-                android:layout_marginTop="?attr/actionBarSize"
-                android:layout_marginRight="@dimen/_34sdp">
+                android:orientation="vertical"
+                android:paddingTop="@dimen/_20sdp"
+                android:layout_marginLeft="@dimen/_30sdp"
+                android:layout_marginRight="@dimen/_30sdp">
 
                 <RelativeLayout
-                    android:id="@+id/rlImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:id="@+id/layRelImage"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_gravity="center">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/imgUser"
-                        android:layout_width="@dimen/_80sdp"
-                        android:layout_height="@dimen/_80sdp"
-                        android:layout_centerHorizontal="true"
-                        android:src="@color/colorHint" />
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/avtar_gray" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignRight="@id/imgUser"
-                        android:layout_alignBottom="@+id/imgUser"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
                         android:src="@drawable/ic_edit_pencil" />
 
                 </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/general_detail"
-                    style="@style/TextView12ssp"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/rlImage"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginTop="@dimen/_36sdp"
-                    android:fontFamily="@font/latosemibold"
-                    android:text="General Detail"
-                    android:textColor="@color/black" />
+                    android:layout_marginTop="@dimen/_35sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_12ssp"
+                        android:layout_alignParentStart="true"
+                        android:fontFamily="@font/latosemibold"
+                        android:text="@string/general_detail"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/tvEditGeneral"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_12ssp"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/latosemibold"
+                        android:text="@string/edit"
+                        android:textColor="@color/yellow" />
+
+                </RelativeLayout>
 
                 <EditText
                     android:id="@+id/etName"
                     style="@style/EditText12ssp"
-                    android:layout_below="@id/general_detail"
-                    android:layout_marginTop="@dimen/_13sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:fontFamily="@font/latoregular"
                     android:hint="@string/name"
+                    android:enabled="false"
                     android:imeOptions="actionNext"
                     android:inputType="text"
-                    android:enabled="false"
-                    android:maxLength="30"
+                    android:maxLength="25"
                     android:padding="@dimen/_15sdp"
                     android:textColor="@color/colorHint"
                     android:singleLine="true" />
@@ -72,15 +100,14 @@
                 <EditText
                     android:id="@+id/etMobileNo"
                     style="@style/EditText12ssp"
-                    android:layout_below="@id/etName"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:fontFamily="@font/latoregular"
                     android:hint="@string/mobile_no"
                     android:enabled="false"
                     android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:maxLength="30"
+                    android:inputType="number"
+                    android:maxLength="10"
                     android:padding="@dimen/_15sdp"
                     android:textColor="@color/colorHint"
                     android:singleLine="true" />
@@ -88,212 +115,193 @@
                 <EditText
                     android:id="@+id/etEmail"
                     style="@style/EditText12ssp"
-                    android:layout_below="@id/etMobileNo"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:fontFamily="@font/latoregular"
                     android:hint="@string/email_optional"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:maxLength="30"
-                    android:padding="@dimen/_15sdp"
                     android:enabled="false"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:padding="@dimen/_15sdp"
                     android:textColor="@color/colorHint"
                     android:singleLine="true" />
 
-                <TextView
-                    android:id="@+id/tvEditGeneral"
-                    style="@style/TextView12ssp"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/rlImage"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="@dimen/_36sdp"
-                    android:fontFamily="@font/latosemibold"
-                    android:text="Edit"
-                    android:textColor="@color/yellow" />
+                    android:layout_marginTop="@dimen/_25sdp">
 
-                <TextView
-                    android:id="@+id/business_detail"
-                    style="@style/TextView12ssp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/etEmail"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginTop="@dimen/_28sdp"
-                    android:fontFamily="@font/latosemibold"
-                    android:text="Business Detail"
-                    android:textColor="@color/black" />
-                <!--add 12ssp for latosemibold in style file-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_12ssp"
+                        android:layout_alignParentStart="true"
+                        android:fontFamily="@font/latosemibold"
+                        android:text="@string/business_detail"
+                        android:textColor="@color/black" />
 
-                <TextView
-                    android:id="@+id/tvEditBusiness"
-                    style="@style/TextView12ssp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/etEmail"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="@dimen/_28sdp"
-                    android:fontFamily="@font/latosemibold"
-                    android:text="Edit"
-                    android:textColor="@color/yellow" />
+                    <TextView
+                        android:id="@+id/tvEditBusiness"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_12ssp"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/latosemibold"
+                        android:text="@string/edit"
+                        android:textColor="@color/yellow" />
+
+                </RelativeLayout>
 
                 <EditText
                     android:id="@+id/etShopName"
                     style="@style/EditText12ssp"
-                    android:layout_below="@+id/business_detail"
-                    android:layout_marginTop="@dimen/_11sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:fontFamily="@font/latoregular"
                     android:hint="@string/shop_name"
+                    android:enabled="false"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:maxLength="30"
-                    android:enabled="false"
-                    android:textColor="@color/colorHint"
                     android:padding="@dimen/_15sdp"
+                    android:textColor="@color/colorHint"
                     android:singleLine="true" />
 
                 <EditText
                     android:id="@+id/etAddLine1"
                     style="@style/EditText12ssp"
-                    android:layout_below="@id/etShopName"
-                    android:layout_marginTop="@dimen/_11sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:fontFamily="@font/latoregular"
                     android:hint="@string/address_line_one"
+                    android:enabled="false"
                     android:imeOptions="actionNext"
                     android:inputType="text"
-                    android:maxLength="30"
-                    android:enabled="false"
-                    android:textColor="@color/colorHint"
+                    android:maxLength="50"
                     android:padding="@dimen/_15sdp"
+                    android:textColor="@color/colorHint"
                     android:singleLine="true" />
 
                 <EditText
                     android:id="@+id/etAddLine2"
                     style="@style/EditText12ssp"
-                    android:layout_below="@id/etAddLine1"
-                    android:layout_marginTop="@dimen/_11sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:fontFamily="@font/latoregular"
                     android:hint="@string/address_line_two"
+                    android:enabled="false"
                     android:imeOptions="actionNext"
                     android:inputType="text"
-                    android:maxLength="30"
-                    android:enabled="false"
-                    android:textColor="@color/colorHint"
+                    android:maxLength="50"
                     android:padding="@dimen/_15sdp"
+                    android:textColor="@color/colorHint"
                     android:singleLine="true" />
 
                 <EditText
                     android:id="@+id/etCity"
                     style="@style/EditText12ssp"
-                    android:layout_below="@id/etAddLine2"
-                    android:layout_marginTop="@dimen/_11sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:fontFamily="@font/latoregular"
                     android:hint="@string/city"
+                    android:enabled="false"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:maxLength="30"
-                    android:enabled="false"
-                    android:textColor="@color/colorHint"
                     android:padding="@dimen/_15sdp"
+                    android:textColor="@color/colorHint"
                     android:singleLine="true" />
 
                 <EditText
                     android:id="@+id/etState"
                     style="@style/EditText12ssp"
-                    android:layout_below="@id/etCity"
-                    android:layout_marginTop="@dimen/_11sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:fontFamily="@font/latoregular"
                     android:hint="@string/state"
+                    android:enabled="false"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:maxLength="30"
                     android:padding="@dimen/_15sdp"
-                    android:enabled="false"
                     android:textColor="@color/colorHint"
                     android:singleLine="true" />
 
                 <EditText
                     android:id="@+id/etAboutShop"
                     style="@style/EditText12ssp"
-                    android:layout_below="@id/etState"
-                    android:layout_marginTop="@dimen/_11sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:fontFamily="@font/latoregular"
                     android:hint="@string/about_shop"
+                    android:enabled="false"
                     android:imeOptions="actionNext"
                     android:inputType="text"
-                    android:maxLength="30"
+                    android:maxLength="50"
                     android:padding="@dimen/_15sdp"
-                    android:enabled="false"
                     android:textColor="@color/colorHint"
                     android:singleLine="true" />
 
                 <EditText
                     android:id="@+id/etPanNumber"
                     style="@style/EditText12ssp"
-                    android:layout_below="@id/etAboutShop"
-                    android:layout_marginTop="@dimen/_11sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:fontFamily="@font/latoregular"
                     android:hint="@string/pan_no"
+                    android:enabled="false"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:maxLength="30"
                     android:padding="@dimen/_15sdp"
-                    android:enabled="false"
                     android:textColor="@color/colorHint"
                     android:singleLine="true" />
 
                 <EditText
                     android:id="@+id/etGst"
                     style="@style/EditText12ssp"
-                    android:layout_below="@id/etPanNumber"
-                    android:layout_marginTop="@dimen/_11sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:fontFamily="@font/latoregular"
                     android:hint="@string/gst"
+                    android:enabled="false"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:maxLength="30"
                     android:padding="@dimen/_15sdp"
-                    android:enabled="false"
                     android:textColor="@color/colorHint"
                     android:singleLine="true" />
 
                 <EditText
                     android:id="@+id/etGstPercent"
                     style="@style/EditText12ssp"
-                    android:layout_below="@id/etGst"
-                    android:layout_marginTop="@dimen/_11sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:fontFamily="@font/latoregular"
                     android:hint="@string/gst_percent"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:maxLength="30"
-                    android:padding="@dimen/_15sdp"
                     android:enabled="false"
+                    android:imeOptions="actionDone"
+                    android:inputType="numberDecimal"
+                    android:maxLength="10"
+                    android:padding="@dimen/_15sdp"
                     android:textColor="@color/colorHint"
                     android:singleLine="true" />
 
                 <Button
                     android:id="@+id/btnSubmit"
                     style="@style/material_button"
-                    android:layout_below="@+id/etGstPercent"
-                    android:layout_centerInParent="true"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:layout_marginBottom="@dimen/_60sdp"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:layout_marginBottom="@dimen/_25sdp"
                     android:minHeight="@dimen/_50sdp"
                     android:text="@string/save"
                     android:textSize="@dimen/_12ssp"
-                    android:textColor="@color/white" />
-            </RelativeLayout>
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/latomedium"/>
+
+            </LinearLayout>
+
         </ScrollView>
-    </RelativeLayout>
+
+    </LinearLayout>
+
 </layout>

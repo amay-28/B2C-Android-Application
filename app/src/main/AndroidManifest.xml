@@ -6,7 +6,16 @@
     <dist:module dist:instant="true" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+
 
     <application
         android:allowBackup="true"
@@ -16,12 +25,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".dashboard.activity.EditProfileActivity"></activity>
-        <activity android:name=".notification.activity.NotificationListingActivity" />
-        <activity android:name=".bankDetail.activity.AddBankDetailActivity" />
-        <activity android:name=".services.AddServiceActivity" />
-        <activity android:name=".product.AddProductActivity" />
-        <activity android:name=".dashboard.activity.MyProfileActivity" />
 
         <activity
             android:name=".basic.SplashActivity"
@@ -32,6 +35,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".dashboard.activity.EditProfileActivity"></activity>
+        <activity android:name=".notification.activity.NotificationListingActivity" />
+        <activity android:name=".bankDetail.activity.AddBankDetailActivity" />
+        <activity android:name=".service.AddServiceActivity" />
+        <activity android:name=".product.AddProductActivity" />
+        <activity android:name=".dashboard.activity.MyProfileActivity" />
+
         <activity
             android:name=".dashboard.activity.CategoryActivity"
             android:screenOrientation="portrait" />
@@ -60,6 +71,13 @@
 
         <activity android:name=".product.DialogActivity"
             android:theme="@style/TransparentBackground" />
+
+        <!-- Image croping activity-->
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeActionbar"/>
+
 
 
     </application>

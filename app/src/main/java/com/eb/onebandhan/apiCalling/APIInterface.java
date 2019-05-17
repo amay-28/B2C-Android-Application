@@ -7,16 +7,20 @@ import com.eb.onebandhan.auth.model.MSignUp;
 import com.eb.onebandhan.auth.model.MUser;
 import com.eb.onebandhan.dashboard.model.MBanner;
 import com.eb.onebandhan.dashboard.model.MCollection;
+import com.google.gson.JsonElement;
 
 import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
 
@@ -50,7 +54,11 @@ public interface APIInterface {
     @GET("collections")
     Observable<ResponseData<List<MCollection>>> getCollectionData(@QueryMap Map<String, String> map);
 
+    @Multipart
+    @POST("upload/file")
+    Observable<ResponseData<JsonElement>> uploadImage(@Header("Authorization") String token,@Part MultipartBody.Part file);
+
     @POST("retailer/update-profile")
-    Observable<ResponseData<MUser>> updateProfile(@Body MUser mUser);
+    Observable<ResponseData<MUser>> updateProfile(@Header("Authorization") String token,@Body MUser mUser);
 
 }

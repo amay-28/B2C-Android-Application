@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class MUser {
     private String name;
+    private String imageUrl;
     private String mobileNumber;
     private String userTypeId;
     private String id;

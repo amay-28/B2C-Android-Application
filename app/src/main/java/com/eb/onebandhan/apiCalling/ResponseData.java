@@ -8,5 +8,6 @@ public class ResponseData<T> {
     private String type;
     private String message;
     private T data;
+    private T image;
     private Boolean success;
 }
