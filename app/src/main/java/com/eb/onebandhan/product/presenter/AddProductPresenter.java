@@ -7,6 +7,7 @@ import com.eb.onebandhan.apiCalling.APIInterface;
 import com.eb.onebandhan.apiCalling.ResponseData;
 import com.eb.onebandhan.auth.model.MCategory;
 import com.eb.onebandhan.product.model.MAddProduct;
+import com.eb.onebandhan.product.model.MImage;
 import com.eb.onebandhan.product.presenterinterface.AddProductPresenterInterface;
 import com.eb.onebandhan.product.presenterinterface.DialogPresenterInterface;
 import com.eb.onebandhan.product.viewinterface.AddProductViewInterface;
@@ -68,10 +69,10 @@ public class AddProductPresenter implements AddProductPresenterInterface, Consta
         };
     }
 
-    public DisposableObserver<ResponseData<JsonElement>> getObserverImage() {
-        return new DisposableObserver<ResponseData<JsonElement>>() {
+    public DisposableObserver<ResponseData<List<MImage>>> getObserverImage() {
+        return new DisposableObserver<ResponseData<List<MImage>>>() {
             @Override
-            public void onNext(ResponseData<JsonElement> value) {
+            public void onNext(ResponseData<List<MImage>> value) {
                 try {
                     JSONObject MainOBJ = new JSONObject(value.getImage().toString());
                     viewInterface.onSucessfullyUpdatedImage(MainOBJ.getString(WebService.URL));
@@ -98,7 +99,8 @@ public class AddProductPresenter implements AddProductPresenterInterface, Consta
     }
 
     private <T> Observable getObservableImage(List<MultipartBody.Part> files) {
-        return APIClient.getClient(activity).create(APIInterface.class).uploadImages(new Session(activity).getString(AUTHORIZATION_KEY),files).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        return APIClient.getClient(activity).create(APIInterface.class).uploadImages(new Session(activity).getString(AUTHORIZATION_KEY),
+                files).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override

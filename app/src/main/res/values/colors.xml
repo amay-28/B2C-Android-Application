@@ -13,6 +13,7 @@
     <color name="red">#FF0000</color>
     <color name="color_sky_blue">#4b9eff</color>
     <color name="color_grey_text">#707070</color>
+    <color name="divider_line">#f2f2f2</color>
     <color name="grey_light">#fafafa</color>
     <color name="colorMobileProfile">#9a9a9a</color>
 </resources>

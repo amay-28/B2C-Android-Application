@@ -147,6 +147,11 @@
     <string name="about_shop_length">About shop is too short.</string>
     <string name="pan_number_length">PAN number is too short.</string>
     <string name="gst_length">GST is too short.</string>
+    <string name="Product_listing">Product Listing</string>
+    <string name="Add_to_your_Inventory">Add to your Inventory</string>
+    <string name="Sort">Sort</string>
+    <string name="Filters">Filters</string>
+
 
     <!--name (max length is 25 AND minimum is 3)
     mobile (max length is 10 AND minimum is 10)

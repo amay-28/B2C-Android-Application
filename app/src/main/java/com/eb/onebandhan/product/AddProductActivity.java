@@ -356,7 +356,7 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
                 //File image = Utils.compressURIForUpload(activity, imageURI, "");
 
                 if (mImage.getFile() != null)
-                    files.add(Utils.getFileRequestBody_part(WebService.FILE, mImage.getFile()));
+                    files.add(Utils.getFileRequestBody_part(WebService.FILES, mImage.getFile()));
             }
         }
 

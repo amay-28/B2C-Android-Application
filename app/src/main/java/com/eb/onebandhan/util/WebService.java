@@ -6,6 +6,7 @@ public class WebService {
 
 
     public static String FILE="file";
+    public static String FILES="files";
     public static String URL="url";
 
 

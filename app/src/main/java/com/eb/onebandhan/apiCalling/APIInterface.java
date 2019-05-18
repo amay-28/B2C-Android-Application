@@ -40,7 +40,8 @@ public interface APIInterface {
     Observable<Response<ResponseData<MUser>>> loginToSendOtp(@Body MSignUp mSignUp);
 
     @POST("product")
-    Observable<ResponseData> addProduct(@Header("Authorization") String token, @Body MAddProduct mAddProduct);
+    Observable<ResponseData> addProduct(@Header("Authorization") String token,
+                                        @Body MAddProduct mAddProduct);
 
     // for withouth auth token
     @GET("categories")
@@ -54,21 +55,25 @@ public interface APIInterface {
 
     // with auth token
     @GET("categories")
-    Observable<ResponseData<List<MCategory>>> getUserCategoryRelatedData(@Header("Authorization") String token, @QueryMap Map<String, String> map);
+    Observable<ResponseData<List<MCategory>>> getUserCategoryRelatedData(@Header("Authorization") String token,
+                                                                         @QueryMap Map<String, String> map);
 
     @GET("collections")
     Observable<ResponseData<List<MCollection>>> getCollectionData(@QueryMap Map<String, String> map);
 
     @Multipart
     @POST("upload/file")
-    Observable<ResponseData<JsonElement>> uploadImage(@Header("Authorization") String token, @Part MultipartBody.Part file);
+    Observable<ResponseData<JsonElement>> uploadImage(@Header("Authorization") String token,
+                                                      @Part MultipartBody.Part file);
 
     @Multipart
     @POST("upload/files")
-    Observable<ResponseData<List<MImage>>> uploadImages(@Header("Authorization") String token, @Part List<MultipartBody.Part> file);
+    Observable<ResponseData<List<MImage>>> uploadImages(@Header("Authorization") String token,
+                                                        @Part List<MultipartBody.Part> files);
 
 
     @POST("retailer/update-profile")
-    Observable<ResponseData<MUser>> updateProfile(@Header("Authorization") String token, @Body MUser mUser);
+    Observable<ResponseData<MUser>> updateProfile(@Header("Authorization") String token,
+                                                  @Body MUser mUser);
 
 }
