@@ -1,14 +1,17 @@
 package com.eb.onebandhan.product.adapter;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.eb.onebandhan.R;
 import com.eb.onebandhan.auth.model.MCategory;
 import com.eb.onebandhan.dashboard.adapter.SubCategoryListAdapter;
 import com.eb.onebandhan.databinding.ItemDialogActivityBinding;
+import com.eb.onebandhan.databinding.ItemImageBinding;
 import com.eb.onebandhan.product.model.MImage;
 
 import java.util.List;
@@ -32,7 +35,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemDialogActivityBinding binding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.item_dialog_activity, parent, false);
+        ItemImageBinding binding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.item_image, parent, false);
         return new ViewHolder(binding);
     }
 
@@ -40,15 +43,28 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MImage mImage = imageList.get(position);
         if (mImage.isLocal()) {
-            //TODO
+            holder.binding.ivImage.setImageDrawable(activity.getDrawable(R.drawable.bg_add_image));
+            holder.binding.ivDelete.setVisibility(View.GONE);
+            holder.binding.ivImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callBack.onAddImageClick(position);
+                }
+            });
+        } else {
+            holder.binding.ivDelete.setVisibility(View.VISIBLE);
+            holder.binding.ivImage.setClickable(false);
+            Glide.with(activity)
+                    .load(mImage.getUrl())
+                    .into(holder.binding.ivImage);
+
+            holder.binding.ivDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callBack.onDeleteImage(position);
+                }
+            });
         }
-        //  String imageUrl = imageList.get(position);
-        //holder.binding.tvCategory.setText(mCategory.getName());
-       /* if (selectedCategory.equalsIgnoreCase(mCategory.getName())) {
-            holder.binding.ivTick.setVisibility(View.VISIBLE);
-        }*/
-
-
     }
 
     @Override
@@ -58,9 +74,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ItemDialogActivityBinding binding;
+        ItemImageBinding binding;
 
-        public ViewHolder(@NonNull ItemDialogActivityBinding itemView) {
+        public ViewHolder(@NonNull ItemImageBinding itemView) {
             super(itemView.getRoot());
             binding = itemView;
         }
@@ -68,5 +84,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
     public interface CallBack {
         void onDeleteImage(int position);
+
+        void onAddImageClick(int position);
     }
 }

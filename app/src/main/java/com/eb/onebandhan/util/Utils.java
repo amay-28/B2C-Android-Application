@@ -45,7 +45,7 @@ import retrofit2.adapter.rxjava2.HttpException;
 public class Utils implements Constant {
     private static String newToken;
 
-    public static void printHashKey(Activity activity){
+    public static void printHashKey(Activity activity) {
 
         try {
             PackageInfo info = activity.getPackageManager().getPackageInfo(
@@ -131,12 +131,12 @@ public class Utils implements Constant {
 
     // File request multipart file only
     public static MultipartBody.Part getMultipartFile(String key, File file) {
-        RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"),file);
-       MultipartBody.Part body = MultipartBody.Part.createFormData(key, file.getName(), requestFile);
+        RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData(key, file.getName(), requestFile);
         return body;
     }
 
-    public static String[] getSplitedString(String inputString,String splitKeyWord){
+    public static String[] getSplitedString(String inputString, String splitKeyWord) {
         String[] separated = inputString.split(splitKeyWord);
         return separated;
     }
@@ -239,15 +239,16 @@ public class Utils implements Constant {
         String outputDateStr = outputFormat.format(date);
         return outputDateStr;
     }
-    public static void openKeyboard(Activity activity,EditText editText){
+
+    public static void openKeyboard(Activity activity, EditText editText) {
         editText.requestFocus();
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
     }
 
-    public static  ResponseData<String> errorMessageParsing(Throwable e) {
+    public static ResponseData<String> errorMessageParsing(Throwable e) {
         try {
-            return new Gson().fromJson(((HttpException)e).response().errorBody().string(), ResponseData.class);
+            return new Gson().fromJson(((HttpException) e).response().errorBody().string(), ResponseData.class);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -268,7 +269,7 @@ public class Utils implements Constant {
     }
 
     // Show Toast
-    public static void ShowToast(Context context,String msg,int duration) {
+    public static void ShowToast(Context context, String msg, int duration) {
 
         int gravity = Gravity.CENTER; // the position of toast
         int xOffset = 0; // horizontal offset from current gravity
@@ -294,7 +295,7 @@ public class Utils implements Constant {
             byte[] bitmapdata = datasecond.toByteArray();
 
             // write the bytes in file
-            imageFile = new File(Environment.getExternalStorageDirectory() + File.separator + mili_second+"waitty_profile.jpeg");
+            imageFile = new File(Environment.getExternalStorageDirectory() + File.separator + mili_second + "waitty_profile.jpeg");
 
             FileOutputStream fo = new FileOutputStream(imageFile);
             fo.write(bitmapdata);
@@ -309,8 +310,35 @@ public class Utils implements Constant {
         return imageFile;
     }
 
+    // Uri compress method and return file
+    public static File compressURIForUpload(Context context, Uri URI, String mili_second) {
+
+        File imageFile = null;
+        try {
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), URI);
+
+            ByteArrayOutputStream datasecond = new ByteArrayOutputStream();
+
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, datasecond);
+
+            byte[] bitmapdata = datasecond.toByteArray();
+
+            imageFile = new File(URI.getPath());
+            FileOutputStream fo = new FileOutputStream(URI.getPath());
+            fo.write(bitmapdata);
+            fo.close();
+
+            return imageFile;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return imageFile;
+    }
+
     // Check value null and return
     public static String checkNull(String value) {
-        return value==null?"":value;
+        return value == null ? "" : value;
     }
 }

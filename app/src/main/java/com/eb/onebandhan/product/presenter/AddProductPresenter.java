@@ -14,7 +14,9 @@ import com.eb.onebandhan.product.viewinterface.DialogViewInterface;
 import com.eb.onebandhan.util.Constant;
 import com.eb.onebandhan.util.Session;
 import com.eb.onebandhan.util.Utils;
+import com.eb.onebandhan.util.WebService;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
@@ -28,6 +30,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MultipartBody;
 import retrofit2.adapter.rxjava2.HttpException;
 
 public class AddProductPresenter implements AddProductPresenterInterface, Constant {
@@ -55,7 +58,32 @@ public class AddProductPresenter implements AddProductPresenterInterface, Consta
             @Override
             public void onError(Throwable e) {
                 if (e instanceof HttpException)
-                    viewInterface.onFailToAddProduct(Utils.errorMessageParsing(e).getMessage());
+                    viewInterface.onFailToUpdate(Utils.errorMessageParsing(e).getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+    }
+
+    public DisposableObserver<ResponseData<JsonElement>> getObserverImage() {
+        return new DisposableObserver<ResponseData<JsonElement>>() {
+            @Override
+            public void onNext(ResponseData<JsonElement> value) {
+                try {
+                    JSONObject MainOBJ = new JSONObject(value.getImage().toString());
+                    viewInterface.onSucessfullyUpdatedImage(MainOBJ.getString(WebService.URL));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                if (e instanceof HttpException)
+                    viewInterface.onFailToUpdate(Utils.errorMessageParsing(e).getMessage());
             }
 
             @Override
@@ -69,8 +97,18 @@ public class AddProductPresenter implements AddProductPresenterInterface, Consta
         return APIClient.getClient(activity).create(APIInterface.class).addProduct(new Session(activity).getString(AUTHORIZATION_KEY), mAddProduct).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
+    private <T> Observable getObservableImage(List<MultipartBody.Part> files) {
+        return APIClient.getClient(activity).create(APIInterface.class).uploadImages(new Session(activity).getString(AUTHORIZATION_KEY),files).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
     @Override
     public void addProductTask(MAddProduct mAddProduct) {
         getObservableForAddProduct(mAddProduct).subscribeWith(getObserverToAddProduct());
     }
+
+    @Override
+    public void onUpdateImage(List<MultipartBody.Part> files) {
+        getObservableImage(files).subscribeWith(getObserverImage());
+    }
+
 }

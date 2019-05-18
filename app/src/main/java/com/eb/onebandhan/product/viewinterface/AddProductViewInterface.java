@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface AddProductViewInterface {
     void onSuccessfullyAddProduct(MAddProduct mAddProduct, String message);
-    void onFailToAddProduct(String errorMessage);
+    void onSucessfullyUpdatedImage(String value);
+    void onFailToUpdate(String errorMessage);
 }

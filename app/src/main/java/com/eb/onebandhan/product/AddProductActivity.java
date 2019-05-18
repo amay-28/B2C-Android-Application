@@ -3,6 +3,9 @@ package com.eb.onebandhan.product;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -22,7 +25,12 @@ import com.eb.onebandhan.product.viewinterface.AddProductViewInterface;
 import com.eb.onebandhan.product.viewinterface.DialogViewInterface;
 import com.eb.onebandhan.util.CommonClickHandler;
 import com.eb.onebandhan.util.ShowToast;
+import com.eb.onebandhan.util.Utils;
+import com.eb.onebandhan.util.WebService;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +41,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import okhttp3.MultipartBody;
 
 import static com.eb.onebandhan.auth.util.Categoryutil.INFINITE_LIMIT;
 import static com.eb.onebandhan.auth.util.Categoryutil.LEVEL;
@@ -58,6 +67,9 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
     private List<MImage> imageList = new ArrayList<>();
     private ImageAdapter imageAdapter;
     private MAddProduct mAddProduct = new MAddProduct();
+    private Uri imageURI;
+    private String profileImageURL = "";
+    private int imagePosition;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,21 +91,31 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         map.put(LEVEL, ZERO);
         map.put(LIMIT, INFINITE_LIMIT);
 
-        binding.rvImages.setLayoutManager(new LinearLayoutManager(activity));
+        binding.rvImages.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
         binding.rvImages.setHasFixedSize(true);
         binding.rvImages.setItemAnimator(new DefaultItemAnimator());
-        imageAdapter = new ImageAdapter(activity, getImageList(), this);
+        imageAdapter = new ImageAdapter(activity, setFirstImage(), this);
         binding.rvImages.setAdapter(imageAdapter);
     }
 
-    public List<MImage> getImageList() {
-         MImage mImage ;
+    public List<MImage> setFirstImage() {
+        MImage mImage;
         if (imageList != null && imageList.size() < 4) {
             mImage = new MImage();
             mImage.setLocal(true);
             imageList.add(mImage);
         }
+        return imageList;
+    }
 
+    public List<MImage> setLocalImage() {
+        MImage mImage;
+        if (imageList != null && imageList.size() < 4) {
+            mImage = new MImage();
+            mImage.setLocal(true);
+            imageList.add(mImage);
+        }
+        imageAdapter.notifyDataSetChanged();
         return imageList;
     }
 
@@ -128,7 +150,12 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         });
 
         binding.btnSubmit.setOnClickListener(v -> {
-            if (checkValidate()) addProductPresenter.addProductTask(mAddProduct);
+            if (imageAdapter.getItemCount() != 0) {
+                CreateFileForSend(imageList);
+            } else {
+                if (checkValidate()) addProductPresenter.addProductTask(mAddProduct);
+            }
+
         });
     }
 
@@ -156,6 +183,7 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
             Toast.makeText(activity, resources.getString(R.string.please_enter_description), Toast.LENGTH_SHORT).show();
             return false;
         }
+
         prepareData();
 
         return true;
@@ -182,17 +210,43 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
                 subCategoryList = getSubCategoryList(mCategory);
 
             }
+
             if (requestCode == OPEN_DIALOG_FOR_SUBCATEGORY) {
                 mCategory = data.getParcelableExtra("MCategory");
                 binding.etSubCategory.setText(mCategory.getName());
 
                 subSubCategoryList = getSubCategoryList(mCategory);
             }
+
             if (requestCode == OPEN_DIALOG_FOR_SUBSUBCATEGORY) {
                 mCategory = data.getParcelableExtra("MCategory");
                 binding.etSubSubCategory.setText(mCategory.getName());
 
                 mSubSubCategory = mCategory;
+            }
+
+            if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+                CropImage.ActivityResult result = CropImage.getActivityResult(data);
+                Uri resultUri = result.getUri();
+                //CreateFileForSend(result.getUri());
+
+                for (int i = 0; i < imageList.size(); i++) {
+                    MImage mImage = imageList.get(i);
+                    if (mImage.isLocal()) {
+                        imageList.remove(i);
+                    }
+                }
+
+                if (!Utils.checkNull(resultUri.getPath()).isEmpty()) {
+                    profileImageURL = resultUri.getPath();
+                    MImage mImage = new MImage();
+                    mImage.setUrl(resultUri.getPath());
+                    mImage.setLocal(false);
+                    mImage.setFile(new File(resultUri.getPath()));
+                    imageList.add(mImage);
+                }
+
+                setLocalImage();
             }
         }
     }
@@ -227,7 +281,35 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
 
     @Override
     public void onDeleteImage(int position) {
+        imageList.remove(position);
+        setLocalImage();
+        imageAdapter.notifyDataSetChanged();
+    }
 
+    @Override
+    public void onAddImageClick(int position) {
+        imagePosition = position;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            CropImage.activity()
+                    .setActivityTitle(getString(R.string.app_name))
+                    .setCropShape(CropImageView.CropShape.RECTANGLE)
+                    .setActivityMenuIconColor(R.color.colorMobileProfile)
+                    .setBorderLineColor(Color.WHITE)
+                    .setGuidelinesColor(R.color.colorPrimary)
+                    .setAspectRatio(1, 1)
+                    .setFixAspectRatio(true)
+                    .start((Activity) this);
+        } else {
+            CropImage.activity()
+                    .setActivityTitle(getString(R.string.app_name))
+                    .setCropShape(CropImageView.CropShape.RECTANGLE)
+                    .setActivityMenuIconColor(R.color.colorMobileProfile)
+                    .setBorderLineColor(Color.WHITE)
+                    .setGuidelinesColor(R.color.colorPrimary)
+                    .setAspectRatio(1, 1)
+                    .setFixAspectRatio(true)
+                    .start((Activity) activity);
+        }
     }
 
     @Override
@@ -237,7 +319,49 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
     }
 
     @Override
-    public void onFailToAddProduct(String errorMessage) {
+    public void onSucessfullyUpdatedImage(String value) {
+        if (checkValidate()) addProductPresenter.addProductTask(mAddProduct);
+
+        /*for (int i = 0; i < imageList.size(); i++) {
+            MImage mImage = imageList.get(i);
+            if (mImage.isLocal()) {
+                imageList.remove(i);
+            }
+        }
+
+        if (!Utils.checkNull(value).isEmpty()) {
+            profileImageURL = value;
+            MImage mImage = new MImage();
+            mImage.setUrl(value);
+            mImage.setLocal(false);
+            imageList.add(mImage);
+        }
+
+        setLocalImage();*/
+
 
     }
+
+    @Override
+    public void onFailToUpdate(String errorMessage) {
+
+    }
+
+    // Crop image convert to file
+    public void CreateFileForSend(List<MImage> imageList) {
+        List<MultipartBody.Part> files = new ArrayList<>();
+        for (MImage mImage : imageList) {
+            if (!mImage.isLocal()){
+                imageURI = Uri.fromFile(mImage.getFile());
+                //File image = Utils.compressURIForUpload(activity, imageURI, "");
+
+                if (mImage.getFile() != null)
+                    files.add(Utils.getFileRequestBody_part(WebService.FILE, mImage.getFile()));
+            }
+        }
+
+        addProductPresenter.onUpdateImage(files);
+        Log.d("AddProduct", "file size: " + files.size());
+    }
+
 }

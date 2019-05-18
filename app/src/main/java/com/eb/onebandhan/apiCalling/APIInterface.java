@@ -8,6 +8,7 @@ import com.eb.onebandhan.auth.model.MUser;
 import com.eb.onebandhan.dashboard.model.MBanner;
 import com.eb.onebandhan.dashboard.model.MCollection;
 import com.eb.onebandhan.product.model.MAddProduct;
+import com.eb.onebandhan.product.model.MImage;
 import com.google.gson.JsonElement;
 
 import java.util.List;
@@ -61,6 +62,11 @@ public interface APIInterface {
     @Multipart
     @POST("upload/file")
     Observable<ResponseData<JsonElement>> uploadImage(@Header("Authorization") String token, @Part MultipartBody.Part file);
+
+    @Multipart
+    @POST("upload/files")
+    Observable<ResponseData<List<MImage>>> uploadImages(@Header("Authorization") String token, @Part List<MultipartBody.Part> file);
+
 
     @POST("retailer/update-profile")
     Observable<ResponseData<MUser>> updateProfile(@Header("Authorization") String token, @Body MUser mUser);

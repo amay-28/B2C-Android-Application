@@ -39,7 +39,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     private MUser loggedInUser;
     private MUser mUser = new MUser();
     private Uri imageURI;
-    private String profileImageURL="";
+    private String profileImageURL = "";
 
     @Override
     public void onResume() {
@@ -66,7 +66,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
 
     private void setDetails() {
         if (loggedInUser != null) {
-            if(loggedInUser.getImageUrl()!=null && !loggedInUser.getImageUrl().isEmpty())
+            if (loggedInUser.getImageUrl() != null && !loggedInUser.getImageUrl().isEmpty())
                 Glide.with(activity).load(loggedInUser.getImageUrl()).apply(new RequestOptions().placeholder(R.mipmap.avtar_gray).error(R.mipmap.avtar_gray)).into(binding.imgUser);
 
             binding.etName.setText(loggedInUser.getName());
@@ -99,55 +99,55 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     private boolean checkValidate() {
         Resources resources = getResources();
         if (TextUtils.isEmpty(binding.etName.getText().toString().trim())) {
-            Utils.ShowToast(activity,resources.getString(R.string.please_enter_name),0);
+            Utils.ShowToast(activity, resources.getString(R.string.please_enter_name), 0);
             return false;
-        } else if (binding.etName.getText().toString().trim().length()<3) {
-            Utils.ShowToast(activity,resources.getString(R.string.name_length),0);
+        } else if (binding.etName.getText().toString().trim().length() < 3) {
+            Utils.ShowToast(activity, resources.getString(R.string.name_length), 0);
             return false;
         } else if (TextUtils.isEmpty(binding.etShopName.getText().toString().trim())) {
-            Utils.ShowToast(activity,resources.getString(R.string.please_enter_shop_name),0);
+            Utils.ShowToast(activity, resources.getString(R.string.please_enter_shop_name), 0);
             return false;
-        } else if (binding.etShopName.getText().toString().trim().length()<3) {
-            Utils.ShowToast(activity,resources.getString(R.string.shop_name_length),0);
+        } else if (binding.etShopName.getText().toString().trim().length() < 3) {
+            Utils.ShowToast(activity, resources.getString(R.string.shop_name_length), 0);
             return false;
         } else if (TextUtils.isEmpty(binding.etAddLine1.getText().toString().trim())) {
-            Utils.ShowToast(activity,resources.getString(R.string.address_line1_blank),0);
+            Utils.ShowToast(activity, resources.getString(R.string.address_line1_blank), 0);
             return false;
         } else if (TextUtils.isEmpty(binding.etAddLine2.getText().toString().trim())) {
-            Utils.ShowToast(activity,resources.getString(R.string.address_line2_blank),0);
+            Utils.ShowToast(activity, resources.getString(R.string.address_line2_blank), 0);
             return false;
         } else if (TextUtils.isEmpty(binding.etCity.getText().toString().trim())) {
-            Utils.ShowToast(activity,resources.getString(R.string.please_enter_city),0);
+            Utils.ShowToast(activity, resources.getString(R.string.please_enter_city), 0);
             return false;
-        } else if (binding.etCity.getText().toString().trim().length()<2) {
-            Utils.ShowToast(activity,resources.getString(R.string.city_name_length),0);
+        } else if (binding.etCity.getText().toString().trim().length() < 2) {
+            Utils.ShowToast(activity, resources.getString(R.string.city_name_length), 0);
             return false;
         } else if (TextUtils.isEmpty(binding.etState.getText().toString().trim())) {
-            Utils.ShowToast(activity,resources.getString(R.string.please_enter_state),0);
+            Utils.ShowToast(activity, resources.getString(R.string.please_enter_state), 0);
             return false;
-        } else if (binding.etState.getText().toString().trim().length()<2) {
-            Utils.ShowToast(activity,resources.getString(R.string.state_name_length),0);
+        } else if (binding.etState.getText().toString().trim().length() < 2) {
+            Utils.ShowToast(activity, resources.getString(R.string.state_name_length), 0);
             return false;
         } else if (TextUtils.isEmpty(binding.etAboutShop.getText().toString().trim())) {
-            Utils.ShowToast(activity,resources.getString(R.string.please_enter_about_the_shop),0);
+            Utils.ShowToast(activity, resources.getString(R.string.please_enter_about_the_shop), 0);
             return false;
-        } else if (binding.etAboutShop.getText().toString().trim().length()<3) {
-            Utils.ShowToast(activity,resources.getString(R.string.about_shop_length),0);
+        } else if (binding.etAboutShop.getText().toString().trim().length() < 3) {
+            Utils.ShowToast(activity, resources.getString(R.string.about_shop_length), 0);
             return false;
         } else if (TextUtils.isEmpty(binding.etPanNumber.getText().toString().trim())) {
-            Utils.ShowToast(activity,resources.getString(R.string.please_enter_pan_number),0);
+            Utils.ShowToast(activity, resources.getString(R.string.please_enter_pan_number), 0);
             return false;
-        } else if (binding.etPanNumber.getText().toString().trim().length()<2) {
-            Utils.ShowToast(activity,resources.getString(R.string.pan_number_length),0);
+        } else if (binding.etPanNumber.getText().toString().trim().length() < 2) {
+            Utils.ShowToast(activity, resources.getString(R.string.pan_number_length), 0);
             return false;
         } else if (TextUtils.isEmpty(binding.etGst.getText().toString().trim())) {
-            Utils.ShowToast(activity,resources.getString(R.string.please_enter_gst),0);
+            Utils.ShowToast(activity, resources.getString(R.string.please_enter_gst), 0);
             return false;
-        } else if (binding.etGst.getText().toString().trim().length()<2) {
-            Utils.ShowToast(activity,resources.getString(R.string.gst_length),0);
+        } else if (binding.etGst.getText().toString().trim().length() < 2) {
+            Utils.ShowToast(activity, resources.getString(R.string.gst_length), 0);
             return false;
         } else if (TextUtils.isEmpty(binding.etGstPercent.getText().toString().trim())) {
-            Utils.ShowToast(activity,resources.getString(R.string.please_enter_gst_percent),0);
+            Utils.ShowToast(activity, resources.getString(R.string.please_enter_gst_percent), 0);
             return false;
         }
         prepareData();
@@ -156,12 +156,12 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
 
     private void prepareData() {
 
-        if(!profileImageURL.isEmpty())
+        if (!profileImageURL.isEmpty())
             mUser.setImageUrl(profileImageURL);
 
         mUser.setName(binding.etName.getText().toString());
 
-        MProfile retailerDetails=new MProfile();
+        MProfile retailerDetails = new MProfile();
         retailerDetails.setShopName(binding.etShopName.getText().toString());
         retailerDetails.setAddressLine1(binding.etAddLine1.getText().toString());
         retailerDetails.setAddressLine2(binding.etAddLine2.getText().toString());
@@ -175,7 +175,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         mUser.setRetailerDetails(retailerDetails);
     }
 
-    private void getProfileImage(){
+    private void getProfileImage() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             CropImage.activity()
@@ -187,7 +187,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
                     .setAspectRatio(1, 1)
                     .setFixAspectRatio(true)
                     .start((Activity) this);
-        }else{
+        } else {
             CropImage.activity()
                     .setActivityTitle(getString(R.string.app_name))
                     .setCropShape(CropImageView.CropShape.OVAL)
@@ -254,13 +254,13 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
 
     @Override
     public void onSucessfullyUpdated(MUser mUser, String message) {
-        Utils.ShowToast(activity,message,0);
+        Utils.ShowToast(activity, message, 0);
         finish();
     }
 
     @Override
     public void onSucessfullyUpdatedImage(String value) {
-        if(!Utils.checkNull(value).isEmpty()){
+        if (!Utils.checkNull(value).isEmpty()) {
             profileImageURL = value;
             binding.imgUser.setImageURI(imageURI);
         }
@@ -268,7 +268,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
 
     @Override
     public void onFailToUpdate(String errorMessage) {
-        Utils.ShowToast(activity,errorMessage,0);
+        Utils.ShowToast(activity, errorMessage, 0);
     }
 
     @Override
@@ -281,13 +281,13 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     }
 
     // Crop image convert to file
-    public void CreateFileForSend(Uri URI){
-        imageURI=URI;
-        File image=Utils.compressURI(activity,URI,"");
+    public void CreateFileForSend(Uri URI) {
+        imageURI = URI;
+        File image = Utils.compressURI(activity, URI, "");
 
-        MultipartBody.Part file=null;
-        if(image!=null)
-            file=Utils.getFileRequestBody_part(WebService.FILE,image);
+        MultipartBody.Part file = null;
+        if (image != null)
+            file = Utils.getFileRequestBody_part(WebService.FILE, image);
 
         editProfilePresenter.onUpdateImage(file);
     }

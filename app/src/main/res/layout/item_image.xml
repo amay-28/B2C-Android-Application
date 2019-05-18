@@ -5,14 +5,26 @@
         android:id="@+id/rlRoot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/_15sdp"
         android:weightSum="1">
 
         <ImageView
             android:id="@+id/ivImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_55sdp"
             android:layout_centerVertical="true"
+            android:src="@drawable/bg_add_image"
             android:layout_gravity="end"/>
+
+        <ImageView
+            android:id="@+id/ivDelete"
+            android:layout_width="@dimen/_17sdp"
+            android:layout_height="@dimen/_17sdp"
+            android:tint="@color/red"
+            android:layout_marginTop="-5dp"
+            android:layout_marginRight="-5dp"
+            android:layout_alignRight="@+id/ivImage"
+            android:src="@drawable/ic_cross"/>
 
     </RelativeLayout>
 </layout>

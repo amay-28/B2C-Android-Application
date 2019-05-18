@@ -147,7 +147,6 @@
                 android:layout_marginLeft="@dimen/_34sdp"
                 android:layout_marginTop="@dimen/_30sdp"
                 android:layout_marginRight="@dimen/_34sdp"
-                android:paddingLeft="@dimen/_15sdp"
                 android:paddingRight="@dimen/_15sdp"
                 android:text="Upload Image(Max. 4)"
                 android:textColor="@color/colorHint" />
