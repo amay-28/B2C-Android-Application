@@ -5,10 +5,12 @@ import com.eb.onebandhan.auth.model.MCategory;
 import com.eb.onebandhan.auth.model.MProfile;
 import com.eb.onebandhan.auth.model.MSignUp;
 import com.eb.onebandhan.auth.model.MUser;
+import com.eb.onebandhan.bankDetail.activity.model.MBankDetail;
 import com.eb.onebandhan.dashboard.model.MBanner;
 import com.eb.onebandhan.dashboard.model.MCollection;
 import com.eb.onebandhan.product.model.MAddProduct;
 import com.eb.onebandhan.product.model.MImage;
+import com.eb.onebandhan.product.model.MImageServer;
 import com.google.gson.JsonElement;
 
 import java.util.List;
@@ -68,12 +70,16 @@ public interface APIInterface {
 
     @Multipart
     @POST("upload/files")
-    Observable<ResponseData<List<MImage>>> uploadImages(@Header("Authorization") String token,
-                                                        @Part List<MultipartBody.Part> files);
+    Observable<ResponseData<List<MImageServer>>> uploadImages(@Header("Authorization") String token,
+                                                              @Part List<MultipartBody.Part> files);
 
 
     @POST("retailer/update-profile")
     Observable<ResponseData<MUser>> updateProfile(@Header("Authorization") String token,
                                                   @Body MUser mUser);
+
+    @POST("retailer/update-bank-details")
+    Observable<ResponseData<MBankDetail>> getBankDetails(@Header("Authorization") String token,
+                                                         @Body MBankDetail mBankDetail);
 
 }

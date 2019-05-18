@@ -6,14 +6,21 @@
     <data>
 
         <variable
-            name="activity"
-            type="com.eb.onebandhan.ProductListing.ProductListingActivity" />
+            name="productListing"
+            type="com.eb.onebandhan.productListing.ProductListingActivity" />
     </data>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/_10sdp">
+
+        <include
+            android:id="@+id/header"
+            layout="@layout/header_with_back"
+            bind:productListing="@{productListing}" />
+
 
         <View
             android:id="@+id/view"
@@ -92,17 +99,35 @@
                 android:layout_below="@+id/llTop"
                 android:background="@color/divider_line" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <!--
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/view2"
+                            android:layout_marginTop="@dimen/_5sdp" />
+            -->
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/view2"
-                android:layout_marginTop="@dimen/_5sdp" />
+                android:orientation="vertical">
 
+            <include layout="@layout/item_product_listing" />
+            <include layout="@layout/item_product_listing" />
+            <include layout="@layout/item_product_listing" />
+            <include layout="@layout/item_product_listing" />
+            <include layout="@layout/item_product_listing" />
+            <include layout="@layout/item_product_listing" />
+            <include layout="@layout/item_product_listing" />
+            <include layout="@layout/item_product_listing" />
+            <include layout="@layout/item_product_listing" />
+            <include layout="@layout/item_product_listing" />
+            <include layout="@layout/item_product_listing" />
+            <include layout="@layout/item_product_listing" />
+            <include layout="@layout/item_product_listing" />
+            <include layout="@layout/item_product_listing" />
+            </LinearLayout>
         </RelativeLayout>
-
-        <include android:id="@+id/header"
-            bind:bankDetail="@{bankDetail}"
-            layout="@layout/header_with_back"></include>
 
     </RelativeLayout>
 </layout>

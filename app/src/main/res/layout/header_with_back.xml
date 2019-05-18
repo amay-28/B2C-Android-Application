@@ -34,6 +34,10 @@
             name="editProfile"
             type="com.eb.onebandhan.dashboard.activity.EditProfileActivity"/>
 
+        <variable
+            name="productListing"
+            type="com.eb.onebandhan.productListing.ProductListingActivity"/>
+
     </data>
 
     <com.google.android.material.appbar.AppBarLayout
@@ -78,7 +82,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:visibility="gone"
-                    android:src="@drawable/ic_search"/>\
+                    android:src="@drawable/ic_search"/>
 
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>

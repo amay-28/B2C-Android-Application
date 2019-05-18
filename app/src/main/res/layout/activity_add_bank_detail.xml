@@ -9,6 +9,7 @@
             name="bankDetail"
             type="com.eb.onebandhan.bankDetail.activity.AddBankDetailActivity"/>
     </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -48,9 +49,10 @@
                     android:background="@drawable/rect_back_with_corner"
                     android:hint="@string/Account_Number"
                     android:imeOptions="actionNext"
+                    android:maxLength="15"
                     android:padding="@dimen/_10sdp"
                     android:minHeight="@dimen/_40sdp"
-                    android:inputType="text" />
+                    android:inputType="number" />
 
                 <EditText
                     android:id="@+id/etIFSC_Code"
@@ -60,25 +62,27 @@
                     android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/rect_back_spinner"
                     android:hint="@string/IFSC_Code"
+                    android:maxLength="11"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:padding="@dimen/_10sdp"
                     android:minHeight="@dimen/_40sdp" />
 
-                <EditText
+                <Spinner
                     android:id="@+id/etAccountType"
-                    style="@style/EditText12ssp"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/latoregular"
+                    android:background="@drawable/rect_back_spinner"
+                    android:drawableRight="@drawable/ic_down_arrow"
                     android:layout_below="@+id/etIFSC_Code"
                     android:layout_marginTop="@dimen/_15sdp"
-                    android:background="@drawable/rect_back_spinner"
-                    android:drawableEnd="@drawable/ic_down_arrow"
-                    android:drawablePadding="@dimen/_20sdp"
                     android:hint="@string/Account_Type"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:padding="@dimen/_10sdp"
-                    android:minHeight="@dimen/_40sdp"/>
+                    android:minHeight="@dimen/_35sdp"/>
 
                 <TextView
                     android:id="@+id/tvDisclaimer"

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
+        android:id="@+id/llRoot"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="wrap_content"
         android:gravity="center"

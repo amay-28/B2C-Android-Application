@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 public class MAddProduct {
     private String id;
+    private String user_id;
     private String name;
     private String categoryId;
     private String price;
@@ -20,6 +21,6 @@ public class MAddProduct {
     private String description;
     private String specifications;
     private MCategory category;
-    private List<MImage> images;
+    private List<MImageServer> images;
 
 }

@@ -1,8 +1,7 @@
-package com.eb.onebandhan.ProductListing;
+package com.eb.onebandhan.productListing;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -31,6 +30,7 @@ public class ProductListingActivity extends AppCompatActivity implements View.On
 
     public void setupToolbar() {
         mBinding.header.setHandler(new CommonClickHandler(activity));
+        mBinding.header.tvMainHeading.setText(R.string.product_listing);
     }
 
     public void initViews() {

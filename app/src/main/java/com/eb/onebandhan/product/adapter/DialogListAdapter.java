@@ -56,6 +56,11 @@ public class DialogListAdapter extends RecyclerView.Adapter<DialogListAdapter.Vi
         return CategoryList.size();
     }
 
+    @Override
+    public void onCategoryClick() {
+
+    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ItemDialogActivityBinding binding;

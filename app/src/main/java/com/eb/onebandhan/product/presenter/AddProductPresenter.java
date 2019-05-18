@@ -8,6 +8,7 @@ import com.eb.onebandhan.apiCalling.ResponseData;
 import com.eb.onebandhan.auth.model.MCategory;
 import com.eb.onebandhan.product.model.MAddProduct;
 import com.eb.onebandhan.product.model.MImage;
+import com.eb.onebandhan.product.model.MImageServer;
 import com.eb.onebandhan.product.presenterinterface.AddProductPresenterInterface;
 import com.eb.onebandhan.product.presenterinterface.DialogPresenterInterface;
 import com.eb.onebandhan.product.viewinterface.AddProductViewInterface;
@@ -20,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -47,12 +49,13 @@ public class AddProductPresenter implements AddProductPresenterInterface, Consta
         return new DisposableObserver<ResponseData<MAddProduct>>() {
             @Override
             public void onNext(ResponseData<MAddProduct> response) {
-                    Gson gson = new Gson();
-                    String s= gson.toJson(response.getData());
-                    Type type = new TypeToken<MAddProduct>() {}.getType();
-                    MAddProduct addProductModel = gson.fromJson(s,type);
+                Gson gson = new Gson();
+                String s = gson.toJson(response.getData());
+                Type type = new TypeToken<MAddProduct>() {
+                }.getType();
+                MAddProduct addProductModel = gson.fromJson(s, type);
 
-                    viewInterface.onSuccessfullyAddProduct(addProductModel, response.getMessage());
+                viewInterface.onSuccessfullyAddProduct(addProductModel, response.getMessage());
 
             }
 
@@ -69,13 +72,12 @@ public class AddProductPresenter implements AddProductPresenterInterface, Consta
         };
     }
 
-    public DisposableObserver<ResponseData<List<MImage>>> getObserverImage() {
-        return new DisposableObserver<ResponseData<List<MImage>>>() {
+    public DisposableObserver<ResponseData<List<MImageServer>>> getObserverImage() {
+        return new DisposableObserver<ResponseData<List<MImageServer>>>() {
             @Override
-            public void onNext(ResponseData<List<MImage>> value) {
+            public void onNext(ResponseData<List<MImageServer>> response) {
                 try {
-                    JSONObject MainOBJ = new JSONObject(value.getImage().toString());
-                    viewInterface.onSucessfullyUpdatedImage(MainOBJ.getString(WebService.URL));
+                    viewInterface.onSucessfullyUpdatedImage(response.getImage());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -42,6 +42,7 @@
         <activity android:name=".service.AddServiceActivity" />
         <activity android:name=".product.AddProductActivity" />
         <activity android:name=".dashboard.activity.MyProfileActivity" />
+        <activity android:name=".productListing.ProductListingActivity" />
 
         <activity
             android:name=".dashboard.activity.CategoryActivity"

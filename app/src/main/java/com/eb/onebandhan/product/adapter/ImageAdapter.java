@@ -72,6 +72,11 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         return imageList.size();
     }
 
+    @Override
+    public void onCategoryClick() {
+
+    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ItemImageBinding binding;

@@ -114,7 +114,7 @@
                 android:fontFamily="@font/latoregular"
                 android:hint="@string/selling_price"
                 android:imeOptions="actionNext"
-                android:inputType="text"
+                android:inputType="number"
                 android:maxLength="30"
                 android:minHeight="@dimen/_50sdp"
                 android:paddingLeft="@dimen/_15sdp"

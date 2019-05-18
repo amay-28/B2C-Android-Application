@@ -2,17 +2,22 @@ package com.eb.onebandhan.dashboard.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.eb.onebandhan.R;
 import com.eb.onebandhan.auth.model.MCategory;
 import com.eb.onebandhan.databinding.CategoryExpandableItemBinding;
 import com.eb.onebandhan.databinding.SubcategoryChildItemBinding;
+import com.eb.onebandhan.productListing.ProductListingActivity;
+
 import java.util.List;
+
 import androidx.databinding.DataBindingUtil;
 
 public class ExpandableCategoryAdapter extends BaseExpandableListAdapter {
@@ -67,10 +72,10 @@ public class ExpandableCategoryAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean b, View convertView, ViewGroup viewGroup) {
-     MCategory mCategory= categoryList.get(groupPosition);
+        MCategory mCategory = categoryList.get(groupPosition);
         if (convertView == null) {
-                bindingCategory = DataBindingUtil.inflate(mLayoutInflater, R.layout.category_expandable_item, viewGroup, false);
-                convertView = bindingCategory.getRoot();
+            bindingCategory = DataBindingUtil.inflate(mLayoutInflater, R.layout.category_expandable_item, viewGroup, false);
+            convertView = bindingCategory.getRoot();
         }
         Glide.with(activity).load(mCategory.getImage()).apply(new RequestOptions().placeholder(R.drawable.ic_t_shirt).error(R.drawable.ic_t_shirt)).into(bindingCategory.imgCategory);
         bindingCategory.tvCategory.setText(mCategory.getName());
@@ -89,6 +94,12 @@ public class ExpandableCategoryAdapter extends BaseExpandableListAdapter {
             }
             Glide.with(activity).load(subCategory.getImage()).apply(new RequestOptions().placeholder(R.drawable.ic_t_shirt).error(R.drawable.ic_t_shirt)).into(bindingSubCategory.imgSubCategory);
             bindingSubCategory.tvSubCategory.setText(subCategory.getName());
+            bindingSubCategory.llRoot.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    activity.startActivity(new Intent(activity, ProductListingActivity.class));
+                }
+            });
         }
         return convertView;
     }

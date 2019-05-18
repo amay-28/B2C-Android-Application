@@ -14,12 +14,14 @@ import com.eb.onebandhan.dashboard.activity.CategoryActivity;
 import com.eb.onebandhan.dashboard.adapter.BannerListAdapter;
 import com.eb.onebandhan.dashboard.adapter.CategoryListAdapter;
 import com.eb.onebandhan.dashboard.adapter.CollectionListAdapter;
+import com.eb.onebandhan.dashboard.adapter.SubCategoryListAdapter;
 import com.eb.onebandhan.dashboard.adapter.SuperCategoryListHomeAdapter;
 import com.eb.onebandhan.dashboard.model.MBanner;
 import com.eb.onebandhan.dashboard.model.MCollection;
 import com.eb.onebandhan.dashboard.presenter.HomePresenter;
 import com.eb.onebandhan.dashboard.viewinterface.HomeViewInterface;
 import com.eb.onebandhan.databinding.HomeFragmentLayoutBinding;
+import com.eb.onebandhan.productListing.ProductListingActivity;
 import com.eb.onebandhan.util.Constant;
 import com.eb.onebandhan.util.ShowToast;
 
@@ -37,7 +39,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import static com.eb.onebandhan.auth.util.Categoryutil.ZERO;
 
-public class HomeFragment extends Fragment implements Constant, HomeViewInterface, CollectionListAdapter.CallBack, BannerListAdapter.CallBack, SuperCategoryListHomeAdapter.CallBack, CategoryListAdapter.CallBack {
+public class HomeFragment extends Fragment implements Constant, HomeViewInterface, CollectionListAdapter.CallBack, SubCategoryListAdapter.CallBack,
+        BannerListAdapter.CallBack, SuperCategoryListHomeAdapter.CallBack, CategoryListAdapter.CallBack {
     private Activity activity;
     private HomeFragmentLayoutBinding binding;
     private List<MCategory> superCategoryList = new ArrayList<>();
@@ -145,5 +148,10 @@ public class HomeFragment extends Fragment implements Constant, HomeViewInterfac
     public void onSucessfullyGetCollectionList(List<MCollection> collectionList, String message) {
         this.collectionList.addAll(collectionList);
         collectionListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onCategoryClick() {
+        startActivity(new Intent(activity, ProductListingActivity.class));
     }
 }

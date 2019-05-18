@@ -1,7 +1,9 @@
 package com.eb.onebandhan.dashboard.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
@@ -10,6 +12,7 @@ import com.eb.onebandhan.R;
 import com.eb.onebandhan.auth.model.MCategory;
 import com.eb.onebandhan.databinding.ItemSubcategoryLayoutBinding;
 import com.eb.onebandhan.databinding.ItemSupercategoryLayoutBinding;
+import com.eb.onebandhan.productListing.ProductListingActivity;
 
 import java.util.List;
 
@@ -39,6 +42,12 @@ public class SubCategoryListAdapter extends RecyclerView.Adapter<SubCategoryList
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MCategory mCategory = superCategoryList.get(position);
+        holder.binding.llRoot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.startActivity(new Intent(activity, ProductListingActivity.class));
+            }
+        });
         holder.binding.tvSubCategory.setText(mCategory.getName());
         Glide.with(activity).load(mCategory.getImage()).apply(new RequestOptions().placeholder(R.mipmap.ic_dummy_banner).error(R.mipmap.ic_dummy_banner)).into(holder.binding.imgSubCat);
     }
@@ -58,5 +67,6 @@ public class SubCategoryListAdapter extends RecyclerView.Adapter<SubCategoryList
     }
 
     public interface CallBack {
+        void onCategoryClick();
     }
 }

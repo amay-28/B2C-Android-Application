@@ -147,11 +147,26 @@
     <string name="about_shop_length">About shop is too short.</string>
     <string name="pan_number_length">PAN number is too short.</string>
     <string name="gst_length">GST is too short.</string>
+
+
     <string name="Product_listing">Product Listing</string>
     <string name="Add_to_your_Inventory">Add to your Inventory</string>
     <string name="Sort">Sort</string>
     <string name="Filters">Filters</string>
+    <string name="Add_Product">Add Product</string>
 
+    <string name="please_enter_valid_account_no">Please enter valid Account No.</string>
+    <string name="please_enter_valid_account_holder_name">Please enter valid Name</string>
+    <string name="valid_IFSC">Please enter valid IFSC Code</string>
+    <string name="please_select_account_type">Please Select Account Type</string>
+
+    <array name="account_type_array">
+        <item>Select Account Type</item>
+        <item>Current Account</item>
+        <item>Saving Account</item>
+    </array>
+
+    <string name="Add_Bank_Details">Add Bank Details</string>
 
     <!--name (max length is 25 AND minimum is 3)
     mobile (max length is 10 AND minimum is 10)

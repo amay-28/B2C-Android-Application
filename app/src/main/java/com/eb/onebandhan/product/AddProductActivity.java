@@ -19,16 +19,22 @@ import com.eb.onebandhan.product.adapter.DialogListAdapter;
 import com.eb.onebandhan.product.adapter.ImageAdapter;
 import com.eb.onebandhan.product.model.MAddProduct;
 import com.eb.onebandhan.product.model.MImage;
+import com.eb.onebandhan.product.model.MImageServer;
 import com.eb.onebandhan.product.presenter.AddProductPresenter;
 import com.eb.onebandhan.product.presenter.DialogPresenter;
 import com.eb.onebandhan.product.viewinterface.AddProductViewInterface;
 import com.eb.onebandhan.product.viewinterface.DialogViewInterface;
 import com.eb.onebandhan.util.CommonClickHandler;
+import com.eb.onebandhan.util.Session;
 import com.eb.onebandhan.util.ShowToast;
 import com.eb.onebandhan.util.Utils;
 import com.eb.onebandhan.util.WebService;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -82,6 +88,8 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
 
     private void initialization() {
         binding.header.setHandler(new CommonClickHandler(activity));
+        binding.header.tvMainHeading.setText(R.string.Add_Product);
+
         dialogPresenter = new DialogPresenter(this, activity);
         map.put("level", ZERO);
         map.put("eager", "children.children");
@@ -190,6 +198,7 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
     }
 
     private void prepareData() {
+        mAddProduct.setUser_id(new Session(activity).getUserProfile().getId());
         mAddProduct.setName(binding.etProductName.getText().toString());
         mAddProduct.setCategory(mSubSubCategory);
         mAddProduct.setPrice(binding.etSellingPrice.getText().toString());
@@ -319,27 +328,9 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
     }
 
     @Override
-    public void onSucessfullyUpdatedImage(String value) {
+    public void onSucessfullyUpdatedImage(List<MImageServer> mImageList) {
+        mAddProduct.setImages(mImageList);
         if (checkValidate()) addProductPresenter.addProductTask(mAddProduct);
-
-        /*for (int i = 0; i < imageList.size(); i++) {
-            MImage mImage = imageList.get(i);
-            if (mImage.isLocal()) {
-                imageList.remove(i);
-            }
-        }
-
-        if (!Utils.checkNull(value).isEmpty()) {
-            profileImageURL = value;
-            MImage mImage = new MImage();
-            mImage.setUrl(value);
-            mImage.setLocal(false);
-            imageList.add(mImage);
-        }
-
-        setLocalImage();*/
-
-
     }
 
     @Override
@@ -351,7 +342,7 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
     public void CreateFileForSend(List<MImage> imageList) {
         List<MultipartBody.Part> files = new ArrayList<>();
         for (MImage mImage : imageList) {
-            if (!mImage.isLocal()){
+            if (!mImage.isLocal()) {
                 imageURI = Uri.fromFile(mImage.getFile());
                 //File image = Utils.compressURIForUpload(activity, imageURI, "");
 
