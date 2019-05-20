@@ -17,7 +17,7 @@
             android:padding="@dimen/_10sdp">
 
             <ImageView
-                android:id="@+id/img3"
+                android:id="@+id/ivImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/dummy_men_shirt" />
@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_13sdp"
-                android:layout_toRightOf="@id/img3">
+                android:layout_toRightOf="@id/ivImage">
 
                 <TextView
                     android:id="@+id/tvProductName"

@@ -1,11 +1,13 @@
 package com.eb.onebandhan.auth.presenter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 
 import com.eb.onebandhan.apiCalling.APIClient;
 import com.eb.onebandhan.apiCalling.APIInterface;
 import com.eb.onebandhan.apiCalling.ResponseData;
+import com.eb.onebandhan.auth.activity.LoginActivity;
 import com.eb.onebandhan.auth.model.MCategory;
 import com.eb.onebandhan.auth.model.MProfile;
 import com.eb.onebandhan.auth.model.MSignUp;
@@ -89,8 +91,11 @@ public class SignUpDetailPresenter implements SignUpDetailPresenterInterface, Ca
 
             @Override
             public void onError(Throwable e) {
-                if (e instanceof HttpException)
-                    viewInterface.onFailToSubmitShopDetail(Utils.errorMessageParsing(e).getMessage());
+                Intent intent = new Intent(activity, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                activity.startActivity(intent);
+                /*if (e instanceof HttpException)
+                    viewInterface.onFailToSubmitShopDetail(Utils.errorMessageParsing(e).getMessage());*/
             }
 
             @Override

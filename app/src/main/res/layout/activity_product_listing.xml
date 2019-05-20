@@ -101,35 +101,34 @@
                 android:layout_below="@+id/llTop"
                 android:background="@color/divider_line" />
 
-            <!--
                         <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvProducts"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/view2"
                             android:layout_marginTop="@dimen/_5sdp" />
-            -->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/view2"
-                android:orientation="vertical">
+            <!-- <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@+id/view2"
+                 android:orientation="vertical">
 
-            <include layout="@layout/item_product_listing" />
-            <include layout="@layout/item_product_listing" />
-            <include layout="@layout/item_product_listing" />
-            <include layout="@layout/item_product_listing" />
-            <include layout="@layout/item_product_listing" />
-            <include layout="@layout/item_product_listing" />
-            <include layout="@layout/item_product_listing" />
-            <include layout="@layout/item_product_listing" />
-            <include layout="@layout/item_product_listing" />
-            <include layout="@layout/item_product_listing" />
-            <include layout="@layout/item_product_listing" />
-            <include layout="@layout/item_product_listing" />
-            <include layout="@layout/item_product_listing" />
-            <include layout="@layout/item_product_listing" />
-            </LinearLayout>
+             <include layout="@layout/item_product_listing" />
+             <include layout="@layout/item_product_listing" />
+             <include layout="@layout/item_product_listing" />
+             <include layout="@layout/item_product_listing" />
+             <include layout="@layout/item_product_listing" />
+             <include layout="@layout/item_product_listing" />
+             <include layout="@layout/item_product_listing" />
+             <include layout="@layout/item_product_listing" />
+             <include layout="@layout/item_product_listing" />
+             <include layout="@layout/item_product_listing" />
+             <include layout="@layout/item_product_listing" />
+             <include layout="@layout/item_product_listing" />
+             <include layout="@layout/item_product_listing" />
+             <include layout="@layout/item_product_listing" />
+             </LinearLayout>-->
         </RelativeLayout>
 
     </RelativeLayout>
