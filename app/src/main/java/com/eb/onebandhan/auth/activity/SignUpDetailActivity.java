@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.eb.onebandhan.R;
@@ -69,7 +72,8 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
         binding.spnCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                if (!categoryList.get(position).getIsSelected()) {
+
+                if (!categoryList.get(position).getIsSelected() && !categoryList.get(position).getId().equals("00")) {
                     Chip chip = new Chip(activity);
                     categoryList.get(position).setIsSelected(true);
                     chip.setText(categoryList.get(position).getName());
@@ -88,6 +92,19 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+
+        binding.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.rbYes) {
+                    binding.etGstNo.setVisibility(View.VISIBLE);
+                    binding.etPanNo.setVisibility(View.VISIBLE);
+                } else {
+                    binding.etGstNo.setVisibility(View.GONE);
+                    binding.etPanNo.setVisibility(View.GONE);
+                }
             }
         });
     }
@@ -109,6 +126,17 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
         } else if (TextUtils.isEmpty(binding.etState.getText().toString())) {
             Toast.makeText(activity, resources.getString(R.string.please_enter_state), Toast.LENGTH_SHORT).show();
             return false;
+        } else if (binding.rbYes.isChecked() && TextUtils.isEmpty(binding.etGstNo.getText().toString())) {
+            Toast.makeText(activity, resources.getString(R.string.please_enter_gst), Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (binding.rbYes.isChecked() && !ValidationUtil.isValidGST(binding.etGstNo.getText().toString())) {
+            Toast.makeText(activity, resources.getString(R.string.please_enter_valid_gst), Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (binding.rbYes.isChecked() &&
+                !TextUtils.isEmpty(binding.etPanNo.getText().toString()) &&
+                !ValidationUtil.isValidPAN(binding.etPanNo.getText().toString())) {
+            Toast.makeText(activity, resources.getString(R.string.please_enter_valid_pan_number), Toast.LENGTH_SHORT).show();
+            return false;
         } else if (!TextUtils.isEmpty(binding.etEmail.getText().toString()) && !ValidationUtil.emailValidator(activity, binding.etEmail, "email")) {
             return false;
         }
@@ -124,6 +152,8 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
         mProfile.setCity(binding.etCity.getText().toString());
         mProfile.setState(binding.etState.getText().toString());
         mProfile.setEmail(binding.etEmail.getText().toString());
+        mProfile.setGstin(binding.etGstNo.getText().toString());
+        mProfile.setPanNumber(binding.etPanNo.getText().toString());
         List<MProfile.MDealsIn> dealsInList = new ArrayList<>();
         if (!categoryList.isEmpty()) {
             for (MCategory mCategory : categoryList) {
@@ -151,6 +181,9 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
     @Override
     public void onSucessfullySubmitShopDetail(MUser data, String message) {
         ShowToast.toastMsg(activity, message);
+        Intent intent = new Intent(activity, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     @Override

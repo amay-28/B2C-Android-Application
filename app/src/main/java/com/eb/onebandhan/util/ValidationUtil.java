@@ -334,4 +334,28 @@ public class ValidationUtil {
         return true;
     }
 
+    public static boolean isValidGST(String gst) {
+        boolean isValidGst = false;
+        String reggst = "^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[0-9]{1}Z[0-9A-Z]{1}?$";
+        CharSequence inputStr = gst;
+        Pattern pattern = Pattern.compile(reggst, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(inputStr);
+        if (matcher.matches()) {
+            isValidGst = true;
+        }
+        return isValidGst;
+    }
+
+    public static boolean isValidPAN(String pan) {
+        boolean isValidGst = false;
+        String reggst = "[A-Z]{5}[0-9]{4}[A-Z]{1}";
+        CharSequence inputStr = pan;
+        Pattern pattern = Pattern.compile(reggst, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(inputStr);
+        if (matcher.matches()) {
+            isValidGst = true;
+        }
+        return isValidGst;
+    }
+
 }

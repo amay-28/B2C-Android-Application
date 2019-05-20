@@ -42,15 +42,16 @@ public class SignUpDetailPresenter implements SignUpDetailPresenterInterface, Ca
 
 
     public DisposableObserver<ResponseData<List<MCategory>>> getObserver() {
-        return new DisposableObserver<ResponseData<List<MCategory>>>(){
+        return new DisposableObserver<ResponseData<List<MCategory>>>() {
             @Override
             public void onNext(ResponseData<List<MCategory>> response) {
-                viewInterface.onSucessfullygetCategories(response.getData(),response.getMessage());
+                viewInterface.onSucessfullygetCategories(response.getData(), response.getMessage());
             }
 
             @Override
             public void onError(Throwable e) {
-                if (e instanceof HttpException) viewInterface.onFailTogetCategories(Utils.errorMessageParsing(e).getMessage());
+                if (e instanceof HttpException)
+                    viewInterface.onFailTogetCategories(Utils.errorMessageParsing(e).getMessage());
             }
 
             @Override
@@ -61,7 +62,7 @@ public class SignUpDetailPresenter implements SignUpDetailPresenterInterface, Ca
     }
 
     private <T> Observable getObservable(Map<String, String> map) {
-        return  APIClient.getClient(activity).create(APIInterface.class).getCategoryRelatedData(map)
+        return APIClient.getClient(activity).create(APIInterface.class).getCategoryRelatedData(map)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
@@ -82,13 +83,14 @@ public class SignUpDetailPresenter implements SignUpDetailPresenterInterface, Ca
             public void onNext(ResponseData<MUser> response) {
                 new Session(activity).getUserProfile().setRetailerDetails(response.getData().getRetailerDetails());
 
-                viewInterface.onSucessfullySubmitShopDetail(response.getData(),response.getMessage());
+                viewInterface.onSucessfullySubmitShopDetail(response.getData(), response.getMessage());
 
             }
 
             @Override
             public void onError(Throwable e) {
-                if (e instanceof HttpException) viewInterface.onFailToSubmitShopDetail(Utils.errorMessageParsing(e).getMessage());
+                if (e instanceof HttpException)
+                    viewInterface.onFailToSubmitShopDetail(Utils.errorMessageParsing(e).getMessage());
             }
 
             @Override
@@ -99,7 +101,8 @@ public class SignUpDetailPresenter implements SignUpDetailPresenterInterface, Ca
     }
 
     private <T> Observable getObservableForShop(MProfile mProfile) {
-        return  APIClient.getClient(activity).create(APIInterface.class).updateShopDetail(mProfile)
+        return APIClient.getClient(activity).create(APIInterface.class).updateShopDetail(new Session(activity).getString("AUTHORIZATION_KEY"),
+                mProfile)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 }

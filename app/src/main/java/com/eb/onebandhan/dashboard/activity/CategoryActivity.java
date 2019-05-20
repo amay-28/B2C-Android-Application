@@ -43,4 +43,5 @@ public class CategoryActivity extends AppCompatActivity implements Constant,Supe
         superCategoryListAdapter = new SuperCategoryListAdapter(activity, superCategoryList, this);
         binding.rvSuperCategory.setAdapter(superCategoryListAdapter);
     }
+
 }

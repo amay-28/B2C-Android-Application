@@ -11,6 +11,7 @@ import com.eb.onebandhan.dashboard.model.MCollection;
 import com.eb.onebandhan.product.model.MAddProduct;
 import com.eb.onebandhan.product.model.MImage;
 import com.eb.onebandhan.product.model.MImageServer;
+import com.eb.onebandhan.productListing.model.MProduct;
 import com.google.gson.JsonElement;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public interface APIInterface {
     Observable<ResponseData<MUser>> signUp(@Body MSignUp mSignUp);
 
     @POST("retailer/verify-otp")
-    Observable<ResponseData> verifyUser(@Body MSignUp mSignUp);
+    Observable<Response<ResponseData<MUser>>> verifyUser(@Body MSignUp mSignUp);
 
     @POST("retailer/login")
     Observable<Response<ResponseData<MUser>>> login(@Body MSignUp mSignUp);
@@ -50,7 +51,7 @@ public interface APIInterface {
     Observable<ResponseData<List<MCategory>>> getCategoryRelatedData(@QueryMap Map<String, String> map);
 
     @POST("retailer/update-profile")
-    Observable<ResponseData<MUser>> updateShopDetail(@Body MProfile mProfile);
+    Observable<ResponseData<MUser>> updateShopDetail(@Header("Authorization") String token, @Body MProfile mProfile);
 
     @GET("banners")
     Observable<ResponseData<List<MBanner>>> getAllBannerList(@Header("Authorization") String token);
@@ -81,5 +82,8 @@ public interface APIInterface {
     @POST("retailer/update-bank-details")
     Observable<ResponseData<MBankDetail>> getBankDetails(@Header("Authorization") String token,
                                                          @Body MBankDetail mBankDetail);
+
+    @GET("products")
+    Observable<ResponseData<List<MProduct>>> getAllProductList();
 
 }

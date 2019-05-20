@@ -11,6 +11,7 @@ import com.eb.onebandhan.auth.presenterinterface.OtpPresenterInterface;
 import com.eb.onebandhan.auth.presenterinterface.SignUpPresenterInterface;
 import com.eb.onebandhan.auth.viewinterface.OtpViewInterface;
 import com.eb.onebandhan.auth.viewinterface.SignUpViewInterface;
+import com.eb.onebandhan.util.Session;
 import com.eb.onebandhan.util.Utils;
 import com.google.gson.Gson;
 
@@ -20,7 +21,11 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Response;
 import retrofit2.adapter.rxjava2.HttpException;
+
+import static com.eb.onebandhan.util.Constant.AUTHORIZATION_KEY;
+import static com.eb.onebandhan.util.Constant.BEARER;
 
 public class OtpPresenter implements OtpPresenterInterface {
     private OtpViewInterface viewInterface;
@@ -31,11 +36,12 @@ public class OtpPresenter implements OtpPresenterInterface {
         this.activity = activity;
     }
 
-    public DisposableObserver<ResponseData> getObserver() {
-        return new DisposableObserver<ResponseData>() {
+    public DisposableObserver<Response<ResponseData<MUser>>> getObserver() {
+        return new DisposableObserver<Response<ResponseData<MUser>>>() {
             @Override
-            public void onNext(ResponseData value) {
-                viewInterface.onSucessfullyVerified(value.getMessage());
+            public void onNext(Response<ResponseData<MUser>> value) {
+                new Session(activity).setString(AUTHORIZATION_KEY, BEARER + value.headers().get("AuthToken"));
+                viewInterface.onSucessfullyVerified(value.body().getMessage());
             }
 
             @Override

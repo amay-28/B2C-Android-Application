@@ -33,13 +33,18 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
     }
 
     private void listner() {
-        binding.tvSignUp.setOnClickListener(view -> startActivity(new Intent(activity,SignUpInitialActivity.class)));
+        binding.tvSignUp.setOnClickListener(view -> {
+            Intent intent = new Intent(activity, SignUpInitialActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+        });
         binding.btnLogin.setOnClickListener(view -> {
             if (TextUtils.isEmpty(binding.etMobileNo.getText()))
                 Toast.makeText(activity, getResources().getString(R.string.please_enter_mobile_no), Toast.LENGTH_SHORT).show();
             else if (binding.etMobileNo.getText().toString().length() < 10)
                 Toast.makeText(activity, getResources().getString(R.string.please_enter_valid_mobile_no), Toast.LENGTH_SHORT).show();
-            else{
+            else {
                 mSignUp.setMobileNumber(binding.etMobileNo.getText().toString());
                 loginPresenter.performLoginTask(mSignUp, TYPE_LOGIN_REQUEST_OTP);
             }
@@ -52,7 +57,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
 
     @Override
     public void onSucessfullyLogin(MUser mUser, String message) {
-        startActivity(new Intent(activity, OtpVerificationActivity.class).putExtra(IS_FROM_SIGNUP, NO).putExtra(MOBILE_NO,mUser.getMobileNumber()));
+        startActivity(new Intent(activity, OtpVerificationActivity.class).putExtra(IS_FROM_SIGNUP, NO).putExtra(MOBILE_NO, mUser.getMobileNumber()));
     }
 
     @Override

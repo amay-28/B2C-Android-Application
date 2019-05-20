@@ -14,6 +14,7 @@ import com.eb.onebandhan.auth.model.MSignUp;
 import com.eb.onebandhan.auth.model.MUser;
 import com.eb.onebandhan.auth.presenter.SignUpPresenter;
 import com.eb.onebandhan.auth.viewinterface.SignUpViewInterface;
+import com.eb.onebandhan.dashboard.activity.DashboardActivity;
 import com.eb.onebandhan.databinding.ActivitySignUpInitialBinding;
 import com.eb.onebandhan.util.Constant;
 
@@ -33,6 +34,12 @@ public class SignUpInitialActivity extends AppCompatActivity implements SignUpVi
     }
 
     private void listner() {
+        binding.tvLogin.setOnClickListener(v -> {
+            Intent intent = new Intent(activity, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        });
+
         binding.btnSubmit.setOnClickListener(view -> {
                     if (checkValidate()) {
                         performSignUp();
@@ -79,6 +86,5 @@ public class SignUpInitialActivity extends AppCompatActivity implements SignUpVi
     @Override
     public void onFailToSignUp(String errorMessage) {
         Toast.makeText(activity, errorMessage, Toast.LENGTH_SHORT).show();
-
     }
 }

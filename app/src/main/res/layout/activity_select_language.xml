@@ -6,61 +6,75 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/_20sdp"
-        android:background="@drawable/ic_background">
+        android:background="@drawable/ic_background"
+        android:padding="@dimen/_20sdp">
 
 
         <TextView
             android:id="@+id/tvWelcome"
-           style="@style/TextView20ssp"
-            android:gravity="center"
-            android:textSize="@dimen/_22sdp"
+            style="@style/TextView20ssp"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/_40sdp"
+            android:gravity="center"
+            android:text="@string/welcome"
             android:textColor="@color/colorPrimary"
-            android:text="@string/welcome"/>
+            android:textSize="@dimen/_22sdp" />
 
         <TextView
             android:id="@+id/tvTo"
-           style="@style/TextView20ssp"
-            android:gravity="center"
-            android:layout_below="@+id/tvWelcome"
-            android:textSize="@dimen/_22sdp"
+            style="@style/TextView20ssp"
             android:layout_width="match_parent"
+            android:layout_below="@+id/tvWelcome"
+            android:gravity="center"
+            android:text="@string/to_bandhan"
             android:textColor="@color/colorPrimary"
-            android:text="@string/to_bandhan"/>
+            android:textSize="@dimen/_22sdp" />
 
         <TextView
-           style="@style/TextView14ssp"
-            android:gravity="center"
-            android:layout_below="@+id/tvTo"
+            style="@style/TextView14ssp"
             android:layout_width="match_parent"
+            android:layout_below="@+id/tvTo"
             android:layout_marginTop="@dimen/_5sdp"
-            android:textColor="@color/colorPrimary"
-            android:text="@string/shopkeeper"/>
+            android:gravity="center"
+            android:text="@string/shopkeeper"
+            android:textColor="@color/colorPrimary" />
 
         <ImageView
             android:id="@+id/imgShop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/ic_shop"/>
+            android:src="@drawable/ic_shop" />
 
 
-            <LinearLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_below="@+id/imgShop"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:background="@drawable/rect_back_with_corner"
+            android:orientation="vertical">
+
+<!--
+            <Spinner
+                android:id="@+id/spnLanguage"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_below="@+id/imgShop"
-                android:layout_marginTop="@dimen/_40sdp"
-                android:background="@drawable/rect_back_with_corner"
-                android:layout_gravity="center">
-                <Spinner
-                    android:id="@+id/spnLanguage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"></Spinner>
+                android:layout_height="match_parent"
+                android:gravity="center"></Spinner>
+-->
 
-            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="English"
+                android:drawableEnd="@drawable/ic_down_arrow"
+                android:textColor="@color/color_grey_text"
+                style="@style/TextView12ssp"
+                android:layout_margin="@dimen/_10sdp" />
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,22 +84,22 @@
 
             <com.google.android.material.button.MaterialButton
                 style="@style/material_button"
+                android:layout_marginEnd="@dimen/_3sdp"
                 android:layout_weight="1"
-                android:textSize="@dimen/_10ssp"
                 android:minHeight="@dimen/_50sdp"
                 android:onClick="startLoginScreen"
-                android:layout_marginEnd="@dimen/_3sdp"
-                android:text="@string/login"/>
+                android:text="@string/login"
+                android:textSize="@dimen/_10ssp" />
 
-             <com.google.android.material.button.MaterialButton
+            <com.google.android.material.button.MaterialButton
                 style="@style/material_button"
-                 android:layout_weight="1"
-                 android:textSize="@dimen/_10ssp"
-                 android:backgroundTint="@color/yellow"
-                 android:layout_marginStart="@dimen/_3sdp"
-                 android:minHeight="@dimen/_50sdp"
-                 android:onClick="startSignUpScreen"
-                 android:text="@string/create_account"/>
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/yellow"
+                android:minHeight="@dimen/_50sdp"
+                android:onClick="startSignUpScreen"
+                android:text="@string/create_account"
+                android:textSize="@dimen/_10ssp" />
 
         </LinearLayout>
 

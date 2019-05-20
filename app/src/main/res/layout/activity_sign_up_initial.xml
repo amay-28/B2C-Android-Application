@@ -142,9 +142,11 @@
                         android:textColor="@color/colorHint" />
 
                     <TextView
+                        android:id="@+id/tvLogin"
                         style="@style/TextView12ssp"
                         android:fontFamily="@font/latoregular"
                         android:textAllCaps="false"
+                        android:layout_marginLeft="@dimen/_3sdp"
                         android:text="@string/login" />
                 </LinearLayout>
                 </LinearLayout>

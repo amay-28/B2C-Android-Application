@@ -159,6 +159,7 @@
                         android:paddingEnd="@dimen/_10sdp"
                         android:singleLine="true" />
 
+<!--
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_50sdp"
@@ -174,7 +175,67 @@
                             android:gravity="center"></Spinner>
 
                     </LinearLayout>
+-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextView12ssp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:text="@string/gst_verification"/>
 
+                    <RadioGroup
+                        android:id="@+id/radioGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp">
+                        
+                        <RadioButton
+                            android:id="@+id/rbYes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="Yes"/>
+
+                        <RadioButton
+                            android:id="@+id/rbNo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_25sdp"
+                            android:text="No"/>
+
+                    </RadioGroup>
+
+                    <EditText
+                        android:id="@+id/etGstNo"
+                        style="@style/EditText12ssp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="@drawable/rect_back_with_corner"
+                        android:hint="@string/gst"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPersonName"
+                        android:maxLength="30"
+                        android:minHeight="@dimen/_50sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:singleLine="true" />
+
+                    <EditText
+                        android:id="@+id/etPanNo"
+                        style="@style/EditText12ssp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="@drawable/rect_back_with_corner"
+                        android:hint="@string/pan_no_optional"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPersonName"
+                        android:maxLength="30"
+                        android:minHeight="@dimen/_50sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:singleLine="true" />
+                    
                     <EditText
                         android:id="@+id/etEmail"
                         style="@style/EditText12ssp"

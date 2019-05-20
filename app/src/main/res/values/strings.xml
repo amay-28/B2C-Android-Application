@@ -45,7 +45,9 @@
     <string name="please_enter_state">Please enter State</string>
     <string name="please_enter_about_the_shop">Please enter something about shop</string>
     <string name="please_enter_pan_number">Please enter PAN Number</string>
+    <string name="please_enter_valid_pan_number">Please enter valid PAN Number</string>
     <string name="please_enter_gst">Please enter GST</string>
+    <string name="please_enter_valid_gst">Please enter valid GST</string>
     <string name="please_enter_gst_percent">Please enter GST%</string>
     <string name="please_select_category_first">Please select category</string>
     <string name="please_select_sub_category_first">Please select sub category</string>
@@ -121,7 +123,9 @@
     <string name="continue_shopping">CONTINUE SHOPPING</string>
     <string name="about_shop">About the Shop</string>
     <string name="pan_no">PAN Number</string>
+    <string name="pan_no_optional">PAN Number (Optional)</string>
     <string name="gst">GST</string>
+    <string name="gst_verification">GST verification</string>
     <string name="gst_percent">Set GST%</string>
     <string name="save">SAVE</string>
     <string name="edit">Edit</string>
