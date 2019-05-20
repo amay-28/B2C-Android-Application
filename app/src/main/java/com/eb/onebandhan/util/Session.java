@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.eb.onebandhan.auth.model.MUser;
+import com.eb.onebandhan.bankDetail.activity.model.MBankDetail;
 import com.google.gson.Gson;
 
 public class Session {
@@ -14,6 +15,7 @@ public class Session {
     private SharedPreferences.Editor prefsEditor;
     private String ALL_USER_LIST = "ALL_USER_LIST";
     private String USER_PROFILE_DATA = "USER_PROFILE_DATA";
+    private String USER_BANK_DETAIL = "USER_BANK_DETAIL";
 
     public Session(Context context) {
         this.context = context;
@@ -66,6 +68,28 @@ public class Session {
         prefsEditor.putString(USER_PROFILE_DATA, json);
         prefsEditor.commit();
 
+    }
+
+    public void setBankDetail(MBankDetail bankDetail) {
+        Gson gson = new Gson();
+        String json = gson.toJson(bankDetail);
+        prefsEditor.putString(USER_BANK_DETAIL, json);
+        prefsEditor.commit();
+
+    }
+
+    public MBankDetail getBankDetail() {
+        Gson gson = new Gson();
+        String json = pref.getString(USER_BANK_DETAIL, "");
+
+        MBankDetail mBankDetail;
+
+        if (json.isEmpty()) {
+            mBankDetail = null;
+        } else {
+            mBankDetail = gson.fromJson(json, MBankDetail.class);
+        }
+        return mBankDetail;
     }
 
 }

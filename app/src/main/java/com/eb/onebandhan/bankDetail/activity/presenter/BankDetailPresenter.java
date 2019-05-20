@@ -33,10 +33,8 @@ public class BankDetailPresenter implements BankDetailPresenterInterface {
             @Override
             public void onNext(ResponseData<MBankDetail> response) {
                 bankDetailViewInterface.onSuccessfulUploadBankDetails(response.getData(), response.getMessage());
-
-                Log.d("BankDetails", "response: " + response.toString());
-
-
+                Session session = new Session(activity);
+                session.setBankDetail(response.getData());
             }
 
             @Override

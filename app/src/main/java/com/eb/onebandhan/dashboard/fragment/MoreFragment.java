@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.eb.onebandhan.R;
 import com.eb.onebandhan.auth.model.MUser;
 import com.eb.onebandhan.bankDetail.activity.AddBankDetailActivity;
+import com.eb.onebandhan.bankDetail.activity.BankDetailActivity;
 import com.eb.onebandhan.dashboard.activity.DashboardActivity;
 import com.eb.onebandhan.dashboard.activity.EditProfileActivity;
 import com.eb.onebandhan.dashboard.activity.MyProfileActivity;
@@ -40,11 +41,22 @@ public class MoreFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        listner();
+    }
+
     private void listner() {
         binding.tvEdit.setOnClickListener(v -> startActivity(new Intent(getActivity(), EditProfileActivity.class)));
         binding.tvAddToInventory.setOnClickListener(v -> startActivity(new Intent(getActivity(), AddProductActivity.class)));
         binding.rlProfile.setOnClickListener(v -> startActivity(new Intent(getActivity(), MyProfileActivity.class)));
-        binding.tvBankDetails.setOnClickListener(v -> startActivity(new Intent(getActivity(), AddBankDetailActivity.class)));
+
+        if (new Session(activity).getBankDetail() != null) {
+            binding.tvBankDetails.setOnClickListener(v -> startActivity(new Intent(getActivity(), BankDetailActivity.class)));
+        } else {
+            binding.tvBankDetails.setOnClickListener(v -> startActivity(new Intent(getActivity(), AddBankDetailActivity.class)));
+        }
     }
 
     private void initialization() {

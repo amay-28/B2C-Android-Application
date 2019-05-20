@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Toast;
@@ -13,10 +14,12 @@ import com.eb.onebandhan.bankDetail.activity.model.MBankDetail;
 import com.eb.onebandhan.bankDetail.activity.presenter.BankDetailPresenter;
 import com.eb.onebandhan.auth.util.Categoryutil;
 import com.eb.onebandhan.bankDetail.activity.viewinterface.BankDetailViewInterface;
+import com.eb.onebandhan.dashboard.activity.DashboardActivity;
 import com.eb.onebandhan.databinding.ActivityAddBankDetailBinding;
 import com.eb.onebandhan.util.CommonClickHandler;
 import com.eb.onebandhan.util.Constant;
 import com.eb.onebandhan.util.CustomSpinnerAdapter;
+import com.eb.onebandhan.util.Session;
 
 public class AddBankDetailActivity extends AppCompatActivity implements BankDetailViewInterface, Categoryutil, Constant {
     private Activity activity;
@@ -24,14 +27,17 @@ public class AddBankDetailActivity extends AppCompatActivity implements BankDeta
     private BankDetailPresenter bankDetailPresenter;
     private MBankDetail mBankDetail = new MBankDetail();
     private CustomSpinnerAdapter spinnerAdapter;
-    private String account_type[];
+    private String accountTypeArray[];
+    private MBankDetail savedBankDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = this;
         binding = DataBindingUtil.setContentView(activity, R.layout.activity_add_bank_detail);
-        account_type = getResources().getStringArray(R.array.account_type_array);
+        savedBankDetail = new Session(activity).getBankDetail();
+
+        accountTypeArray = getResources().getStringArray(R.array.account_type_array);
         //initialize Spinner
         bindSpinner();
         initialization();
@@ -42,14 +48,12 @@ public class AddBankDetailActivity extends AppCompatActivity implements BankDeta
      * Method to initialize Spinner.
      */
     private void bindSpinner() {
-        spinnerAdapter = new CustomSpinnerAdapter(activity, account_type);
+        spinnerAdapter = new CustomSpinnerAdapter(activity, accountTypeArray);
         binding.etAccountType.setAdapter(spinnerAdapter);
     }
 
     private void listner() {
         binding.btnUpload.setOnClickListener(view -> addBankDetailRequestObject());
-//        binding.btnSubmit.setOnClickListener(view -> startActivity(new Intent(activity,SignUpDetailActivity.class)));
-
     }
 
     private void initialization() {
@@ -58,7 +62,30 @@ public class AddBankDetailActivity extends AppCompatActivity implements BankDeta
         bankDetailPresenter = new BankDetailPresenter(this
                 , activity);
 
+        if (savedBankDetail != null) {
+            setExistingData();
+        }
     }
+
+    private void setExistingData() {
+        binding.btnUpload.setText("Update");
+        binding.etAccountHolderName.setText(savedBankDetail.getAccountHolderName());
+        binding.etAccountNumber.setText(savedBankDetail.getAccountNumber());
+        binding.etIFSCCode.setText(savedBankDetail.getIfscCode());
+
+        if (accountTypeArray[1].equalsIgnoreCase(savedBankDetail.getAccountType())) {
+            binding.etAccountType.setSelection(1);
+        } else if (accountTypeArray[2].equalsIgnoreCase(savedBankDetail.getAccountType())) {
+            binding.etAccountType.setSelection(2);
+        }
+    }
+
+    /*private String returnAccountNumber(String account) {
+        if (account.length() > 11)
+            return "XXXX" + account.substring(11, account.length());
+
+        return "";
+    }*/
 
     private void addBankDetailRequestObject() {
         if (TextUtils.isEmpty(binding.etAccountHolderName.getText()))
@@ -84,6 +111,9 @@ public class AddBankDetailActivity extends AppCompatActivity implements BankDeta
 
     @Override
     public void onSuccessfulUploadBankDetails(MBankDetail mBankDetail, String message) {
+        Intent intent = new Intent(activity, DashboardActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
         finish();
     }
 
