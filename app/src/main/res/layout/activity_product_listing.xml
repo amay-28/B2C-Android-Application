@@ -44,6 +44,7 @@
                 android:weightSum="1">
 
                 <RelativeLayout
+                    android:id="@+id/rlSort"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -70,6 +71,7 @@
                     android:background="@color/divider_line" />
 
                 <RelativeLayout
+                    android:id="@+id/rlFilter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -110,6 +112,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/view2"
                 android:orientation="vertical">
 
             <include layout="@layout/item_product_listing" />

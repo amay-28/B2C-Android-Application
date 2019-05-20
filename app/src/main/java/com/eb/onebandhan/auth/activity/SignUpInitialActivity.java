@@ -18,49 +18,62 @@ import com.eb.onebandhan.databinding.ActivitySignUpInitialBinding;
 import com.eb.onebandhan.util.Constant;
 
 public class SignUpInitialActivity extends AppCompatActivity implements SignUpViewInterface, Constant {
-        private Activity activity;
-        private ActivitySignUpInitialBinding binding;
-        private SignUpPresenter signUpPresenter;
-        private MSignUp mSignUp=new MSignUp();
+    private Activity activity;
+    private ActivitySignUpInitialBinding binding;
+    private SignUpPresenter signUpPresenter;
+    private MSignUp mSignUp = new MSignUp();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity=this;
-        binding= DataBindingUtil.setContentView(activity,R.layout.activity_sign_up_initial);
+        activity = this;
+        binding = DataBindingUtil.setContentView(activity, R.layout.activity_sign_up_initial);
         initialization();
         listner();
     }
 
     private void listner() {
-        binding.btnSubmit.setOnClickListener(view -> performSignUp());
-//        binding.btnSubmit.setOnClickListener(view -> startActivity(new Intent(activity,SignUpDetailActivity.class)));
+        binding.btnSubmit.setOnClickListener(view -> {
+                    if (checkValidate()) {
+                        performSignUp();
+                    }
+                }
+        );
     }
 
     private void performSignUp() {
-        if (TextUtils.isEmpty(binding.etName.getText()))
+        mSignUp.setName(binding.etName.getText().toString());
+        mSignUp.setMobileNumber(binding.etMobileNo.getText().toString());
+        signUpPresenter.performSignUpTask(mSignUp);
+
+    }
+
+    private boolean checkValidate() {
+        if (TextUtils.isEmpty(binding.etName.getText())) {
             Toast.makeText(activity, getResources().getString(R.string.please_enter_name), Toast.LENGTH_SHORT).show();
-        else if (TextUtils.isEmpty(binding.etMobileNo.getText()))
+            return false;
+        } else if (TextUtils.isEmpty(binding.etMobileNo.getText())) {
             Toast.makeText(activity, getResources().getString(R.string.please_enter_mobile_no), Toast.LENGTH_SHORT).show();
-        else if (binding.etName.getText().toString().length()<3)
+            return false;
+        } else if (binding.etName.getText().toString().length() < 3) {
             Toast.makeText(activity, getResources().getString(R.string.please_enter_valid_name), Toast.LENGTH_SHORT).show();
-         else if (binding.etMobileNo.getText().toString().length()<10)
+            return false;
+        } else if (binding.etMobileNo.getText().toString().length() < 10) {
             Toast.makeText(activity, getResources().getString(R.string.please_enter_valid_mobile_no), Toast.LENGTH_SHORT).show();
-         else {
-            mSignUp.setName(binding.etName.getText().toString());
-            mSignUp.setMobileNumber(binding.etMobileNo.getText().toString());
-            signUpPresenter.performSignUpTask(mSignUp);
+            return false;
+        } else {
+            return true;
         }
     }
 
     private void initialization() {
-        signUpPresenter = new SignUpPresenter(this,activity);
+        signUpPresenter = new SignUpPresenter(this, activity);
     }
 
     @Override
     public void onSucessfullySignUp(MUser mUser, String message) {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(activity, OtpVerificationActivity.class).putExtra(IS_FROM_SIGNUP, YES).putExtra(MOBILE_NO,mUser.getMobileNumber()));
+        startActivity(new Intent(activity, OtpVerificationActivity.class).putExtra(IS_FROM_SIGNUP, YES).putExtra(MOBILE_NO, mUser.getMobileNumber()));
     }
 
     @Override

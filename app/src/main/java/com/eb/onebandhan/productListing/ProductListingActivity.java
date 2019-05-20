@@ -8,15 +8,17 @@ import android.view.View;
 import com.eb.onebandhan.R;
 import com.eb.onebandhan.databinding.ActivityProductListingBinding;
 import com.eb.onebandhan.util.CommonClickHandler;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-public class ProductListingActivity extends AppCompatActivity implements View.OnClickListener {
+public class ProductListingActivity extends AppCompatActivity {
 
     private ActivityProductListingBinding mBinding;
     private Context context;
     private Activity activity;
+    private BottomSheetDialog bottomSheetDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,7 @@ public class ProductListingActivity extends AppCompatActivity implements View.On
 
         setupToolbar();
         initViews();
+        listener();
     }
 
     public void setupToolbar() {
@@ -34,6 +37,14 @@ public class ProductListingActivity extends AppCompatActivity implements View.On
     }
 
     public void initViews() {
+        bottomSheetDialog = new BottomSheetDialog(this,R.style.TransparentDialogBackground);
+        bottomSheetDialog.setContentView(R.layout.bottom_sheet_sort);
+    }
+
+    public void listener(){
+        mBinding.rlSort.setOnClickListener(v -> bottomSheetDialog.show());
+        bottomSheetDialog.findViewById(R.id.ivCross).setOnClickListener(v -> bottomSheetDialog.dismiss());
+
     }
 
     @Override
@@ -42,12 +53,4 @@ public class ProductListingActivity extends AppCompatActivity implements View.On
         finish();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btnSubmit:
-                break;
-
-        }
-    }
 }

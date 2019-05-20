@@ -12,7 +12,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        >
 
         <ScrollView
             android:layout_width="match_parent"
@@ -21,11 +23,13 @@
             android:fillViewport="true"
             android:scrollbars="none">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_34sdp"
-                android:layout_marginRight="@dimen/_34sdp">
+                android:layout_marginRight="@dimen/_34sdp"
+                android:background="@color/white"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tvEdit"
@@ -35,17 +39,24 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/latosemibold"
                     android:singleLine="true"
+                    android:layout_gravity="end"
                     android:textColor="@color/yellow"
                     android:layout_alignParentRight="true"
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:text="@string/edit" />
 
+                <TextView
+                    style="@style/EditText12ssp"
+                    android:fontFamily="@font/latoregular"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:text="@string/Account_Holder_Name"
+                    android:padding="@dimen/_10sdp" />
 
                 <TextView
                     android:id="@+id/tvAccountHolderName"
                     style="@style/EditText12ssp"
                     android:fontFamily="@font/latoregular"
-                    android:layout_marginTop="@dimen/_50sdp"
+                    android:layout_marginTop="@dimen/_7sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:hint="@string/Account_Holder_Name"
                     android:imeOptions="actionNext"
@@ -55,11 +66,18 @@
                     android:inputType="text" />
 
                 <TextView
+                    style="@style/EditText12ssp"
+                    android:fontFamily="@font/latoregular"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:text="@string/Account_Number"
+                    android:padding="@dimen/_10sdp" />
+
+                <TextView
                     android:id="@+id/tvAccountNumber"
                     style="@style/EditText12ssp"
                     android:fontFamily="@font/latoregular"
                     android:layout_below="@+id/tvAccountHolderName"
-                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_7sdp"
                     android:background="@drawable/rect_back_with_corner"
                     android:hint="@string/Account_Number"
                     android:imeOptions="actionNext"
@@ -69,11 +87,19 @@
                     android:inputType="number" />
 
                 <TextView
+                    style="@style/EditText12ssp"
+                    android:fontFamily="@font/latoregular"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:text="@string/IFSC_Code"
+                    android:padding="@dimen/_10sdp" />
+
+
+                <TextView
                     android:id="@+id/tvIFSC_Code"
                     style="@style/EditText12ssp"
                     android:fontFamily="@font/latoregular"
                     android:layout_below="@+id/tvAccountNumber"
-                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_7sdp"
                     android:background="@drawable/rect_back_spinner"
                     android:hint="@string/IFSC_Code"
                     android:maxLength="11"
@@ -83,19 +109,26 @@
                     android:minHeight="@dimen/_40sdp" />
 
                 <TextView
+                    style="@style/EditText12ssp"
+                    android:fontFamily="@font/latoregular"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:text="@string/Account_Type"
+                    android:padding="@dimen/_10sdp" />
+
+                <TextView
                     android:id="@+id/tvAccountType"
                     style="@style/EditText12ssp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/latoregular"
-                    android:background="@drawable/rect_back_spinner"
                     android:layout_below="@+id/tvIFSC_Code"
-                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:background="@drawable/rect_back_spinner"
+                    android:fontFamily="@font/latoregular"
                     android:hint="@string/Account_Type"
                     android:imeOptions="actionNext"
                     android:inputType="text"
-                    android:padding="@dimen/_10sdp"
-                    android:minHeight="@dimen/_40sdp"/>
+                    android:minHeight="@dimen/_40sdp"
+                    android:padding="@dimen/_10sdp" />
 
                 <TextView
                     android:id="@+id/tvDisclaimer"
@@ -131,7 +164,7 @@
                     android:textSize="@dimen/_12ssp"/>
 -->
 
-            </RelativeLayout>
+            </LinearLayout>
         </ScrollView>
 
         <include android:id="@+id/header"

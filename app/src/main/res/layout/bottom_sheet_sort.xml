@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/ivCross"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_circular_cross"/>
+
+        <LinearLayout
+            android:id="@+id/bottom_sheet_sort_products"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_white_bg"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="vertical"
+            app:behavior_hideable="true"
+            app:behavior_peekHeight="0dp"
+            app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+            <TextView
+                style="@style/TextView12ssp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/latosemibold"
+                android:padding="@dimen/_15sdp"
+                android:layout_marginLeft="@dimen/_17sdp"
+                android:text="Sort By"
+                android:textSize="@dimen/_13ssp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/divider_line" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_17sdp">
+
+                <TextView
+                    android:id="@+id/tvWhatsNew"
+                    style="@style/TextView10ssp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/latomedium"
+                    android:padding="@dimen/_10sdp"
+                    android:text="What's New"/>
+
+                <TextView
+                    android:id="@+id/tvHighToLow"
+                    style="@style/TextView10ssp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/latomedium"
+                    android:layout_below="@+id/tvWhatsNew"
+                    android:padding="@dimen/_10sdp"
+                    android:text="Price - High to low"/>
+
+                <TextView
+                    android:id="@+id/tvLowToHigh"
+                    style="@style/TextView10ssp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/latomedium"
+                    android:layout_below="@+id/tvHighToLow"
+                    android:padding="@dimen/_10sdp"
+                    android:text="Price - Low to High"/>
+
+                <TextView
+                    android:id="@+id/tvPopularity"
+                    style="@style/TextView10ssp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/latomedium"
+                    android:layout_below="@+id/tvLowToHigh"
+                    android:padding="@dimen/_10sdp"
+                    android:text="Popularity"/>
+
+                <TextView
+                    android:id="@+id/tvDiscount"
+                    style="@style/TextView10ssp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/latomedium"
+                    android:layout_below="@+id/tvPopularity"
+                    android:padding="@dimen/_10sdp"
+                    android:text="Discount "/>
+
+                <TextView
+                    android:id="@+id/tvDeliveryTime"
+                    style="@style/TextView10ssp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/latomedium"
+                    android:layout_below="@+id/tvDiscount"
+                    android:padding="@dimen/_10sdp"
+                    android:text="Delivery Time"/>
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</layout>
