@@ -34,15 +34,14 @@
                     android:orientation="vertical">
 
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <TextView
@@ -61,10 +60,12 @@
                     </LinearLayout>
 
                     <ImageView
+                        android:id="@+id/ivLogo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
                         android:src="@drawable/ic_bucket" />
-                </LinearLayout>
+                </RelativeLayout>
 
                 <EditText
                     android:id="@+id/etMobileNo"
@@ -84,7 +85,7 @@
                 <com.google.android.material.button.MaterialButton
                    android:id="@+id/btnLogin"
                     style="@style/material_button"
-                    android:layout_marginTop="@dimen/_100sdp"
+                    android:layout_marginTop="@dimen/_80sdp"
                     android:minHeight="@dimen/_50sdp"
                     android:text="@string/login"
                     android:textSize="@dimen/_12ssp"
@@ -102,7 +103,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_60sdp"
+                    android:layout_marginTop="@dimen/_50sdp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -115,6 +116,7 @@
                         android:id="@+id/tvSignUp"
                         style="@style/TextView12ssp"
                         android:fontFamily="@font/latoregular"
+                        android:layout_marginLeft="@dimen/_5sdp"
                         android:text="@string/sign_up" />
                 </LinearLayout>
                 </LinearLayout>

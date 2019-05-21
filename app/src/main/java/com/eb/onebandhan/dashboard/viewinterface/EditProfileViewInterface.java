@@ -1,4 +1,5 @@
 package com.eb.onebandhan.dashboard.viewinterface;
+import com.eb.onebandhan.auth.model.MProfile;
 import com.eb.onebandhan.auth.model.MUser;
 
 public interface EditProfileViewInterface {

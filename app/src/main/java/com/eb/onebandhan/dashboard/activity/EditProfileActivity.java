@@ -38,6 +38,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     private EditProfilePresenter editProfilePresenter;
     private MUser loggedInUser;
     private MUser mUser = new MUser();
+    MProfile retailerDetails = new MProfile();
     private Uri imageURI;
     private String profileImageURL = "";
 
@@ -92,7 +93,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         binding.tvEditGeneral.setOnClickListener(v -> generalEdit());
         binding.tvEditBusiness.setOnClickListener(v -> businessEdit());
         binding.btnSubmit.setOnClickListener(v -> {
-            if (checkValidate()) editProfilePresenter.onUpdateProfile(mUser);
+            if (checkValidate()) editProfilePresenter.onUpdateProfile(retailerDetails);
         });
     }
 
@@ -156,12 +157,17 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
 
     private void prepareData() {
 
+        /*if (!profileImageURL.isEmpty())
+            mUser.setImageUrl(profileImageURL);*/
+
+        //mUser.setName(binding.etName.getText().toString());
+
+
         if (!profileImageURL.isEmpty())
-            mUser.setImageUrl(profileImageURL);
+            retailerDetails.setImageUrl(profileImageURL);
 
-        mUser.setName(binding.etName.getText().toString());
+        retailerDetails.setName(binding.etName.getText().toString());
 
-        MProfile retailerDetails = new MProfile();
         retailerDetails.setShopName(binding.etShopName.getText().toString());
         retailerDetails.setAddressLine1(binding.etAddLine1.getText().toString());
         retailerDetails.setAddressLine2(binding.etAddLine2.getText().toString());
@@ -171,8 +177,9 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         retailerDetails.setPanNumber(binding.etPanNumber.getText().toString());
         retailerDetails.setGstin(binding.etGst.getText().toString());
         retailerDetails.setGstPercent(binding.etGstPercent.getText().toString());
+       // retailerDetails.setPostalCode("452003");
 
-        mUser.setRetailerDetails(retailerDetails);
+        //mUser.setRetailerDetails(retailerDetails);
     }
 
     private void getProfileImage() {
@@ -254,6 +261,14 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
 
     @Override
     public void onSucessfullyUpdated(MUser mUser, String message) {
+       /* MUser mUser = new MUser();
+        mUser.setName(mProfile.getName());
+        mUser.setImageUrl(mProfile.getImageUrl());
+        mUser.setMobileNumber(mProfile.getMobileNumber());
+        mUser.setRetailerDetails(mProfile);*/
+
+        new Session(activity).setUserProfile(mUser);
+
         Utils.ShowToast(activity, message, 0);
         finish();
     }

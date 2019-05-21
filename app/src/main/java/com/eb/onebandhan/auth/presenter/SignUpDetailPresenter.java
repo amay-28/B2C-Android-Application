@@ -107,7 +107,7 @@ public class SignUpDetailPresenter implements SignUpDetailPresenterInterface, Ca
 
     private <T> Observable getObservableForShop(MProfile mProfile) {
         return APIClient.getClient(activity).create(APIInterface.class).updateShopDetail(new Session(activity).getString("AUTHORIZATION_KEY"),
-                mProfile)
+                mProfile,true)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 }

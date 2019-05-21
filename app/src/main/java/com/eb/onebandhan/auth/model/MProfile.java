@@ -23,6 +23,10 @@ public class MProfile {
     private String gstPercent;
     private Boolean isComposite;
 
+    private String name;
+    private String imageUrl;
+    private String mobileNumber;
+
     @Data
     public static class MDealsIn {
         private String id;

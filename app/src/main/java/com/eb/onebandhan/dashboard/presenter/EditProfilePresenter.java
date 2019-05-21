@@ -6,6 +6,7 @@ import android.util.Log;
 import com.eb.onebandhan.apiCalling.APIClient;
 import com.eb.onebandhan.apiCalling.APIInterface;
 import com.eb.onebandhan.apiCalling.ResponseData;
+import com.eb.onebandhan.auth.model.MProfile;
 import com.eb.onebandhan.auth.model.MUser;
 import com.eb.onebandhan.dashboard.presenterinterface.EditProfilePresenterInterface;
 import com.eb.onebandhan.dashboard.viewinterface.EditProfileViewInterface;
@@ -22,6 +23,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MultipartBody;
+import retrofit2.Response;
 import retrofit2.adapter.rxjava2.HttpException;
 
 public class EditProfilePresenter implements EditProfilePresenterInterface, Constant {
@@ -33,12 +35,11 @@ public class EditProfilePresenter implements EditProfilePresenterInterface, Cons
         this.activity = activity;
     }
 
-    public DisposableObserver<ResponseData<MUser>> getObserver() {
-        return new DisposableObserver<ResponseData<MUser>>() {
+    public DisposableObserver<Response<ResponseData<MUser>>> getObserver() {
+        return new DisposableObserver<Response<ResponseData<MUser>>>() {
             @Override
-            public void onNext(ResponseData<MUser> response) {
-                new Session(activity).setUserProfile(response.getData());
-                viewInterface.onSucessfullyUpdated(response.getData(), response.getMessage());
+            public void onNext(Response<ResponseData<MUser>> response) {
+                viewInterface.onSucessfullyUpdated(response.body().getData(), response.body().getMessage());
             }
 
             @Override
@@ -79,17 +80,17 @@ public class EditProfilePresenter implements EditProfilePresenterInterface, Cons
         };
     }
 
-    private <T> Observable getObservable(MUser mUser) {
-        return APIClient.getClient(activity).create(APIInterface.class).updateProfile(new Session(activity).getString(AUTHORIZATION_KEY),mUser).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    private <T> Observable getObservable(MProfile mProfile) {
+        return APIClient.getClient(activity).create(APIInterface.class).updateProfile(new Session(activity).getString(AUTHORIZATION_KEY), mProfile, true).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     private <T> Observable getObservableImage(MultipartBody.Part file) {
-        return APIClient.getClient(activity).create(APIInterface.class).uploadImage(new Session(activity).getString(AUTHORIZATION_KEY),file).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        return APIClient.getClient(activity).create(APIInterface.class).uploadImage(new Session(activity).getString(AUTHORIZATION_KEY), file).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override
-    public void onUpdateProfile(MUser mUser) {
-        getObservable(mUser).subscribeWith(getObserver());
+    public void onUpdateProfile(MProfile mProfile) {
+        getObservable(mProfile).subscribeWith(getObserver());
     }
 
     @Override

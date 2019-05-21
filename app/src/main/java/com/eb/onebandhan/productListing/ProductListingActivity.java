@@ -85,6 +85,5 @@ public class ProductListingActivity extends AppCompatActivity implements Product
     @Override
     public void onFailedProductListing(String errorMessage) {
         Toast.makeText(activity, errorMessage, Toast.LENGTH_SHORT).show();
-
     }
 }

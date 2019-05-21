@@ -26,6 +26,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
 
@@ -51,7 +52,7 @@ public interface APIInterface {
     Observable<ResponseData<List<MCategory>>> getCategoryRelatedData(@QueryMap Map<String, String> map);
 
     @POST("retailer/update-profile")
-    Observable<ResponseData<MUser>> updateShopDetail(@Header("Authorization") String token, @Body MProfile mProfile);
+    Observable<ResponseData<MUser>> updateShopDetail(@Header("Authorization") String token, @Body MProfile mProfile,@Query("isApp") boolean isApp);
 
     @GET("banners")
     Observable<ResponseData<List<MBanner>>> getAllBannerList(@Header("Authorization") String token);
@@ -76,8 +77,8 @@ public interface APIInterface {
 
 
     @POST("retailer/update-profile")
-    Observable<ResponseData<MUser>> updateProfile(@Header("Authorization") String token,
-                                                  @Body MUser mUser);
+    Observable<Response<ResponseData<MProfile>>> updateProfile(@Header("Authorization") String token,
+                                                               @Body MProfile mProfile, @Query("isApp") boolean isApp);
 
     @POST("retailer/update-bank-details")
     Observable<ResponseData<MBankDetail>> getBankDetails(@Header("Authorization") String token,
