@@ -77,7 +77,7 @@ public interface APIInterface {
 
 
     @POST("retailer/update-profile")
-    Observable<Response<ResponseData<MProfile>>> updateProfile(@Header("Authorization") String token,
+    Observable<Response<ResponseData<MUser>>> updateProfile(@Header("Authorization") String token,
                                                                @Body MProfile mProfile, @Query("isApp") boolean isApp);
 
     @POST("retailer/update-bank-details")

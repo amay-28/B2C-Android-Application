@@ -6,6 +6,7 @@ import android.util.Log;
 import com.eb.onebandhan.apiCalling.APIClient;
 import com.eb.onebandhan.apiCalling.APIInterface;
 import com.eb.onebandhan.apiCalling.ResponseData;
+import com.eb.onebandhan.auth.model.MUser;
 import com.eb.onebandhan.bankDetail.activity.AddBankDetailActivity;
 import com.eb.onebandhan.bankDetail.activity.model.MBankDetail;
 import com.eb.onebandhan.bankDetail.activity.presenterinterface.BankDetailPresenterInterface;
@@ -32,9 +33,13 @@ public class BankDetailPresenter implements BankDetailPresenterInterface {
         return new DisposableObserver<ResponseData<MBankDetail>>() {
             @Override
             public void onNext(ResponseData<MBankDetail> response) {
-                bankDetailViewInterface.onSuccessfulUploadBankDetails(response.getData(), response.getMessage());
                 Session session = new Session(activity);
-                session.setBankDetail(response.getData());
+                MUser mUser = session.getUserProfile();
+                mUser.setBankDetails(response.getData());
+                session.setUserProfile(mUser);
+               // session.getUserProfile().getBankDetails();
+                bankDetailViewInterface.onSuccessfulUploadBankDetails(response.getData(), response.getMessage());
+                //session.setBankDetail(response.getData());
             }
 
             @Override

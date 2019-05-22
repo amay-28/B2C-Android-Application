@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.eb.onebandhan.R;
@@ -11,20 +12,23 @@ import com.eb.onebandhan.auth.model.MUser;
 import com.eb.onebandhan.databinding.ActivityMyProfileBinding;
 import com.eb.onebandhan.util.CommonClickHandler;
 import com.eb.onebandhan.util.Session;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 public class MyProfileActivity extends AppCompatActivity {
     private Activity activity;
     private ActivityMyProfileBinding binding;
-    private MUser loggedInUser;
+    private MUser mUser;
+    private int OPEN_EDIT_FROM_MY_PROFILE = 100;
 
     @Override
     public void onResume() {
         super.onResume();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        loggedInUser = new Session(activity).getUserProfile();
-        setDetails();
+        mUser = new Session(activity).getUserProfile();
+        setDetails(mUser);
     }
 
     @Override
@@ -43,14 +47,14 @@ public class MyProfileActivity extends AppCompatActivity {
 
     private void listeners() {
         binding.btnSubmit.setOnClickListener(v -> {
-            startActivity(new Intent(activity, EditProfileActivity.class));
+            startActivityForResult(new Intent(activity, EditProfileActivity.class), OPEN_EDIT_FROM_MY_PROFILE);
         });
     }
 
-    private void setDetails() {
+    private void setDetails(MUser loggedInUser) {
         if (loggedInUser != null) {
 
-            if(loggedInUser.getImageUrl()!=null && !loggedInUser.getImageUrl().isEmpty())
+            if (loggedInUser.getImageUrl() != null && !loggedInUser.getImageUrl().isEmpty())
                 Glide.with(activity).load(loggedInUser.getImageUrl()).apply(new RequestOptions().placeholder(R.mipmap.avtar_gray).error(R.mipmap.avtar_gray)).into(binding.ivProfile);
 
             binding.tvName.setText(loggedInUser.getName());
@@ -71,4 +75,12 @@ public class MyProfileActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == OPEN_EDIT_FROM_MY_PROFILE && resultCode == RESULT_OK) {
+            mUser = new Session(activity).getUserProfile();
+            setDetails(mUser);
+        }
+    }
 }

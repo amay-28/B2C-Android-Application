@@ -177,7 +177,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         retailerDetails.setPanNumber(binding.etPanNumber.getText().toString());
         retailerDetails.setGstin(binding.etGst.getText().toString());
         retailerDetails.setGstPercent(binding.etGstPercent.getText().toString());
-       // retailerDetails.setPostalCode("452003");
+        // retailerDetails.setPostalCode("452003");
 
         //mUser.setRetailerDetails(retailerDetails);
     }
@@ -261,15 +261,12 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
 
     @Override
     public void onSucessfullyUpdated(MUser mUser, String message) {
-       /* MUser mUser = new MUser();
-        mUser.setName(mProfile.getName());
-        mUser.setImageUrl(mProfile.getImageUrl());
-        mUser.setMobileNumber(mProfile.getMobileNumber());
-        mUser.setRetailerDetails(mProfile);*/
-
         new Session(activity).setUserProfile(mUser);
 
         Utils.ShowToast(activity, message, 0);
+        Intent data = new Intent();
+        data.putExtra("isUpdated", true);
+        setResult(RESULT_OK, data);
         finish();
     }
 

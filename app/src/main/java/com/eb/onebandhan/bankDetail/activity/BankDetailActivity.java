@@ -32,14 +32,14 @@ public class BankDetailActivity extends AppCompatActivity implements Constant {
         super.onCreate(savedInstanceState);
         activity = this;
         binding = DataBindingUtil.setContentView(activity, R.layout.activity_bank_detail);
-        savedBankDetail = new Session(activity).getBankDetail();
+        savedBankDetail = new Session(activity).getUserProfile().getBankDetails();
 
         initialization();
-        listner();
+        listener();
     }
 
 
-    private void listner() {
+    private void listener() {
         binding.tvEdit.setOnClickListener(view -> startActivity(new Intent(activity, AddBankDetailActivity.class)));
     }
 

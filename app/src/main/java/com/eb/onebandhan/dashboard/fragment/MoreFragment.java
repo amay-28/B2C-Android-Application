@@ -52,7 +52,7 @@ public class MoreFragment extends Fragment {
         binding.tvAddToInventory.setOnClickListener(v -> startActivity(new Intent(getActivity(), AddProductActivity.class)));
         binding.rlProfile.setOnClickListener(v -> startActivity(new Intent(getActivity(), MyProfileActivity.class)));
 
-        if (new Session(activity).getBankDetail() != null) {
+        if (new Session(activity).getUserProfile().getBankDetails() != null) {
             binding.tvBankDetails.setOnClickListener(v -> startActivity(new Intent(getActivity(), BankDetailActivity.class)));
         } else {
             binding.tvBankDetails.setOnClickListener(v -> startActivity(new Intent(getActivity(), AddBankDetailActivity.class)));

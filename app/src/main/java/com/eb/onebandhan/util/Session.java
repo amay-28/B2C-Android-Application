@@ -70,26 +70,4 @@ public class Session {
 
     }
 
-    public void setBankDetail(MBankDetail bankDetail) {
-        Gson gson = new Gson();
-        String json = gson.toJson(bankDetail);
-        prefsEditor.putString(USER_BANK_DETAIL, json);
-        prefsEditor.commit();
-
-    }
-
-    public MBankDetail getBankDetail() {
-        Gson gson = new Gson();
-        String json = pref.getString(USER_BANK_DETAIL, "");
-
-        MBankDetail mBankDetail;
-
-        if (json.isEmpty()) {
-            mBankDetail = null;
-        } else {
-            mBankDetail = gson.fromJson(json, MBankDetail.class);
-        }
-        return mBankDetail;
-    }
-
 }

@@ -35,7 +35,7 @@ public class AddBankDetailActivity extends AppCompatActivity implements BankDeta
         super.onCreate(savedInstanceState);
         activity = this;
         binding = DataBindingUtil.setContentView(activity, R.layout.activity_add_bank_detail);
-        savedBankDetail = new Session(activity).getBankDetail();
+        savedBankDetail = new Session(activity).getUserProfile().getBankDetails();
 
         accountTypeArray = getResources().getStringArray(R.array.account_type_array);
         //initialize Spinner

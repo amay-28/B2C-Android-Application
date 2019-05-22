@@ -1,5 +1,7 @@
 package com.eb.onebandhan.auth.model;
 
+import com.eb.onebandhan.bankDetail.activity.model.MBankDetail;
+
 import lombok.Data;
 
 @Data
@@ -21,6 +23,7 @@ public class MUser {
     private MUserType userType;
     //extra params for detailde info
     private MProfile retailerDetails;
+    private MBankDetail bankDetails;
 
     @Data
     public static class MUserType {
