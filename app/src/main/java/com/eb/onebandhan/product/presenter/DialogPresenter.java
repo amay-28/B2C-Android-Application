@@ -51,7 +51,7 @@ public class DialogPresenter implements DialogPresenterInterface, Constant {
     }
 
     private <T> Observable getObservableForCategory(Map<String, String> map) {
-        return APIClient.getClient(activity).create(APIInterface.class).getUserCategoryRelatedData(new Session(activity).getString(AUTHORIZATION_KEY),map).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        return APIClient.getClient(activity).create(APIInterface.class).getUserCategoryRelatedData(map).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override

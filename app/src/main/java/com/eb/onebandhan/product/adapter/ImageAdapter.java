@@ -73,7 +73,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     }
 
     @Override
-    public void onCategoryClick() {
+    public void onCategoryClick(int position,String categoryId) {
 
     }
 

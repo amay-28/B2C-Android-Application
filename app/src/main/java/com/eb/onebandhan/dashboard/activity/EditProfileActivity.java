@@ -67,8 +67,13 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
 
     private void setDetails() {
         if (loggedInUser != null) {
-            if (loggedInUser.getImageUrl() != null && !loggedInUser.getImageUrl().isEmpty())
-                Glide.with(activity).load(loggedInUser.getImageUrl()).apply(new RequestOptions().placeholder(R.mipmap.avtar_gray).error(R.mipmap.avtar_gray)).into(binding.imgUser);
+            if (loggedInUser.getRetailerDetails().getImageUrl() != null && !loggedInUser.getRetailerDetails().getImageUrl().isEmpty())
+                Glide.with(activity)
+                        .load(loggedInUser.getRetailerDetails().getImageUrl())
+                        .apply(new RequestOptions()
+                        .placeholder(R.mipmap.avtar_gray)
+                        .error(R.mipmap.avtar_gray))
+                        .into(binding.imgUser);
 
             binding.etName.setText(loggedInUser.getName());
             binding.etMobileNo.setText(loggedInUser.getMobileNumber());

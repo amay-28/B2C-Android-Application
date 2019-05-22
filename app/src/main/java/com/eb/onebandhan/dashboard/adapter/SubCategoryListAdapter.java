@@ -45,7 +45,7 @@ public class SubCategoryListAdapter extends RecyclerView.Adapter<SubCategoryList
         holder.binding.llRoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.startActivity(new Intent(activity, ProductListingActivity.class));
+                callBack.onCategoryClick(position, mCategory.getId());
             }
         });
         holder.binding.tvSubCategory.setText(mCategory.getName());
@@ -67,6 +67,6 @@ public class SubCategoryListAdapter extends RecyclerView.Adapter<SubCategoryList
     }
 
     public interface CallBack {
-        void onCategoryClick();
+        void onCategoryClick(int position, String categoryId);
     }
 }

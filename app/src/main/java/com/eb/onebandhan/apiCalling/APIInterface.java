@@ -59,8 +59,7 @@ public interface APIInterface {
 
     // with auth token
     @GET("categories")
-    Observable<ResponseData<List<MCategory>>> getUserCategoryRelatedData(@Header("Authorization") String token,
-                                                                         @QueryMap Map<String, String> map);
+    Observable<ResponseData<List<MCategory>>> getUserCategoryRelatedData(@QueryMap Map<String, String> map);
 
     @GET("collections")
     Observable<ResponseData<List<MCollection>>> getCollectionData(@QueryMap Map<String, String> map);

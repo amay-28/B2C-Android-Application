@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.eb.onebandhan.R;
 import com.eb.onebandhan.auth.model.MUser;
 import com.eb.onebandhan.bankDetail.activity.AddBankDetailActivity;
@@ -17,6 +20,8 @@ import com.eb.onebandhan.dashboard.activity.MyProfileActivity;
 import com.eb.onebandhan.databinding.MoreFragmentLayoutBinding;
 import com.eb.onebandhan.product.AddProductActivity;
 import com.eb.onebandhan.util.Session;
+
+import java.io.File;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,17 +42,17 @@ public class MoreFragment extends Fragment {
         View view = binding.getRoot();
         loggedInUser = new Session(activity).getUserProfile();
         initialization();
-        listner();
+        listener();
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        listner();
+        listener();
     }
 
-    private void listner() {
+    private void listener() {
         binding.tvEdit.setOnClickListener(v -> startActivity(new Intent(getActivity(), EditProfileActivity.class)));
         binding.tvAddToInventory.setOnClickListener(v -> startActivity(new Intent(getActivity(), AddProductActivity.class)));
         binding.rlProfile.setOnClickListener(v -> startActivity(new Intent(getActivity(), MyProfileActivity.class)));
@@ -62,5 +67,12 @@ public class MoreFragment extends Fragment {
     private void initialization() {
         binding.tvName.setText(loggedInUser.getName());
         binding.tvPhone.setText(loggedInUser.getMobileNumber());
+        Glide.with(activity)
+                .load(loggedInUser.getRetailerDetails().getImageUrl())
+                .apply(new RequestOptions()
+                        .placeholder(R.mipmap.avtar_gray)
+                        .error(R.mipmap.avtar_gray))
+                .into(binding.imgUserProfile);
+
     }
 }

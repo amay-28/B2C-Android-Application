@@ -42,7 +42,7 @@
                         android:id="@+id/imgUserProfile"
                         android:layout_width="@dimen/_80sdp"
                         android:layout_height="@dimen/_80sdp"
-                        android:src="@color/colorPrimary" />
+                        android:src="@drawable/ic_default_profile" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"

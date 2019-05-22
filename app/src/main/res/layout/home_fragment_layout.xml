@@ -20,44 +20,36 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/curve_back_right_flat">
-
-                    <com.google.android.material.button.MaterialButton
+                    <TextView
                         android:id="@+id/btnWholesale"
-                        style="@style/CustomButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:background="@drawable/curve_back_right_flat"
                         android:singleLine="true"
-                        android:paddingStart="@dimen/_10sdp"
-                        android:paddingEnd="@dimen/_10sdp"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:paddingBottom="@dimen/_7sdp"
+                        android:paddingRight="@dimen/_10sdp"
                         android:textColor="@color/white"
                         android:text="@string/single_peace_store"
                         android:textAllCaps="false"
-                        android:textSize="@dimen/_10sdp" />
-                </LinearLayout>
+                        android:textSize="@dimen/_10ssp" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/curve_back_left_flat">
 
-                    <com.google.android.material.button.MaterialButton
+                    <TextView
                         android:id="@+id/btnSinglePiece"
-                        style="@style/CustomButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingStart="@dimen/_10sdp"
-                        android:paddingEnd="@dimen/_10sdp"
+                        android:background="@drawable/curve_back_left_flat"
+                        android:singleLine="true"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:paddingBottom="@dimen/_7sdp"
+                        android:paddingRight="@dimen/_10sdp"
                         android:textColor="@color/color_grey_text"
                         android:text="@string/wholesale_store"
                         android:textAllCaps="false"
-                        android:textSize="@dimen/_10sdp" />
-                </LinearLayout>
+                        android:textSize="@dimen/_10ssp" />
 
 
             </LinearLayout>

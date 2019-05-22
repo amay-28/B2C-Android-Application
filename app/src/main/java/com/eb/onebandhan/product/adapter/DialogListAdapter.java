@@ -57,7 +57,7 @@ public class DialogListAdapter extends RecyclerView.Adapter<DialogListAdapter.Vi
     }
 
     @Override
-    public void onCategoryClick() {
+    public void onCategoryClick(int position,String categoryId) {
 
     }
 

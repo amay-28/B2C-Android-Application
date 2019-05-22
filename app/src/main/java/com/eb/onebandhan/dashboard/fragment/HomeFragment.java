@@ -40,7 +40,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import static com.eb.onebandhan.auth.util.Categoryutil.ZERO;
 
 public class HomeFragment extends Fragment implements Constant, HomeViewInterface, CollectionListAdapter.CallBack, SubCategoryListAdapter.CallBack,
-        BannerListAdapter.CallBack, SuperCategoryListHomeAdapter.CallBack, CategoryListAdapter.CallBack {
+        BannerListAdapter.CallBack, SuperCategoryListHomeAdapter.CallBack {
     private Activity activity;
     private HomeFragmentLayoutBinding binding;
     private List<MCategory> superCategoryList = new ArrayList<>();
@@ -151,7 +151,7 @@ public class HomeFragment extends Fragment implements Constant, HomeViewInterfac
     }
 
     @Override
-    public void onCategoryClick() {
+    public void onCategoryClick(int position, String categoryId) {
         startActivity(new Intent(activity, ProductListingActivity.class));
     }
 }
