@@ -1,9 +1,11 @@
 package com.eb.onebandhan.productListing.adapter;
 
 import android.app.Activity;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -42,18 +44,16 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MProduct mProduct = productList.get(position);
 
+        strikeThroughText(holder.binding.tvMrp);
         holder.binding.tvProductName.setText(mProduct.getName());
         holder.binding.tvProductDescription.setText(mProduct.getDescription());
-        holder.binding.tvPrice.setText(mProduct.getPrice());
-        holder.binding.tvSellingPrice.setText(mProduct.getCost_price());
+        holder.binding.tvSellingPrice.setText(mProduct.getPrice());
+        holder.binding.tvMrp.setText(mProduct.getCost_price());
 
-        /*holder.binding.tvCategory.setText(mCategory.getName());
-        if (selectedCategory.equalsIgnoreCase(mCategory.getName())) {
-            holder.binding.ivTick.setVisibility(View.VISIBLE);
-        }
-        holder.binding.rlRoot.setOnClickListener(v -> {
-            callBack.onCategoryClick(position, mCategory);
-        });*/
+        double actualPrice = Double.parseDouble(mProduct.getCost_price());
+        double discountedPrice = Double.parseDouble(mProduct.getPrice());
+        long discountPercent = calculateProfitPercent(actualPrice, discountedPrice);
+        holder.binding.tvDiscountPercent.setText(discountPercent + "% OFF");
     }
 
     @Override
@@ -62,7 +62,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     }
 
     @Override
-    public void onCategoryClick(int position,String categoryId) {
+    public void onCategoryClick(int position, String categoryId) {
 
     }
 
@@ -78,5 +78,19 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     public interface CallBack {
         void onCategoryClick(int position, MCategory mCategory);
+    }
+
+    private void strikeThroughText(TextView textView) {
+        textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+    }
+
+    public long calculateProfitPercent(double actualPrice, double discountPrice) {
+        double discountPercent = 0;
+        if (actualPrice > discountPrice) {
+            discountPercent = (actualPrice - discountPrice) / actualPrice * 100;
+            discountPercent = Math.round(discountPercent);
+            //Log.d("Adapter", "percent: " + Math.round(discountPercent));
+        }
+        return Math.round(discountPercent);
     }
 }

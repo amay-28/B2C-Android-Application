@@ -84,6 +84,6 @@ public interface APIInterface {
                                                          @Body MBankDetail mBankDetail);
 
     @GET("products")
-    Observable<ResponseData<List<MProduct>>> getAllProductList();
+    Observable<ResponseData<List<MProduct>>> getAllProductList(@Header("Authorization") String token, @QueryMap Map<String, String> map);
 
 }

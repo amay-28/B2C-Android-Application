@@ -67,12 +67,13 @@ public class MoreFragment extends Fragment {
     private void initialization() {
         binding.tvName.setText(loggedInUser.getName());
         binding.tvPhone.setText(loggedInUser.getMobileNumber());
-        Glide.with(activity)
-                .load(loggedInUser.getRetailerDetails().getImageUrl())
-                .apply(new RequestOptions()
-                        .placeholder(R.mipmap.avtar_gray)
-                        .error(R.mipmap.avtar_gray))
-                .into(binding.imgUserProfile);
+        if (loggedInUser != null && loggedInUser.getRetailerDetails() != null)
+            Glide.with(activity)
+                    .load(loggedInUser.getRetailerDetails().getImageUrl())
+                    .apply(new RequestOptions()
+                            .placeholder(R.mipmap.avtar_gray)
+                            .error(R.mipmap.avtar_gray))
+                    .into(binding.imgUserProfile);
 
     }
 }

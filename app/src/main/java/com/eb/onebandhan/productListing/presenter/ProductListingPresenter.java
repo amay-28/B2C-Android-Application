@@ -14,6 +14,7 @@ import com.eb.onebandhan.util.Session;
 import com.eb.onebandhan.util.Utils;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
@@ -22,6 +23,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.adapter.rxjava2.HttpException;
+import retrofit2.http.QueryMap;
 
 public class ProductListingPresenter implements ProductListingPresenterInterface, Constant {
     private ProductListingViewInterface productListingViewInterface;
@@ -54,12 +56,12 @@ public class ProductListingPresenter implements ProductListingPresenterInterface
     }
 
     @Override
-    public void onProductListing() {
-        getObservable().subscribeWith(getObserver());
+    public void onProductListing(Map<String, String> map) {
+        getObservable(map).subscribeWith(getObserver());
     }
 
-    private Observable getObservable() {
-        return APIClient.getClient(activity).create(APIInterface.class).getAllProductList().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    private Observable getObservable(Map<String, String> map) {
+        return APIClient.getClient(activity).create(APIInterface.class).getAllProductList(new Session(activity).getString(AUTHORIZATION_KEY), map).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
 
     }
 

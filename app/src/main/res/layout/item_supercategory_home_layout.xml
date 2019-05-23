@@ -4,6 +4,7 @@
     <RelativeLayout
         android:layout_width="@dimen/_70sdp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -21,6 +22,7 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_centerHorizontal="true"
             android:text="@string/sign_up"
+            android:singleLine="true"
             android:ellipsize="marquee"/>
     </RelativeLayout>
 </layout>

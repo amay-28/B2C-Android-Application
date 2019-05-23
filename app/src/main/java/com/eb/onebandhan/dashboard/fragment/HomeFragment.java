@@ -152,6 +152,6 @@ public class HomeFragment extends Fragment implements Constant, HomeViewInterfac
 
     @Override
     public void onCategoryClick(int position, String categoryId) {
-        startActivity(new Intent(activity, ProductListingActivity.class));
+        startActivity(ProductListingActivity.getIntent(activity, Integer.parseInt(categoryId)));
     }
 }

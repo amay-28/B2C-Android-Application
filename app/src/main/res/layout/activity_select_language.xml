@@ -37,14 +37,17 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:gravity="center"
             android:text="@string/shopkeeper"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/shopkeerp"/>
 
         <ImageView
             android:id="@+id/imgShop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/ic_shop" />
+            android:layout_below="@+id/shopkeerp"
+            android:src="@drawable/ic_shop"
+            android:layout_marginTop="@dimen/_40sdp"/>
 
 
         <LinearLayout
@@ -71,7 +74,8 @@
                 android:drawableEnd="@drawable/ic_down_arrow"
                 android:textColor="@color/color_grey_text"
                 style="@style/TextView12ssp"
-                android:layout_margin="@dimen/_10sdp" />
+                android:layout_margin="@dimen/_10sdp"
+                android:id="@+id/dropdown"/>
 
         </LinearLayout>
 
@@ -89,7 +93,8 @@
                 android:minHeight="@dimen/_50sdp"
                 android:onClick="startLoginScreen"
                 android:text="@string/login"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_10ssp"
+                />
 
             <com.google.android.material.button.MaterialButton
                 style="@style/material_button"
@@ -99,7 +104,8 @@
                 android:minHeight="@dimen/_50sdp"
                 android:onClick="startSignUpScreen"
                 android:text="@string/create_account"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_10ssp"
+                />
 
         </LinearLayout>
 

@@ -1,6 +1,7 @@
 package com.eb.onebandhan.productListing.presenterinterface;
 
-public interface ProductListingPresenterInterface {
+import java.util.Map;
 
-    void onProductListing();
+public interface ProductListingPresenterInterface {
+    void onProductListing(Map<String, String> map);
 }

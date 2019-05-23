@@ -68,6 +68,9 @@ public class SignUpInitialActivity extends AppCompatActivity implements SignUpVi
         } else if (binding.etMobileNo.getText().toString().length() < 10) {
             Toast.makeText(activity, getResources().getString(R.string.please_enter_valid_mobile_no), Toast.LENGTH_SHORT).show();
             return false;
+        } else if (!binding.checkboxTerms.isChecked()) {
+            Toast.makeText(activity, getString(R.string.please_accept_terms_conditions), Toast.LENGTH_SHORT).show();
+            return false;
         } else {
             return true;
         }

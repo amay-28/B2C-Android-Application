@@ -50,7 +50,7 @@
                     android:textColor="@color/color_light_text" />
 
                 <TextView
-                    android:id="@+id/tvPrice"
+                    android:id="@+id/tvSellingPrice"
                     style="@style/TextView12ssp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -62,25 +62,27 @@
                     android:textColor="@color/black" />
 
                 <TextView
-                    android:id="@+id/tvSellingPrice"
+                    android:id="@+id/tvMrp"
                     style="@style/TextView10ssp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvProductDescription"
                     android:layout_marginTop="@dimen/_11sdp"
                     android:layout_marginBottom="9dp"
-                    android:layout_toRightOf="@id/tvPrice"
+                    android:gravity="center_vertical"
+                    android:layout_toRightOf="@id/tvSellingPrice"
                     android:fontFamily="@font/latoregular"
                     android:text="Rs 2,099"
                     android:textColor="@color/color_grey_text" />
 
                 <TextView
+                    android:id="@+id/tvDiscountPercent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvProductDescription"
                     android:layout_marginLeft="6.2dp"
                     android:layout_marginTop="@dimen/_11sdp"
-                    android:layout_toRightOf="@id/tvSellingPrice"
+                    android:layout_toRightOf="@id/tvMrp"
                     android:text="40% OFF"
                     android:textColor="@color/green" />
 
@@ -97,9 +99,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvPrice"
+                    android:layout_below="@id/tvSellingPrice"
                     android:layout_marginTop="5dp"
                     android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
                     android:drawableLeft="@drawable/ic_plus"
                     android:drawablePadding="@dimen/_5sdp"
                     android:text="@string/Add_to_your_Inventory"

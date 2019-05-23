@@ -40,7 +40,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements OtpVie
 
     private void listner() {
         binding.btnVerifyUser.setOnClickListener(view -> performOtpVerification());
-        binding.tvResendOtp.setOnClickListener(view -> resendOpt());
+        //binding.tvResendOtp.setOnClickListener(view -> resendOpt());
 
     }
 
