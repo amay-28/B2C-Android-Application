@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -23,8 +24,10 @@ import com.eb.onebandhan.auth.model.MUser;
 import com.eb.onebandhan.auth.presenter.SignUpDetailPresenter;
 import com.eb.onebandhan.auth.util.Categoryutil;
 import com.eb.onebandhan.auth.viewinterface.SignUpDetailViewInterface;
+import com.eb.onebandhan.dashboard.activity.DashboardActivity;
 import com.eb.onebandhan.databinding.ActivitySignUpDetailBinding;
 import com.eb.onebandhan.util.Constant;
+import com.eb.onebandhan.util.Session;
 import com.eb.onebandhan.util.ShowToast;
 import com.eb.onebandhan.util.ValidationUtil;
 import com.google.android.material.chip.Chip;
@@ -181,9 +184,7 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
     @Override
     public void onSucessfullySubmitShopDetail(MUser data, String message) {
         ShowToast.toastMsg(activity, getString(R.string.Retailer_account_created_successfully));
-        Intent intent = new Intent(activity, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+        startActivity(new Intent(this,ThankYouActivity.class));
     }
 
     @Override

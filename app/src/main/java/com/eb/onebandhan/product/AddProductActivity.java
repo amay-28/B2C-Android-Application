@@ -105,6 +105,8 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         binding.rvImages.setItemAnimator(new DefaultItemAnimator());
         imageAdapter = new ShowImagesAdapter(activity, setFirstImage(), this);
         binding.rvImages.setAdapter(imageAdapter);
+
+
     }
 
     public List<MImage> setFirstImage() {
@@ -119,23 +121,10 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
 
     public List<MImage> setLocalImage() {
         MImage mImage;
-
-        boolean isLocal = false;
-        for (int i = 0; i < imageList.size(); i++) {
-            MImage image = imageList.get(i);
-            if (image.isLocal()) {
-                isLocal = true;
-            }
-        }
-
-        if (isLocal) {
-            if (imageList != null && imageList.size() < 4) {
-                mImage = new MImage();
-                mImage.setLocal(true);
-                imageList.add(mImage);
-            }
-
-            //TODO
+        if (imageList != null && imageList.size() < 4) {
+            mImage = new MImage();
+            mImage.setLocal(true);
+            imageList.add(mImage);
         }
 
         imageAdapter.notifyDataSetChanged();
@@ -173,7 +162,7 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         });
 
         binding.btnSubmit.setOnClickListener(v -> {
-            if (checkValidate()){
+            if (checkValidate()) {
                 if (imageAdapter.getItemCount() != 0) {
                     CreateFileForSend(imageList);
                 } else {
@@ -204,10 +193,10 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         } /*else if (TextUtils.isEmpty(binding.etPaymentOption.getText().toString())) {
             Toast.makeText(activity, resources.getString(R.string.please_enter_state), Toast.LENGTH_SHORT).show();
             return false;
-        }*/ /*else if (imageAdapter.getItemCount() < 1) {
+        }*/ else if (imageAdapter.getItemCount() <= 1) {
             Toast.makeText(activity, resources.getString(R.string.please_select_image), Toast.LENGTH_SHORT).show();
             return false;
-        }*/ else if (TextUtils.isEmpty(binding.etDescription.getText().toString())) {
+        } else if (TextUtils.isEmpty(binding.etDescription.getText().toString())) {
             Toast.makeText(activity, resources.getString(R.string.please_enter_description), Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -259,12 +248,12 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
                 Uri resultUri = result.getUri();
                 //CreateFileForSend(result.getUri());
 
-                for (int i = 0; i < imageList.size(); i++) {
+               /* for (int i = 0; i < imageList.size(); i++) {
                     MImage mImage = imageList.get(i);
                     if (mImage.isLocal()) {
                         imageList.remove(i);
                     }
-                }
+                }*/
 
                 if (!Utils.checkNull(resultUri.getPath()).isEmpty()) {
                     profileImageURL = resultUri.getPath();
@@ -272,10 +261,15 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
                     mImage.setUrl(resultUri.getPath());
                     mImage.setLocal(false);
                     mImage.setFile(new File(resultUri.getPath()));
-                    imageList.add(mImage);
+                    imageList.set(imagePosition, mImage);
                 }
 
-                setLocalImage();
+                if ((imageList.size() > 1 || imageList.get(0).getFile() != null) && imageList.size() < 4) {
+                    setLocalImage();
+                }else{
+                    imageAdapter.notifyDataSetChanged();
+                }
+
             }
         }
     }
@@ -311,7 +305,10 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
     @Override
     public void onDeleteImage(int position) {
         imageList.remove(position);
-        setLocalImage();
+
+        if (imageList.size() < 4 && imageList.get(imageList.size() - 1).getFile() != null)
+            setLocalImage();
+
         imageAdapter.notifyDataSetChanged();
     }
 

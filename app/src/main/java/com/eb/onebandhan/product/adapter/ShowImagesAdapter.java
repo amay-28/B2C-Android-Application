@@ -77,7 +77,7 @@ public class ShowImagesAdapter extends RecyclerView.Adapter<ShowImagesAdapter.Vi
         holder.binding.ivImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (AL.get(position).getFile() == null && (AL.get(position).getUrl() == null || AL.get(position).getUrl().isEmpty())) {
+                if (AL.get(position).getFile() == null) {
                     //((AddProductActivity) mContext).checkPermission(position);
                     callBack.onAddImageClick(position);
                 }

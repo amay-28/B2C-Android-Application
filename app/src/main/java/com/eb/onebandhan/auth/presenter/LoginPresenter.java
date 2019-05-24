@@ -45,11 +45,9 @@ public class LoginPresenter implements LoginPresenterInterface, Constant {
                         new Session(activity).setUserProfile(response.body().getData());
                     }
                     viewInterface.onSucessfullyLogin(response.body().getData(), response.body().getMessage());
-                } else{
-
-                    Toast.makeText(activity, Utils.getMessageFromErrorBody(response.errorBody()), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(activity, Utils.getMessageFromErrorBody(response.errorBody()), Toast.LENGTH_LONG).show();
                 }
-
             }
 
 
