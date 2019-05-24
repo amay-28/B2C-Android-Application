@@ -16,6 +16,7 @@ import com.eb.onebandhan.productListing.model.MProduct;
 import com.eb.onebandhan.productListing.presenter.ProductListingPresenter;
 import com.eb.onebandhan.productListing.viewinterface.ProductListingViewInterface;
 import com.eb.onebandhan.util.CommonClickHandler;
+import com.eb.onebandhan.util.MyDialogProgress;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public class ProductListingActivity extends AppCompatActivity implements Product
     private boolean loading = true;
     private String sort_key;
     private int DEFAULT_OFFSET = 15, DEFAULT_LIMIT = 15;
+    private boolean isFirstTime = false;
 
 
     @Override
@@ -74,7 +76,8 @@ public class ProductListingActivity extends AppCompatActivity implements Product
     public void initViews() {
         bottomSheetDialog = new BottomSheetDialog(this, R.style.TransparentDialogBackground);
         bottomSheetDialog.setContentView(R.layout.bottom_sheet_sort);
-        callPresenterProductListing(DEFAULT_LIMIT, 0, false, sort_key);
+        isFirstTime = true;
+        callPresenterProductListing(DEFAULT_LIMIT, 0, false, sort_key, false);
 
         mLayoutManager = new LinearLayoutManager(activity, RecyclerView.VERTICAL, false);
         mBinding.rvProducts.setLayoutManager(mLayoutManager);
@@ -93,7 +96,9 @@ public class ProductListingActivity extends AppCompatActivity implements Product
                 if (loading) {
                     if ((visibleItemCount + pastVisibleItems) >= totalItemCount) {
                         loading = false;
-                        callPresenterProductListing(DEFAULT_LIMIT, productList.size(), false, "0");
+                        if (!isFirstTime)
+                            callPresenterProductListing(DEFAULT_LIMIT, productList.size(), false, "0", true);
+                        isFirstTime = false;
                     }
                 }
             }
@@ -103,9 +108,10 @@ public class ProductListingActivity extends AppCompatActivity implements Product
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                checkLimitOffsetCondition();
+                loading =true;
+                checkLimitOffsetConditionSort();
                 //productList.clear();
-                callPresenterProductListing(DEFAULT_LIMIT, DEFAULT_OFFSET, false, "0");
+                callPresenterProductListing(DEFAULT_LIMIT, 0, false, "0", false);
                 pullToRefresh.setRefreshing(false);
 
             }
@@ -114,7 +120,16 @@ public class ProductListingActivity extends AppCompatActivity implements Product
         mBinding.btnContinue.setOnClickListener(v -> finish());
     }
 
-    public void callPresenterProductListing(int limit, int offset, boolean isSort, String sort_key) {
+    public void callPresenterProductListing(int limit, int offset, boolean isSort, String sort_key, boolean isPullRequest) {
+        if (!loading)
+            return;
+
+        if (!MyDialogProgress.isOpen(activity) ) {
+            //    if (!isPullRequest && !MyDialogProgress.isOpen(activity)) {
+            MyDialogProgress.open(activity);
+            //   }
+        }
+
         Map<String, String> map = new HashMap<>();
         map.put("categoryId", String.valueOf(categoryId));
         map.put("limit", String.valueOf(limit));
@@ -127,7 +142,12 @@ public class ProductListingActivity extends AppCompatActivity implements Product
         if (isSort)
             map.put("sort", sort_key);
 
-        productList.clear();
+
+        loading = false;
+
+        if (!isPullRequest)
+            productList.clear();
+
         productListingPresenter = new ProductListingPresenter(productListingViewInterface, activity);
         productListingPresenter.onProductListing(map);
     }
@@ -139,33 +159,35 @@ public class ProductListingActivity extends AppCompatActivity implements Product
 
         bottomSheetDialog.findViewById(R.id.tvWhatsNew).setOnClickListener(v -> {
             bottomSheetDialog.dismiss();
-            checkLimitOffsetCondition();
-            callPresenterProductListing(DEFAULT_LIMIT, 0, true, SORT_NEW_FIRST);
+            checkLimitOffsetConditionSort();
+            callPresenterProductListing(DEFAULT_LIMIT, 0, true, SORT_NEW_FIRST, false);
         });
 
         bottomSheetDialog.findViewById(R.id.tvLowToHigh).setOnClickListener(v -> {
             bottomSheetDialog.dismiss();
-            checkLimitOffsetCondition();
-            callPresenterProductListing(DEFAULT_LIMIT, 0, true, SORT_LOW_TO_HIGH);
+            checkLimitOffsetConditionSort();
+            callPresenterProductListing(DEFAULT_LIMIT, 0, true, SORT_LOW_TO_HIGH, false);
         });
         bottomSheetDialog.findViewById(R.id.tvHighToLow).setOnClickListener(v -> {
             bottomSheetDialog.dismiss();
-            callPresenterProductListing(DEFAULT_LIMIT, 0, true, SORT_HIGH_TO_LOW);
+            checkLimitOffsetConditionSort();
+            callPresenterProductListing(DEFAULT_LIMIT, 0, true, SORT_HIGH_TO_LOW, false);
         });
         bottomSheetDialog.findViewById(R.id.tvPopularity).setOnClickListener(v -> {
             bottomSheetDialog.dismiss();
-            checkLimitOffsetCondition();
+            //  checkLimitOffsetConditionSort();
             Toast.makeText(activity, COMING_SOON, Toast.LENGTH_SHORT).show();
         });
+
         bottomSheetDialog.findViewById(R.id.tvDiscount).setOnClickListener(v -> {
             bottomSheetDialog.dismiss();
-            checkLimitOffsetCondition();
+            //  checkLimitOffsetCondition();
             Toast.makeText(activity, COMING_SOON, Toast.LENGTH_SHORT).show();
         });
 
         bottomSheetDialog.findViewById(R.id.tvDeliveryTime).setOnClickListener(v -> {
             bottomSheetDialog.dismiss();
-            checkLimitOffsetCondition();
+            //   checkLimitOffsetCondition();
             Toast.makeText(activity, COMING_SOON, Toast.LENGTH_SHORT).show();
         });
     }
@@ -173,10 +195,19 @@ public class ProductListingActivity extends AppCompatActivity implements Product
     private void checkLimitOffsetCondition() {
         if (productList.size() < DEFAULT_LIMIT) {
             DEFAULT_LIMIT = 15;
-            callPresenterProductListing(DEFAULT_LIMIT, DEFAULT_OFFSET, false, "0");
+            callPresenterProductListing(DEFAULT_LIMIT, DEFAULT_OFFSET, false, "0", false);
         } else {
             DEFAULT_LIMIT = productList.size();
-            callPresenterProductListing(DEFAULT_LIMIT, DEFAULT_OFFSET, false, "0");
+            callPresenterProductListing(DEFAULT_LIMIT, DEFAULT_OFFSET, false, "0", false);
+        }
+    }
+
+
+    private void checkLimitOffsetConditionSort() {
+        if (productList.size() < DEFAULT_LIMIT) {
+            DEFAULT_LIMIT = 15;
+        } else {
+            DEFAULT_LIMIT = productList.size();
         }
     }
 
@@ -198,21 +229,31 @@ public class ProductListingActivity extends AppCompatActivity implements Product
 
     @Override
     public void onSuccessfulProductListing(List<MProduct> mProductListing, String message) {
+        MyDialogProgress.close(activity);
         DEFAULT_LIMIT = 15;
         this.productList.addAll(mProductListing);
 
         if (productList != null && productList.size() != 0) {
             mBinding.rlRoot.setVisibility(View.VISIBLE);
             mBinding.llNoRecordFind.setVisibility(View.GONE);
+            MyDialogProgress.close(activity);
             productListAdapter.notifyDataSetChanged();
         } else {
             mBinding.rlRoot.setVisibility(View.GONE);
-            mBinding.llNoRecordFind.setVisibility(View.VISIBLE);
+            MyDialogProgress.close(activity);
+
+            if (productList.size() == 0)
+                mBinding.llNoRecordFind.setVisibility(View.VISIBLE);
         }
+
+        loading = true;
     }
 
     @Override
     public void onFailedProductListing(String errorMessage) {
+        MyDialogProgress.close(activity);
         Toast.makeText(activity, errorMessage, Toast.LENGTH_SHORT).show();
+
+        loading = false;
     }
 }

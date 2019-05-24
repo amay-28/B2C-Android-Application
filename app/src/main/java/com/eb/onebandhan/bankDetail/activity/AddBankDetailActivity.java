@@ -68,6 +68,7 @@ public class AddBankDetailActivity extends AppCompatActivity implements BankDeta
     }
 
     private void setExistingData() {
+        binding.header.tvMainHeading.setText(R.string.Update_Bank_Details);
         binding.btnUpload.setText("Update");
         binding.etAccountHolderName.setText(savedBankDetail.getAccountHolderName());
         binding.etAccountNumber.setText(savedBankDetail.getAccountNumber());

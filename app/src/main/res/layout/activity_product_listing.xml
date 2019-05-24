@@ -37,7 +37,8 @@
             android:gravity="center"
             android:layout_centerInParent="true"
             android:orientation="vertical"
-            android:layout_below="@+id/view">
+            android:layout_below="@+id/view"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -83,7 +84,7 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/view"
             android:background="@color/white"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <LinearLayout
                 android:id="@+id/llTop"

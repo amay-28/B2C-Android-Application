@@ -179,6 +179,7 @@
     </array>
 
     <string name="Add_Bank_Details">Add Bank Details</string>
+    <string name="Update_Bank_Details">Update Bank Details</string>
     <string name="No_Product_Found">No Product Found</string>
     <string name="No_Product_Found_message">Simply browse, create a wishlist or make a purchase.</string>
     <string name="CONTINUE_SHOPPING">CONTINUE SHOPPING</string>

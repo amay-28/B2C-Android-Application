@@ -22,7 +22,8 @@ public class MyDialogProgress {
         if (!isOpen(context)) {
             pDialog = new ProgressDialog(context, R.style.LoaderTheme);
             // pDialog.setMessage(context.getResources().getString(R.string.loading_text));
-            pDialog.setCancelable(false);
+            //pDialog.setCancelable(false);
+            pDialog.setCancelable(true);
             pDialog.show();
         }
 
@@ -40,7 +41,7 @@ public class MyDialogProgress {
     }
 
     public static boolean isOpen(Context context) {
-        if (dd != null&&dd.isShowing()) {
+        if (dd != null && dd.isShowing()) {
             return true;
         }
         return false;
