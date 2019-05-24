@@ -171,7 +171,7 @@
                 android:background="@drawable/rect_back_with_corner"
                 android:fontFamily="@font/latoregular"
                 android:gravity="top"
-                android:hint="@string/add_description"
+                android:hint="@string/add_product_description"
                 android:imeOptions="actionNext"
                 android:inputType="text|textMultiLine"
                 android:maxLength="30"

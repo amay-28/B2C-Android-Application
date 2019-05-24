@@ -107,8 +107,17 @@
 
                     <TextView
                         android:textColor="@color/colorHint"
-                        android:text="@string/terms_condition"
+                        android:text="@string/I_agree_with"
                         style="@style/TextView10ssp"/>
+
+                    <TextView
+                        android:id="@+id/tvTermsPolicies"
+                        android:textColor="@color/yellow"
+                        android:text="@string/terms_and_policies"
+                        android:layout_marginLeft="@dimen/_3sdp"
+                        style="@style/TextView10ssp"/>
+
+
                 </LinearLayout>
 
 

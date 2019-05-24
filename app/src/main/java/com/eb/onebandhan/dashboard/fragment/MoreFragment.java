@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.eb.onebandhan.R;
+import com.eb.onebandhan.auth.activity.LoginActivity;
 import com.eb.onebandhan.auth.model.MUser;
 import com.eb.onebandhan.bankDetail.activity.AddBankDetailActivity;
 import com.eb.onebandhan.bankDetail.activity.BankDetailActivity;
@@ -19,19 +20,28 @@ import com.eb.onebandhan.dashboard.activity.EditProfileActivity;
 import com.eb.onebandhan.dashboard.activity.MyProfileActivity;
 import com.eb.onebandhan.databinding.MoreFragmentLayoutBinding;
 import com.eb.onebandhan.product.AddProductActivity;
+import com.eb.onebandhan.util.DialogUtil;
+import com.eb.onebandhan.util.OnDialogItemClickListener;
 import com.eb.onebandhan.util.Session;
 
 import java.io.File;
+
+import javax.xml.transform.Result;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-public class MoreFragment extends Fragment {
+import static android.app.Activity.RESULT_OK;
+import static com.eb.onebandhan.util.Constant.IS_LOGIN;
+import static com.eb.onebandhan.util.Constant.NO;
+
+public class MoreFragment extends Fragment implements OnDialogItemClickListener {
     private Activity activity;
     private MoreFragmentLayoutBinding binding;
     private MUser loggedInUser;
+    private int OPEN_EDIT_PROFILE = 100;
 
     @Nullable
     @Override
@@ -53,7 +63,7 @@ public class MoreFragment extends Fragment {
     }
 
     private void listener() {
-        binding.tvEdit.setOnClickListener(v -> startActivity(new Intent(getActivity(), EditProfileActivity.class)));
+        binding.tvEdit.setOnClickListener(v -> startActivityForResult(new Intent(getActivity(), EditProfileActivity.class), OPEN_EDIT_PROFILE));
         binding.tvAddToInventory.setOnClickListener(v -> startActivity(new Intent(getActivity(), AddProductActivity.class)));
         binding.rlProfile.setOnClickListener(v -> startActivity(new Intent(getActivity(), MyProfileActivity.class)));
 
@@ -62,9 +72,15 @@ public class MoreFragment extends Fragment {
         } else {
             binding.tvBankDetails.setOnClickListener(v -> startActivity(new Intent(getActivity(), AddBankDetailActivity.class)));
         }
+
+        binding.tvLogout.setOnClickListener(v -> performLogout());
     }
 
     private void initialization() {
+        setExistingData();
+    }
+
+    private void setExistingData() {
         binding.tvName.setText(loggedInUser.getName());
         binding.tvPhone.setText(loggedInUser.getMobileNumber());
         if (loggedInUser != null && loggedInUser.getRetailerDetails() != null)
@@ -75,5 +91,29 @@ public class MoreFragment extends Fragment {
                             .error(R.mipmap.avtar_gray))
                     .into(binding.imgUserProfile);
 
+    }
+
+    private void performLogout() {
+        DialogUtil.showOkCancelDialog(activity, getString(R.string.logout_popup), this);
+           }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == OPEN_EDIT_PROFILE && resultCode == RESULT_OK) {
+            loggedInUser = new Session(activity).getUserProfile();
+            setExistingData();
+        }
+    }
+
+    @Override
+    public void onDialogButtonClick(int i, int position) {
+        Session session = new Session(activity);
+        session.setUserProfile(null);
+        session.setString(IS_LOGIN, NO);
+
+        Intent in = new Intent(activity, LoginActivity.class);
+        in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        (activity).startActivity(in);
     }
 }

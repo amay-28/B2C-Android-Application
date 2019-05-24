@@ -22,6 +22,12 @@ import android.widget.Toast;
 
 import com.eb.onebandhan.apiCalling.ResponseData;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -40,6 +46,7 @@ import java.util.TimeZone;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.adapter.rxjava2.HttpException;
 
 public class Utils implements Constant {
@@ -279,6 +286,22 @@ public class Utils implements Constant {
         toast.setGravity(gravity, xOffset, yOffset);
         toast.show();
 
+    }
+
+    public static String getMessageFromErrorBody(ResponseBody errorBody) {
+        JSONObject jsonObject = null;
+        try {
+            String jsonString = errorBody.string();
+            jsonObject = new JSONObject(jsonString);
+
+            return jsonObject.getString("message");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return "Try again";
     }
 
     // Uri compress method and return file

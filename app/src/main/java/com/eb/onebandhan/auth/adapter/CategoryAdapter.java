@@ -18,9 +18,11 @@ import androidx.annotation.Nullable;
 
 public class CategoryAdapter extends ArrayAdapter<MCategory> {
     private List<MCategory> categoryList;
+    private Activity activity;
 
     public CategoryAdapter(@NonNull Activity activity, int resource, List<MCategory> categoryList) {
-        super(activity, resource,categoryList);
+        super(activity, resource, categoryList);
+        this.activity = activity;
         this.categoryList = categoryList;
     }
 
@@ -40,6 +42,26 @@ public class CategoryAdapter extends ArrayAdapter<MCategory> {
         View row = inflater.inflate(R.layout.row_spinner_text, parent, false);
         TextView label = row.findViewById(R.id.txt);
         label.setText(categoryList.get(position).getName());
+
+        if (position == 0) {
+            // Set the hint text color gray
+            label.setTextColor(activity.getResources().getColor(R.color.colorHint));
+        } else {
+            label.setTextColor(activity.getResources().getColor(R.color.black));
+        }
+
         return row;
+    }
+
+    @Override
+    public boolean isEnabled(int position) {
+        if (position == 0) {
+            // Disable the first item from Spinner
+            // First item will be use for hint
+            return false;
+        } else {
+            return true;
+        }
+
     }
 }

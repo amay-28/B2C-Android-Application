@@ -18,5 +18,6 @@
     <color name="colorMobileProfile">#9a9a9a</color>
     <color name="color_light_text">#9a9a9a</color>
     <color name="green">#3db657</color>
+    <color name="placeholder_bg">#dddddd</color>
 
 </resources>

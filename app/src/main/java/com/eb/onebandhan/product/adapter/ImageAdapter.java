@@ -25,6 +25,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     private List<MImage> imageList;
     private CallBack callBack;
     private String selectedCategory;
+    private boolean isLocalImage = false;
 
     public ImageAdapter(Activity activity, List<MImage> imageList, CallBack callBack) {
         this.activity = activity;
@@ -43,6 +44,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MImage mImage = imageList.get(position);
         if (mImage.isLocal()) {
+            isLocalImage = true;
             holder.binding.ivImage.setImageDrawable(activity.getDrawable(R.drawable.bg_add_image));
             holder.binding.ivDelete.setVisibility(View.GONE);
             holder.binding.ivImage.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +75,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     }
 
     @Override
-    public void onCategoryClick(int position,String categoryId) {
+    public void onCategoryClick(int position, String categoryId) {
 
     }
 

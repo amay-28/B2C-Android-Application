@@ -17,6 +17,7 @@ import com.eb.onebandhan.dashboard.adapter.SuperCategoryListAdapter;
 import com.eb.onebandhan.databinding.ActivityAddProductBinding;
 import com.eb.onebandhan.product.adapter.DialogListAdapter;
 import com.eb.onebandhan.product.adapter.ImageAdapter;
+import com.eb.onebandhan.product.adapter.ShowImagesAdapter;
 import com.eb.onebandhan.product.model.MAddProduct;
 import com.eb.onebandhan.product.model.MImage;
 import com.eb.onebandhan.product.model.MImageServer;
@@ -71,7 +72,7 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
     private List<MCategory> subSubCategoryList = new ArrayList<>();
     private List<MCategory> categoryList = new ArrayList<>();
     private List<MImage> imageList = new ArrayList<>();
-    private ImageAdapter imageAdapter;
+    private ShowImagesAdapter imageAdapter;
     private MAddProduct mAddProduct = new MAddProduct();
     private Uri imageURI;
     private String profileImageURL = "";
@@ -102,7 +103,7 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         binding.rvImages.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
         binding.rvImages.setHasFixedSize(true);
         binding.rvImages.setItemAnimator(new DefaultItemAnimator());
-        imageAdapter = new ImageAdapter(activity, setFirstImage(), this);
+        imageAdapter = new ShowImagesAdapter(activity, setFirstImage(), this);
         binding.rvImages.setAdapter(imageAdapter);
     }
 
@@ -118,11 +119,25 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
 
     public List<MImage> setLocalImage() {
         MImage mImage;
-        if (imageList != null && imageList.size() < 4) {
-            mImage = new MImage();
-            mImage.setLocal(true);
-            imageList.add(mImage);
+
+        boolean isLocal = false;
+        for (int i = 0; i < imageList.size(); i++) {
+            MImage image = imageList.get(i);
+            if (image.isLocal()) {
+                isLocal = true;
+            }
         }
+
+        if (isLocal) {
+            if (imageList != null && imageList.size() < 4) {
+                mImage = new MImage();
+                mImage.setLocal(true);
+                imageList.add(mImage);
+            }
+
+            //TODO
+        }
+
         imageAdapter.notifyDataSetChanged();
         return imageList;
     }
@@ -158,10 +173,12 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         });
 
         binding.btnSubmit.setOnClickListener(v -> {
-            if (imageAdapter.getItemCount() != 0) {
-                CreateFileForSend(imageList);
-            } else {
-                if (checkValidate()) addProductPresenter.addProductTask(mAddProduct);
+            if (checkValidate()){
+                if (imageAdapter.getItemCount() != 0) {
+                    CreateFileForSend(imageList);
+                } else {
+                    if (checkValidate()) addProductPresenter.addProductTask(mAddProduct);
+                }
             }
 
         });
@@ -186,6 +203,9 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
             return false;
         } /*else if (TextUtils.isEmpty(binding.etPaymentOption.getText().toString())) {
             Toast.makeText(activity, resources.getString(R.string.please_enter_state), Toast.LENGTH_SHORT).show();
+            return false;
+        }*/ /*else if (imageAdapter.getItemCount() < 1) {
+            Toast.makeText(activity, resources.getString(R.string.please_select_image), Toast.LENGTH_SHORT).show();
             return false;
         }*/ else if (TextUtils.isEmpty(binding.etDescription.getText().toString())) {
             Toast.makeText(activity, resources.getString(R.string.please_enter_description), Toast.LENGTH_SHORT).show();

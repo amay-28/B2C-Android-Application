@@ -2,6 +2,7 @@ package com.eb.onebandhan.auth.presenter;
 
 import android.app.Activity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.eb.onebandhan.apiCalling.APIClient;
 import com.eb.onebandhan.apiCalling.APIInterface;
@@ -37,12 +38,17 @@ public class LoginPresenter implements LoginPresenterInterface, Constant {
         return new DisposableObserver<Response<ResponseData<MUser>>>() {
             @Override
             public void onNext(Response<ResponseData<MUser>> response) {
-                if (requestType.equals(TYPE_LOGIN_ONLY)) {
-                    new Session(activity).setString(IS_LOGIN, YES);
-                    new Session(activity).setString(AUTHORIZATION_KEY, BEARER + response.headers().get("AuthToken"));
-                    new Session(activity).setUserProfile(response.body().getData());
+                if (response.body() != null) {
+                    if (requestType.equals(TYPE_LOGIN_ONLY)) {
+                        new Session(activity).setString(IS_LOGIN, YES);
+                        new Session(activity).setString(AUTHORIZATION_KEY, BEARER + response.headers().get("AuthToken"));
+                        new Session(activity).setUserProfile(response.body().getData());
+                    }
+                    viewInterface.onSucessfullyLogin(response.body().getData(), response.body().getMessage());
+                } else{
+
+                    Toast.makeText(activity, Utils.getMessageFromErrorBody(response.errorBody()), Toast.LENGTH_SHORT).show();
                 }
-                viewInterface.onSucessfullyLogin(response.body().getData(), response.body().getMessage());
 
             }
 

@@ -83,7 +83,13 @@ public class SignUpDetailPresenter implements SignUpDetailPresenterInterface, Ca
         return new DisposableObserver<ResponseData<MUser>>() {
             @Override
             public void onNext(ResponseData<MUser> response) {
-                new Session(activity).getUserProfile().setRetailerDetails(response.getData().getRetailerDetails());
+               /* Session session = new Session(activity);
+                MUser mUser = session.getUserProfile();
+                mUser.setRetailerDetails(response.getData().getRetailerDetails());
+                session.setUserProfile(mUser);*/
+
+                //new Session(activity).getUserProfile().setRetailerDetails(response.getData().getRetailerDetails());
+                new Session(activity).setUserProfile(response.getData());
 
                 viewInterface.onSucessfullySubmitShopDetail(response.getData(), response.getMessage());
 
@@ -107,7 +113,7 @@ public class SignUpDetailPresenter implements SignUpDetailPresenterInterface, Ca
 
     private <T> Observable getObservableForShop(MProfile mProfile) {
         return APIClient.getClient(activity).create(APIInterface.class).updateShopDetail(new Session(activity).getString("AUTHORIZATION_KEY"),
-                mProfile,true)
+                mProfile, true)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 }

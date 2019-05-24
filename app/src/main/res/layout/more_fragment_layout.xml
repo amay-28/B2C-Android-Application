@@ -240,6 +240,29 @@
                         android:drawableLeft="@drawable/ic_setting"
                         android:text="@string/settings" />
 
+                    <View
+                        android:id="@+id/viewSetting"
+                        android:layout_below="@+id/tvSettings"
+                        android:layout_width="match_parent"
+                        android:background="@color/white_dark"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:layout_height="1dp"></View>
+
+                    <TextView
+                        android:id="@+id/tvLogout"
+                        style="@style/TextView12ssp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/latosemibold"
+                        android:padding="@dimen/_7sdp"
+                        android:singleLine="true"
+                        android:layout_below="@+id/viewSetting"
+                        android:drawablePadding="@dimen/_13sdp"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:drawableLeft="@drawable/ic_logout"
+                        android:text="@string/logout" />
+
                 </RelativeLayout>
             </RelativeLayout>
 

@@ -111,33 +111,33 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
 
     private boolean validation() {
         Resources resources = getResources();
-        if (TextUtils.isEmpty(binding.etShopName.getText().toString())) {
+        if (TextUtils.isEmpty(binding.etShopName.getText().toString().trim())) {
             Toast.makeText(activity, resources.getString(R.string.please_enter_shop_name), Toast.LENGTH_SHORT).show();
             return false;
-        } else if (TextUtils.isEmpty(binding.etAddressOne.getText().toString())) {
+        } else if (TextUtils.isEmpty(binding.etAddressOne.getText().toString().trim())) {
             Toast.makeText(activity, resources.getString(R.string.please_enter_address), Toast.LENGTH_SHORT).show();
             return false;
-        } else if (TextUtils.isEmpty(binding.etAddressTwo.getText().toString())) {
+        } else if (TextUtils.isEmpty(binding.etAddressTwo.getText().toString().trim())) {
             Toast.makeText(activity, resources.getString(R.string.please_enter_address), Toast.LENGTH_SHORT).show();
             return false;
-        } else if (TextUtils.isEmpty(binding.etCity.getText().toString())) {
+        } else if (TextUtils.isEmpty(binding.etCity.getText().toString().trim())) {
             Toast.makeText(activity, resources.getString(R.string.please_enter_city), Toast.LENGTH_SHORT).show();
             return false;
-        } else if (TextUtils.isEmpty(binding.etState.getText().toString())) {
+        } else if (TextUtils.isEmpty(binding.etState.getText().toString().trim())) {
             Toast.makeText(activity, resources.getString(R.string.please_enter_state), Toast.LENGTH_SHORT).show();
             return false;
-        } else if (binding.rbYes.isChecked() && TextUtils.isEmpty(binding.etGstNo.getText().toString())) {
+        } else if (binding.rbYes.isChecked() && TextUtils.isEmpty(binding.etGstNo.getText().toString().trim())) {
             Toast.makeText(activity, resources.getString(R.string.please_enter_gst), Toast.LENGTH_SHORT).show();
             return false;
-        } else if (binding.rbYes.isChecked() && !ValidationUtil.isValidGST(binding.etGstNo.getText().toString())) {
+        } else if (binding.rbYes.isChecked() && !ValidationUtil.isValidGST(binding.etGstNo.getText().toString().trim())) {
             Toast.makeText(activity, resources.getString(R.string.please_enter_valid_gst), Toast.LENGTH_SHORT).show();
             return false;
         } else if (binding.rbYes.isChecked() &&
-                !TextUtils.isEmpty(binding.etPanNo.getText().toString()) &&
-                !ValidationUtil.isValidPAN(binding.etPanNo.getText().toString())) {
+                !TextUtils.isEmpty(binding.etPanNo.getText().toString().trim()) &&
+                !ValidationUtil.isValidPAN(binding.etPanNo.getText().toString().trim())) {
             Toast.makeText(activity, resources.getString(R.string.please_enter_valid_pan_number), Toast.LENGTH_SHORT).show();
             return false;
-        } else if (!TextUtils.isEmpty(binding.etEmail.getText().toString()) && !ValidationUtil.emailValidator(activity, binding.etEmail, "email")) {
+        } else if (!TextUtils.isEmpty(binding.etEmail.getText().toString().trim()) && !ValidationUtil.emailValidator(activity, binding.etEmail, "email")) {
             return false;
         }
         prepareData();
@@ -180,7 +180,7 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
 
     @Override
     public void onSucessfullySubmitShopDetail(MUser data, String message) {
-        ShowToast.toastMsg(activity, message);
+        ShowToast.toastMsg(activity, getString(R.string.Retailer_account_created_successfully));
         Intent intent = new Intent(activity, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

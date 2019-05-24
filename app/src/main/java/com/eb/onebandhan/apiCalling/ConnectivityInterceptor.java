@@ -14,6 +14,9 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static com.eb.onebandhan.util.Constant.IS_LOGIN;
+import static com.eb.onebandhan.util.Constant.NO;
+
 
 public class ConnectivityInterceptor implements Interceptor {
     private Activity activity;
@@ -43,6 +46,7 @@ public class ConnectivityInterceptor implements Interceptor {
                 (activity).startActivity(in);
                 Session session = new Session(activity);
                 session.setUserProfile(null);
+                session.setString(IS_LOGIN, NO);
             }
             /*Request.Builder builder = chain.request().newBuilder();
             return chain.proceed(builder.build());*/

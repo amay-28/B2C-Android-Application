@@ -110,6 +110,8 @@ public class ProductListingActivity extends AppCompatActivity implements Product
 
             }
         });
+
+        mBinding.btnContinue.setOnClickListener(v -> finish());
     }
 
     public void callPresenterProductListing(int limit, int offset, boolean isSort, String sort_key) {
@@ -168,7 +170,7 @@ public class ProductListingActivity extends AppCompatActivity implements Product
         });
     }
 
-    private void checkLimitOffsetCondition(){
+    private void checkLimitOffsetCondition() {
         if (productList.size() < DEFAULT_LIMIT) {
             DEFAULT_LIMIT = 15;
             callPresenterProductListing(DEFAULT_LIMIT, DEFAULT_OFFSET, false, "0");
@@ -198,7 +200,15 @@ public class ProductListingActivity extends AppCompatActivity implements Product
     public void onSuccessfulProductListing(List<MProduct> mProductListing, String message) {
         DEFAULT_LIMIT = 15;
         this.productList.addAll(mProductListing);
-        productListAdapter.notifyDataSetChanged();
+
+        if (productList != null && productList.size() != 0) {
+            mBinding.rlRoot.setVisibility(View.VISIBLE);
+            mBinding.llNoRecordFind.setVisibility(View.GONE);
+            productListAdapter.notifyDataSetChanged();
+        } else {
+            mBinding.rlRoot.setVisibility(View.GONE);
+            mBinding.llNoRecordFind.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

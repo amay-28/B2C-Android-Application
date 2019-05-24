@@ -2,6 +2,7 @@ package com.eb.onebandhan.dashboard.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
@@ -9,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -20,6 +22,8 @@ import com.eb.onebandhan.dashboard.viewinterface.EditProfileViewInterface;
 import com.eb.onebandhan.databinding.ActivityEditProfileBinding;
 import com.eb.onebandhan.util.CommonClickHandler;
 import com.eb.onebandhan.util.Constant;
+import com.eb.onebandhan.util.MarshmallowPermission;
+import com.eb.onebandhan.util.MyDialogProgress;
 import com.eb.onebandhan.util.Session;
 import com.eb.onebandhan.util.Utils;
 import com.eb.onebandhan.util.WebService;
@@ -28,9 +32,12 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.File;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import okhttp3.MultipartBody;
+
+import static android.os.Build.VERSION_CODES.M;
 
 public class EditProfileActivity extends AppCompatActivity implements EditProfileViewInterface, Constant {
     private Activity activity;
@@ -41,6 +48,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     MProfile retailerDetails = new MProfile();
     private Uri imageURI;
     private String profileImageURL = "";
+    private MarshmallowPermission marshmallowPermission;
 
     @Override
     public void onResume() {
@@ -57,12 +65,14 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     }
 
     private void initialization() {
+        marshmallowPermission = new MarshmallowPermission(activity);
         loggedInUser = new Session(activity).getUserProfile();
         binding.header.setHandler(new CommonClickHandler(activity));
         binding.header.tvMainHeading.setText(R.string.txt_editprofile);
         editProfilePresenter = new EditProfilePresenter(this, activity);
         setDetails();
         listeners();
+
     }
 
     private void setDetails() {
@@ -71,8 +81,8 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
                 Glide.with(activity)
                         .load(loggedInUser.getRetailerDetails().getImageUrl())
                         .apply(new RequestOptions()
-                        .placeholder(R.mipmap.avtar_gray)
-                        .error(R.mipmap.avtar_gray))
+                                .placeholder(R.mipmap.avtar_gray)
+                                .error(R.mipmap.avtar_gray))
                         .into(binding.imgUser);
 
             binding.etName.setText(loggedInUser.getName());
@@ -94,7 +104,8 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     }
 
     private void listeners() {
-        binding.layRelImage.setOnClickListener(v -> getProfileImage());
+        // binding.layRelImage.setOnClickListener(v -> getProfileImage());
+        binding.layRelImage.setOnClickListener(v -> EnableRuntimePermission());
         binding.tvEditGeneral.setOnClickListener(v -> generalEdit());
         binding.tvEditBusiness.setOnClickListener(v -> businessEdit());
         binding.btnSubmit.setOnClickListener(v -> {
@@ -264,10 +275,44 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         binding.etGstPercent.setTextColor(getResources().getColor(R.color.black));
     }
 
+    public void EnableRuntimePermission() {
+        if (Build.VERSION.SDK_INT >= M) {
+            boolean result = marshmallowPermission.checkPermissionForWriteExternalStorage();
+            if (result) {
+                getProfileImage();
+            } else {
+                try {
+                    marshmallowPermission.requestPermissionForWriteExternalStorage();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            getProfileImage();
+        }
+    }
+
+    /**
+     * Callback for the result from requesting permissions.
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        //Log.d(TAG, "requestCode---" + requestCode + "     " + "grantResults----" + grantResults);
+        switch (requestCode) {
+            case MarshmallowPermission.EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(activity, "Permission granted", Toast.LENGTH_SHORT).show();
+                    getProfileImage();
+                } else {
+                    Toast.makeText(activity, "Permission denied", Toast.LENGTH_SHORT).show();
+                    //code for deny
+                }
+        }
+    }
+
     @Override
     public void onSucessfullyUpdated(MUser mUser, String message) {
         new Session(activity).setUserProfile(mUser);
-
         Utils.ShowToast(activity, message, 0);
         Intent data = new Intent();
         data.putExtra("isUpdated", true);
@@ -277,6 +322,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
 
     @Override
     public void onSucessfullyUpdatedImage(String value) {
+        MyDialogProgress.close(activity);
         if (!Utils.checkNull(value).isEmpty()) {
             profileImageURL = value;
             binding.imgUser.setImageURI(imageURI);
@@ -285,6 +331,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
 
     @Override
     public void onFailToUpdate(String errorMessage) {
+        MyDialogProgress.close(activity);
         Utils.ShowToast(activity, errorMessage, 0);
     }
 
@@ -299,6 +346,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
 
     // Crop image convert to file
     public void CreateFileForSend(Uri URI) {
+        MyDialogProgress.open(activity);
         imageURI = URI;
         File image = Utils.compressURI(activity, URI, "");
 

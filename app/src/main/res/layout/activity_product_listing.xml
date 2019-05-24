@@ -30,11 +30,60 @@
             android:background="@color/divider_line" />
 
 
+        <LinearLayout
+            android:id="@+id/llNoRecordFind"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:layout_below="@+id/view">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_no_product_found"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextView14ssp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/latomedium"
+                android:text="@string/No_Product_Found"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextView14ssp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:gravity="center"
+                android:textColor="@color/color_grey_text"
+                android:fontFamily="@font/latoregular"
+                android:text="@string/No_Product_Found_message" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnContinue"
+                style="@style/material_button"
+                android:layout_margin="@dimen/_60sdp"
+                android:minHeight="@dimen/_50sdp"
+                android:text="@string/CONTINUE_SHOPPING"
+                android:textSize="@dimen/_12ssp"
+                app:cornerRadius="@dimen/_3sdp" />
+
+        </LinearLayout>
         <RelativeLayout
+            android:id="@+id/rlRoot"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/view"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:visibility="gone">
 
             <LinearLayout
                 android:id="@+id/llTop"
@@ -111,8 +160,8 @@
                     android:id="@+id/rvProducts"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:layout_marginTop="@dimen/_5sdp" />
+
 
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
             <!-- <LinearLayout

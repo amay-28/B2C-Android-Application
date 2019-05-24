@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Toast;
@@ -46,6 +47,12 @@ public class SignUpInitialActivity extends AppCompatActivity implements SignUpVi
                     }
                 }
         );
+
+        binding.tvTermsPolicies.setOnClickListener(v -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW);
+            browserIntent.setData(Uri.parse("http://www.google.com"));
+            startActivity(browserIntent);
+        });
     }
 
     private void performSignUp() {
@@ -56,16 +63,16 @@ public class SignUpInitialActivity extends AppCompatActivity implements SignUpVi
     }
 
     private boolean checkValidate() {
-        if (TextUtils.isEmpty(binding.etName.getText())) {
+        if (TextUtils.isEmpty(binding.etName.getText().toString().trim())) {
             Toast.makeText(activity, getResources().getString(R.string.please_enter_name), Toast.LENGTH_SHORT).show();
             return false;
-        } else if (TextUtils.isEmpty(binding.etMobileNo.getText())) {
+        } else if (TextUtils.isEmpty(binding.etMobileNo.getText().toString().trim())) {
             Toast.makeText(activity, getResources().getString(R.string.please_enter_mobile_no), Toast.LENGTH_SHORT).show();
             return false;
-        } else if (binding.etName.getText().toString().length() < 3) {
+        } else if (binding.etName.getText().toString().trim().length() < 3) {
             Toast.makeText(activity, getResources().getString(R.string.please_enter_valid_name), Toast.LENGTH_SHORT).show();
             return false;
-        } else if (binding.etMobileNo.getText().toString().length() < 10) {
+        } else if (binding.etMobileNo.getText().toString().trim().length() < 10) {
             Toast.makeText(activity, getResources().getString(R.string.please_enter_valid_mobile_no), Toast.LENGTH_SHORT).show();
             return false;
         } else if (!binding.checkboxTerms.isChecked()) {
