@@ -7,7 +7,7 @@
 
         <variable
             name="productListing"
-            type="com.eb.onebandhan.productListing.ProductListingActivity" />
+            type="com.retailer.oneops.productListing.ProductListingActivity" />
     </data>
 
 

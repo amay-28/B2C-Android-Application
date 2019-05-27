@@ -7,7 +7,7 @@
     <data>
         <variable
             name="bankDetail"
-            type="com.eb.onebandhan.bankDetail.activity.AddBankDetailActivity"/>
+            type="com.retailer.oneops.bankDetail.activity.AddBankDetailActivity"/>
     </data>
 
     <RelativeLayout

@@ -8,7 +8,7 @@
 
         <variable
             name="myProfile"
-            type="com.eb.onebandhan.dashboard.activity.MyProfileActivity" />
+            type="com.retailer.oneops.dashboard.activity.MyProfileActivity" />
     </data>
 
     <LinearLayout

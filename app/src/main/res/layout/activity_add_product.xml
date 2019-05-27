@@ -6,7 +6,7 @@
 
         <variable
             name="addProduct"
-            type="com.eb.onebandhan.product.AddProductActivity" />
+            type="com.retailer.oneops.product.AddProductActivity" />
     </data>
 
     <ScrollView

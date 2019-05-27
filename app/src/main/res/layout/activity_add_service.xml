@@ -6,7 +6,7 @@
     <data>
         <variable
             name="addService"
-            type="com.eb.onebandhan.service.AddServiceActivity"/>
+            type="com.retailer.oneops.service.AddServiceActivity"/>
     </data>
     <ScrollView
         android:layout_width="match_parent"

@@ -8,7 +8,7 @@
 
         <variable
             name="notification"
-            type="com.eb.onebandhan.notification.activity.NotificationListingActivity" />
+            type="com.retailer.oneops.notification.activity.NotificationListingActivity" />
     </data>
 
     <RelativeLayout

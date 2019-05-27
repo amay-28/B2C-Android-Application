@@ -4,39 +4,39 @@
     <data>
         <variable
             name="handler"
-            type="com.eb.onebandhan.util.CommonClickHandler" />
+            type="com.retailer.oneops.util.CommonClickHandler" />
 
         <variable
             name="category"
-            type="com.eb.onebandhan.dashboard.activity.CategoryActivity"/>
+            type="com.retailer.oneops.dashboard.activity.CategoryActivity"/>
 
         <variable
             name="addProduct"
-            type="com.eb.onebandhan.product.AddProductActivity"/>
+            type="com.retailer.oneops.product.AddProductActivity"/>
 
         <variable
             name="addService"
-            type="com.eb.onebandhan.service.AddServiceActivity"/>
+            type="com.retailer.oneops.service.AddServiceActivity"/>
 
         <variable
             name="bankDetail"
-            type="com.eb.onebandhan.bankDetail.activity.AddBankDetailActivity"/>
+            type="com.retailer.oneops.bankDetail.activity.AddBankDetailActivity"/>
 
         <variable
             name="notification"
-            type="com.eb.onebandhan.notification.activity.NotificationListingActivity"/>
+            type="com.retailer.oneops.notification.activity.NotificationListingActivity"/>
 
         <variable
             name="myProfile"
-            type="com.eb.onebandhan.dashboard.activity.MyProfileActivity"/>
+            type="com.retailer.oneops.dashboard.activity.MyProfileActivity"/>
 
         <variable
             name="editProfile"
-            type="com.eb.onebandhan.dashboard.activity.EditProfileActivity"/>
+            type="com.retailer.oneops.dashboard.activity.EditProfileActivity"/>
 
         <variable
             name="productListing"
-            type="com.eb.onebandhan.productListing.ProductListingActivity"/>
+            type="com.retailer.oneops.productListing.ProductListingActivity"/>
 
     </data>
 

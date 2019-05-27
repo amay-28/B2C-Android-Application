@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.eb.onebandhan"
+        applicationId "com.retailer.oneops"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
@@ -64,11 +64,12 @@ dependencies {
     // Shimmer
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
     //SMS retriver
-    implementation 'com.google.android.gms:play-services-base:11.6.0'
-    implementation 'com.google.android.gms:play-services-auth-api-phone:11.6.0'
+    implementation 'com.google.android.gms:play-services-base:16.1.0'
+    implementation 'com.google.android.gms:play-services-auth-api-phone:16.0.0'
     //Optional for phone number hint
-    implementation 'com.google.android.gms:play-services-auth:11.6.0'
-
-    implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
+
+    implementation 'com.google.firebase:firebase-core:16.0.9'
 }
+apply plugin: 'com.google.gms.google-services'
+
