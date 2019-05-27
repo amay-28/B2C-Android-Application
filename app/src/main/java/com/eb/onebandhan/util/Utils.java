@@ -21,6 +21,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.eb.onebandhan.apiCalling.ResponseData;
+import com.google.android.gms.auth.api.phone.SmsRetriever;
+import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -43,6 +48,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
+import androidx.annotation.NonNull;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -285,6 +291,26 @@ public class Utils implements Constant {
         Toast toast = Toast.makeText(context, msg, duration);
         toast.setGravity(gravity, xOffset, yOffset);
         toast.show();
+
+    }
+
+    // Start SMS receiver
+    public static void startSMSReceiver(Context context) {
+        SmsRetrieverClient client = SmsRetriever.getClient(context);
+
+        Task<Void> task = client.startSmsRetriever();
+
+        task.addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+            }
+        });
+
+        task.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+            }
+        });
 
     }
 

@@ -80,6 +80,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeActionbar"/>
 
+        <receiver
+            android:name=".util.TextMessageReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED" />
+            </intent-filter>
+        </receiver>
 
 
     </application>

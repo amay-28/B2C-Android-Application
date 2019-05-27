@@ -16,6 +16,7 @@ public class Session {
     private String ALL_USER_LIST = "ALL_USER_LIST";
     private String USER_PROFILE_DATA = "USER_PROFILE_DATA";
     private String USER_BANK_DETAIL = "USER_BANK_DETAIL";
+    private static final String PREFERENCE = "ONE_OPS_RETAILER";
 
     public Session(Context context) {
         this.context = context;
@@ -70,4 +71,33 @@ public class Session {
 
     }
 
+    //save Integer preferences
+    public void setIntegerSharedPreference(Context context, String name, int value) {
+        this.context = context;
+        SharedPreferences settings = context.getSharedPreferences(PREFERENCE, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        // editor.clear();
+        editor.putInt(name, value);
+        editor.commit();
+    }
+
+    //Save Integer
+    public  int getIngerSharedPreferences(Context context, String name) {
+        SharedPreferences settings = context.getSharedPreferences(PREFERENCE, 0);
+        return settings.getInt(name, 0);
+    }
+
+    //Save boolean
+    public  void setSharedPreferenceBoolean(Context context, String name, boolean value) {
+        SharedPreferences settings = context.getSharedPreferences(PREFERENCE, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean(name, value);
+        editor.commit();
+    }
+
+    //Get boolean
+    public static boolean getSharedPreferencesBoolean(Context context, String name) {
+        SharedPreferences settings = context.getSharedPreferences(PREFERENCE, 0);
+        return settings.getBoolean(name, false);
+    }
 }

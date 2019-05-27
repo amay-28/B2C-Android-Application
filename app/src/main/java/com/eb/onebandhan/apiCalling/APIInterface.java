@@ -43,6 +43,9 @@ public interface APIInterface {
     @POST("retailer/login-send-otp")
     Observable<Response<ResponseData<MUser>>> loginToSendOtp(@Body MSignUp mSignUp);
 
+    @POST("retailer/resend-otp")
+    Observable<Response<ResponseData<MUser>>> resendOtp(@Body MSignUp mSignUp);
+
     @POST("product")
     Observable<ResponseData> addProduct(@Header("Authorization") String token,
                                         @Body MAddProduct mAddProduct);

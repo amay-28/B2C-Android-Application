@@ -63,4 +63,12 @@ dependencies {
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.+'//Image crop
     // Shimmer
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+    //SMS retriver
+    implementation 'com.google.android.gms:play-services-base:11.6.0'
+    implementation 'com.google.android.gms:play-services-auth-api-phone:11.6.0'
+    //Optional for phone number hint
+    implementation 'com.google.android.gms:play-services-auth:11.6.0'
+
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
 }

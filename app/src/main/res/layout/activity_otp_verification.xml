@@ -65,12 +65,20 @@
                         android:src="@drawable/ic_bucket" />
                 </LinearLayout>
 
+                <TextView
+                    style="@style/TextView12ssp"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:fontFamily="@font/latomedium"
+                    android:text="@string/We_are_retrieving_OTP"
+                    android:gravity="center"
+                    android:textColor="@color/colorHint" />
+
                 <com.mukesh.OtpView
                     android:id="@+id/otp_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_100sdp"
+                    android:layout_marginTop="@dimen/_50sdp"
                     android:inputType="number"
                     app:itemSpacing="@dimen/_20sdp"
                     android:itemBackground="@color/white_lite"
@@ -84,7 +92,7 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnVerifyUser"
                     style="@style/material_button"
-                    android:layout_marginTop="@dimen/_100sdp"
+                    android:layout_marginTop="@dimen/_60sdp"
                     android:minHeight="@dimen/_50sdp"
                     android:text="@string/verify_continue"
                     android:textSize="@dimen/_12ssp"
@@ -95,7 +103,7 @@
                     android:id="@+id/tvResendOtp"
                     style="@style/TextView12ssp"
                     android:text="@string/resend_otp"
-                    android:layout_marginTop="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:layout_gravity="center"/>
 
             </LinearLayout>

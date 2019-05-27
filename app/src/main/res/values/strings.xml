@@ -20,7 +20,9 @@
     <string name="already_have_an_account">Already have an account? </string>
     <string name="otp_verification">OTP Verification</string>
     <string name="to_verify_phone_no">To verify your phone no.</string>
+    <string name="We_are_retrieving_OTP">We are retrieving 4 digit OTP sent on your mobile number. You can also enter it manually and proceed</string>
     <string name="resend_otp">Resend OTP</string>
+    <string name="resend_OTP_with_time">Resend OTP in </string>
     <string name="verify_continue"><![CDATA[VERIFY & CONTINUE]]></string>
     <string name="shop_name">Shop Name</string>
     <string name="address_line_one">Address Line 1</string>

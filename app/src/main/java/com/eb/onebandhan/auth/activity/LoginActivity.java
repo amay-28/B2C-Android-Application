@@ -16,6 +16,7 @@ import com.eb.onebandhan.auth.presenter.LoginPresenter;
 import com.eb.onebandhan.auth.viewinterface.LoginViewInterface;
 import com.eb.onebandhan.databinding.ActivityLoginBinding;
 import com.eb.onebandhan.util.Constant;
+import com.eb.onebandhan.util.Utils;
 
 public class LoginActivity extends AppCompatActivity implements LoginViewInterface, Constant {
     private Activity activity;
@@ -58,6 +59,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
     @Override
     public void onSucessfullyLogin(MUser mUser, String message) {
         startActivity(new Intent(activity, OtpVerificationActivity.class).putExtra(IS_FROM_SIGNUP, NO).putExtra(MOBILE_NO, mUser.getMobileNumber()));
+        Utils.startSMSReceiver(activity);
     }
 
     @Override

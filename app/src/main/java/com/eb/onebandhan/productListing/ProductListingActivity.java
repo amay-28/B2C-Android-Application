@@ -124,7 +124,7 @@ public class ProductListingActivity extends AppCompatActivity implements Product
         if (!loading)
             return;
 
-        if (!MyDialogProgress.isOpen(activity) ) {
+        if (!MyDialogProgress.isOpen(activity)) {
             //    if (!isPullRequest && !MyDialogProgress.isOpen(activity)) {
             MyDialogProgress.open(activity);
             //   }

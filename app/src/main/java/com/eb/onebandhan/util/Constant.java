@@ -1,7 +1,9 @@
 package com.eb.onebandhan.util;
 
 public interface Constant {
+    String FCMTOKENID = "fcmtoken";
     String TYPE_LOGIN_REQUEST_OTP="TYPE_LOGIN_REQUEST_OTP";
+    String TYPE_RESEND_OTP="TYPE_RESEND_OTP";
     String TYPE_LOGIN_ONLY="TYPE_LOGIN_ONLY";
     String IS_FROM_SIGNUP="FROM_SIGNUP";
     String YES="YES";
@@ -15,4 +17,9 @@ public interface Constant {
     String SORT_LOW_TO_HIGH = "price_asc";
     String SORT_HIGH_TO_LOW = "price_desc";
     String COMING_SOON = "coming soon";
+    String OTP_RECEIVE = "OTP_RECEIVE";
+    String OTP_RECEIVE_CLASS = "OTP_RECEIVE_CLASS";
+    String SPACE = " ";
+    String DEVICETYPE = "deviceType";
+    String DEVICETOKEN = "deviceToken";
 }

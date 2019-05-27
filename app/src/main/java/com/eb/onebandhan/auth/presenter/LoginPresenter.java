@@ -67,7 +67,9 @@ public class LoginPresenter implements LoginPresenterInterface, Constant {
     private <T> Observable getObservable(MSignUp mSignUp, String requestType) {
         if (requestType.equals(TYPE_LOGIN_ONLY))
             return APIClient.getClient(activity).create(APIInterface.class).login(mSignUp).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-        else
+        else if (requestType.equals(TYPE_RESEND_OTP)) {
+            return APIClient.getClient(activity).create(APIInterface.class).resendOtp(mSignUp).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        } else
             return APIClient.getClient(activity).create(APIInterface.class).loginToSendOtp(mSignUp).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
