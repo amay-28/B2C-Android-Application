@@ -135,7 +135,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements OtpVie
     // Show resend otp clock counter for product2 mnt
     public void counterClock() {
         binding.tvResendOtp.setEnabled(false);
-        new CountDownTimer(120000, 1000) {
+        new CountDownTimer(60000, 1000) {
             public void onTick(long millisUntilFinished) {
                 binding.tvResendOtp.setText(getString(R.string.resend_OTP_with_time) + Constant.SPACE + String.format("%02d:%02d", 0, TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
             }
