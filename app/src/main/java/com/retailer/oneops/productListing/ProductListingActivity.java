@@ -131,6 +131,7 @@ public class ProductListingActivity extends AppCompatActivity implements Product
         Map<String, String> map = new HashMap<>();
         map.put("categoryId", String.valueOf(categoryId));
         map.put("limit", String.valueOf(limit));
+        map.put("eager", "images");
         if (offset < DEFAULT_OFFSET) {
             map.put("offset", String.valueOf(offset));
         } else {

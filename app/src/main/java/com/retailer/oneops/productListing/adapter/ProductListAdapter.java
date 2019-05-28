@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.retailer.oneops.R;
 import com.retailer.oneops.auth.model.MCategory;
 import com.retailer.oneops.dashboard.adapter.SubCategoryListAdapter;
@@ -49,6 +50,12 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         double discountedPrice = Double.parseDouble(mProduct.getPrice());
         long discountPercent = calculateProfitPercent(actualPrice, discountedPrice);
         holder.binding.tvDiscountPercent.setText(discountPercent + "% OFF");
+
+        if (mProduct.getImages() != null){
+            Glide.with(activity)
+                    .load(mProduct.getImages().get(0).getUrl())
+                    .into(holder.binding.ivImage);
+        }
     }
 
     @Override

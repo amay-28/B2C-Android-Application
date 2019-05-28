@@ -1,5 +1,9 @@
 package com.retailer.oneops.productListing.model;
 
+import com.retailer.oneops.product.model.MImage;
+
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -18,4 +22,5 @@ public class MProduct {
     private String description;
     private String specifications;
     private String user_id;
+    private List<MImage> images;
 }
