@@ -12,7 +12,6 @@
             android:id="@+id/imgCollection"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_collection"
             android:scaleType="fitXY"/>
     </androidx.cardview.widget.CardView>
 </layout>

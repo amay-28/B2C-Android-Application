@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.retailer.oneops.R;
 import com.retailer.oneops.dashboard.fragment.HomeFragment;
 import com.retailer.oneops.dashboard.fragment.MoreFragment;
+import com.retailer.oneops.dashboard.fragment.MyInventoryFragment;
 import com.retailer.oneops.databinding.ActivityDashboardBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -26,6 +27,8 @@ public class DashboardActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.navMyInventory:
                 //                    mTextMessage.setText(R.string.title_home);
+                fragment = new MyInventoryFragment();
+                switchFragment(fragment, fragmentClass);
                 return true;
             case R.id.navHome:
                 //                    mTextMessage.setText(R.string.title_dashboard);

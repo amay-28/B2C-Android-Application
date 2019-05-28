@@ -122,7 +122,6 @@
     <string name="Bank_Details">Bank Details</string>
     <string name="order_placed_successfully">Your order placed successfully</string>
     <string name="dummy_time">10 min ago</string>
-    <string name="notification">Notification</string>
     <string name="no_notification_yet">No Notification Yet!</string>
     <string name="simply_browse">Simply browse, create a whishlist or make a purchase.</string>
     <string name="continue_shopping">CONTINUE SHOPPING</string>
@@ -141,7 +140,6 @@
     <string name="faqs">FAQ\'s</string>
     <string name="help">Help</string>
     <string name="settings">Settings</string>
-    <string name="logout">Logout</string>
     <string name="Ok">Ok</string>
     <string name="Cancel">Cancel</string>
     <string name="Message">Message</string>
@@ -187,6 +185,29 @@
     <string name="CONTINUE_SHOPPING">CONTINUE SHOPPING</string>
     <string name="Retailer_account_created_successfully">Retailer account created successfully !</string>
 
+    <!--Setting screen-->
+    <string name="notification">Notification</string>
+    <string name="cod">Cash On Delivery</string>
+    <string name="language">Select Your Language</string>
+    <string name="product">Add Product</string>
+    <string name="Service">Add Services</string>
+    <string name="refund">Set Your Return/Refund Policy</string>
+    <string name="cancel">Set Your Cancellation Policy</string>
+    <string name="delivery">Set Your Delivery Range</string>
+    <string name="tc">Terms &amp; Conditions</string>
+    <string name="privacy">Privacy Policy</string>
+    <string name="contact">Contact</string>
+    <string name="logout">Logout</string>
+    <string name="physicalinventory">(to your physical inventory)</string>
+    <string name="inventoryproduct">(for physical inventory product)</string>
+
+
+    <string name="Length">Length</string>
+    <string name="size_and_fit">Size &amp; Fit</string>
+    <string name="Material">Material</string>
+    <string name="Price">Price</string>
+    <string name="Your_Margin">Your Margin</string>
+    <string name="Selling_Price">Selling Price</string>
     <!--name (max length is 25 AND minimum is 3)
     mobile (max length is 10 AND minimum is 10)
     shop name (max length is 30 AND minimum is 3)

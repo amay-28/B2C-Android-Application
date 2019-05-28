@@ -38,6 +38,15 @@
             name="productListing"
             type="com.retailer.oneops.productListing.ProductListingActivity"/>
 
+        <variable
+            name="settings"
+            type="com.retailer.oneops.settings.SettingActivity"/>
+
+        <variable
+            name="myInventory"
+            type="com.retailer.oneops.dashboard.fragment.MyInventoryFragment"/>
+
+
     </data>
 
     <com.google.android.material.appbar.AppBarLayout

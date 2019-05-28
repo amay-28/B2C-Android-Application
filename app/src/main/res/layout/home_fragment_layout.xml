@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -24,7 +25,7 @@
                         android:id="@+id/btnWholesale"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/curve_back_right_flat"
+                        android:background="@drawable/curve_back_right_flat_blue"
                         android:singleLine="true"
                         android:paddingLeft="@dimen/_10sdp"
                         android:paddingTop="@dimen/_7sdp"
@@ -40,7 +41,7 @@
                         android:id="@+id/btnSinglePiece"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/curve_back_left_flat"
+                        android:background="@drawable/curve_back_left_flat_grey"
                         android:singleLine="true"
                         android:paddingLeft="@dimen/_10sdp"
                         android:paddingTop="@dimen/_7sdp"
@@ -54,6 +55,24 @@
 
             </LinearLayout>
 
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerViewContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="70dp"
+                android:orientation="vertical"
+                shimmer:duration="800">
+
+                <!-- Adding 7 rows of placeholders -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <include layout="@layout/home_place_holder" />
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
 
             <LinearLayout
                 android:id="@+id/llViewAll"

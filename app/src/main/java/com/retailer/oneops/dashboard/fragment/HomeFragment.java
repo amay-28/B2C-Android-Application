@@ -123,6 +123,9 @@ public class HomeFragment extends Fragment implements Constant, HomeViewInterfac
 
     @Override
     public void onSucessfullyGetCategoryList(List<MCategory> categoryList, String message) {
+        binding.shimmerViewContainer.stopShimmerAnimation();
+        binding.shimmerViewContainer.setVisibility(View.GONE);
+
         if (categoryList != null) {
             superCategoryList.addAll(categoryList);
             for (MCategory mCategory : superCategoryList) {
@@ -153,5 +156,17 @@ public class HomeFragment extends Fragment implements Constant, HomeViewInterfac
     @Override
     public void onCategoryClick(int position, String categoryId) {
         startActivity(ProductListingActivity.getIntent(activity, Integer.parseInt(categoryId)));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        binding.shimmerViewContainer.startShimmerAnimation();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        binding.shimmerViewContainer.stopShimmerAnimation();
     }
 }
