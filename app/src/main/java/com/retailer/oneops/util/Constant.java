@@ -22,4 +22,5 @@ public interface Constant {
     String SPACE = " ";
     String DEVICETYPE = "deviceType";
     String DEVICETOKEN = "deviceToken";
+    String ANDROID = "android";
 }

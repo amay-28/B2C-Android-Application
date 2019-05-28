@@ -99,4 +99,21 @@ public class Session {
         SharedPreferences settings = context.getSharedPreferences(PREFERENCE, 0);
         return settings.getBoolean(name, false);
     }
+
+    public void setSharedPreference(Context context, String name, String value) {
+        SharedPreferences settings = context.getSharedPreferences(PREFERENCE, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        // editor.clear();
+        editor.putString(name, value);
+        editor.apply();
+    }
+
+    //Get String
+    public String getSharedPreferences(Context context, String name) {
+        SharedPreferences settings = context.getSharedPreferences(PREFERENCE, 0);
+        if (name == null) {
+            name = "";
+        }
+        return settings.getString(name, "");
+    }
 }

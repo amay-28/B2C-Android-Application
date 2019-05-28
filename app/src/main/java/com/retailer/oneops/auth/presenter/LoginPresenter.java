@@ -11,6 +11,7 @@ import com.retailer.oneops.auth.model.MUser;
 import com.retailer.oneops.auth.presenterinterface.LoginPresenterInterface;
 import com.retailer.oneops.auth.viewinterface.LoginViewInterface;
 import com.retailer.oneops.util.Constant;
+import com.retailer.oneops.util.MyDialogProgress;
 import com.retailer.oneops.util.Session;
 import com.retailer.oneops.util.Utils;
 
@@ -50,6 +51,7 @@ public class LoginPresenter implements LoginPresenterInterface, Constant {
 
             @Override
             public void onError(Throwable e) {
+                MyDialogProgress.close(activity);
                 if (e instanceof HttpException)
                     viewInterface.onFailToLogin(Utils.errorMessageParsing(e).getMessage());
             }

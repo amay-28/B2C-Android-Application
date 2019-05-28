@@ -2,6 +2,7 @@ package com.retailer.oneops.util;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
@@ -28,10 +29,8 @@ public class RegisterFCMId extends AsyncTask<Void, Void, Void> {
         if (fcm_id == null || fcm_id.equals("")) {
             new RegisterFCMId(context).execute();
         } else {
-           /* Utils.setSharedPreference(context, Constant.FCMTOKENID, fcm_id);
+            session.setSharedPreference(context, Constant.FCMTOKENID, fcm_id);
             Log.d("token", fcm_id);
-            Utils.setSharedPreference(context, Constant.DEVICEID, Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID));
-            Log.d("token", Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID));*/
         }
         super.onPostExecute(aVoid);
     }

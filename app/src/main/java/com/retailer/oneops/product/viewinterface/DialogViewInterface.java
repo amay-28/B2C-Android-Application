@@ -1,7 +1,6 @@
-package com.eb.onebandhan.product.viewinterface;
+package com.retailer.oneops.product.viewinterface;
 
-import com.eb.onebandhan.auth.model.MCategory;
-import com.eb.onebandhan.auth.model.MUser;
+import com.retailer.oneops.auth.model.MCategory;
 
 import java.util.List;
 

@@ -21,6 +21,7 @@ import com.retailer.oneops.dashboard.activity.DashboardActivity;
 import com.retailer.oneops.databinding.ActivityOtpVerificationBinding;
 import com.retailer.oneops.util.Constant;
 import com.retailer.oneops.util.MyDialogProgress;
+import com.retailer.oneops.util.RegisterFCMId;
 import com.retailer.oneops.util.Session;
 import com.retailer.oneops.util.Utils;
 
@@ -65,6 +66,9 @@ public class OtpVerificationActivity extends AppCompatActivity implements OtpVie
             Toast.makeText(activity, getResources().getString(R.string.please_enter_valid_otp), Toast.LENGTH_SHORT).show();
         else {
             mSignUp.setOtp(binding.otpView.getText().toString());
+            mSignUp.setDeviceType(Constant.ANDROID);
+            mSignUp.setDeviceToken(session.getSharedPreferences(activity,Constant.FCMTOKENID));
+
             if (isFromSignUp.equals(YES)) {
                 MyDialogProgress.open(activity);
                 otpPresenter.performOtpVerificationTask(mSignUp);
@@ -85,6 +89,10 @@ public class OtpVerificationActivity extends AppCompatActivity implements OtpVie
         session = new Session(activity);
         session.setIntegerSharedPreference(activity, Constant.OTP_RECEIVE_CLASS, 1);
         session.setSharedPreferenceBoolean(activity, Constant.OTP_RECEIVE, true);
+        if (session.getSharedPreferences(activity, Constant.FCMTOKENID) != null && session.getSharedPreferences(activity, Constant.FCMTOKENID).trim().length() > 0) {
+        } else {
+            new RegisterFCMId(activity).execute();
+        }
     }
 
     public static void updateOtp(String otp) {

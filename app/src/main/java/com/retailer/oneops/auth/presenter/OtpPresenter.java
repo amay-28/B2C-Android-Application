@@ -1,6 +1,7 @@
 package com.retailer.oneops.auth.presenter;
 
 import android.app.Activity;
+import android.widget.Toast;
 
 import com.retailer.oneops.apiCalling.APIClient;
 import com.retailer.oneops.apiCalling.APIInterface;
@@ -9,6 +10,7 @@ import com.retailer.oneops.auth.model.MSignUp;
 import com.retailer.oneops.auth.model.MUser;
 import com.retailer.oneops.auth.presenterinterface.OtpPresenterInterface;
 import com.retailer.oneops.auth.viewinterface.OtpViewInterface;
+import com.retailer.oneops.util.MyDialogProgress;
 import com.retailer.oneops.util.Session;
 import com.retailer.oneops.util.Utils;
 
@@ -35,19 +37,27 @@ public class OtpPresenter implements OtpPresenterInterface {
         return new DisposableObserver<Response<ResponseData<MUser>>>() {
             @Override
             public void onNext(Response<ResponseData<MUser>> value) {
+                MyDialogProgress.close(activity);
                 new Session(activity).setString(AUTHORIZATION_KEY, BEARER + value.headers().get("AuthToken"));
-                viewInterface.onSucessfullyVerified(value.body().getMessage());
+                if (value.body() != null)
+                    viewInterface.onSucessfullyVerified(value.body().getMessage());
+                else {
+                    Toast.makeText(activity, Utils.getMessageFromErrorBody(value.errorBody()), Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override
             public void onError(Throwable e) {
-                if (e instanceof HttpException)
+                MyDialogProgress.close(activity);
+                if (e instanceof HttpException){
                     viewInterface.onFailToVerified(Utils.errorMessageParsing(e).getMessage());
+                }
+
             }
 
             @Override
             public void onComplete() {
-
+                MyDialogProgress.close(activity);
             }
         };
     }
