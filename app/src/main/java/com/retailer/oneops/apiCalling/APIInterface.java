@@ -1,6 +1,7 @@
 package com.retailer.oneops.apiCalling;
 
 
+import com.google.gson.JsonObject;
 import com.retailer.oneops.auth.model.MCategory;
 import com.retailer.oneops.auth.model.MProfile;
 import com.retailer.oneops.auth.model.MSignUp;
@@ -54,7 +55,7 @@ public interface APIInterface {
     Observable<ResponseData<List<MCategory>>> getCategoryRelatedData(@QueryMap Map<String, String> map);
 
     @POST("retailer/update-profile")
-    Observable<ResponseData<MUser>> updateShopDetail(@Header("Authorization") String token, @Body MProfile mProfile,@Query("isApp") boolean isApp);
+    Observable<ResponseData<MUser>> updateShopDetail(@Header("Authorization") String token, @Body MProfile mProfile, @Query("isApp") boolean isApp);
 
     @GET("banners")
     Observable<ResponseData<List<MBanner>>> getAllBannerList(@Header("Authorization") String token);
@@ -79,7 +80,7 @@ public interface APIInterface {
 
     @POST("retailer/update-profile")
     Observable<Response<ResponseData<MUser>>> updateProfile(@Header("Authorization") String token,
-                                                               @Body MProfile mProfile, @Query("isApp") boolean isApp);
+                                                            @Body MProfile mProfile, @Query("isApp") boolean isApp);
 
     @POST("retailer/update-bank-details")
     Observable<ResponseData<MBankDetail>> getBankDetails(@Header("Authorization") String token,
@@ -93,8 +94,13 @@ public interface APIInterface {
     Observable<ResponseData<List<MProduct>>> getPhysicalProductList(@Header("Authorization") String token, @QueryMap Map<String, String> map);
 
 
+    @GET("retailer/virtual-inventory")
+    Observable<ResponseData<List<MInventory>>> getVirtualProductList(@Header("Authorization") String token,
+                                                                   @QueryMap Map<String, String> map);
+
+
     @POST("retailer/virtual-inventory")
     Observable<Response<ResponseData<MInventory>>> addToInventory(@Header("Authorization") String token,
-                                                                 @Body MInventory mInventory);
+                                                                  @Body JsonObject inventoryObject);
 
 }

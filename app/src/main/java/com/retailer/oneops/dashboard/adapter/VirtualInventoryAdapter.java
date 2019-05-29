@@ -1,4 +1,4 @@
-package com.retailer.oneops.productListing.adapter;
+package com.retailer.oneops.dashboard.adapter;
 
 import android.app.Activity;
 import android.graphics.Paint;
@@ -8,9 +8,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.retailer.oneops.R;
-import com.retailer.oneops.auth.model.MCategory;
-import com.retailer.oneops.dashboard.adapter.SubCategoryListAdapter;
-import com.retailer.oneops.databinding.ItemProductListingBinding;
+import com.retailer.oneops.databinding.ItemMyInventoryBinding;
+import com.retailer.oneops.myinventory.model.MInventory;
 import com.retailer.oneops.productListing.model.MProduct;
 
 import java.util.List;
@@ -19,12 +18,12 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ViewHolder> implements SubCategoryListAdapter.CallBack {
+public class VirtualInventoryAdapter extends RecyclerView.Adapter<VirtualInventoryAdapter.ViewHolder> {
     private Activity activity;
-    private List<MProduct> productList;
+    private List<MInventory> productList;
     private CallBack callBack;
 
-    public ProductListAdapter(Activity activity, List<MProduct> productList, CallBack callBack) {
+    public VirtualInventoryAdapter(Activity activity, List<MInventory> productList, CallBack callBack) {
         this.activity = activity;
         this.productList = productList;
         this.callBack = callBack;
@@ -33,32 +32,32 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemProductListingBinding binding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.item_product_listing, parent, false);
+        ItemMyInventoryBinding binding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.item_my_inventory, parent, false);
         return new ViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        MProduct mProduct = productList.get(position);
+        MInventory mInventory = productList.get(position);
 
-        strikeThroughText(holder.binding.tvMrp);
-        holder.binding.tvProductName.setText(mProduct.getName());
-        holder.binding.tvProductDescription.setText(mProduct.getDescription());
-        holder.binding.tvSellingPrice.setText(mProduct.getPrice());
-        holder.binding.tvMrp.setText(mProduct.getCost_price());
+        strikeThroughText(holder.binding.tvSellingPrice);
+        holder.binding.tvProductName.setText(mInventory.getProduct().getName());
+        holder.binding.tvProductDescription.setText(mInventory.getProduct().getDescription());
+        holder.binding.tvPrice.setText(mInventory.getProduct().getPrice());
+        holder.binding.tvSellingPrice.setText(mInventory.getProduct().getCost_price());
 
-        double actualPrice = Double.parseDouble(mProduct.getCost_price());
-        double discountedPrice = Double.parseDouble(mProduct.getPrice());
+        double actualPrice = Double.parseDouble(mInventory.getProduct().getCost_price());
+        double discountedPrice = Double.parseDouble(mInventory.getProduct().getPrice());
         long discountPercent = calculateProfitPercent(actualPrice, discountedPrice);
         holder.binding.tvDiscountPercent.setText(discountPercent + "% OFF");
 
-        if (mProduct.getImages() != null) {
+        if (mInventory.getProduct().getImages() != null) {
             Glide.with(activity)
-                    .load(mProduct.getImages().get(0).getUrl())
-                    .into(holder.binding.ivImage);
+                    .load(mInventory.getProduct().getImages().get(0).getUrl())
+                    .into(holder.binding.ivProduct);
         }
 
-        holder.binding.tvAddToInventory.setOnClickListener(v -> callBack.onAddToInventoryClick(position,mProduct));
+        //holder.binding.cardViewRoot.setOnClickListener(v -> callBack.onProductItemClick(position,mProduct));
     }
 
     @Override
@@ -66,16 +65,10 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         return productList.size();
     }
 
-        @Override
-        public void onCategoryClick(int position, String categoryId) {
-
-        }
-
-
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ItemProductListingBinding binding;
+        ItemMyInventoryBinding binding;
 
-        public ViewHolder(@NonNull ItemProductListingBinding itemView) {
+        public ViewHolder(@NonNull ItemMyInventoryBinding itemView) {
             super(itemView.getRoot());
             binding = itemView;
         }
@@ -83,7 +76,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     public interface CallBack {
         void onProductItemClick(int position, MProduct mProduct);
-        void onAddToInventoryClick(int position, MProduct mProduct);
+        void onEditProduct(int position, MProduct mProduct);
+        void onDeleteProduct(int position, MProduct mProduct);
     }
 
     private void strikeThroughText(TextView textView) {

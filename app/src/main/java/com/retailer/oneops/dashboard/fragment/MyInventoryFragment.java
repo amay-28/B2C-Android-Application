@@ -1,36 +1,23 @@
 package com.retailer.oneops.dashboard.fragment;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.retailer.oneops.R;
-import com.retailer.oneops.auth.activity.LoginActivity;
 import com.retailer.oneops.auth.model.MUser;
-import com.retailer.oneops.bankDetail.activity.AddBankDetailActivity;
-import com.retailer.oneops.bankDetail.activity.BankDetailActivity;
-import com.retailer.oneops.dashboard.activity.EditProfileActivity;
-import com.retailer.oneops.dashboard.activity.MyProfileActivity;
-import com.retailer.oneops.dashboard.adapter.MyInventoryAdapter;
+import com.retailer.oneops.dashboard.adapter.PhysicalInventoryAdapter;
+import com.retailer.oneops.dashboard.adapter.VirtualInventoryAdapter;
 import com.retailer.oneops.dashboard.presenter.MyInventoryPresenter;
 import com.retailer.oneops.dashboard.viewinterface.MyInventViewInterface;
-import com.retailer.oneops.databinding.MoreFragmentLayoutBinding;
 import com.retailer.oneops.databinding.MyInventoryFragmentBinding;
-import com.retailer.oneops.product.AddProductActivity;
-import com.retailer.oneops.productListing.adapter.ProductListAdapter;
+import com.retailer.oneops.myinventory.model.MInventory;
 import com.retailer.oneops.productListing.model.MProduct;
-import com.retailer.oneops.productListing.presenter.ProductListingPresenter;
-import com.retailer.oneops.productListing.viewinterface.ProductListingViewInterface;
-import com.retailer.oneops.util.DialogUtil;
 import com.retailer.oneops.util.MyDialogProgress;
-import com.retailer.oneops.util.OnDialogItemClickListener;
 import com.retailer.oneops.util.Session;
 
 import java.util.ArrayList;
@@ -47,30 +34,32 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import static android.app.Activity.RESULT_OK;
 import static com.retailer.oneops.util.Constant.COMING_SOON;
-import static com.retailer.oneops.util.Constant.IS_LOGIN;
-import static com.retailer.oneops.util.Constant.NO;
+import static com.retailer.oneops.util.Constant.PHYSICAL_INVENTORY_LIST;
 import static com.retailer.oneops.util.Constant.SORT_HIGH_TO_LOW;
 import static com.retailer.oneops.util.Constant.SORT_LOW_TO_HIGH;
 import static com.retailer.oneops.util.Constant.SORT_NEW_FIRST;
+import static com.retailer.oneops.util.Constant.VIRTUAL_INVENTORY_LIST;
 
-public class MyInventoryFragment extends Fragment implements MyInventViewInterface, MyInventoryAdapter.CallBack {
+public class MyInventoryFragment extends Fragment implements MyInventViewInterface, PhysicalInventoryAdapter.CallBack, VirtualInventoryAdapter.CallBack {
     private Activity activity;
     private MyInventoryFragmentBinding binding;
     private MUser loggedInUser;
     private List<MProduct> productList = new ArrayList<>();
+    private List<MInventory> virtualList = new ArrayList<>();
     private BottomSheetDialog bottomSheetDialog;
-    private MyInventoryAdapter myInventoryAdapter;
+    private PhysicalInventoryAdapter physicalInventoryAdapter;
+    private VirtualInventoryAdapter virtualInventoryAdapter;
     private MyInventoryPresenter myInventoryPresenter;
     private MyInventViewInterface myInventViewInterface;
     private int visibleItemCount, totalItemCount, pastVisibleItems;
     LinearLayoutManager mLayoutManager;
-    private boolean loading = true;
-    private String sort_key;
+    private boolean loadingVirtual = true;
+    private boolean loadingPhysical = true;
     private int DEFAULT_OFFSET = 15, DEFAULT_LIMIT = 15;
     private boolean isFirstTime = false;
     private boolean isPhysicalInventory = false;
+    private String sort_key;
 
     @Nullable
     @Override
@@ -92,18 +81,21 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
         listener();
     }
 
+
     private void initialization() {
         bottomSheetDialog = new BottomSheetDialog(activity, R.style.TransparentDialogBackground);
         bottomSheetDialog.setContentView(R.layout.bottom_sheet_sort);
         isFirstTime = true;
-
-
         mLayoutManager = new LinearLayoutManager(activity, RecyclerView.VERTICAL, false);
+        bindRecyclerViewForVirtual();
+    }
+
+    public void bindRecyclerViewForPhysical() {
         binding.rvProducts.setLayoutManager(mLayoutManager);
         binding.rvProducts.setHasFixedSize(true);
         binding.rvProducts.setItemAnimator(new DefaultItemAnimator());
-        myInventoryAdapter = new MyInventoryAdapter(activity, productList, this);
-        binding.rvProducts.setAdapter(myInventoryAdapter);
+        physicalInventoryAdapter = new PhysicalInventoryAdapter(activity, productList, this);
+        binding.rvProducts.setAdapter(physicalInventoryAdapter);
 
         binding.rvProducts.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -112,12 +104,10 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
                 visibleItemCount = mLayoutManager.getChildCount();
                 totalItemCount = mLayoutManager.getItemCount();
                 pastVisibleItems = mLayoutManager.findFirstVisibleItemPosition();
-                if (loading) {
+                if (loadingPhysical) {
                     if ((visibleItemCount + pastVisibleItems) >= totalItemCount) {
-                        loading = false;
-                        if (!isFirstTime && isPhysicalInventory) {
-                            callPhysicalListing(DEFAULT_LIMIT, productList.size(), false, "0", true);
-                        }
+                        loadingPhysical = false;
+                        createPhysicalMapForAPICall(DEFAULT_LIMIT, productList.size(), false, "0", true, false);
                         isFirstTime = false;
                     }
                 }
@@ -128,11 +118,50 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loading = true;
+                loadingPhysical = true;
+                checkLimitOffsetConditionSort();
+                createPhysicalMapForAPICall(DEFAULT_LIMIT, 0, false, "0", false, false);
+                pullToRefresh.setRefreshing(false);
+
+            }
+        });
+
+    }
+
+    public void bindRecyclerViewForVirtual() {
+        binding.rvProducts.setLayoutManager(mLayoutManager);
+        binding.rvProducts.setHasFixedSize(true);
+        binding.rvProducts.setItemAnimator(new DefaultItemAnimator());
+        virtualInventoryAdapter = new VirtualInventoryAdapter(activity, virtualList, this);
+        binding.rvProducts.setAdapter(virtualInventoryAdapter);
+
+        createVirtualMapForAPICall(DEFAULT_LIMIT, 0, false, sort_key, false, true);
+
+        binding.rvProducts.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                visibleItemCount = mLayoutManager.getChildCount();
+                totalItemCount = mLayoutManager.getItemCount();
+                pastVisibleItems = mLayoutManager.findFirstVisibleItemPosition();
+                if (loadingVirtual) {
+                    if ((visibleItemCount + pastVisibleItems) >= totalItemCount) {
+                        loadingVirtual = false;
+                        createVirtualMapForAPICall(DEFAULT_LIMIT, productList.size(), false, "0", true, true);
+                        isFirstTime = false;
+                    }
+                }
+            }
+        });
+
+        final SwipeRefreshLayout pullToRefresh = binding.swipeToRefresh;
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadingVirtual = true;
                 checkLimitOffsetConditionSort();
                 //productList.clear();
-                if (isPhysicalInventory)
-                    callPhysicalListing(DEFAULT_LIMIT, 0, false, "0", false);
+                createVirtualMapForAPICall(DEFAULT_LIMIT, 0, false, "0", false, true);
                 pullToRefresh.setRefreshing(false);
 
             }
@@ -152,7 +181,9 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
             bottomSheetDialog.dismiss();
             checkLimitOffsetConditionSort();
             if (isPhysicalInventory)
-                callPhysicalListing(DEFAULT_LIMIT, 0, true, SORT_NEW_FIRST, false);
+                createPhysicalMapForAPICall(DEFAULT_LIMIT, 0, true, SORT_NEW_FIRST, false, false);
+            else
+                createVirtualMapForAPICall(DEFAULT_LIMIT, 0, true, SORT_NEW_FIRST, false, true);
 
         });
 
@@ -160,13 +191,17 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
             bottomSheetDialog.dismiss();
             checkLimitOffsetConditionSort();
             if (isPhysicalInventory)
-                callPhysicalListing(DEFAULT_LIMIT, 0, true, SORT_LOW_TO_HIGH, false);
+                createPhysicalMapForAPICall(DEFAULT_LIMIT, 0, true, SORT_LOW_TO_HIGH, false, false);
+            else
+                createVirtualMapForAPICall(DEFAULT_LIMIT, 0, true, SORT_LOW_TO_HIGH, false, true);
         });
         bottomSheetDialog.findViewById(R.id.tvHighToLow).setOnClickListener(v -> {
             bottomSheetDialog.dismiss();
             checkLimitOffsetConditionSort();
             if (isPhysicalInventory)
-                callPhysicalListing(DEFAULT_LIMIT, 0, true, SORT_HIGH_TO_LOW, false);
+                createPhysicalMapForAPICall(DEFAULT_LIMIT, 0, true, SORT_HIGH_TO_LOW, false, false);
+            else
+                createVirtualMapForAPICall(DEFAULT_LIMIT, 0, true, SORT_HIGH_TO_LOW, false, true);
         });
         bottomSheetDialog.findViewById(R.id.tvPopularity).setOnClickListener(v -> {
             bottomSheetDialog.dismiss();
@@ -196,9 +231,8 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
         }
     }
 
-
-    public void callPhysicalListing(int limit, int offset, boolean isSort, String sort_key, boolean isPullRequest) {
-        if (!loading)
+    public void createVirtualMapForAPICall(int limit, int offset, boolean isSort, String sort_key, boolean isPullRequest, boolean isVirtual) {
+        if (!loadingVirtual)
             return;
 
         if (!MyDialogProgress.isOpen(activity)) {
@@ -207,7 +241,7 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
 
         Map<String, String> map = new HashMap<>();
         map.put("limit", String.valueOf(limit));
-        //map.put("eager", "images");
+        map.put("eager", "images");
         if (offset < DEFAULT_OFFSET) {
             map.put("offset", String.valueOf(offset));
         } else {
@@ -217,14 +251,48 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
         if (isSort)
             map.put("sort", sort_key);
 
+        loadingVirtual = false;
+        loadingPhysical = true;
+        callInventoryListing(map, isVirtual, isPullRequest);
+    }
 
-        loading = false;
+    public void createPhysicalMapForAPICall(int limit, int offset, boolean isSort, String sort_key, boolean isPullRequest, boolean isVirtual) {
+        if (!loadingPhysical)
+            return;
 
-        if (!isPullRequest)
-            productList.clear();
+        if (!MyDialogProgress.isOpen(activity)) {
+            MyDialogProgress.open(activity);
+        }
 
-        myInventoryPresenter = new MyInventoryPresenter(myInventViewInterface, activity);
-        myInventoryPresenter.onInventoryProductList(map);
+        Map<String, String> map = new HashMap<>();
+        map.put("limit", String.valueOf(limit));
+        map.put("eager", "images");
+        if (offset < DEFAULT_OFFSET) {
+            map.put("offset", String.valueOf(offset));
+        } else {
+            map.put("offset", String.valueOf(DEFAULT_OFFSET));
+        }
+
+        if (isSort)
+            map.put("sort", sort_key);
+
+        loadingPhysical = false;
+        loadingVirtual = true;
+        callInventoryListing(map, isVirtual, isPullRequest);
+    }
+
+    public void callInventoryListing(Map<String, String> map, boolean isVirtualList, boolean isPullRequest) {
+        if (isVirtualList) {
+            if (!isPullRequest)
+                virtualList.clear();
+            myInventoryPresenter = new MyInventoryPresenter(myInventViewInterface, activity);
+            myInventoryPresenter.onProductInventoryList(map, VIRTUAL_INVENTORY_LIST);
+        } else {
+            if (!isPullRequest)
+                productList.clear();
+            myInventoryPresenter = new MyInventoryPresenter(myInventViewInterface, activity);
+            myInventoryPresenter.onProductInventoryList(map, PHYSICAL_INVENTORY_LIST);
+        }
     }
 
     public void virtualInventoryUI() {
@@ -233,6 +301,8 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
         binding.tvVirtualInventory.setTextColor(getResources().getColor(R.color.white));
         binding.llPhysicalInventory.setBackground(getResources().getDrawable(R.drawable.curve_back_left_flat_grey));
         binding.tvPhysicalInventory.setTextColor(getResources().getColor(R.color.black));
+        bindRecyclerViewForVirtual();
+        createVirtualMapForAPICall(DEFAULT_LIMIT, 0, false, sort_key, false, true);
     }
 
     public void physicalInventoryUI() {
@@ -241,8 +311,8 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
         binding.tvVirtualInventory.setTextColor(getResources().getColor(R.color.black));
         binding.llPhysicalInventory.setBackground(getResources().getDrawable(R.drawable.curve_back_left_flat_blue));
         binding.tvPhysicalInventory.setTextColor(getResources().getColor(R.color.white));
-
-        callPhysicalListing(DEFAULT_LIMIT, 0, false, sort_key, false);
+        bindRecyclerViewForPhysical();
+        createPhysicalMapForAPICall(DEFAULT_LIMIT, 0, false, sort_key, false, false);
     }
 
     @Override
@@ -255,7 +325,7 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
             binding.swipeToRefresh.setVisibility(View.VISIBLE);
             binding.llNoRecordFind.setVisibility(View.GONE);
             MyDialogProgress.close(activity);
-            myInventoryAdapter.notifyDataSetChanged();
+            physicalInventoryAdapter.notifyDataSetChanged();
         } else {
             binding.swipeToRefresh.setVisibility(View.GONE);
             MyDialogProgress.close(activity);
@@ -264,7 +334,30 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
                 binding.llNoRecordFind.setVisibility(View.VISIBLE);
         }
 
-        loading = true;
+        loadingPhysical = true;
+    }
+
+    @Override
+    public void onSuccessfulVirtualListing(List<MInventory> mInventoryList, String message) {
+        MyDialogProgress.close(activity);
+        DEFAULT_LIMIT = 15;
+        this.productList.clear();
+        this.virtualList.addAll(mInventoryList);
+
+        if (virtualList != null && virtualList.size() != 0) {
+            binding.swipeToRefresh.setVisibility(View.VISIBLE);
+            binding.llNoRecordFind.setVisibility(View.GONE);
+            MyDialogProgress.close(activity);
+            virtualInventoryAdapter.notifyDataSetChanged();
+        } else {
+            binding.swipeToRefresh.setVisibility(View.GONE);
+            MyDialogProgress.close(activity);
+
+            if (virtualList.size() == 0)
+                binding.llNoRecordFind.setVisibility(View.VISIBLE);
+        }
+
+        loadingVirtual = true;
     }
 
     @Override
@@ -272,7 +365,8 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
         MyDialogProgress.close(activity);
         Toast.makeText(activity, errorMessage, Toast.LENGTH_SHORT).show();
 
-        loading = false;
+        loadingVirtual = false;
+        loadingPhysical = false;
     }
 
     @Override

@@ -8,10 +8,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.retailer.oneops.R;
-import com.retailer.oneops.auth.model.MCategory;
-import com.retailer.oneops.dashboard.adapter.SubCategoryListAdapter;
 import com.retailer.oneops.databinding.ItemMyInventoryBinding;
-import com.retailer.oneops.databinding.ItemProductListingBinding;
 import com.retailer.oneops.productListing.model.MProduct;
 
 import java.util.List;
@@ -20,12 +17,12 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MyInventoryAdapter extends RecyclerView.Adapter<MyInventoryAdapter.ViewHolder> {
+public class PhysicalInventoryAdapter extends RecyclerView.Adapter<PhysicalInventoryAdapter.ViewHolder> {
     private Activity activity;
     private List<MProduct> productList;
     private CallBack callBack;
 
-    public MyInventoryAdapter(Activity activity, List<MProduct> productList, CallBack callBack) {
+    public PhysicalInventoryAdapter(Activity activity, List<MProduct> productList, CallBack callBack) {
         this.activity = activity;
         this.productList = productList;
         this.callBack = callBack;

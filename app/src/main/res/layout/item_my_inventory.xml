@@ -75,12 +75,38 @@
                     android:textColor="@color/color_light_text" />
 
                 <TextView
+                    android:id="@+id/tvCategoryHead"
+                    style="@style/TextView10ssp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvProductDescription"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/latoregular"
+                    android:singleLine="true"
+                    android:text="@string/category"
+                    android:textColor="@color/color_light_text" />
+
+                <TextView
+                    android:id="@+id/tvCategory"
+                    style="@style/TextView10ssp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvProductDescription"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/tvCategoryHead"
+                    android:fontFamily="@font/latoregular"
+                    android:singleLine="true"
+                    android:text="@string/category" />
+
+
+                <TextView
                     android:id="@+id/tvPrice"
                     style="@style/TextView12ssp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/latomedium"
-                    android:layout_below="@id/tvProductDescription"
+                    android:layout_below="@id/tvCategoryHead"
                     android:layout_marginTop="@dimen/_11sdp"
                     android:layout_marginRight="@dimen/_10sdp"
                     android:text="Rs.1,259"
@@ -91,7 +117,7 @@
                     style="@style/TextView10ssp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvProductDescription"
+                    android:layout_below="@id/tvCategory"
                     android:layout_marginTop="@dimen/_11sdp"
                     android:layout_marginBottom="9dp"
                     android:layout_toRightOf="@id/tvPrice"
@@ -103,33 +129,13 @@
                     android:id="@+id/tvDiscountPercent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvProductDescription"
+                    android:layout_below="@id/tvCategory"
                     android:layout_marginLeft="6.2dp"
                     android:layout_marginTop="@dimen/_11sdp"
                     android:layout_toRightOf="@id/tvSellingPrice"
                     android:text="40% OFF"
                     android:textColor="@color/green" />
 
-<!--
-                <ImageView
-                    android:id="@+id/btn1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tvPrice"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_plus" />
--->
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tvPrice"
-                    android:layout_marginTop="5dp"
-                    android:layout_centerVertical="true"
-                    android:drawableLeft="@drawable/ic_plus"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:text="@string/Add_to_your_Inventory"
-                    android:textColor="@color/yellow" />
 
             </RelativeLayout>
 

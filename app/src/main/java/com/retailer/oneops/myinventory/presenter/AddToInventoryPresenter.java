@@ -3,6 +3,7 @@ package com.retailer.oneops.myinventory.presenter;
 import android.app.Activity;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
 import com.retailer.oneops.apiCalling.APIClient;
 import com.retailer.oneops.apiCalling.APIInterface;
 import com.retailer.oneops.apiCalling.ResponseData;
@@ -60,14 +61,14 @@ public class AddToInventoryPresenter implements AddToInventPresenterInterface, C
         };
     }
 
-    private <T> Observable getObservable(MInventory mInventory) {
+    private <T> Observable getObservable(JsonObject inventoryObject) {
         return APIClient.getClient(activity).create(APIInterface.class)
-                .addToInventory(new Session(activity).getString(AUTHORIZATION_KEY),mInventory)
+                .addToInventory(new Session(activity).getString(AUTHORIZATION_KEY),inventoryObject)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override
-    public void performAddToInventoryTask(MInventory mInventory) {
-        getObservable(mInventory).subscribeWith(getObserver());
+    public void performAddToInventoryTask(JsonObject inventoryObject) {
+        getObservable(inventoryObject).subscribeWith(getObserver());
     }
 }

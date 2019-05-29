@@ -19,6 +19,8 @@ public interface Constant {
     String COMING_SOON = "coming soon";
     String OTP_RECEIVE = "OTP_RECEIVE";
     String OTP_RECEIVE_CLASS = "OTP_RECEIVE_CLASS";
+    int VIRTUAL_INVENTORY_LIST = 1;
+    int PHYSICAL_INVENTORY_LIST = 2;
     String SPACE = " ";
     String DEVICETYPE = "deviceType";
     String DEVICETOKEN = "deviceToken";

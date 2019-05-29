@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
 import com.retailer.oneops.R;
 import com.retailer.oneops.auth.model.MCategory;
 import com.retailer.oneops.auth.model.MSignUp;
@@ -61,7 +62,10 @@ public class AddToInventoryActivity extends AppCompatActivity implements AddToIn
             } else {
                 mInventory.setProduct_id(Integer.parseInt(mProduct.getId()));
                 mInventory.setMargin(Integer.parseInt(binding.etMargin.getText().toString().trim()));
-                presenter.performAddToInventoryTask(mInventory);
+                JsonObject jsonObject=new JsonObject();
+                jsonObject.addProperty("product_id",Integer.parseInt(mProduct.getId()));
+                jsonObject.addProperty("margin",Integer.parseInt(binding.etMargin.getText().toString().trim()));
+                presenter.performAddToInventoryTask(jsonObject);
             }
         });
     }

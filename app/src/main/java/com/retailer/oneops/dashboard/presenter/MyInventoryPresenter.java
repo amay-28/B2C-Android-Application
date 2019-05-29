@@ -7,6 +7,7 @@ import com.retailer.oneops.apiCalling.APIInterface;
 import com.retailer.oneops.apiCalling.ResponseData;
 import com.retailer.oneops.dashboard.presenterinterface.MyInventPresenterInterface;
 import com.retailer.oneops.dashboard.viewinterface.MyInventViewInterface;
+import com.retailer.oneops.myinventory.model.MInventory;
 import com.retailer.oneops.productListing.model.MProduct;
 import com.retailer.oneops.productListing.presenterinterface.ProductListingPresenterInterface;
 import com.retailer.oneops.productListing.viewinterface.ProductListingViewInterface;
@@ -53,14 +54,41 @@ public class MyInventoryPresenter implements MyInventPresenterInterface, Constan
         };
     }
 
-    @Override
-    public void onInventoryProductList(Map<String, String> map) {
-        getObservable(map).subscribeWith(getObserver());
+    public DisposableObserver<ResponseData<List<MInventory>>> getVirtualObserver() {
+        return new DisposableObserver<ResponseData<List<MInventory>>>() {
+            @Override
+            public void onNext(ResponseData<List<MInventory>> response) {
+                productListingViewInterface.onSuccessfulVirtualListing(response.getData(), response.getMessage());
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                if (e instanceof HttpException)
+                    productListingViewInterface.onFailedProductListing(Utils.errorMessageParsing(e).getMessage());
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
     }
 
-    private Observable getObservable(Map<String, String> map) {
+    private Observable getPhysicalObservable(Map<String, String> map) {
         return APIClient.getClient(activity).create(APIInterface.class).getPhysicalProductList(new Session(activity).getString(AUTHORIZATION_KEY), map).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-
     }
 
+    private Observable getVirtualObservable(Map<String, String> map) {
+        return APIClient.getClient(activity).create(APIInterface.class).getVirtualProductList(new Session(activity).getString(AUTHORIZATION_KEY), map).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    @Override
+    public void onProductInventoryList(Map<String, String> map, int requestType) {
+        if (requestType == Constant.VIRTUAL_INVENTORY_LIST) {
+            getVirtualObservable(map).subscribeWith(getVirtualObserver());
+        } else {
+            getPhysicalObservable(map).subscribeWith(getObserver());
+        }
+    }
 }
