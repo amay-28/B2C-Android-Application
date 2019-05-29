@@ -260,6 +260,10 @@ public class ProductListingActivity extends AppCompatActivity implements Product
 
     @Override
     public void onProductItemClick(int position, MProduct mProduct) {
+    }
+
+    @Override
+    public void onAddToInventoryClick(int position, MProduct mProduct) {
         startActivityForResult(AddToInventoryActivity.getIntent(activity, mProduct), OPEN_ACTIVITY_ADD_TO_INVENTORY);
     }
 }

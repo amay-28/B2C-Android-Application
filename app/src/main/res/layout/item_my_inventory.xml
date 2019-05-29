@@ -40,7 +40,7 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/img3"
+                android:id="@+id/ivProduct"
                 android:layout_width="@dimen/_95sdp"
                 android:layout_height="@dimen/_100sdp"
                 android:layout_centerVertical="true"
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_13sdp"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/img3">
+                android:layout_toRightOf="@id/ivProduct">
 
                 <TextView
                     android:id="@+id/tvProductName"
@@ -100,6 +100,7 @@
                     android:textColor="@color/color_grey_text" />
 
                 <TextView
+                    android:id="@+id/tvDiscountPercent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvProductDescription"

@@ -4,6 +4,7 @@
     xmlns:bind="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="myInventory"
             type="com.retailer.oneops.dashboard.fragment.MyInventoryFragment" />
@@ -35,6 +36,7 @@
                 android:weightSum="1">
 
                 <RelativeLayout
+                    android:id="@+id/rlSort"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -95,69 +97,118 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/view2"
+                android:layout_marginLeft="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_13sdp"
+                android:layout_marginRight="@dimen/_40sdp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:layout_marginLeft="@dimen/_40sdp"
-                android:layout_marginRight="@dimen/_40sdp"
-                android:layout_marginTop="@dimen/_13sdp"
                 android:weightSum="1">
 
 
-            <LinearLayout
-                android:id="@+id/llVirtualInventory"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".5"
-                android:background="@drawable/curve_back_right_flat_blue"
-                android:paddingLeft="@dimen/_5sdp"
-                android:paddingRight="@dimen/_5sdp"
-                android:paddingTop="@dimen/_7sdp"
-                android:paddingBottom="@dimen/_7sdp">
+                <LinearLayout
+                    android:id="@+id/llVirtualInventory"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    android:background="@drawable/curve_back_right_flat_blue"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:paddingTop="@dimen/_7sdp"
+                    android:paddingRight="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_7sdp">
 
-                <TextView
-                    android:id="@+id/tvVirtualInventory"
+                    <TextView
+                        android:id="@+id/tvVirtualInventory"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight=".4"
+                        android:fontFamily="@font/latoregular"
+                        android:gravity="center"
+                        android:text="Virtual Inventory"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10ssp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llPhysicalInventory"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight=".4"
-                    android:fontFamily="@font/latoregular"
-                    android:gravity="center"
-                    android:text="Virtual Inventory"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10ssp" />
+                    android:layout_weight=".5"
+                    android:background="@drawable/curve_back_left_flat_grey"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:paddingTop="@dimen/_7sdp"
+                    android:paddingRight="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_7sdp">
+
+                    <TextView
+                        android:id="@+id/tvPhysicalInventory"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent"
+                        android:fontFamily="@font/latoregular"
+                        android:gravity="center"
+                        android:text="Physical Inventory"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10ssp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/llPhysicalInventory"
-                android:layout_width="0dp"
+                android:id="@+id/llNoRecordFind"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight=".5"
-                android:background="@drawable/curve_back_left_flat_grey"
-                android:paddingLeft="@dimen/_5sdp"
-                android:paddingRight="@dimen/_5sdp"
-                android:paddingTop="@dimen/_7sdp"
-                android:paddingBottom="@dimen/_7sdp">
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:layout_below="@+id/llInventoryOption"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_no_product_found"
+                    android:layout_gravity="center"/>
 
                 <TextView
-                    android:id="@+id/tvPhysicalInventory"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/transparent"
-                    android:fontFamily="@font/latoregular"
+                    android:layout_height="wrap_content"
+                    style="@style/TextView14ssp"
+                    android:layout_marginTop="@dimen/_30sdp"
                     android:gravity="center"
-                    android:text="Physical Inventory"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_10ssp" />
+                    android:textColor="@color/colorPrimary"
+                    android:fontFamily="@font/latomedium"
+                    android:text="@string/No_Product_Found"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/TextView14ssp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:textColor="@color/color_grey_text"
+                    android:fontFamily="@font/latoregular"
+                    android:text="@string/No_Product_Found_message" />
 
             </LinearLayout>
 
-            </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipeToRefresh"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/llInventoryOption"
-                android:layout_marginTop="@dimen/_13sdp" />
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                android:layout_below="@+id/llInventoryOption">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvProducts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_13sdp" />
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         </RelativeLayout>
 

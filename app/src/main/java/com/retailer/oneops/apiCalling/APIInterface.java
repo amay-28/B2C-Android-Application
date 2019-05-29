@@ -89,6 +89,10 @@ public interface APIInterface {
     Observable<ResponseData<List<MProduct>>> getAllProductList(@Header("Authorization") String token, @QueryMap Map<String, String> map);
 
 
+    @GET("products/seller")
+    Observable<ResponseData<List<MProduct>>> getPhysicalProductList(@Header("Authorization") String token, @QueryMap Map<String, String> map);
+
+
     @POST("retailer/virtual-inventory")
     Observable<Response<ResponseData<MInventory>>> addToInventory(@Header("Authorization") String token,
                                                                  @Body MInventory mInventory);

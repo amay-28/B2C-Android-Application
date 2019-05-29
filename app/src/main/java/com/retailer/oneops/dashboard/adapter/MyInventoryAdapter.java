@@ -1,4 +1,4 @@
-package com.retailer.oneops.productListing.adapter;
+package com.retailer.oneops.dashboard.adapter;
 
 import android.app.Activity;
 import android.graphics.Paint;
@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide;
 import com.retailer.oneops.R;
 import com.retailer.oneops.auth.model.MCategory;
 import com.retailer.oneops.dashboard.adapter.SubCategoryListAdapter;
+import com.retailer.oneops.databinding.ItemMyInventoryBinding;
 import com.retailer.oneops.databinding.ItemProductListingBinding;
 import com.retailer.oneops.productListing.model.MProduct;
 
@@ -19,12 +20,12 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ViewHolder> implements SubCategoryListAdapter.CallBack {
+public class MyInventoryAdapter extends RecyclerView.Adapter<MyInventoryAdapter.ViewHolder> {
     private Activity activity;
     private List<MProduct> productList;
     private CallBack callBack;
 
-    public ProductListAdapter(Activity activity, List<MProduct> productList, CallBack callBack) {
+    public MyInventoryAdapter(Activity activity, List<MProduct> productList, CallBack callBack) {
         this.activity = activity;
         this.productList = productList;
         this.callBack = callBack;
@@ -33,7 +34,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemProductListingBinding binding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.item_product_listing, parent, false);
+        ItemMyInventoryBinding binding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.item_my_inventory, parent, false);
         return new ViewHolder(binding);
     }
 
@@ -41,11 +42,11 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MProduct mProduct = productList.get(position);
 
-        strikeThroughText(holder.binding.tvMrp);
+        strikeThroughText(holder.binding.tvSellingPrice);
         holder.binding.tvProductName.setText(mProduct.getName());
         holder.binding.tvProductDescription.setText(mProduct.getDescription());
-        holder.binding.tvSellingPrice.setText(mProduct.getPrice());
-        holder.binding.tvMrp.setText(mProduct.getCost_price());
+        holder.binding.tvPrice.setText(mProduct.getPrice());
+        holder.binding.tvSellingPrice.setText(mProduct.getCost_price());
 
         double actualPrice = Double.parseDouble(mProduct.getCost_price());
         double discountedPrice = Double.parseDouble(mProduct.getPrice());
@@ -55,10 +56,10 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         if (mProduct.getImages() != null) {
             Glide.with(activity)
                     .load(mProduct.getImages().get(0).getUrl())
-                    .into(holder.binding.ivImage);
+                    .into(holder.binding.ivProduct);
         }
 
-        holder.binding.tvAddToInventory.setOnClickListener(v -> callBack.onProductItemClick(position,mProduct));
+        //holder.binding.cardViewRoot.setOnClickListener(v -> callBack.onProductItemClick(position,mProduct));
     }
 
     @Override
@@ -66,16 +67,10 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         return productList.size();
     }
 
-        @Override
-        public void onCategoryClick(int position, String categoryId) {
-
-        }
-
-
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ItemProductListingBinding binding;
+        ItemMyInventoryBinding binding;
 
-        public ViewHolder(@NonNull ItemProductListingBinding itemView) {
+        public ViewHolder(@NonNull ItemMyInventoryBinding itemView) {
             super(itemView.getRoot());
             binding = itemView;
         }
@@ -83,7 +78,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     public interface CallBack {
         void onProductItemClick(int position, MProduct mProduct);
-        void onAddToInventoryClick(int position, MProduct mProduct);
+        void onEditProduct(int position, MProduct mProduct);
+        void onDeleteProduct(int position, MProduct mProduct);
     }
 
     private void strikeThroughText(TextView textView) {
