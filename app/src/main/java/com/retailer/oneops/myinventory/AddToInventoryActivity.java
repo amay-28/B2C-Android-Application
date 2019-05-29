@@ -36,7 +36,7 @@ public class AddToInventoryActivity extends AppCompatActivity implements AddToIn
     private Activity activity;
     private MProduct mProduct;
     private AddToInventoryPresenter presenter;
-    private MInventory mInventory = new MInventory();
+    private MInventory mInventory=new MInventory();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,24 +60,31 @@ public class AddToInventoryActivity extends AppCompatActivity implements AddToIn
             if (TextUtils.isEmpty(binding.etMargin.getText().toString().trim())) {
                 Toast.makeText(activity, getResources().getString(R.string.Please_enter_your_margin), Toast.LENGTH_LONG).show();
             } else {
-                mInventory.setProduct_id(Integer.parseInt(mProduct.getId()));
-                mInventory.setMargin(Integer.parseInt(binding.etMargin.getText().toString().trim()));
-                JsonObject jsonObject=new JsonObject();
-                jsonObject.addProperty("product_id",Integer.parseInt(mProduct.getId()));
-                jsonObject.addProperty("margin",Integer.parseInt(binding.etMargin.getText().toString().trim()));
-                presenter.performAddToInventoryTask(jsonObject);
+                if (mProduct != null) {
+                    mInventory.setProduct_id(Integer.parseInt(mProduct.getId()));
+                    mInventory.setMargin(Integer.parseInt(binding.etMargin.getText().toString().trim()));
+                    JsonObject jsonObject = new JsonObject();
+                    jsonObject.addProperty("product_id", Integer.parseInt(mProduct.getId()));
+                    jsonObject.addProperty("margin", Integer.parseInt(binding.etMargin.getText().toString().trim()));
+                    presenter.performAddToInventoryTask(jsonObject);
+                } else {
+
+                }
+
             }
         });
     }
 
     private void getIntentData() {
         mProduct = getIntent().getParcelableExtra("mProduct");
+        mInventory = getIntent().getParcelableExtra("mInventory");
         setExistingData(mProduct);
     }
 
-    public static Intent getIntent(Activity activity, MProduct productModel) {
+    public static Intent getIntent(Activity activity, MProduct productModel, MInventory inventoryModel) {
         Intent intent = new Intent(activity, AddToInventoryActivity.class);
         intent.putExtra("mProduct", (Parcelable) productModel);
+        intent.putExtra("mInventory", (Parcelable) inventoryModel);
         return intent;
     }
 
@@ -90,6 +97,7 @@ public class AddToInventoryActivity extends AppCompatActivity implements AddToIn
 
     @Override
     public void onSuccessfullyAdd(MInventory mInventory, String message) {
+        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
         Intent data = new Intent();
         setResult(RESULT_OK, data);
         finish();

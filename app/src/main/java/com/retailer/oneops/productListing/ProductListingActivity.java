@@ -193,16 +193,6 @@ public class ProductListingActivity extends AppCompatActivity implements Product
         });
     }
 
-    private void checkLimitOffsetCondition() {
-        if (productList.size() < DEFAULT_LIMIT) {
-            DEFAULT_LIMIT = 15;
-            callPresenterProductListing(DEFAULT_LIMIT, DEFAULT_OFFSET, false, "0", false);
-        } else {
-            DEFAULT_LIMIT = productList.size();
-            callPresenterProductListing(DEFAULT_LIMIT, DEFAULT_OFFSET, false, "0", false);
-        }
-    }
-
 
     private void checkLimitOffsetConditionSort() {
         if (productList.size() < DEFAULT_LIMIT) {
@@ -264,6 +254,6 @@ public class ProductListingActivity extends AppCompatActivity implements Product
 
     @Override
     public void onAddToInventoryClick(int position, MProduct mProduct) {
-        startActivityForResult(AddToInventoryActivity.getIntent(activity, mProduct), OPEN_ACTIVITY_ADD_TO_INVENTORY);
+        startActivityForResult(AddToInventoryActivity.getIntent(activity, mProduct, null), OPEN_ACTIVITY_ADD_TO_INVENTORY);
     }
 }

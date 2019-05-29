@@ -75,9 +75,9 @@ public class VirtualInventoryAdapter extends RecyclerView.Adapter<VirtualInvento
     }
 
     public interface CallBack {
-        void onProductItemClick(int position, MProduct mProduct);
-        void onEditProduct(int position, MProduct mProduct);
-        void onDeleteProduct(int position, MProduct mProduct);
+        void onVirtualItemClick(int position, MInventory mInventory);
+        void onEditVirtualProduct(int position, MInventory mInventory);
+        void onDeleteVirtualProduct(int position, MInventory mInventory);
     }
 
     private void strikeThroughText(TextView textView) {

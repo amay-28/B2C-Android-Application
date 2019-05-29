@@ -74,9 +74,9 @@ public class PhysicalInventoryAdapter extends RecyclerView.Adapter<PhysicalInven
     }
 
     public interface CallBack {
-        void onProductItemClick(int position, MProduct mProduct);
-        void onEditProduct(int position, MProduct mProduct);
-        void onDeleteProduct(int position, MProduct mProduct);
+        void onPhysicalItemClick(int position, MProduct mProduct);
+        void onEditPhysicalProduct(int position, MProduct mProduct);
+        void onDeletePhysicalProduct(int position, MProduct mProduct);
     }
 
     private void strikeThroughText(TextView textView) {

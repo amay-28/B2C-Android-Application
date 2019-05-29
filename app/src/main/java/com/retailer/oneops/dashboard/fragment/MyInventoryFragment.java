@@ -15,6 +15,7 @@ import com.retailer.oneops.dashboard.adapter.VirtualInventoryAdapter;
 import com.retailer.oneops.dashboard.presenter.MyInventoryPresenter;
 import com.retailer.oneops.dashboard.viewinterface.MyInventViewInterface;
 import com.retailer.oneops.databinding.MyInventoryFragmentBinding;
+import com.retailer.oneops.myinventory.AddToInventoryActivity;
 import com.retailer.oneops.myinventory.model.MInventory;
 import com.retailer.oneops.productListing.model.MProduct;
 import com.retailer.oneops.util.MyDialogProgress;
@@ -60,6 +61,7 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
     private boolean isFirstTime = false;
     private boolean isPhysicalInventory = false;
     private String sort_key;
+    private int OPEN_ACTIVITY_ADD_TO_INVENTORY = 100;
 
     @Nullable
     @Override
@@ -369,18 +371,35 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
         loadingPhysical = false;
     }
 
+
     @Override
-    public void onProductItemClick(int position, MProduct mProduct) {
+    public void onVirtualItemClick(int position, MInventory mInventory) {
 
     }
 
     @Override
-    public void onEditProduct(int position, MProduct mProduct) {
+    public void onEditVirtualProduct(int position, MInventory mInventory) {
+        startActivityForResult(AddToInventoryActivity.getIntent(activity, null, mInventory), OPEN_ACTIVITY_ADD_TO_INVENTORY);
+    }
+
+    @Override
+    public void onDeleteVirtualProduct(int position, MInventory mInventory) {
 
     }
 
     @Override
-    public void onDeleteProduct(int position, MProduct mProduct) {
+    public void onPhysicalItemClick(int position, MProduct mProduct) {
 
     }
+
+    @Override
+    public void onEditPhysicalProduct(int position, MProduct mProduct) {
+
+    }
+
+    @Override
+    public void onDeletePhysicalProduct(int position, MProduct mProduct) {
+
+    }
+
 }
