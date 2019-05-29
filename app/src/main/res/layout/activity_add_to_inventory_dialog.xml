@@ -161,7 +161,7 @@
                     android:text="@string/Price" />
 
                 <TextView
-                    android:id="@+id/tvPrice"
+                    android:id="@+id/tvPriceRs"
                     style="@style/TextView12ssp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -169,7 +169,20 @@
                     android:layout_marginTop="@dimen/_7sdp"
                     android:fontFamily="@font/latomedium"
                     android:textColor="@color/color_grey_text"
-                    android:text="Rs. 1250" />
+                    android:text="Rs." />
+
+                <TextView
+                    android:id="@+id/tvPrice"
+                    style="@style/TextView12ssp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/priceHead"
+                    android:layout_toRightOf="@+id/tvPriceRs"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_marginLeft="@dimen/_3sdp"
+                    android:fontFamily="@font/latomedium"
+                    android:textColor="@color/color_grey_text"
+                    android:text="" />
 
                 <TextView
                     android:id="@+id/yourMarginHead"
@@ -181,8 +194,8 @@
                     android:fontFamily="@font/latosemibold"
                     android:text="@string/Your_Margin" />
 
-                <EditText
-                    android:id="@+id/etMargin"
+                <TextView
+                    android:id="@+id/tvMarginRs"
                     style="@style/TextView12ssp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -190,7 +203,19 @@
                     android:layout_marginTop="@dimen/_7sdp"
                     android:fontFamily="@font/latomedium"
                     android:textColor="@color/color_grey_text"
-                    android:text="Rs. 10" />
+                    android:text="Rs." />
+
+                <EditText
+                    android:id="@+id/etMargin"
+                    style="@style/TextView12ssp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/yourMarginHead"
+                    android:layout_toRightOf="@+id/tvMarginRs"
+                    android:fontFamily="@font/latomedium"
+                    android:layout_marginLeft="@dimen/_3sdp"
+                    android:textColor="@color/color_grey_text"
+                    android:text="" />
 
                 <TextView
                     android:id="@+id/SellingPriceHead"
@@ -202,19 +227,48 @@
                     android:fontFamily="@font/latosemibold"
                     android:text="@string/Selling_Price" />
 
-                <TextView
-                    android:id="@+id/tvGST"
-                    style="@style/TextView12ssp"
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/etMargin"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:layout_marginRight="@dimen/_5sdp"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentRight="true">
+
+                    <TextView
+                        android:id="@+id/tvGSTRs"
+                        style="@style/TextView12ssp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:fontFamily="@font/latomedium"
+                        android:textColor="@color/color_grey_text"
+                        android:text="GST: Rs." />
+
+
+                    <TextView
+                        android:id="@+id/tvGST"
+                        style="@style/TextView12ssp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/tvGSTRs"
+                        android:layout_marginLeft="@dimen/_3sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:fontFamily="@font/latomedium"
+                        android:textColor="@color/color_grey_text"
+                        android:text="" />
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tvSpRs"
+                    style="@style/TextView12ssp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/SellingPriceHead"
+                    android:layout_marginTop="@dimen/_7sdp"
                     android:fontFamily="@font/latomedium"
                     android:textColor="@color/color_grey_text"
-                    android:text="GST: Rs.10" />
-
+                    android:text="Rs." />
 
                 <TextView
                     android:id="@+id/tvSellingPrice"
@@ -223,11 +277,14 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/SellingPriceHead"
                     android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_toRightOf="@+id/tvSpRs"
                     android:fontFamily="@font/latomedium"
+                    android:layout_marginLeft="@dimen/_3sdp"
                     android:textColor="@color/color_grey_text"
-                    android:text="Rs. 1250" />
+                    android:text="" />
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSave"
                     style="@style/material_button"
                     android:layout_marginTop="@dimen/_30sdp"
                     android:layout_marginBottom="@dimen/_10sdp"

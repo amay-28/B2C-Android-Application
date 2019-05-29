@@ -8,6 +8,7 @@ import com.retailer.oneops.auth.model.MUser;
 import com.retailer.oneops.bankDetail.activity.model.MBankDetail;
 import com.retailer.oneops.dashboard.model.MBanner;
 import com.retailer.oneops.dashboard.model.MCollection;
+import com.retailer.oneops.myinventory.model.MInventory;
 import com.retailer.oneops.product.model.MAddProduct;
 import com.retailer.oneops.product.model.MImageServer;
 import com.retailer.oneops.productListing.model.MProduct;
@@ -86,5 +87,10 @@ public interface APIInterface {
 
     @GET("products")
     Observable<ResponseData<List<MProduct>>> getAllProductList(@Header("Authorization") String token, @QueryMap Map<String, String> map);
+
+
+    @POST("retailer/virtual-inventory")
+    Observable<Response<ResponseData<MInventory>>> addToInventory(@Header("Authorization") String token,
+                                                                 @Body MInventory mInventory);
 
 }

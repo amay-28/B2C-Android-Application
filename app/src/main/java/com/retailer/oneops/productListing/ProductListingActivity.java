@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.retailer.oneops.R;
 import com.retailer.oneops.databinding.ActivityProductListingBinding;
+import com.retailer.oneops.myinventory.AddToInventoryActivity;
 import com.retailer.oneops.productListing.adapter.ProductListAdapter;
 import com.retailer.oneops.productListing.model.MProduct;
 import com.retailer.oneops.productListing.presenter.ProductListingPresenter;
@@ -35,7 +36,7 @@ import static com.retailer.oneops.util.Constant.SORT_HIGH_TO_LOW;
 import static com.retailer.oneops.util.Constant.SORT_LOW_TO_HIGH;
 import static com.retailer.oneops.util.Constant.SORT_NEW_FIRST;
 
-public class ProductListingActivity extends AppCompatActivity implements ProductListingViewInterface {
+public class ProductListingActivity extends AppCompatActivity implements ProductListingViewInterface, ProductListAdapter.CallBack {
 
     private ActivityProductListingBinding mBinding;
     private Context context;
@@ -52,6 +53,7 @@ public class ProductListingActivity extends AppCompatActivity implements Product
     private String sort_key;
     private int DEFAULT_OFFSET = 15, DEFAULT_LIMIT = 15;
     private boolean isFirstTime = false;
+    private int OPEN_ACTIVITY_ADD_TO_INVENTORY = 100;
 
 
     @Override
@@ -81,7 +83,7 @@ public class ProductListingActivity extends AppCompatActivity implements Product
         mBinding.rvProducts.setLayoutManager(mLayoutManager);
         mBinding.rvProducts.setHasFixedSize(true);
         mBinding.rvProducts.setItemAnimator(new DefaultItemAnimator());
-        productListAdapter = new ProductListAdapter(activity, productList);
+        productListAdapter = new ProductListAdapter(activity, productList, this);
         mBinding.rvProducts.setAdapter(productListAdapter);
 
         mBinding.rvProducts.setOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -106,7 +108,7 @@ public class ProductListingActivity extends AppCompatActivity implements Product
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loading =true;
+                loading = true;
                 checkLimitOffsetConditionSort();
                 //productList.clear();
                 callPresenterProductListing(DEFAULT_LIMIT, 0, false, "0", false);
@@ -254,5 +256,10 @@ public class ProductListingActivity extends AppCompatActivity implements Product
         Toast.makeText(activity, errorMessage, Toast.LENGTH_SHORT).show();
 
         loading = false;
+    }
+
+    @Override
+    public void onProductItemClick(int position, MProduct mProduct) {
+        startActivityForResult(AddToInventoryActivity.getIntent(activity, mProduct), OPEN_ACTIVITY_ADD_TO_INVENTORY);
     }
 }

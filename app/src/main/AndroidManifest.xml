@@ -11,10 +11,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
-    <uses-permission android:name="android.permission.READ_SMS"/>
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
 
     <application
@@ -71,14 +71,19 @@
             android:name="com.retailer.oneops.auth.activity.SelectLanguageActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name="com.retailer.oneops.product.DialogActivity"
+        <activity
+            android:name="com.retailer.oneops.product.DialogActivity"
+            android:theme="@style/TransparentBackground" />
+
+        <activity
+            android:name=".myinventory.AddToInventoryActivity"
             android:theme="@style/TransparentBackground" />
 
         <!-- Image croping activity-->
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeActionbar"/>
+            android:theme="@style/AppThemeActionbar" />
 
         <receiver
             android:name="com.retailer.oneops.util.TextMessageReceiver"

@@ -208,6 +208,7 @@
     <string name="Price">Price</string>
     <string name="Your_Margin">Your Margin</string>
     <string name="Selling_Price">Selling Price</string>
+    <string name="Please_enter_your_margin">Please enter your margin</string>
     <!--name (max length is 25 AND minimum is 3)
     mobile (max length is 10 AND minimum is 10)
     shop name (max length is 30 AND minimum is 3)

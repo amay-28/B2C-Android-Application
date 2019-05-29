@@ -24,9 +24,10 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     private List<MProduct> productList;
     private CallBack callBack;
 
-    public ProductListAdapter(Activity activity, List<MProduct> productList) {
+    public ProductListAdapter(Activity activity, List<MProduct> productList, CallBack callBack) {
         this.activity = activity;
         this.productList = productList;
+        this.callBack = callBack;
     }
 
     @NonNull
@@ -51,11 +52,13 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         long discountPercent = calculateProfitPercent(actualPrice, discountedPrice);
         holder.binding.tvDiscountPercent.setText(discountPercent + "% OFF");
 
-        if (mProduct.getImages() != null){
+        if (mProduct.getImages() != null) {
             Glide.with(activity)
                     .load(mProduct.getImages().get(0).getUrl())
                     .into(holder.binding.ivImage);
         }
+
+        holder.binding.cardViewRoot.setOnClickListener(v -> callBack.onProductItemClick(position,mProduct));
     }
 
     @Override
@@ -63,10 +66,10 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         return productList.size();
     }
 
-    @Override
-    public void onCategoryClick(int position, String categoryId) {
+        @Override
+        public void onCategoryClick(int position, String categoryId) {
 
-    }
+        }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -79,7 +82,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     }
 
     public interface CallBack {
-        void onCategoryClick(int position, MCategory mCategory);
+        void onProductItemClick(int position, MProduct mProduct);
     }
 
     private void strikeThroughText(TextView textView) {
