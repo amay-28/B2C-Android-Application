@@ -22,6 +22,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Response;
 import retrofit2.adapter.rxjava2.HttpException;
 
 public class MyInventoryPresenter implements MyInventPresenterInterface, Constant {
@@ -75,12 +76,44 @@ public class MyInventoryPresenter implements MyInventPresenterInterface, Constan
         };
     }
 
+    public DisposableObserver<retrofit2.Response<String>> getDeleteObserver() {
+        return new DisposableObserver<retrofit2.Response<String>>() {
+            @Override
+            public void onNext(Response<String> response) {
+                productListingViewInterface.onSuccessfulDeleteItem();
+                //productListingViewInterface.onSuccessfulVirtualListing(response.getData(), response.getMessage());
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                if (e instanceof HttpException)
+                    productListingViewInterface.onFailedProductListing(Utils.errorMessageParsing(e).getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+    }
+
     private Observable getPhysicalObservable(Map<String, String> map) {
         return APIClient.getClient(activity).create(APIInterface.class).getPhysicalProductList(new Session(activity).getString(AUTHORIZATION_KEY), map).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     private Observable getVirtualObservable(Map<String, String> map) {
         return APIClient.getClient(activity).create(APIInterface.class).getVirtualProductList(new Session(activity).getString(AUTHORIZATION_KEY), map).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    private <T> Observable getDeleteInventoryObservable(int id, int requestType) {
+        if (requestType == VIRTUAL_INVENTORY_LIST)
+            return APIClient.getClient(activity).create(APIInterface.class)
+                    .deleteVirtualInventory(new Session(activity).getString(AUTHORIZATION_KEY), id)
+                    .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        else
+            return APIClient.getClient(activity).create(APIInterface.class)
+                    .deletePhysicalInventory(new Session(activity).getString(AUTHORIZATION_KEY), id)
+                    .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override
@@ -90,5 +123,10 @@ public class MyInventoryPresenter implements MyInventPresenterInterface, Constan
         } else {
             getPhysicalObservable(map).subscribeWith(getObserver());
         }
+    }
+
+    @Override
+    public void onDeleteInventoryList(int inventoryId, int requestType) {
+        getDeleteInventoryObservable(inventoryId, requestType).subscribeWith(getDeleteObserver());
     }
 }

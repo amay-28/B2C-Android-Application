@@ -6,4 +6,6 @@ import com.retailer.oneops.myinventory.model.MInventory;
 
 public interface AddToInventPresenterInterface {
     void performAddToInventoryTask(JsonObject inventoryObject);
+
+    void performEditInventoryTask(JsonObject inventoryObject, int id);
 }

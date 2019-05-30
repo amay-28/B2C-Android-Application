@@ -8,5 +8,8 @@ import okhttp3.MultipartBody;
 
 public interface AddProductPresenterInterface {
     void addProductTask(MAddProduct mAddProduct);
+
+    void updateProductTask(MAddProduct mAddProduct, int id);
+
     void onUpdateImage(List<MultipartBody.Part> files);
 }

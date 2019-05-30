@@ -63,7 +63,19 @@ public class AddToInventoryPresenter implements AddToInventPresenterInterface, C
 
     private <T> Observable getObservable(JsonObject inventoryObject) {
         return APIClient.getClient(activity).create(APIInterface.class)
-                .addToInventory(new Session(activity).getString(AUTHORIZATION_KEY),inventoryObject)
+                .addToVirtualInventory(new Session(activity).getString(AUTHORIZATION_KEY), inventoryObject)
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    private <T> Observable getEditInventoryObservable(JsonObject inventoryObject, int id) {
+        return APIClient.getClient(activity).create(APIInterface.class)
+                .editVirtualInventory(new Session(activity).getString(AUTHORIZATION_KEY), inventoryObject, id)
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    private <T> Observable getDeleteInventoryObservable(int id) {
+        return APIClient.getClient(activity).create(APIInterface.class)
+                .deleteVirtualInventory(new Session(activity).getString(AUTHORIZATION_KEY), id)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
@@ -71,4 +83,10 @@ public class AddToInventoryPresenter implements AddToInventPresenterInterface, C
     public void performAddToInventoryTask(JsonObject inventoryObject) {
         getObservable(inventoryObject).subscribeWith(getObserver());
     }
+
+    @Override
+    public void performEditInventoryTask(JsonObject inventoryObject, int id) {
+        getEditInventoryObservable(inventoryObject, id).subscribeWith(getObserver());
+    }
+
 }

@@ -208,11 +208,13 @@
                 <EditText
                     android:id="@+id/etMargin"
                     style="@style/TextView12ssp"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_70sdp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/yourMarginHead"
                     android:layout_toRightOf="@+id/tvMarginRs"
                     android:fontFamily="@font/latomedium"
+                    android:inputType="number"
+                    android:maxLength="4"
                     android:layout_marginLeft="@dimen/_3sdp"
                     android:textColor="@color/color_grey_text"
                     android:text="" />

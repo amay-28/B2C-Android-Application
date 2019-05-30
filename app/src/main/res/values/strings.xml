@@ -143,7 +143,7 @@
     <string name="Ok">Ok</string>
     <string name="Cancel">Cancel</string>
     <string name="Message">Message</string>
-    <string name="logout_popup">Are you sure you want to logout from the app?</string>
+
 
     <!--PROFILE SCREEN-->
     <string name="general_detail">General Detail</string>
@@ -221,4 +221,7 @@
     GST (max length is 30 AND minimum is 2)
     GST% (max length is 10 AND minimum is 1)-->
 
+    <!--popups-->
+    <string name="logout_popup">Are you sure you want to logout from the app?</string>
+    <string name="delete_popup">Are you sure you want to delete it from your inventory?</string>
 </resources>

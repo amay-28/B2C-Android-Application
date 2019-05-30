@@ -7,13 +7,17 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.retailer.oneops.R;
 import com.retailer.oneops.auth.model.MCategory;
 import com.retailer.oneops.databinding.ActivityAddProductBinding;
+import com.retailer.oneops.myinventory.AddToInventoryActivity;
+import com.retailer.oneops.myinventory.model.MInventory;
 import com.retailer.oneops.product.adapter.ImageAdapter;
 import com.retailer.oneops.product.adapter.ShowImagesAdapter;
 import com.retailer.oneops.product.model.MAddProduct;
@@ -23,6 +27,7 @@ import com.retailer.oneops.product.presenter.AddProductPresenter;
 import com.retailer.oneops.product.presenter.DialogPresenter;
 import com.retailer.oneops.product.viewinterface.AddProductViewInterface;
 import com.retailer.oneops.product.viewinterface.DialogViewInterface;
+import com.retailer.oneops.productListing.model.MProduct;
 import com.retailer.oneops.util.CommonClickHandler;
 import com.retailer.oneops.util.Session;
 import com.retailer.oneops.util.ShowToast;
@@ -51,6 +56,7 @@ import static com.retailer.oneops.auth.util.Categoryutil.ZERO;
 
 public class AddProductActivity extends AppCompatActivity implements DialogViewInterface, AddProductViewInterface,
         ImageAdapter.CallBack {
+    private static Intent intent;
     private Activity activity;
     private ActivityAddProductBinding binding;
     private int OPEN_DIALOG_FOR_CATEGORY = 1;
@@ -71,6 +77,8 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
     private Uri imageURI;
     private String profileImageURL = "";
     private int imagePosition;
+    private MProduct mProduct;
+    private boolean isEditProduct = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -100,8 +108,33 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         imageAdapter = new ShowImagesAdapter(activity, setFirstImage(), this);
         binding.rvImages.setAdapter(imageAdapter);
 
-
+        if (intent != null)
+            getIntentData();
     }
+
+    private void getIntentData() {
+        isEditProduct = true;
+        mProduct = intent.getParcelableExtra("mProduct");
+        if (mProduct != null)
+            setExistingData(mProduct);
+    }
+
+
+    public static Intent getIntent(Activity activity, MProduct productModel) {
+        intent = new Intent(activity, AddProductActivity.class);
+        intent.putExtra("mProduct", (Parcelable) productModel);
+        return intent;
+    }
+
+    public void setExistingData(MProduct mProduct) {
+        binding.etProductName.setText(mProduct.getName());
+        binding.etDescription.setText(mProduct.getDescription());
+        binding.etSellingPrice.setText(mProduct.getPrice());
+
+        imageList.addAll(mProduct.getImages());
+        imageAdapter.notifyDataSetChanged();
+    }
+
 
     public List<MImage> setFirstImage() {
         MImage mImage;
@@ -260,7 +293,7 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
 
                 if ((imageList.size() > 1 || imageList.get(0).getFile() != null) && imageList.size() < 4) {
                     setLocalImage();
-                }else{
+                } else {
                     imageAdapter.notifyDataSetChanged();
                 }
 
@@ -341,7 +374,15 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
     @Override
     public void onSucessfullyUpdatedImage(List<MImageServer> mImageList) {
         mAddProduct.setImages(mImageList);
-        if (checkValidate()) addProductPresenter.addProductTask(mAddProduct);
+        if (checkValidate()) {
+            mAddProduct.getCategory().setIsSelected(null);
+            if (isEditProduct) {
+                addProductPresenter.updateProductTask(mAddProduct, Integer.parseInt(mProduct.getId()));
+            } else {
+                addProductPresenter.addProductTask(mAddProduct);
+            }
+
+        }
     }
 
     @Override
@@ -353,7 +394,8 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
     public void CreateFileForSend(List<MImage> imageList) {
         List<MultipartBody.Part> files = new ArrayList<>();
         for (MImage mImage : imageList) {
-            if (!mImage.isLocal()) {
+
+            if (!mImage.isLocal() && mImage.getFile() != null) {
                 imageURI = Uri.fromFile(mImage.getFile());
                 //File image = Utils.compressURIForUpload(activity, imageURI, "");
 

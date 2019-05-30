@@ -23,6 +23,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MultipartBody;
+import retrofit2.Response;
 import retrofit2.adapter.rxjava2.HttpException;
 
 public class AddProductPresenter implements AddProductPresenterInterface, Constant {
@@ -89,9 +90,19 @@ public class AddProductPresenter implements AddProductPresenterInterface, Consta
         return APIClient.getClient(activity).create(APIInterface.class).addProduct(new Session(activity).getString(AUTHORIZATION_KEY), mAddProduct).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
+    private <T> Observable getObservableForEditProduct(MAddProduct mAddProduct, int id) {
+        return APIClient.getClient(activity).create(APIInterface.class).editProduct(new Session(activity).getString(AUTHORIZATION_KEY), mAddProduct, id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
     private <T> Observable getObservableImage(List<MultipartBody.Part> files) {
         return APIClient.getClient(activity).create(APIInterface.class).uploadImages(new Session(activity).getString(AUTHORIZATION_KEY),
                 files).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    private <T> Observable getDeleteInventoryObservable(int id) {
+        return APIClient.getClient(activity).create(APIInterface.class)
+                .deletePhysicalInventory(new Session(activity).getString(AUTHORIZATION_KEY), id)
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override
@@ -100,8 +111,18 @@ public class AddProductPresenter implements AddProductPresenterInterface, Consta
     }
 
     @Override
+    public void updateProductTask(MAddProduct mAddProduct, int id) {
+        getObservableForEditProduct(mAddProduct, id).subscribeWith(getObserverToAddProduct());
+    }
+
+    @Override
     public void onUpdateImage(List<MultipartBody.Part> files) {
         getObservableImage(files).subscribeWith(getObserverImage());
     }
 
+    /*@Override
+    public void onDeleteInventoryItem(int inventoryId) {
+        getDeleteInventoryObservable(inventoryId).subscribeWith(getDeleteObserver());
+    }
+*/
 }

@@ -6,4 +6,5 @@ import java.util.Map;
 
 public interface MyInventPresenterInterface {
     void onProductInventoryList(Map<String, String> map,int requestType);
+    void onDeleteInventoryList(int inventoryId,int requestType);
 }

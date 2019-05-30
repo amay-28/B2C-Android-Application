@@ -56,6 +56,8 @@ public class PhysicalInventoryAdapter extends RecyclerView.Adapter<PhysicalInven
                     .into(holder.binding.ivProduct);
         }
 
+        holder.binding.ivEdit.setOnClickListener(v -> callBack.onEditPhysicalProduct(position, mProduct));
+        holder.binding.ivDelete.setOnClickListener(v -> callBack.onDeletePhysicalProduct(position, mProduct));
         //holder.binding.cardViewRoot.setOnClickListener(v -> callBack.onProductItemClick(position,mProduct));
     }
 
@@ -75,7 +77,9 @@ public class PhysicalInventoryAdapter extends RecyclerView.Adapter<PhysicalInven
 
     public interface CallBack {
         void onPhysicalItemClick(int position, MProduct mProduct);
+
         void onEditPhysicalProduct(int position, MProduct mProduct);
+
         void onDeletePhysicalProduct(int position, MProduct mProduct);
     }
 

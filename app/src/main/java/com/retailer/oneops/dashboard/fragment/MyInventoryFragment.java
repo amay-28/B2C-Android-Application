@@ -1,6 +1,7 @@
 package com.retailer.oneops.dashboard.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,8 +18,11 @@ import com.retailer.oneops.dashboard.viewinterface.MyInventViewInterface;
 import com.retailer.oneops.databinding.MyInventoryFragmentBinding;
 import com.retailer.oneops.myinventory.AddToInventoryActivity;
 import com.retailer.oneops.myinventory.model.MInventory;
+import com.retailer.oneops.product.AddProductActivity;
 import com.retailer.oneops.productListing.model.MProduct;
+import com.retailer.oneops.util.DialogUtil;
 import com.retailer.oneops.util.MyDialogProgress;
+import com.retailer.oneops.util.OnDialogItemClickListener;
 import com.retailer.oneops.util.Session;
 
 import java.util.ArrayList;
@@ -35,6 +39,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import static android.app.Activity.RESULT_OK;
 import static com.retailer.oneops.util.Constant.COMING_SOON;
 import static com.retailer.oneops.util.Constant.PHYSICAL_INVENTORY_LIST;
 import static com.retailer.oneops.util.Constant.SORT_HIGH_TO_LOW;
@@ -42,7 +47,8 @@ import static com.retailer.oneops.util.Constant.SORT_LOW_TO_HIGH;
 import static com.retailer.oneops.util.Constant.SORT_NEW_FIRST;
 import static com.retailer.oneops.util.Constant.VIRTUAL_INVENTORY_LIST;
 
-public class MyInventoryFragment extends Fragment implements MyInventViewInterface, PhysicalInventoryAdapter.CallBack, VirtualInventoryAdapter.CallBack {
+public class MyInventoryFragment extends Fragment implements MyInventViewInterface,
+        PhysicalInventoryAdapter.CallBack, VirtualInventoryAdapter.CallBack, OnDialogItemClickListener {
     private Activity activity;
     private MyInventoryFragmentBinding binding;
     private MUser loggedInUser;
@@ -61,7 +67,11 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
     private boolean isFirstTime = false;
     private boolean isPhysicalInventory = false;
     private String sort_key;
-    private int OPEN_ACTIVITY_ADD_TO_INVENTORY = 100;
+    private int OPEN_EDIT_VIRTUAL_INVENTORY = 100;
+    private int deleteVirtualInventoryItemId;
+    private int deletePhysicalProductId;
+    private int deleteProductItemId;
+    private int deletePosition;
 
     @Nullable
     @Override
@@ -321,6 +331,7 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
     public void onSuccessfulProductListing(List<MProduct> mProductListing, String message) {
         MyDialogProgress.close(activity);
         DEFAULT_LIMIT = 15;
+        this.virtualList.clear();
         this.productList.addAll(mProductListing);
 
         if (productList != null && productList.size() != 0) {
@@ -363,6 +374,21 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
     }
 
     @Override
+    public void onSuccessfulDeleteItem() {
+        if (isPhysicalInventory) {
+            this.productList.remove(deletePosition);
+            physicalInventoryAdapter.notifyDataSetChanged();
+
+        } else {
+            /*loadingVirtual = true;
+            loadingPhysical = false;
+            createVirtualMapForAPICall(DEFAULT_LIMIT, 0, false, sort_key, false, true);*/
+            this.virtualList.remove(deletePosition);
+            virtualInventoryAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
     public void onFailedProductListing(String errorMessage) {
         MyDialogProgress.close(activity);
         Toast.makeText(activity, errorMessage, Toast.LENGTH_SHORT).show();
@@ -379,12 +405,14 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
 
     @Override
     public void onEditVirtualProduct(int position, MInventory mInventory) {
-        startActivityForResult(AddToInventoryActivity.getIntent(activity, null, mInventory), OPEN_ACTIVITY_ADD_TO_INVENTORY);
+        startActivityForResult(AddToInventoryActivity.getIntent(activity, null, mInventory), OPEN_EDIT_VIRTUAL_INVENTORY);
     }
 
     @Override
     public void onDeleteVirtualProduct(int position, MInventory mInventory) {
-
+        deletePosition = position;
+        deleteProductItemId = mInventory.getId();
+        DialogUtil.showOkCancelDialog(activity, getString(R.string.delete_popup), this);
     }
 
     @Override
@@ -394,12 +422,32 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
 
     @Override
     public void onEditPhysicalProduct(int position, MProduct mProduct) {
-
+        startActivityForResult(AddProductActivity.getIntent(activity, mProduct), OPEN_EDIT_VIRTUAL_INVENTORY);
     }
 
     @Override
     public void onDeletePhysicalProduct(int position, MProduct mProduct) {
-
+        deletePosition = position;
+        deleteProductItemId = Integer.parseInt(mProduct.getId());
+        DialogUtil.showOkCancelDialog(activity, getString(R.string.delete_popup), this);
     }
+
+    @Override
+    public void onDialogButtonClick(int i, int position) {
+        if (isPhysicalInventory)
+            myInventoryPresenter.onDeleteInventoryList(deleteProductItemId, PHYSICAL_INVENTORY_LIST);
+        else
+            myInventoryPresenter.onDeleteInventoryList(deleteProductItemId, VIRTUAL_INVENTORY_LIST);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == OPEN_EDIT_VIRTUAL_INVENTORY && resultCode == RESULT_OK) {
+            loadingVirtual = true;
+            createVirtualMapForAPICall(DEFAULT_LIMIT, 0, false, sort_key, false, true);
+        }
+    }
+
 
 }

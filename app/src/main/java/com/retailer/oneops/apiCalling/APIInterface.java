@@ -22,11 +22,14 @@ import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import retrofit2.Response;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
@@ -49,6 +52,10 @@ public interface APIInterface {
     @POST("product")
     Observable<ResponseData> addProduct(@Header("Authorization") String token,
                                         @Body MAddProduct mAddProduct);
+
+    @PUT("product/{id}")
+    Observable<ResponseData> editProduct(@Header("Authorization") String token,
+                                        @Body MAddProduct mAddProduct,@Path("id") int id);
 
     // for withouth auth token
     @GET("categories")
@@ -82,7 +89,7 @@ public interface APIInterface {
     Observable<Response<ResponseData<MUser>>> updateProfile(@Header("Authorization") String token,
                                                             @Body MProfile mProfile, @Query("isApp") boolean isApp);
 
-    @POST("retailer/update-bank-details")
+    @POST("update-bank-details")
     Observable<ResponseData<MBankDetail>> getBankDetails(@Header("Authorization") String token,
                                                          @Body MBankDetail mBankDetail);
 
@@ -96,11 +103,23 @@ public interface APIInterface {
 
     @GET("retailer/virtual-inventory")
     Observable<ResponseData<List<MInventory>>> getVirtualProductList(@Header("Authorization") String token,
-                                                                   @QueryMap Map<String, String> map);
+                                                                     @QueryMap Map<String, String> map);
 
 
     @POST("retailer/virtual-inventory")
-    Observable<Response<ResponseData<MInventory>>> addToInventory(@Header("Authorization") String token,
-                                                                  @Body JsonObject inventoryObject);
+    Observable<Response<ResponseData<MInventory>>> addToVirtualInventory(@Header("Authorization") String token,
+                                                                         @Body JsonObject inventoryObject);
 
+    @PUT("retailer/virtual-inventory/{id}")
+    Observable<Response<ResponseData<MInventory>>> editVirtualInventory(@Header("Authorization") String token,
+                                                                        @Body JsonObject inventoryObject,
+                                                                        @Path("id") int id);
+
+    @DELETE("retailer/virtual-inventory/{id}")
+    Observable<Response<String>> deleteVirtualInventory(@Header("Authorization") String token,
+                                                                        @Path("id") int id);
+
+    @DELETE("product/{id}")
+    Observable<Response<String>> deletePhysicalInventory(@Header("Authorization") String token,
+                                                        @Path("id") int id);
 }

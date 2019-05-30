@@ -9,6 +9,7 @@ public interface MyInventViewInterface {
 
   void onSuccessfulProductListing(List<MProduct> mProductListing, String message);
   void onSuccessfulVirtualListing(List<MInventory> mInventoryList, String message);
+  void onSuccessfulDeleteItem();
   void onFailedProductListing(String errorMessage);
 }
 
