@@ -9,7 +9,8 @@
         <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
     </style>
 
-// use for crop image
+    // use for crop image
+
     <style name="AppThemeActionbar" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -173,7 +174,6 @@
     </style>
 
 
-
     <style name="material_button_outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -211,7 +211,7 @@
         <!--<item name="android:windowCloseOnTouchOutside">false</item>-->
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:colorBackground">     @android:color/transparent</item>
+        <item name="android:colorBackground">@android:color/transparent</item>
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:backgroundDimAmount">0.3</item>
         <item name="android:windowFrame">@null</item>

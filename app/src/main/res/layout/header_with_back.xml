@@ -46,6 +46,10 @@
             name="myInventory"
             type="com.retailer.oneops.dashboard.fragment.MyInventoryFragment"/>
 
+        <variable
+            name="productDetail"
+            type="com.retailer.oneops.product.ProductDetailActivity"/>
+
 
     </data>
 

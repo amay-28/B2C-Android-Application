@@ -221,6 +221,28 @@
     GST (max length is 30 AND minimum is 2)
     GST% (max length is 10 AND minimum is 1)-->
 
+    <!--Product Detail-->
+    <string name="COD_available">COD Available</string>
+    <string name="Share">Share</string>
+    <string name="Add_to_Inventory">Add to Inventory</string>
+    <string name="Product_Description">Product Description</string>
+    <string name="Fit">Fit</string>
+    <string name="Transparency">Transparency</string>
+    <string name="Sleeve_Length">Sleeve Length</string>
+    <string name="Material_and_Care">Material &amp; Care</string>
+    <string name="Maximum_Purchase_Limit">Maximum Purchase Limit</string>
+    <string name="Specify_pincode_delivery">Specify pincode to find delivery at your location</string>
+    <string name="Pincode">Pincode</string>
+    <string name="CHECK">CHECK</string>
+    <string name="Return_Refund_Policy">Return/Refund Policy</string>
+    <string name="Within">Within</string>
+    <string name="Wrong_Products">Wrong \nProducts</string>
+    <string name="Faulty_Products">Faulty \nProducts</string>
+    <string name="Reviews">Reviews</string>
+    <string name="Rate_Product">Rate Product</string>
+    <string name="View_Similar_Product">View Similar Product</string>
+    <string name="Seller_Info">Seller Info:</string>
+
     <!--popups-->
     <string name="logout_popup">Are you sure you want to logout from the app?</string>
     <string name="delete_popup">Are you sure you want to delete it from your inventory?</string>
