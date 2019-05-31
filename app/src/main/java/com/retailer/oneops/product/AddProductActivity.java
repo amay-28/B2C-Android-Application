@@ -208,13 +208,13 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         } else if (TextUtils.isEmpty(binding.etCategory.getText().toString())) {
             Toast.makeText(activity, resources.getString(R.string.please_select_category_first), Toast.LENGTH_SHORT).show();
             return false;
-        } else if (TextUtils.isEmpty(binding.etSubCategory.getText().toString())) {
+        } /*else if (TextUtils.isEmpty(binding.etSubCategory.getText().toString())) {
             Toast.makeText(activity, resources.getString(R.string.please_select_sub_category_first), Toast.LENGTH_SHORT).show();
             return false;
         } else if (TextUtils.isEmpty(binding.etSubSubCategory.getText().toString())) {
             Toast.makeText(activity, resources.getString(R.string.please_select_sub_sub_category_first), Toast.LENGTH_SHORT).show();
             return false;
-        } else if (TextUtils.isEmpty(binding.etSellingPrice.getText().toString())) {
+        }*/ else if (TextUtils.isEmpty(binding.etSellingPrice.getText().toString())) {
             Toast.makeText(activity, resources.getString(R.string.please_enter_selling_price), Toast.LENGTH_SHORT).show();
             return false;
         } /*else if (TextUtils.isEmpty(binding.etPaymentOption.getText().toString())) {

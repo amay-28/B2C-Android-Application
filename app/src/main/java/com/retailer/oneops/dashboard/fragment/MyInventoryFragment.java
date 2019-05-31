@@ -19,6 +19,7 @@ import com.retailer.oneops.databinding.MyInventoryFragmentBinding;
 import com.retailer.oneops.myinventory.AddToInventoryActivity;
 import com.retailer.oneops.myinventory.model.MInventory;
 import com.retailer.oneops.product.AddProductActivity;
+import com.retailer.oneops.product.ProductDetailActivity;
 import com.retailer.oneops.productListing.model.MProduct;
 import com.retailer.oneops.util.DialogUtil;
 import com.retailer.oneops.util.MyDialogProgress;
@@ -278,7 +279,8 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
 
         Map<String, String> map = new HashMap<>();
         map.put("limit", String.valueOf(limit));
-        map.put("eager", "images");
+        // map.put("eager", "images");
+        map.put("eager", "[images,category.parent.parent]");
         if (offset < DEFAULT_OFFSET) {
             map.put("offset", String.valueOf(offset));
         } else {
@@ -400,6 +402,8 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
 
     @Override
     public void onVirtualItemClick(int position, MInventory mInventory) {
+        startActivity(new Intent(activity, ProductDetailActivity.class)
+                .putExtra("productId", mInventory.getProduct_id()));
 
     }
 
@@ -417,7 +421,8 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
 
     @Override
     public void onPhysicalItemClick(int position, MProduct mProduct) {
-
+        startActivity(new Intent(activity, ProductDetailActivity.class)
+                .putExtra("productId", mProduct.getId()));
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.retailer.oneops.productListing.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.retailer.oneops.auth.model.MCategory;
 import com.retailer.oneops.product.model.MImage;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class MProduct implements Parcelable {
     private String description;
     private String specifications;
     private String user_id;
+    private MCategory category;
     private List<MImage> images;
     private List<MProductVariant> product_variant;
 
@@ -44,6 +46,7 @@ public class MProduct implements Parcelable {
         description = in.readString();
         specifications = in.readString();
         user_id = in.readString();
+        category = in.readParcelable(MCategory.class.getClassLoader());
     }
 
     public static final Creator<MProduct> CREATOR = new Creator<MProduct>() {
@@ -79,5 +82,6 @@ public class MProduct implements Parcelable {
         dest.writeString(description);
         dest.writeString(specifications);
         dest.writeString(user_id);
+        dest.writeParcelable(category, flags);
     }
 }

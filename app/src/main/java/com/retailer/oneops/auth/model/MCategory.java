@@ -21,6 +21,7 @@ public class MCategory  implements Parcelable {
     private String updated_at;
     private List<MCategory> children;
     private Boolean isSelected=false;
+    private MCategory parent;
 
     public MCategory(Parcel in) {
         id = in.readString();
@@ -35,6 +36,7 @@ public class MCategory  implements Parcelable {
         children = in.createTypedArrayList(MCategory.CREATOR);
         byte tmpIsSelected = in.readByte();
         isSelected = tmpIsSelected == 0 ? null : tmpIsSelected == 1;
+        parent = in.readParcelable(MCategory.class.getClassLoader());
     }
 
     public static final Creator<MCategory> CREATOR = new Creator<MCategory>() {
@@ -71,5 +73,6 @@ public class MCategory  implements Parcelable {
         parcel.writeString(updated_at);
         parcel.writeTypedList(children);
         parcel.writeByte((byte) (isSelected == null ? 0 : isSelected ? 1 : 2));
+        parcel.writeParcelable(parent, i);
     }
 }

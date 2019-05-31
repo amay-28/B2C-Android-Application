@@ -59,7 +59,7 @@ public class VirtualInventoryAdapter extends RecyclerView.Adapter<VirtualInvento
 
         holder.binding.ivEdit.setOnClickListener(v -> callBack.onEditVirtualProduct(position, mInventory));
         holder.binding.ivDelete.setOnClickListener(v -> callBack.onDeleteVirtualProduct(position, mInventory));
-        //holder.binding.cardViewRoot.setOnClickListener(v -> callBack.onProductItemClick(position,mProduct));
+        holder.binding.cardViewRoot.setOnClickListener(v -> callBack.onVirtualItemClick(position,mInventory));
     }
 
     @Override

@@ -45,6 +45,18 @@ public class PhysicalInventoryAdapter extends RecyclerView.Adapter<PhysicalInven
         holder.binding.tvPrice.setText(mProduct.getPrice());
         holder.binding.tvSellingPrice.setText(mProduct.getCost_price());
 
+        if (mProduct.getCategory() != null
+                && mProduct.getCategory().getParent() != null && mProduct.getCategory().getParent().getParent() != null) {
+            holder.binding.tvCategory.setText(mProduct.getCategory().getParent().getParent().getName());
+        } else if (mProduct.getCategory() != null && mProduct.getCategory().getParent() != null) {
+            holder.binding.tvCategory.setText(mProduct.getCategory().getParent().getName());
+        } else if (mProduct.getCategory() != null) {
+            holder.binding.tvCategory.setText(mProduct.getCategory().getName());
+        } else {
+            holder.binding.tvCategory.setText("NA");
+        }
+
+
         double actualPrice = Double.parseDouble(mProduct.getCost_price());
         double discountedPrice = Double.parseDouble(mProduct.getPrice());
         long discountPercent = calculateProfitPercent(actualPrice, discountedPrice);
@@ -58,7 +70,7 @@ public class PhysicalInventoryAdapter extends RecyclerView.Adapter<PhysicalInven
 
         holder.binding.ivEdit.setOnClickListener(v -> callBack.onEditPhysicalProduct(position, mProduct));
         holder.binding.ivDelete.setOnClickListener(v -> callBack.onDeletePhysicalProduct(position, mProduct));
-        //holder.binding.cardViewRoot.setOnClickListener(v -> callBack.onProductItemClick(position,mProduct));
+        holder.binding.cardViewRoot.setOnClickListener(v -> callBack.onPhysicalItemClick(position, mProduct));
     }
 
     @Override
