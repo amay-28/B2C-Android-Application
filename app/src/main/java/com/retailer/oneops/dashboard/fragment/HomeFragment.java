@@ -77,6 +77,7 @@ public class HomeFragment extends Fragment implements Constant, HomeViewInterfac
         Map<String, String> mapCollection = new HashMap<>();
         mapCollection.put("eager", "products");
         homePresenter.getCollectionListTask(mapCollection);
+
         binding.rvSuperCategories.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
         binding.rvSuperCategories.setHasFixedSize(true);
         binding.rvSuperCategories.setItemAnimator(new DefaultItemAnimator());
@@ -129,7 +130,7 @@ public class HomeFragment extends Fragment implements Constant, HomeViewInterfac
         MCategory staticDataModel = new MCategory();
         staticDataModel.setId("0");
         staticDataModel.setName(getString(R.string.All));
-        superCategoryList.add(0,staticDataModel);
+        superCategoryList.add(0, staticDataModel);
 
         if (categoryList != null) {
             superCategoryList.addAll(categoryList);
@@ -177,6 +178,13 @@ public class HomeFragment extends Fragment implements Constant, HomeViewInterfac
 
     @Override
     public void onCategoryItemClick(int position, MCategory mCategory) {
-
+        this.categoryList.clear();
+        if (position == 0) {
+            this.superCategoryList.clear();
+            homePresenter.getCategoryListTask(map);
+        } else {
+            this.categoryList.addAll(mCategory.getChildren());
+            if (this.categoryList != null) categoryListAdapter.notifyDataSetChanged();
+        }
     }
 }

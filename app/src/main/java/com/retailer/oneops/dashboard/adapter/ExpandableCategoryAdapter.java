@@ -37,7 +37,10 @@ public class ExpandableCategoryAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-        return categoryList.size();
+        if (categoryList != null)
+            return categoryList.size();
+        else
+            return 0;
     }
 
     @Override
