@@ -26,6 +26,7 @@ public class MProduct implements Parcelable {
     private String specifications;
     private String user_id;
     private List<MImage> images;
+    private List<MProductVariant> product_variant;
 
     protected MProduct(Parcel in) {
         id = in.readString();

@@ -12,7 +12,11 @@ import com.retailer.oneops.R;
 import com.retailer.oneops.adapter.ViewPagerAdapter;
 import com.retailer.oneops.databinding.ActivityProductDetailBinding;
 import com.retailer.oneops.databinding.ActivityProductListingBinding;
+import com.retailer.oneops.fragment.ViewPagerFragment;
 import com.retailer.oneops.myinventory.AddToInventoryActivity;
+import com.retailer.oneops.product.model.MImage;
+import com.retailer.oneops.product.presenter.ProductDetailPresenter;
+import com.retailer.oneops.product.viewinterface.ProductDetailViewInterface;
 import com.retailer.oneops.productListing.adapter.ProductListAdapter;
 import com.retailer.oneops.productListing.model.MProduct;
 import com.retailer.oneops.productListing.presenter.ProductListingPresenter;
@@ -39,49 +43,75 @@ import static com.retailer.oneops.util.Constant.SORT_HIGH_TO_LOW;
 import static com.retailer.oneops.util.Constant.SORT_LOW_TO_HIGH;
 import static com.retailer.oneops.util.Constant.SORT_NEW_FIRST;
 
-public class ProductDetailActivity extends AppCompatActivity {
+public class ProductDetailActivity extends AppCompatActivity implements ProductDetailViewInterface {
 
     private ActivityProductDetailBinding binding;
     private Context context;
     private Activity activity;
-
+    private Bundle bundle;
+    private int productId;
+    private ProductDetailPresenter productDetailPresenter;
+    private ProductDetailViewInterface productDetailViewInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_product_detail);
         activity = this;
+        productDetailViewInterface = this;
         setupToolbar();
         initViews();
         listener();
     }
 
     public void setupToolbar() {
-        binding.header.setHandler(new CommonClickHandler(activity));
-        binding.header.tvMainHeading.setText("");
+       /* binding.header.setHandler(new CommonClickHandler(activity));
+        binding.header.tvMainHeading.setText("");*/
     }
 
     public void initViews() {
-        setupViewPager(binding.viewPager);
+        productDetailPresenter = new ProductDetailPresenter(productDetailViewInterface, activity);
+
+        bundle = getIntent().getExtras();
+
+        if (bundle != null) {
+            if (bundle.containsKey("productId")) {
+                productId = bundle.getInt("productId");
+                productDetailPresenter.getProductDetailTask(productId);
+            }
+        }
     }
 
     public void listener() {
 
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager(ViewPager viewPager, List<MImage> imageList) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-
-        /*if (bannerImageList != null) {
-            for (String imageUrl : bannerImageList) {
-                adapter.addFrag(AdvertismentFragment.newInstance(imageUrl), imageUrl);
+        if (imageList != null) {
+            for (MImage mImage : imageList) {
+                adapter.addFrag(ViewPagerFragment.newInstance(mImage.getUrl()), mImage.getUrl());
             }
 
-        }*/
+        }
 
         viewPager.setAdapter(adapter);
         binding.dotsIndicator.setViewPager(viewPager);
     }
 
+
+    @Override
+    public void onSuccessfullyGetDetail(MProduct mProduct, String message) {
+        List<MImage> imageList = new ArrayList<>();
+        for (int i = 0; i < mProduct.getImages().size(); i++) {
+            imageList.add(mProduct.getImages().get(i));
+        }
+        setupViewPager(binding.viewPager, imageList);
+    }
+
+    @Override
+    public void onFailToUpdate(String errorMessage) {
+
+    }
 }

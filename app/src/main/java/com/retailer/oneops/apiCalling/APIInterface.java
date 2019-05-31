@@ -122,4 +122,8 @@ public interface APIInterface {
     @DELETE("product/{id}")
     Observable<Response<String>> deletePhysicalInventory(@Header("Authorization") String token,
                                                         @Path("id") int id);
+
+    @GET("product/{id}")
+    Observable<Response<ResponseData<MProduct>>> getProductDetail(@Header("Authorization") String token,
+                                                         @Path("id") int id);
 }

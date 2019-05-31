@@ -52,13 +52,14 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         long discountPercent = calculateProfitPercent(actualPrice, discountedPrice);
         holder.binding.tvDiscountPercent.setText(discountPercent + "% OFF");
 
-        if (mProduct.getImages() != null) {
+        if (mProduct.getImages() != null && mProduct.getImages().size() > 0) {
             Glide.with(activity)
                     .load(mProduct.getImages().get(0).getUrl())
                     .into(holder.binding.ivImage);
         }
 
-        holder.binding.tvAddToInventory.setOnClickListener(v -> callBack.onAddToInventoryClick(position,mProduct));
+        holder.binding.tvAddToInventory.setOnClickListener(v -> callBack.onAddToInventoryClick(position, mProduct));
+        holder.binding.cardViewRoot.setOnClickListener(v -> callBack.onProductItemClick(position, mProduct));
     }
 
     @Override
@@ -66,10 +67,10 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         return productList.size();
     }
 
-        @Override
-        public void onCategoryClick(int position, String categoryId) {
+    @Override
+    public void onCategoryClick(int position, String categoryId) {
 
-        }
+    }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -83,6 +84,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     public interface CallBack {
         void onProductItemClick(int position, MProduct mProduct);
+
         void onAddToInventoryClick(int position, MProduct mProduct);
     }
 

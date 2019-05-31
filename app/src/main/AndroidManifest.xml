@@ -44,6 +44,7 @@
         <activity android:name="com.retailer.oneops.dashboard.activity.MyProfileActivity" />
         <activity android:name="com.retailer.oneops.productListing.ProductListingActivity" />
         <activity android:name="com.retailer.oneops.bankDetail.activity.BankDetailActivity" />
+        <activity android:name=".product.ProductDetailActivity" />
 
         <activity
             android:name="com.retailer.oneops.dashboard.activity.CategoryActivity"

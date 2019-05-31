@@ -21,10 +21,12 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/_10sdp">
 
+<!--
             <include
                 android:id="@+id/header"
                 layout="@layout/header_with_back"
                 bind:productDetail="@{productDetail}" />
+-->
 
 
             <RelativeLayout
@@ -42,10 +44,13 @@
                     android:id="@+id/dotsIndicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/viewPager"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/_7sdp"
                     app:dampingRatio="0.5"
                     app:dotsColor="@color/color_grey_text"
-                    app:dotsCornerRadius="2dp"
-                    app:dotsSize="16dp"
+                    app:dotsCornerRadius="@dimen/_60sdp"
+                    app:dotsSize="@dimen/_10sdp"
                     app:dotsSpacing="6dp"
                     app:dotsStrokeColor="@color/color_grey_text"
                     app:dotsStrokeWidth="2dp"
@@ -54,7 +59,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/viewPager"
+                    android:layout_below="@+id/dotsIndicator"
                     android:layout_marginLeft="@dimen/_13sdp"
                     android:layout_marginTop="@dimen/_24sdp"
                     android:layout_marginRight="@dimen/_13sdp">

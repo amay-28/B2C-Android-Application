@@ -1,7 +1,9 @@
 package com.retailer.oneops.dashboard.adapter;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
@@ -20,6 +22,7 @@ public class SuperCategoryListHomeAdapter extends RecyclerView.Adapter<SuperCate
     private Activity activity;
     private List<MCategory> superCategoryList;
     private CallBack callBack;
+    private int selectedPos = 0;
 
     public SuperCategoryListHomeAdapter(Activity activity, List<MCategory> superCategoryList, CallBack callBack) {
         this.activity = activity;
@@ -36,9 +39,24 @@ public class SuperCategoryListHomeAdapter extends RecyclerView.Adapter<SuperCate
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Resources resources = activity.getResources();
         MCategory mCategory = superCategoryList.get(position);
         holder.binding.tvSuperCatName.setText(mCategory.getName());
-        Glide.with(activity).load(mCategory.getImage()).apply(new RequestOptions().placeholder(R.color.colorPrimary).error(R.color.colorPrimary)).into(holder.binding.imgSuperCat);
+        holder.binding.ivBorderCircle.setVisibility(position == selectedPos ? View.VISIBLE : View.GONE);
+        holder.binding.tvSuperCatName.setTextColor(position == selectedPos ? resources.getColor(R.color.colorPrimary) : resources.getColor(R.color.black));
+
+        if (position == 0)
+            holder.binding.imgSuperCat.setImageDrawable(resources.getDrawable(R.drawable.img_all_category));
+        else
+            Glide.with(activity).load(mCategory.getImage()).apply(new RequestOptions().placeholder(R.color.colorPrimary).error(R.color.colorPrimary)).into(holder.binding.imgSuperCat);
+
+        holder.binding.rlRoot.setOnClickListener(v -> {
+            selectedPos = position;
+            holder.binding.ivBorderCircle.setVisibility(position == selectedPos ? View.VISIBLE : View.GONE);
+            holder.binding.tvSuperCatName.setTextColor(position == selectedPos ? resources.getColor(R.color.colorPrimary) : resources.getColor(R.color.white));
+            callBack.onCategoryItemClick(position, mCategory);
+            notifyDataSetChanged();
+        });
     }
 
     @Override
@@ -56,5 +74,6 @@ public class SuperCategoryListHomeAdapter extends RecyclerView.Adapter<SuperCate
     }
 
     public interface CallBack {
+        void onCategoryItemClick(int position, MCategory mCategory);
     }
 }

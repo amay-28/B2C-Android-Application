@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.retailer.oneops.R;
 import com.retailer.oneops.databinding.ActivityProductListingBinding;
 import com.retailer.oneops.myinventory.AddToInventoryActivity;
+import com.retailer.oneops.product.ProductDetailActivity;
 import com.retailer.oneops.productListing.adapter.ProductListAdapter;
 import com.retailer.oneops.productListing.model.MProduct;
 import com.retailer.oneops.productListing.presenter.ProductListingPresenter;
@@ -56,6 +57,7 @@ public class ProductListingActivity extends AppCompatActivity implements Product
     private int OPEN_ACTIVITY_ADD_TO_INVENTORY = 100;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,10 +97,7 @@ public class ProductListingActivity extends AppCompatActivity implements Product
                 pastVisibleItems = mLayoutManager.findFirstVisibleItemPosition();
                 if (loading) {
                     if ((visibleItemCount + pastVisibleItems) >= totalItemCount) {
-                        loading = false;
-                        if (!isFirstTime)
                             callPresenterProductListing(DEFAULT_LIMIT, productList.size(), false, "0", true);
-                        isFirstTime = false;
                     }
                 }
             }
@@ -250,6 +249,8 @@ public class ProductListingActivity extends AppCompatActivity implements Product
 
     @Override
     public void onProductItemClick(int position, MProduct mProduct) {
+        startActivity(new Intent(ProductListingActivity.this, ProductDetailActivity.class)
+                .putExtra("productId", Integer.parseInt(mProduct.getId())));
     }
 
     @Override

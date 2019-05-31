@@ -1,4 +1,4 @@
-package com.retailer.fragment;
+package com.retailer.oneops.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.retailer.oneops.R;
 import com.retailer.oneops.databinding.FragmentViewPagerBinding;
 
@@ -44,7 +46,6 @@ public class ViewPagerFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        /*    mGetAllBankModelData= (GetAllBankModelData) getArguments().getSerializable("mGetAllBankModelData");*/
         mContext = getActivity();
         initializeView();
     }
@@ -58,14 +59,8 @@ public class ViewPagerFragment extends Fragment {
     }
 
     private void initializeView() {
-        // fragmentAdvertismentBinding.advertismentIv.setImageResource(mImageUrl);
-        /*Glide.with(getActivity())
+        Glide.with(getActivity())
                 .load(mImageUrl)
-                .dontAnimate()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(fragmentAdvertismentBinding.advertismentIv);*/
-
+                .into(binding.ivImage);
     }
-
-
 }

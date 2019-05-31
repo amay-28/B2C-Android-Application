@@ -242,6 +242,7 @@
     <string name="Rate_Product">Rate Product</string>
     <string name="View_Similar_Product">View Similar Product</string>
     <string name="Seller_Info">Seller Info:</string>
+    <string name="All">All</string>
 
     <!--popups-->
     <string name="logout_popup">Are you sure you want to logout from the app?</string>

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
+        android:id="@+id/rlRoot"
         android:layout_width="@dimen/_70sdp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/_5sdp"
@@ -9,19 +11,27 @@
         android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivBorderCircle"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:background="@drawable/hollow_circle_border"
+            android:layout_centerInParent="true" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgSuperCat"
-            android:layout_centerInParent="true"
             android:layout_width="@dimen/_60sdp"
-            android:layout_height="@dimen/_60sdp" />
+            android:layout_height="@dimen/_60sdp"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/_4sdp" />
 
         <TextView
             android:id="@+id/tvSuperCatName"
-            android:layout_below="@+id/imgSuperCat"
             style="@style/TextView10ssp"
-            android:maxLines="2"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_below="@+id/imgSuperCat"
             android:layout_centerHorizontal="true"
-            android:singleLine="true"
-            android:ellipsize="marquee"/>
+            android:layout_marginTop="@dimen/_30sdp"
+            android:ellipsize="marquee"
+            android:maxLines="2"
+            android:singleLine="true" />
     </RelativeLayout>
 </layout>

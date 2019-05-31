@@ -126,6 +126,11 @@ public class HomeFragment extends Fragment implements Constant, HomeViewInterfac
         binding.shimmerViewContainer.stopShimmerAnimation();
         binding.shimmerViewContainer.setVisibility(View.GONE);
 
+        MCategory staticDataModel = new MCategory();
+        staticDataModel.setId("0");
+        staticDataModel.setName(getString(R.string.All));
+        superCategoryList.add(0,staticDataModel);
+
         if (categoryList != null) {
             superCategoryList.addAll(categoryList);
             for (MCategory mCategory : superCategoryList) {
@@ -168,5 +173,10 @@ public class HomeFragment extends Fragment implements Constant, HomeViewInterfac
     public void onPause() {
         super.onPause();
         binding.shimmerViewContainer.stopShimmerAnimation();
+    }
+
+    @Override
+    public void onCategoryItemClick(int position, MCategory mCategory) {
+
     }
 }
