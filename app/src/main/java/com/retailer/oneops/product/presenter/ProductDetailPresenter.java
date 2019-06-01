@@ -2,6 +2,7 @@ package com.retailer.oneops.product.presenter;
 
 import android.app.Activity;
 
+import com.google.gson.JsonObject;
 import com.retailer.oneops.apiCalling.APIClient;
 import com.retailer.oneops.apiCalling.APIInterface;
 import com.retailer.oneops.apiCalling.ResponseData;
@@ -62,5 +63,10 @@ public class ProductDetailPresenter implements ProductDetailPresenterInterface, 
     @Override
     public void getProductDetailTask(int id) {
         getObservableProductDetail(id).subscribeWith(getObserverToAddProduct());
+    }
+
+    @Override
+    public void addToCartTask(JsonObject jsonObject) {
+
     }
 }

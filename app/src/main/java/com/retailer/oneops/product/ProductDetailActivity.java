@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.retailer.oneops.R;
 import com.retailer.oneops.adapter.ViewPagerAdapter;
+import com.retailer.oneops.checkout.CheckoutActivity;
 import com.retailer.oneops.databinding.ActivityProductDetailBinding;
 import com.retailer.oneops.databinding.ActivityProductListingBinding;
 import com.retailer.oneops.fragment.ViewPagerFragment;
@@ -50,8 +51,10 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     private Activity activity;
     private Bundle bundle;
     private int productId;
+    private boolean isFromInventory = false;
     private ProductDetailPresenter productDetailPresenter;
     private ProductDetailViewInterface productDetailViewInterface;
+    private MProduct mProduct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,11 +82,21 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
                 productId = bundle.getInt("productId");
                 productDetailPresenter.getProductDetailTask(productId);
             }
+            if (bundle.containsKey("isFromInventory")) {
+                isFromInventory = bundle.getBoolean("isFromInventory");
+                if (bundle.getBoolean("isFromInventory")) {
+                    binding.btnAddToInventory.setText(getString(R.string.Add_to_Cart));
+                }
+            }
         }
     }
 
     public void listener() {
-
+        if (isFromInventory) {
+            binding.btnAddToInventory.setOnClickListener(v -> startActivity(new Intent(activity, CheckoutActivity.class)));
+        } else {
+            startActivity(AddToInventoryActivity.getIntent(activity, mProduct, null));
+        }
     }
 
     private void setupViewPager(ViewPager viewPager, List<MImage> imageList) {
@@ -103,6 +116,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
     @Override
     public void onSuccessfullyGetDetail(MProduct mProduct, String message) {
+        this.mProduct = mProduct;
         List<MImage> imageList = new ArrayList<>();
         for (int i = 0; i < mProduct.getImages().size(); i++) {
             imageList.add(mProduct.getImages().get(i));

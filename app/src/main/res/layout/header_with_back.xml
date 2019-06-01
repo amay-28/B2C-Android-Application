@@ -50,7 +50,9 @@
             name="productDetail"
             type="com.retailer.oneops.product.ProductDetailActivity"/>
 
-
+        <variable
+            name="myCart"
+            type="com.retailer.oneops.checkout.CheckoutActivity"/>
     </data>
 
     <com.google.android.material.appbar.AppBarLayout

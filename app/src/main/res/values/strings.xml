@@ -225,6 +225,7 @@
     <string name="COD_available">COD Available</string>
     <string name="Share">Share</string>
     <string name="Add_to_Inventory">Add to Inventory</string>
+    <string name="Add_to_Cart">Add to Cart</string>
     <string name="Product_Description">Product Description</string>
     <string name="Fit">Fit</string>
     <string name="Transparency">Transparency</string>
@@ -243,6 +244,29 @@
     <string name="View_Similar_Product">View Similar Product</string>
     <string name="Seller_Info">Seller Info:</string>
     <string name="All">All</string>
+
+    <!--checkout-->
+    <string name="deliveryOptions">Delivery Options</string>
+    <string name="store_pick_up">Store Pick Up</string>
+    <string name="home_delivery_by_store">Home Delivery by Store</string>
+    <string name="direct_courier_to_customer">Direct Courier To Customer</string>
+    <string name="CouponCode">Coupon Code</string>
+    <string name="Apply">Apply</string>
+    <string name="priceDetail">Price Detail:</string>
+    <string name="mrp">MRP:</string>
+    <string name="estimatedTax">Estimated Tax:</string>
+    <string name="DeliveryCharges">Delivery Charges:</string>
+    <string name="total">Total</string>
+    <string name="CustomerDetails">Customer Details</string>
+    <string name="CustomerName">Customer"'"s Name</string>
+    <string name="CustomerMobileNo">Customer"'"s Mobile No.</string>
+    <string name="pinCode">Pin Code</string>
+    <string name="Locality">Locality/Town</string>
+    <string name="City">City/District</string>
+    <string name="PlaceOrder">Place Order</string>
+    <string name="order_status">Order Status:</string>
+    <string name="Order_No">Order No.</string>
+    <string name="Order_detail">Order Detail</string>
 
     <!--popups-->
     <string name="logout_popup">Are you sure you want to logout from the app?</string>

@@ -403,7 +403,8 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
     @Override
     public void onVirtualItemClick(int position, MInventory mInventory) {
         startActivity(new Intent(activity, ProductDetailActivity.class)
-                .putExtra("productId", mInventory.getProduct_id()));
+                .putExtra("productId", mInventory.getProduct_id())
+                .putExtra("isFromInventory", true));
 
     }
 
@@ -422,7 +423,8 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
     @Override
     public void onPhysicalItemClick(int position, MProduct mProduct) {
         startActivity(new Intent(activity, ProductDetailActivity.class)
-                .putExtra("productId", mProduct.getId()));
+                .putExtra("productId", mProduct.getId())
+                .putExtra("isFromInventory", true));
     }
 
     @Override
