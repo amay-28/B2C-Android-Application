@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.retailer.oneops.apiCalling.APIClient;
 import com.retailer.oneops.apiCalling.APIInterface;
 import com.retailer.oneops.apiCalling.ResponseData;
+import com.retailer.oneops.checkout.model.MCart;
 import com.retailer.oneops.product.presenterinterface.ProductDetailPresenterInterface;
 import com.retailer.oneops.product.viewinterface.ProductDetailViewInterface;
 import com.retailer.oneops.productListing.model.MProduct;
@@ -39,8 +40,29 @@ public class ProductDetailPresenter implements ProductDetailPresenterInterface, 
                 }.getType();
                 MProduct mProduct = gson.fromJson(s, type);
 */
-                viewInterface.onSuccessfullyGetDetail(response.body().getData(), response.message());
+                if (response.body() != null)
+                    viewInterface.onSuccessfullyGetDetail(response.body().getData(), response.message());
 
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                if (e instanceof HttpException)
+                    viewInterface.onFailToUpdate(Utils.errorMessageParsing(e).getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+    }
+
+    private DisposableObserver<Response<ResponseData<MCart>>> getObserverToAddCart() {
+        return new DisposableObserver<Response<ResponseData<MCart>>>() {
+            @Override
+            public void onNext(Response<ResponseData<MCart>> response) {
+                viewInterface.onSuccessfullyAddToCart(response.body().getData(), response.message());
             }
 
             @Override
@@ -60,6 +82,10 @@ public class ProductDetailPresenter implements ProductDetailPresenterInterface, 
         return APIClient.getClient(activity).create(APIInterface.class).getProductDetail(new Session(activity).getString(AUTHORIZATION_KEY), id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
+    private <T> Observable getObservableAddCart(JsonObject jsonObject) {
+        return APIClient.getClient(activity).create(APIInterface.class).addToCart(new Session(activity).getString(AUTHORIZATION_KEY), jsonObject).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
     @Override
     public void getProductDetailTask(int id) {
         getObservableProductDetail(id).subscribeWith(getObserverToAddProduct());
@@ -67,6 +93,6 @@ public class ProductDetailPresenter implements ProductDetailPresenterInterface, 
 
     @Override
     public void addToCartTask(JsonObject jsonObject) {
-
+        getObservableAddCart(jsonObject).subscribeWith(getObserverToAddCart());
     }
 }

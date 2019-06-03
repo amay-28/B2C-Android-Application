@@ -1,15 +1,20 @@
 package com.retailer.oneops.dashboard.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.retailer.oneops.R;
+import com.retailer.oneops.checkout.CheckoutActivity;
 import com.retailer.oneops.dashboard.fragment.HomeFragment;
 import com.retailer.oneops.dashboard.fragment.MoreFragment;
 import com.retailer.oneops.dashboard.fragment.MyInventoryFragment;
 import com.retailer.oneops.databinding.ActivityDashboardBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.retailer.oneops.notification.activity.NotificationListingActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -51,9 +56,7 @@ public class DashboardActivity extends AppCompatActivity {
         activity = this;
         binding = DataBindingUtil.setContentView(activity, R.layout.activity_dashboard);
         initialization();
-        listner();
-//        new Session(activity).getUserProfile().setRetailerDetails();
-//        Toast.makeText(activity, "retailer: "+, Toast.LENGTH_SHORT).show();
+        listener();
     }
 
     private void initialization() {
@@ -61,8 +64,9 @@ public class DashboardActivity extends AppCompatActivity {
         switchFragment(fragment, fragmentClass);
     }
 
-    private void listner() {
+    private void listener() {
         binding.navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        binding.header.imgBag.setOnClickListener(v -> startActivity(new Intent(activity, CheckoutActivity.class)));
     }
 
     private void switchFragment(Fragment fragment, Class fragmentClass) {
@@ -75,4 +79,23 @@ public class DashboardActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().replace(R.id.flContentprovider, fragment).commit();
     }
 
+    /*@Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        Intent intent = null;
+        switch (id) {
+            case R.id.imgSearch:
+                Toast.makeText(getApplicationContext(), "Search Item Selected", Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.imgNotification:
+                startActivity(new Intent(DashboardActivity.this, NotificationListingActivity.class));
+                //Toast.makeText(getApplicationContext(), "Contact Selected", Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.imgBag:
+                startActivity(new Intent(activity, CheckoutActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }*/
 }

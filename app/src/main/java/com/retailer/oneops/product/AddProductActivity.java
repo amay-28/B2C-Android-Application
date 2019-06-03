@@ -79,6 +79,7 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
     private int imagePosition;
     private MProduct mProduct;
     private boolean isEditProduct = false;
+    private int selectedCategoryId = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -248,6 +249,7 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         if (resultCode == RESULT_OK) {
             if (requestCode == OPEN_DIALOG_FOR_CATEGORY) {
                 mCategory = data.getParcelableExtra("MCategory");
+                selectedCategoryId = Integer.parseInt(mCategory.getId());
                 binding.etCategory.setText(mCategory.getName());
                 binding.etSubCategory.setText("");
                 binding.etSubSubCategory.setText("");
@@ -258,6 +260,7 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
 
             if (requestCode == OPEN_DIALOG_FOR_SUBCATEGORY) {
                 mCategory = data.getParcelableExtra("MCategory");
+                selectedCategoryId = Integer.parseInt(mCategory.getId());
                 binding.etSubCategory.setText(mCategory.getName());
 
                 subSubCategoryList = getSubCategoryList(mCategory);
@@ -265,6 +268,7 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
 
             if (requestCode == OPEN_DIALOG_FOR_SUBSUBCATEGORY) {
                 mCategory = data.getParcelableExtra("MCategory");
+                selectedCategoryId = Integer.parseInt(mCategory.getId());
                 binding.etSubSubCategory.setText(mCategory.getName());
 
                 mSubSubCategory = mCategory;
@@ -376,6 +380,8 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         mAddProduct.setImages(mImageList);
         if (checkValidate()) {
             mAddProduct.getCategory().setIsSelected(null);
+            mAddProduct.setCategoryId(String.valueOf(selectedCategoryId));
+            mAddProduct.setCategory(null);
             if (isEditProduct) {
                 addProductPresenter.updateProductTask(mAddProduct, Integer.parseInt(mProduct.getId()));
             } else {

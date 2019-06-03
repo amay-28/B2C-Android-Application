@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.retailer.oneops.apiCalling.APIClient;
 import com.retailer.oneops.apiCalling.APIInterface;
 import com.retailer.oneops.apiCalling.ResponseData;
+import com.retailer.oneops.checkout.model.MCartDetail;
 import com.retailer.oneops.checkout.presenterinterface.CheckoutPresenterInterface;
 import com.retailer.oneops.checkout.viewinterface.CheckoutViewInterface;
 import com.retailer.oneops.dashboard.presenterinterface.MyInventPresenterInterface;
@@ -34,10 +35,10 @@ public class CheckoutPresenter implements CheckoutPresenterInterface, Constant {
         this.activity = activity;
     }
 
-    public DisposableObserver<ResponseData<List<MProduct>>> getObserver() {
-        return new DisposableObserver<ResponseData<List<MProduct>>>() {
+    public DisposableObserver<ResponseData<MCartDetail>> getObserver() {
+        return new DisposableObserver<ResponseData<MCartDetail>>() {
             @Override
-            public void onNext(ResponseData<List<MProduct>> response) {
+            public void onNext(ResponseData<MCartDetail> response) {
               //  checkoutViewInterface.onSuccessfulListing(response.getData(), response.getMessage());
             }
 
@@ -55,25 +56,20 @@ public class CheckoutPresenter implements CheckoutPresenterInterface, Constant {
         };
     }
 
-    private Observable getPhysicalObservable(Map<String, String> map) {
-        return APIClient.getClient(activity).create(APIInterface.class).getPhysicalProductList(new Session(activity).getString(AUTHORIZATION_KEY), map).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    private Observable getCartDetailsObservable() {
+        return APIClient.getClient(activity).create(APIInterface.class).getCartDetails(new Session(activity).getString(AUTHORIZATION_KEY)).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
 
-    private <T> Observable getDeleteInventoryObservable(int id, int requestType) {
-        if (requestType == VIRTUAL_INVENTORY_LIST)
-            return APIClient.getClient(activity).create(APIInterface.class)
-                    .deleteVirtualInventory(new Session(activity).getString(AUTHORIZATION_KEY), id)
-                    .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-        else
+ /*   private <T> Observable getDeleteInventoryObservable(int id, int requestType) {
             return APIClient.getClient(activity).create(APIInterface.class)
                     .deletePhysicalInventory(new Session(activity).getString(AUTHORIZATION_KEY), id)
                     .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-    }
+    }*/
 
     @Override
-    public void onCartList(Map<String, String> map, int requestType) {
-
+    public void getCartDetails() {
+        getCartDetailsObservable().subscribeWith(getObserver());
     }
 
     @Override

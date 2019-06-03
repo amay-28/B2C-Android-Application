@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.retailer.oneops.R;
+import com.retailer.oneops.checkout.model.MCart;
+import com.retailer.oneops.checkout.model.MCartDetail;
 import com.retailer.oneops.databinding.ItemMyInventoryBinding;
 import com.retailer.oneops.databinding.ItemProductListingBinding;
 import com.retailer.oneops.productListing.adapter.ProductListAdapter;
@@ -27,14 +29,14 @@ import io.reactivex.internal.queue.MpscLinkedQueue;
 public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHolder> {
 
     private LayoutInflater mInflater;
-    private List <MProduct> productList;
+    private List <MCart> productList;
     private Context mContext;
     private Activity activity;
     private ItemMyInventoryBinding binding;
     private CallBack callBack;
 
     // data is passed into the constructor
-    public CheckoutAdapter(Activity activity, List<MProduct> productList, CheckoutAdapter.CallBack callBack) {
+    public CheckoutAdapter(Activity activity, List<MCart> productList, CheckoutAdapter.CallBack callBack) {
         this.activity = activity;
         this.productList = productList;
         this.callBack = callBack;
@@ -49,7 +51,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@androidx.annotation.NonNull CheckoutAdapter.ViewHolder holder, int position) {
-        MProduct mProduct = productList.get(position);
+        MCart mProduct = productList.get(position);
        /* MProduct mProduct = productList.get(position);
 
         strikeThroughText(holder.binding.tvMrp);
@@ -71,7 +73,6 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
 
         holder.binding.tvAddToInventory.setOnClickListener(v -> callBack.onAddToInventoryClick(position, mProduct));
         holder.binding.cardViewRoot.setOnClickListener(v -> callBack.onProductItemClick(position, mProduct));*/
-        holder.binding.cardViewRoot.setOnClickListener(v -> callBack.onProductItemClick(position, mProduct));
     }
 
     @Override
@@ -90,7 +91,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
     }
 
     public interface CallBack {
-        void onProductItemClick(int position, MProduct mProduct);
+        void onProductItemClick(int position, MCartDetail mCartDetail);
     }
 
     private void strikeThroughText(TextView textView) {

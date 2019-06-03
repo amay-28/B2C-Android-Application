@@ -423,7 +423,7 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
     @Override
     public void onPhysicalItemClick(int position, MProduct mProduct) {
         startActivity(new Intent(activity, ProductDetailActivity.class)
-                .putExtra("productId", mProduct.getId())
+                .putExtra("productId", Integer.parseInt(mProduct.getId()))
                 .putExtra("isFromInventory", true));
     }
 

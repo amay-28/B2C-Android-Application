@@ -3,14 +3,18 @@ package com.retailer.oneops.product;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.gson.JsonObject;
 import com.retailer.oneops.R;
 import com.retailer.oneops.adapter.ViewPagerAdapter;
 import com.retailer.oneops.checkout.CheckoutActivity;
+import com.retailer.oneops.checkout.model.MCart;
 import com.retailer.oneops.databinding.ActivityProductDetailBinding;
 import com.retailer.oneops.databinding.ActivityProductListingBinding;
 import com.retailer.oneops.fragment.ViewPagerFragment;
@@ -61,6 +65,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_product_detail);
         activity = this;
+        context = this;
         productDetailViewInterface = this;
         setupToolbar();
         initViews();
@@ -80,6 +85,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         if (bundle != null) {
             if (bundle.containsKey("productId")) {
                 productId = bundle.getInt("productId");
+                MyDialogProgress.open(context);
                 productDetailPresenter.getProductDetailTask(productId);
             }
             if (bundle.containsKey("isFromInventory")) {
@@ -92,11 +98,44 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     }
 
     public void listener() {
-        if (isFromInventory) {
-            binding.btnAddToInventory.setOnClickListener(v -> startActivity(new Intent(activity, CheckoutActivity.class)));
-        } else {
-            startActivity(AddToInventoryActivity.getIntent(activity, mProduct, null));
+        binding.btnAddToInventory.setOnClickListener(v -> {
+            if (isFromInventory) {
+                MyDialogProgress.open(context);
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("productId", mProduct.getId());
+                //jsonObject.addProperty("quantity",mProduct.ge);
+                productDetailPresenter.addToCartTask(jsonObject);
+            } else {
+                startActivity(AddToInventoryActivity.getIntent(activity, mProduct, null));
+            }
+        });
+
+    }
+
+    private void setExistingData(MProduct mProduct) {
+        strikeThroughText(binding.tvMrp);
+        binding.tvProductName.setText(mProduct.getName());
+        binding.tvProductDescription.setText(mProduct.getDescription());
+        binding.tvSellingPrice.setText(mProduct.getPrice());
+        binding.tvMrp.setText(mProduct.getCost_price());
+
+        double actualPrice = Double.parseDouble(mProduct.getCost_price());
+        double discountedPrice = Double.parseDouble(mProduct.getPrice());
+        long discountPercent = calculateProfitPercent(actualPrice, discountedPrice);
+        binding.tvDiscountPercent.setText(discountPercent + "% OFF");
+    }
+
+    private void strikeThroughText(TextView textView) {
+        textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+    }
+
+    public long calculateProfitPercent(double actualPrice, double discountPrice) {
+        double discountPercent = 0;
+        if (actualPrice > discountPrice) {
+            discountPercent = (actualPrice - discountPrice) / actualPrice * 100;
+            discountPercent = Math.round(discountPercent);
         }
+        return Math.round(discountPercent);
     }
 
     private void setupViewPager(ViewPager viewPager, List<MImage> imageList) {
@@ -116,16 +155,25 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
     @Override
     public void onSuccessfullyGetDetail(MProduct mProduct, String message) {
+        MyDialogProgress.close(context);
         this.mProduct = mProduct;
         List<MImage> imageList = new ArrayList<>();
         for (int i = 0; i < mProduct.getImages().size(); i++) {
             imageList.add(mProduct.getImages().get(i));
         }
         setupViewPager(binding.viewPager, imageList);
+
+        setExistingData(mProduct);
+    }
+
+    @Override
+    public void onSuccessfullyAddToCart(MCart mCart, String message) {
+        MyDialogProgress.close(context);
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onFailToUpdate(String errorMessage) {
-
+        MyDialogProgress.close(context);
     }
 }

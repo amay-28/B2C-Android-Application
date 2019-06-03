@@ -7,6 +7,8 @@ import com.retailer.oneops.auth.model.MProfile;
 import com.retailer.oneops.auth.model.MSignUp;
 import com.retailer.oneops.auth.model.MUser;
 import com.retailer.oneops.bankDetail.activity.model.MBankDetail;
+import com.retailer.oneops.checkout.model.MCart;
+import com.retailer.oneops.checkout.model.MCartDetail;
 import com.retailer.oneops.dashboard.model.MBanner;
 import com.retailer.oneops.dashboard.model.MCollection;
 import com.retailer.oneops.myinventory.model.MInventory;
@@ -126,4 +128,12 @@ public interface APIInterface {
     @GET("product/{id}")
     Observable<Response<ResponseData<MProduct>>> getProductDetail(@Header("Authorization") String token,
                                                          @Path("id") int id);
+
+    @POST("cart")
+    Observable<Response<ResponseData<MCart>>> addToCart(@Header("Authorization") String token,
+                                                                    @Body JsonObject cartJson);
+    @GET("cart")
+    Observable<ResponseData<MCartDetail>> getCartDetails(@Header("Authorization") String token);
+
+
 }

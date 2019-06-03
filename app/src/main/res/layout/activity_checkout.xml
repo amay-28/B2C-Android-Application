@@ -49,34 +49,48 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_10sdp">
 
-                    <CheckBox
-                        android:id="@+id/cb_store_pickup"
-                        style="@style/TextView10ssp"
-                        android:layout_width="wrap_content"
+                    <RadioGroup
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/green"
-                        android:fontFamily="@font/latosemibold"
-                        android:text="@string/store_pick_up" />
+                        android:gravity="center">
 
-                    <CheckBox
-                        style="@style/TextView10ssp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_toRightOf="@id/cb_store_pickup"
-                        android:backgroundTint="@color/green"
-                        android:fontFamily="@font/latosemibold"
-                        android:text="@string/home_delivery_by_store" />
+                        <RadioButton
+                            android:id="@+id/cb_store_pickup"
+                            style="@android:style/Widget.CompoundButton.CheckBox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/green"
+                            android:fontFamily="@font/latosemibold"
+                            android:textSize="@dimen/_10ssp"
+                            android:textColor="@color/black"
+                            android:text="@string/store_pick_up" />
 
-                    <CheckBox
-                        style="@style/TextView10ssp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/cb_store_pickup"
-                        android:layout_centerHorizontal="true"
-                        android:backgroundTint="@color/green"
-                        android:fontFamily="@font/latosemibold"
-                        android:text="@string/direct_courier_to_customer" />
+                        <RadioButton
+                            style="@android:style/Widget.CompoundButton.CheckBox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_toRightOf="@id/cb_store_pickup"
+                            android:backgroundTint="@color/green"
+                            android:textSize="@dimen/_10ssp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/latosemibold"
+                            android:text="@string/home_delivery_by_store" />
+
+                        <RadioButton
+                            style="@android:style/Widget.CompoundButton.CheckBox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/cb_store_pickup"
+                            android:layout_centerHorizontal="true"
+                            android:backgroundTint="@color/green"
+                            android:textSize="@dimen/_10ssp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/latosemibold"
+                            android:text="@string/direct_courier_to_customer" />
+
+                    </RadioGroup>
+
 
                 </RelativeLayout>
 
