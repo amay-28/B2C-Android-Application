@@ -272,4 +272,5 @@
     <!--popups-->
     <string name="logout_popup">Are you sure you want to logout from the app?</string>
     <string name="delete_popup">Are you sure you want to delete it from your inventory?</string>
+    <string name="delete_from_bag">Are you sure you want to delete it from your bag?</string>
 </resources>

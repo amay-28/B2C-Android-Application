@@ -60,6 +60,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/green"
+                            android:checked="true"
                             android:fontFamily="@font/latosemibold"
                             android:textSize="@dimen/_10ssp"
                             android:textColor="@color/black"
@@ -155,6 +156,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/tvTotalMrp"
                     style="@style/TextView12ssp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -166,7 +168,7 @@
                     android:textColor="@color/color_light_text" />
 
                 <TextView
-                    android:id="@+id/tvEstimatedTax"
+                    android:id="@+id/tvEstimatedTaxHead"
                     style="@style/TextView12ssp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -174,15 +176,14 @@
                     android:layout_marginLeft="@dimen/_26sdp"
                     android:layout_marginTop="@dimen/_11sdp"
                     android:fontFamily="@font/latosemibold"
-                    android:text="@string/estimatedTax"
-
-                    />
+                    android:text="@string/estimatedTax" />
 
                 <TextView
+                    android:id="@+id/tvEstimatedTax"
                     style="@style/TextView12ssp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/tvEstimatedTax"
+                    android:layout_alignTop="@+id/tvEstimatedTaxHead"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/_13sdp"
                     android:fontFamily="@font/latomedium"
@@ -190,7 +191,7 @@
                     android:textColor="@color/color_light_text" />
 
                 <TextView
-                    android:id="@+id/tvDeliveryCharges"
+                    android:id="@+id/tvDeliveryChargesHead"
                     style="@style/TextView12ssp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -203,10 +204,11 @@
                     />
 
                 <TextView
+                    android:id="@+id/tvDeliveryCharges"
                     style="@style/TextView12ssp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/tvDeliveryCharges"
+                    android:layout_alignTop="@+id/tvDeliveryChargesHead"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/_13sdp"
                     android:fontFamily="@font/latomedium"
@@ -236,6 +238,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/tvGrandTotal"
                     style="@style/TextView12ssp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

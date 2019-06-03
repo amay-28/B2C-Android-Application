@@ -51,7 +51,7 @@ public class VirtualInventoryAdapter extends RecyclerView.Adapter<VirtualInvento
         long discountPercent = calculateProfitPercent(actualPrice, discountedPrice);
         holder.binding.tvDiscountPercent.setText(discountPercent + "% OFF");
 
-        if (mInventory.getProduct().getImages() != null) {
+        if (mInventory.getProduct().getImages() != null && mInventory.getProduct().getImages().size() > 0) {
             Glide.with(activity)
                     .load(mInventory.getProduct().getImages().get(0).getUrl())
                     .into(holder.binding.ivProduct);
@@ -59,7 +59,7 @@ public class VirtualInventoryAdapter extends RecyclerView.Adapter<VirtualInvento
 
         holder.binding.ivEdit.setOnClickListener(v -> callBack.onEditVirtualProduct(position, mInventory));
         holder.binding.ivDelete.setOnClickListener(v -> callBack.onDeleteVirtualProduct(position, mInventory));
-        holder.binding.cardViewRoot.setOnClickListener(v -> callBack.onVirtualItemClick(position,mInventory));
+        holder.binding.cardViewRoot.setOnClickListener(v -> callBack.onVirtualItemClick(position, mInventory));
     }
 
     @Override

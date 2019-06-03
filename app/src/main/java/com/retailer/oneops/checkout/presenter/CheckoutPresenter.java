@@ -39,14 +39,34 @@ public class CheckoutPresenter implements CheckoutPresenterInterface, Constant {
         return new DisposableObserver<ResponseData<MCartDetail>>() {
             @Override
             public void onNext(ResponseData<MCartDetail> response) {
-              //  checkoutViewInterface.onSuccessfulListing(response.getData(), response.getMessage());
+                checkoutViewInterface.onSuccessfulCartDetails(response.getData(), response.getMessage());
             }
 
             @Override
             public void onError(Throwable e) {
-                /*if (e instanceof HttpException)
-                    checkoutViewInterface.onFailedListing(Utils.errorMessageParsing(e).getMessage());*/
+                if (e instanceof HttpException)
+                    checkoutViewInterface.onFailedListing(Utils.errorMessageParsing(e).getMessage());
 
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+    }
+
+    public DisposableObserver<retrofit2.Response<String>> getDeleteObserver() {
+        return new DisposableObserver<retrofit2.Response<String>>() {
+            @Override
+            public void onNext(Response<String> response) {
+                checkoutViewInterface.onSuccessfulDeleteItem();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                if (e instanceof HttpException)
+                    checkoutViewInterface.onFailedListing(Utils.errorMessageParsing(e).getMessage());
             }
 
             @Override
@@ -60,12 +80,9 @@ public class CheckoutPresenter implements CheckoutPresenterInterface, Constant {
         return APIClient.getClient(activity).create(APIInterface.class).getCartDetails(new Session(activity).getString(AUTHORIZATION_KEY)).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
-
- /*   private <T> Observable getDeleteInventoryObservable(int id, int requestType) {
-            return APIClient.getClient(activity).create(APIInterface.class)
-                    .deletePhysicalInventory(new Session(activity).getString(AUTHORIZATION_KEY), id)
-                    .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-    }*/
+    private Observable deleteObservable(int id) {
+        return APIClient.getClient(activity).create(APIInterface.class).deleteCartItem(new Session(activity).getString(AUTHORIZATION_KEY), id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
 
     @Override
     public void getCartDetails() {
@@ -73,7 +90,7 @@ public class CheckoutPresenter implements CheckoutPresenterInterface, Constant {
     }
 
     @Override
-    public void onDeleteProductItem(int inventoryId, int requestType) {
-
+    public void onDeleteProductItem(int id) {
+        deleteObservable(id).subscribeWith(getDeleteObserver());
     }
 }

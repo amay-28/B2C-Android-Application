@@ -15,7 +15,7 @@ public class MProductVariant {
     private int quantity;
     private int quantity_allocated;
     private String name;
-    private MAttributes attributes;
+    private List<MAttributes> attributes;
     private String specifications;
     private String created_at;
     private String updated_at;

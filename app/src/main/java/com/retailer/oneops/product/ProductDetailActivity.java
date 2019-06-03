@@ -103,6 +103,10 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
                 MyDialogProgress.open(context);
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("productId", mProduct.getId());
+
+                /*if (mProduct.getProduct_variant() != null) {
+                    jsonObject.addProperty("productVariantId", mProduct.getProduct_variant());
+                }*/
                 //jsonObject.addProperty("quantity",mProduct.ge);
                 productDetailPresenter.addToCartTask(jsonObject);
             } else {

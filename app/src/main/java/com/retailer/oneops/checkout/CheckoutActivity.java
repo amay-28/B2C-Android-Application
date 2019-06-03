@@ -24,18 +24,21 @@ import com.retailer.oneops.productListing.model.MProduct;
 import com.retailer.oneops.productListing.presenter.ProductListingPresenter;
 import com.retailer.oneops.productListing.viewinterface.ProductListingViewInterface;
 import com.retailer.oneops.util.CommonClickHandler;
+import com.retailer.oneops.util.DialogUtil;
+import com.retailer.oneops.util.OnDialogItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CheckoutActivity extends AppCompatActivity implements CheckoutAdapter.CallBack, CheckoutViewInterface {
+public class CheckoutActivity extends AppCompatActivity implements CheckoutAdapter.CallBack, CheckoutViewInterface, OnDialogItemClickListener {
 
     private Activity activity;
     private ActivityCheckoutBinding binding;
     private CheckoutAdapter checkoutAdapter;
-    private List<MCart> productList = new ArrayList<>();
+    private List<MCart> cartList = new ArrayList<>();
     private CheckoutPresenter checkoutPresenter;
     private CheckoutViewInterface checkoutViewInterface;
+    private int cartId, deletePosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +66,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutAdapt
         binding.rvCartItems.setLayoutManager(mLayoutManager);
         binding.rvCartItems.setHasFixedSize(true);
         binding.rvCartItems.setItemAnimator(new DefaultItemAnimator());
-        checkoutAdapter = new CheckoutAdapter(activity, productList, this);
+        checkoutAdapter = new CheckoutAdapter(activity, cartList, this);
         binding.rvCartItems.setAdapter(checkoutAdapter);
     }
 
@@ -73,13 +76,23 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutAdapt
 
 
     @Override
-    public void onSuccessfulListing(List<MInventory> mInventoryList, String message) {
+    public void onSuccessfulCartDetails(MCartDetail mCartDetail, String message) {
+        cartList.addAll(mCartDetail.getCart_lines());
+        checkoutAdapter.notifyDataSetChanged();
 
+        List<Integer> mrpList = new ArrayList<>();
+        for (int i = 0; i < mCartDetail.getCart_lines().size(); i++) {
+            mrpList.add(Integer.valueOf(mCartDetail.getCart_lines().get(i).getProduct().getPrice()));
+        }
+        binding.tvTotalMrp.setText("Rs. " + String.valueOf(calculateMrp(mrpList)));
+        binding.tvGrandTotal.setText("Rs. " + calculateGrandTotal(calculateMrp(mrpList),
+                10,20));
     }
 
     @Override
     public void onSuccessfulDeleteItem() {
-
+        this.cartList.remove(deletePosition);
+        checkoutAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -88,7 +101,32 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutAdapt
     }
 
     @Override
-    public void onProductItemClick(int position, MCartDetail mCartDetail) {
+    public void onProductItemClick(int position, MProduct mProduct) {
 
+    }
+
+    @Override
+    public void onDeleteItem(int position, int cartId) {
+        this.cartId = cartId;
+        this.deletePosition = position;
+        DialogUtil.showOkCancelDialog(activity, getString(R.string.delete_from_bag), this);
+    }
+
+    @Override
+    public void onDialogButtonClick(int i, int position) {
+        checkoutPresenter.onDeleteProductItem(cartId);
+    }
+
+    private int calculateMrp(List<Integer> itemMrpList) {
+        int totalPrice = 0;
+        for (int i = 0; i < itemMrpList.size(); i++) {
+            totalPrice += itemMrpList.get(i);
+        }
+
+        return totalPrice;
+    }
+
+    private int calculateGrandTotal(int mrp, int taxPrice, int deliveryCharges) {
+        return mrp + taxPrice + deliveryCharges;
     }
 }

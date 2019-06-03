@@ -101,7 +101,7 @@ public class AddToInventoryActivity extends AppCompatActivity implements AddToIn
         binding.tvSellingPrice.setText(mProduct.getPrice());
         binding.tvPrice.setText(mProduct.getCost_price());
 
-        if (mProduct.getImages() != null) {
+        if (mProduct.getImages() != null && mProduct.getImages().size() > 0) {
             Glide.with(activity)
                     .load(mProduct.getImages().get(0).getUrl())
                     .into(binding.ivProduct);

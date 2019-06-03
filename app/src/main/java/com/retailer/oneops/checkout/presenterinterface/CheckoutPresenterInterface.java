@@ -4,5 +4,5 @@ import java.util.Map;
 
 public interface CheckoutPresenterInterface {
     void getCartDetails();
-    void onDeleteProductItem(int inventoryId, int requestType);
+    void onDeleteProductItem(int id);
 }

@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.retailer.oneops.R;
 import com.retailer.oneops.checkout.model.MCart;
 import com.retailer.oneops.checkout.model.MCartDetail;
+import com.retailer.oneops.databinding.ItemMyCartBinding;
 import com.retailer.oneops.databinding.ItemMyInventoryBinding;
 import com.retailer.oneops.databinding.ItemProductListingBinding;
 import com.retailer.oneops.productListing.adapter.ProductListAdapter;
@@ -29,36 +30,36 @@ import io.reactivex.internal.queue.MpscLinkedQueue;
 public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHolder> {
 
     private LayoutInflater mInflater;
-    private List <MCart> productList;
+    private List<MCart> cartList;
     private Context mContext;
     private Activity activity;
-    private ItemMyInventoryBinding binding;
+    private ItemMyCartBinding binding;
     private CallBack callBack;
 
     // data is passed into the constructor
-    public CheckoutAdapter(Activity activity, List<MCart> productList, CheckoutAdapter.CallBack callBack) {
+    public CheckoutAdapter(Activity activity, List<MCart> cartList, CheckoutAdapter.CallBack callBack) {
         this.activity = activity;
-        this.productList = productList;
+        this.cartList = cartList;
         this.callBack = callBack;
     }
 
     @androidx.annotation.NonNull
     @Override
     public ViewHolder onCreateViewHolder(@androidx.annotation.NonNull ViewGroup parent, int viewType) {
-        ItemMyInventoryBinding binding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.item_my_inventory, parent, false);
+        ItemMyCartBinding binding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.item_my_cart, parent, false);
         return new ViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@androidx.annotation.NonNull CheckoutAdapter.ViewHolder holder, int position) {
-        MCart mProduct = productList.get(position);
-       /* MProduct mProduct = productList.get(position);
+        MCart mCart = cartList.get(position);
+        MProduct mProduct = mCart.getProduct();
 
-        strikeThroughText(holder.binding.tvMrp);
+        strikeThroughText(holder.binding.tvSellingPrice);
         holder.binding.tvProductName.setText(mProduct.getName());
         holder.binding.tvProductDescription.setText(mProduct.getDescription());
-        holder.binding.tvSellingPrice.setText(mProduct.getPrice());
-        holder.binding.tvMrp.setText(mProduct.getCost_price());
+        holder.binding.tvPrice.setText(mProduct.getPrice());
+        holder.binding.tvSellingPrice.setText(mProduct.getCost_price());
 
         double actualPrice = Double.parseDouble(mProduct.getCost_price());
         double discountedPrice = Double.parseDouble(mProduct.getPrice());
@@ -68,30 +69,32 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
         if (mProduct.getImages() != null && mProduct.getImages().size() > 0) {
             Glide.with(activity)
                     .load(mProduct.getImages().get(0).getUrl())
-                    .into(holder.binding.ivImage);
+                    .into(holder.binding.ivProduct);
         }
 
-        holder.binding.tvAddToInventory.setOnClickListener(v -> callBack.onAddToInventoryClick(position, mProduct));
-        holder.binding.cardViewRoot.setOnClickListener(v -> callBack.onProductItemClick(position, mProduct));*/
+        holder.binding.cardViewRoot.setOnClickListener(v -> callBack.onProductItemClick(position, mProduct));
+        holder.binding.ivDelete.setOnClickListener(v -> callBack.onDeleteItem(position, mCart.getCartId()));
     }
 
     @Override
     public int getItemCount() {
-        return productList.size();
+        return cartList.size();
     }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ItemMyInventoryBinding binding;
+        ItemMyCartBinding binding;
 
-        public ViewHolder(@NonNull ItemMyInventoryBinding itemView) {
+        public ViewHolder(@NonNull ItemMyCartBinding itemView) {
             super(itemView.getRoot());
             binding = itemView;
         }
     }
 
     public interface CallBack {
-        void onProductItemClick(int position, MCartDetail mCartDetail);
+        void onProductItemClick(int position, MProduct mProduct);
+
+        void onDeleteItem(int position, int cartId);
     }
 
     private void strikeThroughText(TextView textView) {

@@ -55,7 +55,12 @@ public class MyOrderActivity extends AppCompatActivity implements CheckoutAdapte
     }
 
     @Override
-    public void onProductItemClick(int position, MCartDetail mCartDetail) {
+    public void onProductItemClick(int position, MProduct mProduct) {
+
+    }
+
+    @Override
+    public void onDeleteItem(int position, int productId) {
 
     }
 }

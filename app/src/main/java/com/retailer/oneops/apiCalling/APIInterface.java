@@ -135,5 +135,8 @@ public interface APIInterface {
     @GET("cart")
     Observable<ResponseData<MCartDetail>> getCartDetails(@Header("Authorization") String token);
 
+    @DELETE("cart/{id}")
+    Observable<Response<String>> deleteCartItem(@Header("Authorization") String token,
+                                                         @Path("id") int id);
 
 }

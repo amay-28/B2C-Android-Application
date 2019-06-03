@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/_2sdp"
+        app:cardElevation="@dimen/_2sdp"
+        android:layout_margin="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_3sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:padding="@dimen/_10sdp">
+
+            <LinearLayout
+                android:id="@+id/llButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true">
+
+                <ImageView
+                    android:id="@+id/ivDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:src="@drawable/ic_delete"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/ivProduct"
+                android:layout_width="@dimen/_95sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/dummy_men_shirt" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_13sdp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/ivProduct">
+
+                <TextView
+                    android:id="@+id/tvProductName"
+                    style="@style/TextView12ssp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/latosemibold"
+                    android:text="Kook N Keech"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/tvProductDescription"
+                    style="@style/TextView10ssp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvProductName"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/latoregular"
+                    android:singleLine="true"
+                    android:text="Men Regular Fit Blue Shirt"
+                    android:textColor="@color/color_light_text" />
+
+                <TextView
+                    android:id="@+id/tvCategoryHead"
+                    style="@style/TextView10ssp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvProductDescription"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/latoregular"
+                    android:singleLine="true"
+                    android:text="@string/category"
+                    android:textColor="@color/color_light_text" />
+
+                <TextView
+                    android:id="@+id/tvCategory"
+                    style="@style/TextView10ssp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvProductDescription"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/tvCategoryHead"
+                    android:fontFamily="@font/latoregular"
+                    android:singleLine="true"
+                    android:text="@string/category" />
+
+
+                <TextView
+                    android:id="@+id/tvPrice"
+                    style="@style/TextView12ssp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/latomedium"
+                    android:layout_below="@id/tvCategoryHead"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:text="Rs.1,259"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/tvSellingPrice"
+                    style="@style/TextView10ssp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvCategory"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:layout_marginBottom="9dp"
+                    android:layout_toRightOf="@id/tvPrice"
+                    android:fontFamily="@font/latoregular"
+                    android:text="Rs 2,099"
+                    android:textColor="@color/color_grey_text" />
+
+                <TextView
+                    android:id="@+id/tvDiscountPercent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvCategory"
+                    android:layout_marginLeft="6.2dp"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:layout_toRightOf="@id/tvSellingPrice"
+                    android:text="40% OFF"
+                    android:textColor="@color/green" />
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>
