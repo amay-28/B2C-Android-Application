@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -15,6 +16,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.retailer.oneops.R;
+import com.retailer.oneops.auth.activity.LoginActivity;
+
+import static com.retailer.oneops.util.Constant.IS_LOGIN;
+import static com.retailer.oneops.util.Constant.NO;
 
 public class DialogUtil {
 
@@ -43,7 +48,11 @@ public class DialogUtil {
         buttonPositive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickInAdapter.onDialogButtonClick(0, 0);
+                if (clickInAdapter != null)
+                    clickInAdapter.onDialogButtonClick(0, 0);
+                else
+                    sessionExpire(context);
+
                 dialog.dismiss();
 
             }
@@ -58,6 +67,17 @@ public class DialogUtil {
 
         dialog.show();
     }
+
+    private static void sessionExpire(Context context) {
+        Session session = new Session(context);
+        session.setUserProfile(null);
+        session.setString(IS_LOGIN, NO);
+
+        Intent in = new Intent(context, LoginActivity.class);
+        in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        (context).startActivity(in);
+    }
+
 
     @SuppressLint("NewApi")
     public static void showOkDialog(final String title, final String message, final Context context, final OnDialogItemClickListener clickInAdapter) {

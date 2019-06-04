@@ -9,12 +9,11 @@
         android:background="@drawable/ic_background"
         android:padding="@dimen/_20sdp">
 
-
         <TextView
             android:id="@+id/tvWelcome"
             style="@style/TextView20ssp"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginTop="?attr/actionBarSize"
             android:gravity="center"
             android:text="@string/welcome"
             android:textColor="@color/colorPrimary"
@@ -42,8 +41,8 @@
 
         <ImageView
             android:id="@+id/imgShop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_234sdp"
+            android:layout_height="@dimen/_119sdp"
             android:layout_centerInParent="true"
             android:layout_below="@+id/shopkeerp"
             android:src="@drawable/ic_shop"
@@ -84,6 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_marginTop="@dimen/_10sdp"
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton

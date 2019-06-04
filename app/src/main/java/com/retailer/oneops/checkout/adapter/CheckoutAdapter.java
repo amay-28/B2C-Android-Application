@@ -60,6 +60,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
         holder.binding.tvProductDescription.setText(mProduct.getDescription());
         holder.binding.tvPrice.setText(mProduct.getPrice());
         holder.binding.tvSellingPrice.setText(mProduct.getCost_price());
+        holder.binding.tvQty.setText("" + mCart.getQuantity());
 
         double actualPrice = Double.parseDouble(mProduct.getCost_price());
         double discountedPrice = Double.parseDouble(mProduct.getPrice());
@@ -73,7 +74,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
         }
 
         holder.binding.cardViewRoot.setOnClickListener(v -> callBack.onProductItemClick(position, mProduct));
-        holder.binding.ivDelete.setOnClickListener(v -> callBack.onDeleteItem(position, mCart.getCartId()));
+        holder.binding.ivDelete.setOnClickListener(v -> callBack.onDeleteItem(position, mCart.getId()));
     }
 
     @Override

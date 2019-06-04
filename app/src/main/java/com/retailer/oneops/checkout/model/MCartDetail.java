@@ -11,5 +11,4 @@ public class MCartDetail {
     private String created_at;
     private String updated_at;
     private List<MCart> cart_lines;
-
 }

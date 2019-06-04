@@ -3,11 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".basic.SplashActivity">
 
-    <ImageView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/ic_splash"
-        android:scaleType="fitXY"
-        android:contentDescription="TODO" />
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_splash_bg"
+            android:src="@drawable/ic_splash_top" />
+
+
+    </RelativeLayout>
 
 </layout>

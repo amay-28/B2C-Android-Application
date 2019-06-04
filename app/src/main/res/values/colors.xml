@@ -19,5 +19,12 @@
     <color name="color_light_text">#9a9a9a</color>
     <color name="green">#3db657</color>
     <color name="placeholder_bg">#dddddd</color>
+    <color name="colorBar">#c6c6c6</color>
+
+    <array name="progress_colors">
+        <item>@color/colorPrimaryDark</item>
+        <item>@color/colorAccent</item>
+        <item>@color/colorAccent</item>
+    </array>
 
 </resources>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="activity"
+            type="com.retailer.oneops.BaseActivity" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rl_internet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_175sdp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_msg"
+            style="@style/TextView14ssp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:drawableTop="@drawable/ic_no_internet"
+            android:drawablePadding="@dimen/_18sdp"
+            android:fontFamily="@font/latomedium"
+            android:gravity="center"
+            android:text="@string/error_connection"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_12ssp"
+            android:visibility="visible" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_retry"
+            style="@style/material_button"
+            android:onClick="@{activity::onClicks}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_msg"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:fontFamily="@font/latomedium"
+            android:text="@string/label_retry"
+            android:textAllCaps="false"
+            android:textSize="@dimen/_12ssp"
+            app:cornerRadius="@dimen/_3sdp" />
+
+    </RelativeLayout>
+</layout>

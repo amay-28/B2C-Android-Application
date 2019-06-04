@@ -14,16 +14,19 @@ import com.google.gson.JsonObject;
 import com.retailer.oneops.R;
 import com.retailer.oneops.adapter.ViewPagerAdapter;
 import com.retailer.oneops.checkout.CheckoutActivity;
+import com.retailer.oneops.checkout.adapter.CheckoutAdapter;
 import com.retailer.oneops.checkout.model.MCart;
 import com.retailer.oneops.databinding.ActivityProductDetailBinding;
 import com.retailer.oneops.databinding.ActivityProductListingBinding;
 import com.retailer.oneops.fragment.ViewPagerFragment;
 import com.retailer.oneops.myinventory.AddToInventoryActivity;
+import com.retailer.oneops.product.adapter.ProductVariantAdapter;
 import com.retailer.oneops.product.model.MImage;
 import com.retailer.oneops.product.presenter.ProductDetailPresenter;
 import com.retailer.oneops.product.viewinterface.ProductDetailViewInterface;
 import com.retailer.oneops.productListing.adapter.ProductListAdapter;
 import com.retailer.oneops.productListing.model.MProduct;
+import com.retailer.oneops.productListing.model.MProductVariant;
 import com.retailer.oneops.productListing.presenter.ProductListingPresenter;
 import com.retailer.oneops.productListing.viewinterface.ProductListingViewInterface;
 import com.retailer.oneops.util.CommonClickHandler;
@@ -48,7 +51,7 @@ import static com.retailer.oneops.util.Constant.SORT_HIGH_TO_LOW;
 import static com.retailer.oneops.util.Constant.SORT_LOW_TO_HIGH;
 import static com.retailer.oneops.util.Constant.SORT_NEW_FIRST;
 
-public class ProductDetailActivity extends AppCompatActivity implements ProductDetailViewInterface {
+public class ProductDetailActivity extends AppCompatActivity implements ProductDetailViewInterface, ProductVariantAdapter.CallBack {
 
     private ActivityProductDetailBinding binding;
     private Context context;
@@ -59,6 +62,9 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     private ProductDetailPresenter productDetailPresenter;
     private ProductDetailViewInterface productDetailViewInterface;
     private MProduct mProduct;
+    private ProductVariantAdapter productVariantAdapter;
+    private List<MProductVariant> productVariantList = new ArrayList<>();
+    private int productVariantId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +91,6 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         if (bundle != null) {
             if (bundle.containsKey("productId")) {
                 productId = bundle.getInt("productId");
-                MyDialogProgress.open(context);
                 productDetailPresenter.getProductDetailTask(productId);
             }
             if (bundle.containsKey("isFromInventory")) {
@@ -95,19 +100,33 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
                 }
             }
         }
+
+        bindRecyclerView();
+    }
+
+    private void bindRecyclerView() {
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false);
+        binding.rvProductVariant.setLayoutManager(mLayoutManager);
+        binding.rvProductVariant.setHasFixedSize(true);
+        binding.rvProductVariant.setItemAnimator(new DefaultItemAnimator());
+        productVariantAdapter = new ProductVariantAdapter(activity, productVariantList, this);
+        binding.rvProductVariant.setAdapter(productVariantAdapter);
     }
 
     public void listener() {
         binding.btnAddToInventory.setOnClickListener(v -> {
             if (isFromInventory) {
-                MyDialogProgress.open(context);
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("productId", mProduct.getId());
 
-                /*if (mProduct.getProduct_variant() != null) {
-                    jsonObject.addProperty("productVariantId", mProduct.getProduct_variant());
-                }*/
+                if (mProduct.getProduct_variant() != null) {
+                    if (productVariantId != 0)
+                        jsonObject.addProperty("productVariantId", productVariantId);
+                    else
+                        Toast.makeText(activity, getString(R.string.Please_select_a_variant), Toast.LENGTH_SHORT).show();
+                }
                 //jsonObject.addProperty("quantity",mProduct.ge);
+
                 productDetailPresenter.addToCartTask(jsonObject);
             } else {
                 startActivity(AddToInventoryActivity.getIntent(activity, mProduct, null));
@@ -120,6 +139,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         strikeThroughText(binding.tvMrp);
         binding.tvProductName.setText(mProduct.getName());
         binding.tvProductDescription.setText(mProduct.getDescription());
+        binding.tvProductDetail.setText(mProduct.getDescription());
         binding.tvSellingPrice.setText(mProduct.getPrice());
         binding.tvMrp.setText(mProduct.getCost_price());
 
@@ -127,6 +147,12 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         double discountedPrice = Double.parseDouble(mProduct.getPrice());
         long discountPercent = calculateProfitPercent(actualPrice, discountedPrice);
         binding.tvDiscountPercent.setText(discountPercent + "% OFF");
+
+        if (mProduct.getProduct_variant() != null) {
+            this.productVariantList.addAll(mProduct.getProduct_variant());
+            productVariantAdapter.notifyDataSetChanged();
+        }
+
     }
 
     private void strikeThroughText(TextView textView) {
@@ -159,7 +185,6 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
     @Override
     public void onSuccessfullyGetDetail(MProduct mProduct, String message) {
-        MyDialogProgress.close(context);
         this.mProduct = mProduct;
         List<MImage> imageList = new ArrayList<>();
         for (int i = 0; i < mProduct.getImages().size(); i++) {
@@ -172,12 +197,15 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
     @Override
     public void onSuccessfullyAddToCart(MCart mCart, String message) {
-        MyDialogProgress.close(context);
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onFailToUpdate(String errorMessage) {
-        MyDialogProgress.close(context);
+    }
+
+    @Override
+    public void onVariantItemClick(int position, int productVariantId) {
+        this.productVariantId = productVariantId;
     }
 }

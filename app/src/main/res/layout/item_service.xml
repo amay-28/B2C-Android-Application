@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res/android">
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/cardviewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_2sdp">
+
+        <RelativeLayout
+            android:id="@+id/rlService"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="@dimen/_8sdp">
+
+            <ImageView
+                android:scaleType="centerCrop"
+                android:id="@+id/ivServiceImage"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp" />
+
+            <LinearLayout
+                android:id="@+id/ll_service_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_toEndOf="@+id/ivServiceImage"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/tvServiceName"
+                    style="@style/TextView12ssp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textSize="@dimen/_14ssp" />
+
+
+                <TextView
+                    android:id="@+id/tvDescription"
+                    style="@style/TextView12ssp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/color_light_text"
+                    android:textSize="@dimen/_8ssp" />
+
+                <TextView
+                    android:id="@+id/tvCategory"
+                    style="@style/TextView12ssp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_marginBottom="@dimen/_3sdp"
+                    android:singleLine="true"
+                    android:textSize="@dimen/_10ssp" />
+
+                <TextView
+                    android:id="@+id/tvPrice"
+                    style="@style/TextView12ssp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:singleLine="true"
+                    android:textSize="@dimen/_12ssp" />
+
+
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

@@ -16,7 +16,7 @@
 
         <variable
             name="addService"
-            type="com.retailer.oneops.service.AddServiceActivity"/>
+            type="com.retailer.oneops.service.activity.AddServiceActivity"/>
 
         <variable
             name="bankDetail"
@@ -62,10 +62,12 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
+            android:background="@color/white"
             android:layout_width="match_parent"
+            android:elevation="4dp"
             android:layout_height="?attr/actionBarSize">
 
-            <RelativeLayout
+        <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"

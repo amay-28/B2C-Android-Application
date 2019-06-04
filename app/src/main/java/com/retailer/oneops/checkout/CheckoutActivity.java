@@ -2,6 +2,7 @@ package com.retailer.oneops.checkout;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -59,6 +60,18 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutAdapt
 
         checkoutPresenter = new CheckoutPresenter(checkoutViewInterface, activity);
         checkoutPresenter.getCartDetails();
+
+        binding.radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            switch (checkedId){
+                case R.id.rbStorePickup:
+                    //Toast.makeText(activity, R.string.error_coming_soon, Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.rbHomeDelivery:
+                    break;
+                case R.id.rbDirectCourier:
+                    break;
+            }
+        });
     }
 
     public void bindRecyclerView() {
@@ -74,6 +87,9 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutAdapt
 
     }
 
+    public void placeOrderClick() {
+        
+    }
 
     @Override
     public void onSuccessfulCartDetails(MCartDetail mCartDetail, String message) {
@@ -86,13 +102,15 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutAdapt
         }
         binding.tvTotalMrp.setText("Rs. " + String.valueOf(calculateMrp(mrpList)));
         binding.tvGrandTotal.setText("Rs. " + calculateGrandTotal(calculateMrp(mrpList),
-                10,20));
+                10, 20));
     }
 
     @Override
     public void onSuccessfulDeleteItem() {
-        this.cartList.remove(deletePosition);
-        checkoutAdapter.notifyDataSetChanged();
+       /* this.cartList.remove(deletePosition);
+        checkoutAdapter.notifyDataSetChanged();*/
+        this.cartList.clear();
+        checkoutPresenter.getCartDetails();
     }
 
     @Override

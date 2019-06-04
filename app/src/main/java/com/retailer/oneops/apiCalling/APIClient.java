@@ -2,6 +2,7 @@ package com.retailer.oneops.apiCalling;
 
 import android.app.Activity;
 
+import com.readystatesoftware.chuck.ChuckInterceptor;
 import com.retailer.oneops.util.WebService;
 
 import java.net.CookieManager;
@@ -32,6 +33,7 @@ public class APIClient {
                     .writeTimeout(120, TimeUnit.MINUTES)
                     .readTimeout(120, TimeUnit.MINUTES)
                     .addInterceptor(new ConnectivityInterceptor(activity))
+                    .addInterceptor(new ChuckInterceptor(activity))
                     .cookieJar(new JavaNetCookieJar(cookieManager));
 
             oktHttpClient.addInterceptor(logging);

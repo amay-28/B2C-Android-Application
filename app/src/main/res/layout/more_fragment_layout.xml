@@ -24,13 +24,13 @@
                     style="@style/TextView12ssp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
                     android:fontFamily="@font/latosemibold"
                     android:singleLine="true"
-                    android:textColor="@color/yellow"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:text="@string/edit" />
+                    android:text="@string/edit"
+                    android:textColor="@color/yellow" />
 
                 <RelativeLayout
                     android:id="@+id/rlProfile"
@@ -47,9 +47,9 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_80sdp"
+                        android:layout_marginLeft="@dimen/_13sdp"
                         android:layout_toRightOf="@+id/imgUserProfile"
-                        android:gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/_13sdp">
+                        android:gravity="center_vertical">
 
                         <TextView
                             android:id="@+id/tvName"
@@ -69,8 +69,8 @@
                             android:layout_marginTop="@dimen/_7sdp"
                             android:fontFamily="@font/latosemibold"
                             android:singleLine="true"
-                            android:textColor="@color/colorHint"
-                            android:text="9755253699" />
+                            android:text="9755253699"
+                            android:textColor="@color/colorHint" />
 
                     </RelativeLayout>
 
@@ -79,12 +79,12 @@
 
                 <View
                     android:id="@+id/viewProfile"
-                    android:layout_below="@+id/rlProfile"
                     android:layout_width="match_parent"
-                    android:background="@color/white_dark"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/rlProfile"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
-                    android:layout_height="1dp"></View>
+                    android:background="@color/white_dark"></View>
 
 
                 <RelativeLayout
@@ -98,110 +98,114 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_7sdp"
-                        android:padding="@dimen/_7sdp"
-                        android:fontFamily="@font/latosemibold"
-                        android:singleLine="true"
-                        android:drawablePadding="@dimen/_13sdp"
                         android:drawableLeft="@drawable/ic_add_circle"
+                        android:drawablePadding="@dimen/_13sdp"
+                        android:fontFamily="@font/latosemibold"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/_7sdp"
+                        android:singleLine="true"
                         android:text="@string/add_items_to_your_physical_inventory" />
 
                     <View
                         android:id="@+id/viewInventory"
-                        android:layout_below="@+id/tvAddToInventory"
                         android:layout_width="match_parent"
-                        android:background="@color/white_dark"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/tvAddToInventory"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_marginBottom="@dimen/_5sdp"
-                        android:layout_height="1dp"></View>
+                        android:background="@color/white_dark"></View>
 
                     <TextView
                         android:id="@+id/tvOrders"
                         style="@style/TextView12ssp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/viewInventory"
+                        android:drawableLeft="@drawable/ic_order"
+                        android:drawablePadding="@dimen/_13sdp"
                         android:fontFamily="@font/latosemibold"
+                        android:gravity="center_vertical"
                         android:padding="@dimen/_7sdp"
                         android:singleLine="true"
-                        android:layout_below="@+id/viewInventory"
-                        android:drawablePadding="@dimen/_13sdp"
-                        android:drawableLeft="@drawable/ic_order"
                         android:text="@string/orders" />
 
                     <View
                         android:id="@+id/viewOrder"
-                        android:layout_below="@+id/tvOrders"
                         android:layout_width="match_parent"
-                        android:background="@color/white_dark"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/tvOrders"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_marginBottom="@dimen/_5sdp"
-                        android:layout_height="1dp"></View>
+                        android:background="@color/white_dark"></View>
 
                     <TextView
                         android:id="@+id/tvTotalEarnings"
                         style="@style/TextView12ssp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
+                        android:layout_below="@+id/viewOrder"
+                        android:drawableLeft="@drawable/ic_total_earnings"
+                        android:drawablePadding="@dimen/_13sdp"
                         android:fontFamily="@font/latosemibold"
+                        android:gravity="center_vertical"
                         android:padding="@dimen/_7sdp"
                         android:singleLine="true"
-                        android:layout_below="@+id/viewOrder"
-                        android:drawablePadding="@dimen/_13sdp"
-                        android:drawableLeft="@drawable/ic_total_earnings"
                         android:text="@string/total_earnings" />
 
                     <View
                         android:id="@+id/viewEarning"
-                        android:layout_below="@+id/tvTotalEarnings"
                         android:layout_width="match_parent"
-                        android:background="@color/white_dark"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/tvTotalEarnings"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_marginBottom="@dimen/_5sdp"
-                        android:layout_height="1dp"></View>
+                        android:background="@color/white_dark"></View>
 
                     <TextView
                         android:id="@+id/tvBankDetails"
                         style="@style/TextView12ssp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/viewEarning"
+                        android:drawableLeft="@drawable/ic_my_bank_details"
+                        android:drawablePadding="@dimen/_13sdp"
                         android:fontFamily="@font/latosemibold"
+                        android:gravity="center_vertical"
                         android:padding="@dimen/_7sdp"
                         android:singleLine="true"
-                        android:layout_below="@+id/viewEarning"
-                        android:drawablePadding="@dimen/_13sdp"
-                        android:drawableLeft="@drawable/ic_my_bank_details"
                         android:text="@string/my_bank_details" />
 
                     <View
                         android:id="@+id/viewBankDetail"
-                        android:layout_below="@+id/tvBankDetails"
                         android:layout_width="match_parent"
-                        android:background="@color/white_dark"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/tvBankDetails"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_marginBottom="@dimen/_5sdp"
-                        android:layout_height="1dp"></View>
+                        android:background="@color/white_dark"></View>
 
                     <TextView
                         android:id="@+id/tvFAQ"
                         style="@style/TextView12ssp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/viewBankDetail"
+                        android:drawableLeft="@drawable/ic_faq"
+                        android:drawablePadding="@dimen/_13sdp"
                         android:fontFamily="@font/latosemibold"
+                        android:gravity="center_vertical"
                         android:padding="@dimen/_7sdp"
                         android:singleLine="true"
-                        android:layout_below="@+id/viewBankDetail"
-                        android:drawablePadding="@dimen/_13sdp"
-                        android:drawableLeft="@drawable/ic_faq"
                         android:text="@string/faqs" />
 
                     <View
                         android:id="@+id/viewFaq"
-                        android:layout_below="@+id/tvFAQ"
                         android:layout_width="match_parent"
-                        android:background="@color/white_dark"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/tvFAQ"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_marginBottom="@dimen/_5sdp"
-                        android:layout_height="1dp"></View>
+                        android:background="@color/white_dark"></View>
 
 
                     <TextView
@@ -209,22 +213,23 @@
                         style="@style/TextView12ssp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/viewFaq"
+                        android:drawableLeft="@drawable/ic_help"
+                        android:drawablePadding="@dimen/_13sdp"
                         android:fontFamily="@font/latosemibold"
+                        android:gravity="center_vertical"
                         android:padding="@dimen/_7sdp"
                         android:singleLine="true"
-                        android:layout_below="@+id/viewFaq"
-                        android:drawablePadding="@dimen/_13sdp"
-                        android:drawableLeft="@drawable/ic_help"
                         android:text="@string/help" />
 
                     <View
                         android:id="@+id/viewHelp"
-                        android:layout_below="@+id/tvHelp"
                         android:layout_width="match_parent"
-                        android:background="@color/white_dark"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/tvHelp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_marginBottom="@dimen/_5sdp"
-                        android:layout_height="1dp"></View>
+                        android:background="@color/white_dark"></View>
 
 
                     <TextView
@@ -232,36 +237,38 @@
                         style="@style/TextView12ssp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/viewHelp"
+                        android:drawableLeft="@drawable/ic_setting"
+                        android:drawablePadding="@dimen/_13sdp"
                         android:fontFamily="@font/latosemibold"
+                        android:gravity="center_vertical"
                         android:padding="@dimen/_7sdp"
                         android:singleLine="true"
-                        android:layout_below="@+id/viewHelp"
-                        android:drawablePadding="@dimen/_13sdp"
-                        android:drawableLeft="@drawable/ic_setting"
                         android:text="@string/settings" />
 
-                    <View
+                    <!--<View
                         android:id="@+id/viewSetting"
-                        android:layout_below="@+id/tvSettings"
                         android:layout_width="match_parent"
-                        android:background="@color/white_dark"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/tvSettings"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_marginBottom="@dimen/_5sdp"
-                        android:layout_height="1dp"></View>
+                        android:background="@color/white_dark"></View>
 
                     <TextView
                         android:id="@+id/tvLogout"
                         style="@style/TextView12ssp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/latosemibold"
-                        android:padding="@dimen/_7sdp"
-                        android:singleLine="true"
                         android:layout_below="@+id/viewSetting"
-                        android:drawablePadding="@dimen/_13sdp"
                         android:layout_margin="@dimen/_5sdp"
                         android:drawableLeft="@drawable/ic_logout"
-                        android:text="@string/logout" />
+                        android:drawablePadding="@dimen/_13sdp"
+                        android:fontFamily="@font/latosemibold"
+                        android:padding="@dimen/_7sdp"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:text="@string/logout" />-->
 
                 </RelativeLayout>
             </RelativeLayout>

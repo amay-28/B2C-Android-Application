@@ -18,6 +18,7 @@ import com.retailer.oneops.dashboard.activity.EditProfileActivity;
 import com.retailer.oneops.dashboard.activity.MyProfileActivity;
 import com.retailer.oneops.databinding.MoreFragmentLayoutBinding;
 import com.retailer.oneops.product.AddProductActivity;
+import com.retailer.oneops.settings.SettingActivity;
 import com.retailer.oneops.util.DialogUtil;
 import com.retailer.oneops.util.OnDialogItemClickListener;
 import com.retailer.oneops.util.Session;
@@ -60,6 +61,7 @@ public class MoreFragment extends Fragment implements OnDialogItemClickListener 
         binding.tvEdit.setOnClickListener(v -> startActivityForResult(new Intent(getActivity(), EditProfileActivity.class), OPEN_EDIT_PROFILE));
         binding.tvAddToInventory.setOnClickListener(v -> startActivity(new Intent(getActivity(), AddProductActivity.class)));
         binding.rlProfile.setOnClickListener(v -> startActivity(new Intent(getActivity(), MyProfileActivity.class)));
+        binding.tvSettings.setOnClickListener(v -> startActivity(new Intent(getActivity(), SettingActivity.class)));
 
         if (new Session(activity).getUserProfile().getBankDetails() != null) {
             binding.tvBankDetails.setOnClickListener(v -> startActivity(new Intent(getActivity(), BankDetailActivity.class)));
@@ -67,7 +69,7 @@ public class MoreFragment extends Fragment implements OnDialogItemClickListener 
             binding.tvBankDetails.setOnClickListener(v -> startActivity(new Intent(getActivity(), AddBankDetailActivity.class)));
         }
 
-        binding.tvLogout.setOnClickListener(v -> performLogout());
+       // binding.tvLogout.setOnClickListener(v -> performLogout());
     }
 
     private void initialization() {

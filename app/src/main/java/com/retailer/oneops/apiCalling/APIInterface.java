@@ -16,12 +16,14 @@ import com.retailer.oneops.product.model.MAddProduct;
 import com.retailer.oneops.product.model.MImageServer;
 import com.retailer.oneops.productListing.model.MProduct;
 import com.google.gson.JsonElement;
+import com.retailer.oneops.settings.model.AddService;
 
 import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
+import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -138,5 +140,24 @@ public interface APIInterface {
     @DELETE("cart/{id}")
     Observable<Response<String>> deleteCartItem(@Header("Authorization") String token,
                                                          @Path("id") int id);
+
+    /*Add by Sumit*/
+    @Multipart
+    @POST("upload/file")
+    Call<JsonElement> uploadImageFile(@Header("Authorization") String token,
+                                      @Part MultipartBody.Part file);
+
+    @POST("retailer/service")
+    Call<JsonElement> addService(@Header("Authorization") String token,
+                                 @Body AddService jsonObject);
+
+    @GET("retailer/service")
+
+    Call<JsonElement> getService(@Header("Authorization") String token,
+                                 @QueryMap Map<String, String> map);
+
+    @PUT("retailer/service/{id}")
+    Call<JsonElement> editService(@Header("Authorization") String token,
+                                  @Body AddService jsonObject, @Path("id") int id);
 
 }

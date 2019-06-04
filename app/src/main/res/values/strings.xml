@@ -96,6 +96,7 @@
     <string name="single_peace_store">Single Piece Store</string>
     <string name="categories">Categories</string>
     <string name="category">Category</string>
+    <string name="Qty">Qty:</string>
     <string name="view_all">View All</string>
     <string name="explore">Explore</string>
     <string name="product_name">Product Name</string>
@@ -110,6 +111,15 @@
     <string name="service_price">Service Price</string>
     <string name="service_description">Service Description</string>
     <string name="product_listing">Product Listing</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="error_pls_enter">Please enter %1$s</string>
+    <string name="please_select_service_image">Please upload service image</string>
+    <string name="service_added_successfully">Service added successfully</string>
+    <string name="service_updated_successfully">Service updated successfully</string>
+    <string name="error_valid_amount">Please provide valid %1$s</string>
+    <string name="label_retry">Retry</string>
+    <string name="label_services">Services</string>
+    <string name="msg_no_service_list">Oops! No service available.</string>
 
     <!-- Add_Bank_Details String -->
     <string name="Account_Holder_Name">Account Holder Name</string>
@@ -200,6 +210,9 @@
     <string name="logout">Logout</string>
     <string name="physicalinventory">(to your physical inventory)</string>
     <string name="inventoryproduct">(for physical inventory product)</string>
+    <string name="enable">Enable Hyper Local</string>
+    <string name="setminamount">Set your minimum order amount </string>
+    <string name="agents">Agents</string>
 
 
     <string name="Length">Length</string>
@@ -227,6 +240,7 @@
     <string name="Add_to_Inventory">Add to Inventory</string>
     <string name="Add_to_Cart">Add to Cart</string>
     <string name="Product_Description">Product Description</string>
+    <string name="Select_product_variant">Select product variant</string>
     <string name="Fit">Fit</string>
     <string name="Transparency">Transparency</string>
     <string name="Sleeve_Length">Sleeve Length</string>
@@ -244,6 +258,7 @@
     <string name="View_Similar_Product">View Similar Product</string>
     <string name="Seller_Info">Seller Info:</string>
     <string name="All">All</string>
+    <string name="Please_select_a_variant">Please select a product variant</string>
 
     <!--checkout-->
     <string name="deliveryOptions">Delivery Options</string>
@@ -268,7 +283,7 @@
     <string name="Order_No">Order No.</string>
     <string name="Order_detail">Order Detail</string>
     <string name="Checkout">Checkout</string>
-
+    <string name="label_category">Category:</string>
     <!--popups-->
     <string name="logout_popup">Are you sure you want to logout from the app?</string>
     <string name="delete_popup">Are you sure you want to delete it from your inventory?</string>

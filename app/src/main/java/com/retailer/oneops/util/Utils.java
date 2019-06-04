@@ -11,6 +11,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Html;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
@@ -18,8 +19,11 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.retailer.oneops.R;
 import com.retailer.oneops.apiCalling.ResponseData;
 import com.google.android.gms.auth.api.phone.SmsRetriever;
 import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
@@ -46,6 +50,9 @@ import java.util.List;
 import java.util.TimeZone;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -387,4 +394,67 @@ public class Utils implements Constant {
     public static String checkNull(String value) {
         return value == null ? "" : value;
     }
+
+    public static void showToast(Context context, String msg) {
+        if (msg != null && !msg.isEmpty())
+            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void showToastConnection(Context context) {
+        Toast.makeText(context, context.getString(R.string.error_connection), Toast.LENGTH_SHORT).show();
+    }
+
+    public static void showToastAuthFailed(Context context) {
+        Toast.makeText(context, context.getString(R.string.error_auth_failed), Toast.LENGTH_SHORT).show();
+    }
+
+    public static void showToastAuthCancelled(Context context) {
+        Toast.makeText(context, context.getString(R.string.error_auth_cancelled), Toast.LENGTH_SHORT).show();
+    }
+
+    public static void showToastWentWrong(Context context) {
+        Toast.makeText(context, context.getString(R.string.error_something_wrong), Toast.LENGTH_SHORT).show();
+    }
+
+    public static ActionBar setUpToolbarWithColor(final Context context, Toolbar actionBarToolbar, TextView toolbarTitle, String title) {
+        return setUpToolbarWithColor(context, actionBarToolbar, toolbarTitle, title, context.getResources().getColor(R.color.white));
+    }
+
+    public static ActionBar setUpToolbarWithColor(final Context context, Toolbar actionBarToolbar, TextView toolbarTitle, String title, int backgroundResource) {
+        final AppCompatActivity activity = (AppCompatActivity) context;
+        //   Toolbar actionBarToolbar = (Toolbar) activity.findViewById(R.id.toolbar_actionbar);
+        activity.setSupportActionBar(actionBarToolbar);
+        androidx.appcompat.app.ActionBar actionBar = activity.getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        if (backgroundResource != 0)
+            actionBarToolbar.setBackgroundColor(backgroundResource);
+
+        //  TextView tvTitle = (TextView) actionBarToolbar.findViewById(R.id.toolbar_title);
+        toolbarTitle.setText(Html.fromHtml(title));
+        actionBarToolbar.setNavigationIcon(R.drawable.ic_back);
+
+        actionBarToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.finish();
+            }
+        });
+        return actionBar;
+    }
+
+    public static void setMsg(Context context, RelativeLayout llInternet, TextView txtConnection, String msg) {
+        llInternet.setVisibility(View.VISIBLE);
+        txtConnection.setText(msg);
+
+        if (msg.equalsIgnoreCase(context.getString(R.string.error_connection))) {
+            txtConnection.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_no_internet, 0, 0);
+        } else {
+            txtConnection.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+        }
+
+    }
+
 }

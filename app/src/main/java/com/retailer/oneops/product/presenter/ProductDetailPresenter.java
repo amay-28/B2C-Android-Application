@@ -11,6 +11,7 @@ import com.retailer.oneops.product.presenterinterface.ProductDetailPresenterInte
 import com.retailer.oneops.product.viewinterface.ProductDetailViewInterface;
 import com.retailer.oneops.productListing.model.MProduct;
 import com.retailer.oneops.util.Constant;
+import com.retailer.oneops.util.MyDialogProgress;
 import com.retailer.oneops.util.Session;
 import com.retailer.oneops.util.Utils;
 
@@ -34,6 +35,7 @@ public class ProductDetailPresenter implements ProductDetailPresenterInterface, 
         return new DisposableObserver<Response<ResponseData<MProduct>>>() {
             @Override
             public void onNext(Response<ResponseData<MProduct>> response) {
+                MyDialogProgress.close(activity);
                 /*Gson gson = new Gson();
                 String s = gson.toJson(response.getData());
                 Type type = new TypeToken<MProduct>() {
@@ -47,6 +49,7 @@ public class ProductDetailPresenter implements ProductDetailPresenterInterface, 
 
             @Override
             public void onError(Throwable e) {
+                MyDialogProgress.close(activity);
                 if (e instanceof HttpException)
                     viewInterface.onFailToUpdate(Utils.errorMessageParsing(e).getMessage());
             }
@@ -62,11 +65,14 @@ public class ProductDetailPresenter implements ProductDetailPresenterInterface, 
         return new DisposableObserver<Response<ResponseData<MCart>>>() {
             @Override
             public void onNext(Response<ResponseData<MCart>> response) {
-                viewInterface.onSuccessfullyAddToCart(response.body().getData(), response.message());
+                MyDialogProgress.close(activity);
+                if (response.body() != null)
+                    viewInterface.onSuccessfullyAddToCart(response.body().getData(), response.message());
             }
 
             @Override
             public void onError(Throwable e) {
+                MyDialogProgress.close(activity);
                 if (e instanceof HttpException)
                     viewInterface.onFailToUpdate(Utils.errorMessageParsing(e).getMessage());
             }
@@ -88,11 +94,14 @@ public class ProductDetailPresenter implements ProductDetailPresenterInterface, 
 
     @Override
     public void getProductDetailTask(int id) {
+        MyDialogProgress.open(activity);
         getObservableProductDetail(id).subscribeWith(getObserverToAddProduct());
     }
 
     @Override
     public void addToCartTask(JsonObject jsonObject) {
+        if (!MyDialogProgress.isOpen(activity))
+            MyDialogProgress.open(activity);
         getObservableAddCart(jsonObject).subscribeWith(getObserverToAddCart());
     }
 }
