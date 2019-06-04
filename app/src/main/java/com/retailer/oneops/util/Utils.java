@@ -19,10 +19,13 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.retailer.oneops.R;
 import com.retailer.oneops.apiCalling.ResponseData;
 import com.google.android.gms.auth.api.phone.SmsRetriever;
@@ -31,6 +34,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
+import com.retailer.oneops.product.ProductDetailActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -434,7 +438,12 @@ public class Utils implements Constant {
 
         //  TextView tvTitle = (TextView) actionBarToolbar.findViewById(R.id.toolbar_title);
         toolbarTitle.setText(Html.fromHtml(title));
-        actionBarToolbar.setNavigationIcon(R.drawable.ic_back);
+        if (context instanceof ProductDetailActivity){
+            actionBarToolbar.setNavigationIcon(R.drawable.ic_back);
+        }else {
+            actionBarToolbar.setNavigationIcon(R.drawable.ic_back);
+        }
+
 
         actionBarToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -455,6 +464,28 @@ public class Utils implements Constant {
             txtConnection.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         }
 
+    }
+
+    public static void setImage(Context context, String url, ImageView imageView){
+
+        if (url == null || url.isEmpty() || url.endsWith("/")) {
+            imageView.setImageResource(R.drawable.ic_launcher_background);
+            return;
+        }
+
+
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.error(R.drawable.ic_launcher_background);
+        requestOptions.centerCrop();
+        requestOptions.dontAnimate();
+
+
+        Glide.with(context)
+                .setDefaultRequestOptions(requestOptions)
+                .asBitmap()
+                .load(url)
+                .thumbnail(0.3f)
+                .into(imageView);
     }
 
 }

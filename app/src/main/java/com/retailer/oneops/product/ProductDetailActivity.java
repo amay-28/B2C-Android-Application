@@ -31,6 +31,7 @@ import com.retailer.oneops.productListing.presenter.ProductListingPresenter;
 import com.retailer.oneops.productListing.viewinterface.ProductListingViewInterface;
 import com.retailer.oneops.util.CommonClickHandler;
 import com.retailer.oneops.util.MyDialogProgress;
+import com.retailer.oneops.util.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -79,11 +80,13 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     }
 
     public void setupToolbar() {
+        Utils.setUpToolbarWithColor(context, binding.incToolbar.toolbarActionbar, binding.incToolbar.toolbarTitle, "", android.R.color.transparent);
        /* binding.header.setHandler(new CommonClickHandler(activity));
         binding.header.tvMainHeading.setText("");*/
     }
 
     public void initViews() {
+
         productDetailPresenter = new ProductDetailPresenter(productDetailViewInterface, activity);
 
         bundle = getIntent().getExtras();

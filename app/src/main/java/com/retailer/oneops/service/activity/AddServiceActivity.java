@@ -2,6 +2,7 @@ package com.retailer.oneops.service.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -37,6 +38,7 @@ import com.retailer.oneops.settings.model.AddService;
 import com.retailer.oneops.settings.model.MUrl;
 import com.retailer.oneops.util.CommonClickHandler;
 import com.retailer.oneops.util.Constant;
+import com.retailer.oneops.util.ImageUtils;
 import com.retailer.oneops.util.MyDialogProgress;
 import com.retailer.oneops.util.Session;
 import com.retailer.oneops.util.ShowToast;
@@ -51,13 +53,16 @@ import androidx.databinding.DataBindingUtil;
 
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 
 import static com.retailer.oneops.auth.util.Categoryutil.ZERO;
@@ -143,7 +148,7 @@ public class AddServiceActivity extends AppCompatActivity implements DialogViewI
             return;
         }
 
-        if (TextUtils.isEmpty(sellingPrice)) {
+        /*if (TextUtils.isEmpty(sellingPrice)) {
             Utils.showToast(activity, getString(R.string.error_pls_enter, getString(R.string.selling_price).toLowerCase()));
             return;
         }
@@ -151,7 +156,7 @@ public class AddServiceActivity extends AppCompatActivity implements DialogViewI
         if (Integer.parseInt(sellingPrice) <= 0) {
             Utils.showToast(activity, getString(R.string.error_valid_amount, getString(R.string.selling_price).toLowerCase()));
             return;
-        }
+        }*/
 
         if (TextUtils.isEmpty(mImage)) {
             Utils.showToast(activity, getString(R.string.please_select_service_image));
@@ -196,7 +201,7 @@ public class AddServiceActivity extends AppCompatActivity implements DialogViewI
     }
 
     // Crop image convert to file
-    public void CreateFileForSend(Uri URI) {
+   /* public void CreateFileForSend(Uri URI) {
         imageURI = URI;
         File image = Utils.compressURI(activity, URI, "");
 
@@ -214,7 +219,33 @@ public class AddServiceActivity extends AppCompatActivity implements DialogViewI
 
 
     }
+*/
 
+// Crop image convert to file
+    public void CreateFileForSend(Uri URI) {
+        imageURI = URI;
+        Bitmap bitmap = ImageUtils.getInstant().getCompressedBitmap(imageURI.getPath());
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, bos);
+
+
+
+
+        if (bitmap != null) {
+            RequestBody mRBCover = RequestBody.create(MediaType.parse("image/jpeg"), bos.toByteArray());
+            MultipartBody.Part mPartCover = MultipartBody.Part.createFormData(WebService.FILE, "file.jpg", mRBCover);
+
+
+            new Repository(activity).callProfileAPI(mPartCover, activity, new UpdateAccount() {
+                @Override
+                public void onSuccess(int position, Object object) {
+                    mImage = (String) object;
+                    binding.ivService.setImageURI(imageURI);
+                }
+            });
+        }
+
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

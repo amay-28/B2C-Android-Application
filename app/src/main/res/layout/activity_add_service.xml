@@ -75,6 +75,7 @@
 
                 <EditText
                     android:id="@+id/etSellingPrice"
+                    android:visibility="gone"
                     style="@style/EditText12ssp"
                     android:layout_below="@+id/etServicePrice"
                     android:layout_marginTop="@dimen/_10sdp"
