@@ -21,6 +21,16 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
+<!--
+        <ExpandableListView
+            android:layout_below="@+id/header"
+            android:id="@+id/rvSuperCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </ExpandableListView>
+-->
+
         <include android:id="@+id/header"
             bind:category="@{category}"
             layout="@layout/header_with_back"></include>

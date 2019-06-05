@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.retailer.oneops.R;
 import com.retailer.oneops.auth.model.MCategory;
 import com.retailer.oneops.dashboard.activity.CategoryActivity;
+import com.retailer.oneops.dashboard.activity.CategoryActivity1;
 import com.retailer.oneops.dashboard.adapter.BannerListAdapter;
 import com.retailer.oneops.dashboard.adapter.CategoryListAdapter;
 import com.retailer.oneops.dashboard.adapter.CollectionListAdapter;
@@ -107,7 +108,7 @@ public class HomeFragment extends Fragment implements Constant, HomeViewInterfac
     }
 
     private void listner() {
-        binding.tvViewAll.setOnClickListener(view -> startActivity(new Intent(activity, CategoryActivity.class).putParcelableArrayListExtra(ALL_CATEGORY_LIST, (ArrayList<? extends Parcelable>) superCategoryList)));
+        binding.tvViewAll.setOnClickListener(view -> startActivity(new Intent(activity, CategoryActivity1.class).putParcelableArrayListExtra(ALL_CATEGORY_LIST, (ArrayList<? extends Parcelable>) superCategoryList)));
     }
 
     @Override

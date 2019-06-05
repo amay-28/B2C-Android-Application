@@ -430,7 +430,8 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
 
     @Override
     public void onEditPhysicalProduct(int position, MProduct mProduct) {
-        startActivityForResult(AddProductActivity.getIntent(activity, mProduct), OPEN_EDIT_VIRTUAL_INVENTORY);
+        startActivityForResult(new Intent(activity, AddProductActivity.class)
+                .putExtra("mProduct", mProduct),OPEN_EDIT_VIRTUAL_INVENTORY);
     }
 
     @Override

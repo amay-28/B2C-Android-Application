@@ -80,13 +80,17 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
     private MProduct mProduct;
     private boolean isEditProduct = false;
     private int selectedCategoryId = 0;
+    private Bundle bundle;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = this;
         binding = DataBindingUtil.setContentView(activity, R.layout.activity_add_product);
+        bundle = getIntent().getExtras();
         initialization();
+
         listeners();
     }
 
@@ -109,22 +113,13 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         imageAdapter = new ShowImagesAdapter(activity, setFirstImage(), this);
         binding.rvImages.setAdapter(imageAdapter);
 
-        if (intent != null)
-            getIntentData();
-    }
-
-    private void getIntentData() {
-        isEditProduct = true;
-        mProduct = intent.getParcelableExtra("mProduct");
-        if (mProduct != null)
-            setExistingData(mProduct);
-    }
-
-
-    public static Intent getIntent(Activity activity, MProduct productModel) {
-        intent = new Intent(activity, AddProductActivity.class);
-        intent.putExtra("mProduct", (Parcelable) productModel);
-        return intent;
+        if (bundle != null) {
+            if (bundle.containsKey("mProduct")) {
+                isEditProduct = true;
+                mProduct = (MProduct)bundle.getParcelable("mProduct");
+                setExistingData(mProduct);
+            }
+        }
     }
 
     public void setExistingData(MProduct mProduct) {
@@ -132,8 +127,10 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         binding.etDescription.setText(mProduct.getDescription());
         binding.etSellingPrice.setText(mProduct.getPrice());
 
-        imageList.addAll(mProduct.getImages());
-        imageAdapter.notifyDataSetChanged();
+        if (mProduct.getImages() != null) {
+            imageList.addAll(mProduct.getImages());
+            imageAdapter.notifyDataSetChanged();
+        }
     }
 
 

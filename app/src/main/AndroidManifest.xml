@@ -68,6 +68,10 @@
             android:name="com.retailer.oneops.dashboard.activity.CategoryActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.retailer.oneops.dashboard.activity.CategoryActivity1"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name="com.retailer.oneops.dashboard.activity.DashboardActivity"
             android:label="@string/title_activity_dashboard"
             android:screenOrientation="portrait" />

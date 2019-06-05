@@ -30,7 +30,7 @@ public class MProduct implements Parcelable {
     private List<MImage> images;
     private List<MProductVariant> product_variant;
 
-    protected MProduct(Parcel in) {
+    public MProduct(Parcel in) {
         id = in.readString();
         name = in.readString();
         categoryId = in.readString();
@@ -60,6 +60,10 @@ public class MProduct implements Parcelable {
             return new MProduct[size];
         }
     };
+
+    public MProduct() {
+
+    }
 
     @Override
     public int describeContents() {
