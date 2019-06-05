@@ -116,10 +116,12 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         if (bundle != null) {
             if (bundle.containsKey("mProduct")) {
                 isEditProduct = true;
-                mProduct = (MProduct)bundle.getParcelable("mProduct");
+                mProduct = (MProduct) bundle.getParcelable("mProduct");
                 setExistingData(mProduct);
             }
         }
+        /*if (intent != null)
+            getIntentData();*/
     }
 
     public void setExistingData(MProduct mProduct) {
@@ -133,6 +135,22 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         }
     }
 
+   /* private void getIntentData() {
+        if (intent.hasExtra("mProduct")){
+            isEditProduct = true;
+            mProduct = intent.getParcelableExtra("mProduct");
+            if (mProduct != null) {
+                setExistingData(mProduct);
+            }
+        }
+    }
+
+
+    public static Intent getIntent(Activity activity, MProduct productModel) {
+        intent = new Intent(activity, AddProductActivity.class);
+        intent.putExtra("mProduct", (Parcelable) productModel);
+        return intent;
+    }*/
 
     public List<MImage> setFirstImage() {
         MImage mImage;
@@ -215,7 +233,10 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         }*/ else if (TextUtils.isEmpty(binding.etSellingPrice.getText().toString())) {
             Toast.makeText(activity, resources.getString(R.string.please_enter_selling_price), Toast.LENGTH_SHORT).show();
             return false;
-        } /*else if (TextUtils.isEmpty(binding.etPaymentOption.getText().toString())) {
+        } else if (TextUtils.isEmpty(binding.etCostPrice.getText().toString())) {
+            Toast.makeText(activity, resources.getString(R.string.please_enter_cost_price), Toast.LENGTH_SHORT).show();
+            return false;
+        }/*else if (TextUtils.isEmpty(binding.etPaymentOption.getText().toString())) {
             Toast.makeText(activity, resources.getString(R.string.please_enter_state), Toast.LENGTH_SHORT).show();
             return false;
         }*/ else if (imageAdapter.getItemCount() <= 1) {
@@ -236,7 +257,7 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         mAddProduct.setName(binding.etProductName.getText().toString());
         mAddProduct.setCategory(mSubSubCategory);
         mAddProduct.setPrice(binding.etSellingPrice.getText().toString());
-        mAddProduct.setCost_price(binding.etSellingPrice.getText().toString());
+        mAddProduct.setCost_price(binding.etCostPrice.getText().toString());
         mAddProduct.setDescription(binding.etDescription.getText().toString());
     }
 

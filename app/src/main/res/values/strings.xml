@@ -44,6 +44,7 @@
     <string name="please_enter_valid_otp">Please enter valid otp</string>
     <string name="deals_in_category">Deals in (Category)</string>
     <string name="please_enter_shop_name">Please enter Shop Name</string>
+    <string name="please_enter_customer_name">Please enter Customer Name</string>
     <string name="please_enter_address">Please enter address</string>
     <string name="please_enter_city">Please enter City</string>
     <string name="please_enter_state">Please enter State</string>
@@ -59,6 +60,7 @@
 
     <string name="please_enter_product_name">Please enter product name</string>
     <string name="please_enter_selling_price">Please enter selling price</string>
+    <string name="please_enter_cost_price">Please enter cost price</string>
     <string name="please_enter_description">Please enter description</string>
     <string name="please_select_image">Please select at least one image</string>
 
@@ -103,6 +105,7 @@
     <string name="sub_category">Sub Category</string>
     <string name="sub_sub_category">Sub Sub Category</string>
     <string name="selling_price">Selling Price</string>
+    <string name="cost_price">Cost Price</string>
     <string name="payment_options">Payment Option</string>
     <string name="add_product_description">Add Product Description</string>
     <string name="add_product">Add Product</string>
@@ -259,7 +262,10 @@
     <string name="Seller_Info">Seller Info:</string>
     <string name="All">All</string>
     <string name="Please_select_a_variant">Please select a product variant</string>
-    <string name="Product_added_with_another_inventory">Product added with another inventory in cart</string>
+    <string name="TITLE_You_can_only_order_items_from">You can only order items from one inventory at a time</string>
+    <string name="MESSAGE_clear_cart">Clear your cart if you\'d still like to order this item</string>
+    <string name="Your_cart_is_clear">Your cart is now empty, you can continue shopping with any inventory</string>
+    <string name="choose_product_from_same_inventory">Choose product from same inventory</string>
 
     <!--checkout-->
     <string name="deliveryOptions">Delivery Options</string>

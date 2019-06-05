@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.retailer.oneops.R;
 import com.retailer.oneops.auth.adapter.CategoryAdapter;
+import com.retailer.oneops.auth.model.MAddress;
 import com.retailer.oneops.auth.model.MCategory;
 import com.retailer.oneops.auth.model.MProfile;
 import com.retailer.oneops.auth.model.MUser;
@@ -143,13 +144,16 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
     }
 
     private void prepareData() {
+        /*List<MAddress> addressList = new ArrayList<>();
+        MAddress mAddress = new MAddress();*/
         // have to add more fields
         mProfile.setShopName(binding.etShopName.getText().toString());
+        mProfile.setEmail(binding.etEmail.getText().toString());
+
         mProfile.setAddressLine1(binding.etAddressOne.getText().toString());
         mProfile.setAddressLine2(binding.etAddressTwo.getText().toString());
         mProfile.setCity(binding.etCity.getText().toString());
         mProfile.setState(binding.etState.getText().toString());
-        mProfile.setEmail(binding.etEmail.getText().toString());
         mProfile.setGstin(binding.etGstNo.getText().toString());
         mProfile.setPanNumber(binding.etPanNo.getText().toString());
         List<MProfile.MDealsIn> dealsInList = new ArrayList<>();
@@ -179,7 +183,7 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
     @Override
     public void onSucessfullySubmitShopDetail(MUser data, String message) {
         ShowToast.toastMsg(activity, getString(R.string.Retailer_account_created_successfully));
-        startActivity(new Intent(this,ThankYouActivity.class));
+        startActivity(new Intent(this, ThankYouActivity.class));
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.retailer.oneops.dashboard.adapter;
 import android.app.Activity;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -57,7 +58,7 @@ public class VirtualInventoryAdapter extends RecyclerView.Adapter<VirtualInvento
                     .into(holder.binding.ivProduct);
         }
 
-        holder.binding.ivEdit.setOnClickListener(v -> callBack.onEditVirtualProduct(position, mInventory));
+        holder.binding.ivEdit.setVisibility(View.GONE);
         holder.binding.ivDelete.setOnClickListener(v -> callBack.onDeleteVirtualProduct(position, mInventory));
         holder.binding.cardViewRoot.setOnClickListener(v -> callBack.onVirtualItemClick(position, mInventory));
     }

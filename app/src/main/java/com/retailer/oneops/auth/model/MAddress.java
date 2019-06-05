@@ -1,9 +1,9 @@
-package com.retailer.oneops.checkout.model;
+package com.retailer.oneops.auth.model;
 
 import lombok.Data;
 
 @Data
-public class MCustomerAddress {
+public class MAddress {
     private String name;
     private String mobileNumber;
     private int pincode;

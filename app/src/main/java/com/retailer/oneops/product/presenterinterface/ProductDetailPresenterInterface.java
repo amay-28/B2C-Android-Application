@@ -11,4 +11,5 @@ import okhttp3.MultipartBody;
 public interface ProductDetailPresenterInterface {
     void getProductDetailTask(int id);
     void addToCartTask(JsonObject jsonObject);
+    void clearCartTask();
 }

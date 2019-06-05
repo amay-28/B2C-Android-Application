@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class MCart {
     private int productId;
+    private int productVariantId;
     private int quantity;
     private int cartId;
     private int id;

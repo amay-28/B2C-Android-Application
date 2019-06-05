@@ -68,6 +68,43 @@ public class DialogUtil {
         dialog.show();
     }
 
+
+    public static void showInventoryChangeDialog(Context context, String title, String message, final OnDialogItemClickListener clickInAdapter) {
+        final Dialog dialog = new Dialog(context, R.style.Dialog_No_Border);
+
+        //Grab the window of the dialog, and change the width
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = dialog.getWindow();
+
+        lp.copyFrom(window.getAttributes());
+
+        //This makes the dialog take up the full width
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+
+        dialog.setContentView(R.layout.custom_ok_cancel_dialog);
+        dialog.setCanceledOnTouchOutside(true);
+
+        Button buttonPositive = (Button) dialog.findViewById(R.id.buttonPositive);
+        Button buttonNegative = (Button) dialog.findViewById(R.id.buttonNegative);
+        TextView textViewMessage = (TextView) dialog.findViewById(R.id.textViewMessage);
+        TextView textViewTitle = (TextView) dialog.findViewById(R.id.textViewTitle);
+
+        textViewMessage.setText(message);
+        textViewTitle.setText(title);
+        buttonPositive.setOnClickListener(v -> {
+            clickInAdapter.onDialogButtonClick(0, 0);
+            dialog.dismiss();
+        });
+
+        buttonNegative.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+
+        dialog.show();
+    }
+
     private static void sessionExpire(Context context) {
         Session session = new Session(context);
         session.setUserProfile(null);

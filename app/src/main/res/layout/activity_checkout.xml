@@ -13,70 +13,70 @@
             android:id="@+id/header"
             layout="@layout/header_with_back" />
 
+        <!--<LinearLayout
+            android:id="@+id/llNoRecordFind"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_no_product_found" />
+
+            <TextView
+                style="@style/TextView14ssp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:fontFamily="@font/latomedium"
+                android:gravity="center"
+                android:text="@string/No_Product_Found"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                style="@style/TextView14ssp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/latoregular"
+                android:gravity="center"
+                android:text="@string/No_Product_Found_message"
+                android:textColor="@color/color_grey_text" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnContinue"
+                style="@style/material_button"
+                android:layout_margin="@dimen/_60sdp"
+                android:minHeight="@dimen/_50sdp"
+                android:text="@string/CONTINUE_SHOPPING"
+                android:textSize="@dimen/_12ssp"
+                app:cornerRadius="@dimen/_3sdp" />
+
+        </LinearLayout>-->
+
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
             <RelativeLayout
                 android:id="@+id/rlItemList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="?attr/actionBarSize"
                 android:layout_marginRight="@dimen/_10sdp">
-
-               <!-- <LinearLayout
-                    android:id="@+id/llNoRecordFind"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/view"
-                    android:layout_centerInParent="true"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:visibility="gone">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_no_product_found" />
-
-                    <TextView
-                        style="@style/TextView14ssp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_30sdp"
-                        android:fontFamily="@font/latomedium"
-                        android:gravity="center"
-                        android:text="@string/No_Product_Found"
-                        android:textColor="@color/colorPrimary" />
-
-                    <TextView
-                        style="@style/TextView14ssp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:fontFamily="@font/latoregular"
-                        android:gravity="center"
-                        android:text="@string/No_Product_Found_message"
-                        android:textColor="@color/color_grey_text" />
-
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnContinue"
-                        style="@style/material_button"
-                        android:layout_margin="@dimen/_60sdp"
-                        android:minHeight="@dimen/_50sdp"
-                        android:text="@string/CONTINUE_SHOPPING"
-                        android:textSize="@dimen/_12ssp"
-                        app:cornerRadius="@dimen/_3sdp" />
-
-                </LinearLayout>-->
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvCartItems"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="?attr/actionBarSize"/>
+                        android:layout_height="wrap_content" />
 
                     <TextView
                         android:id="@+id/tvDeliveryOptions"
@@ -298,179 +298,187 @@
                         android:text="Rs.1269"
                         android:textColor="@color/color_light_text" />
 
-                    <View
-                        android:id="@+id/line4"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_1sdp"
-                        android:layout_below="@+id/tvTotal"
-                        android:layout_marginTop="@dimen/_29sdp"
-                        android:background="@color/white_dark" />
-
-                    <TextView
-                        android:id="@+id/tvCustomerDetails"
-                        style="@style/TextView12ssp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/line4"
-                        android:layout_marginTop="@dimen/_12sdp"
-                        android:fontFamily="@font/latosemibold"
-                        android:text="@string/CustomerDetails" />
-
                     <RelativeLayout
-                        android:id="@+id/rlCustomerDetails"
+                        android:id="@+id/rlAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tvCustomerDetails"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="@dimen/_23sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginRight="@dimen/_22sdp">
+                        android:layout_below="@+id/tvTotal">
 
+                        <View
+                            android:id="@+id/line4"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_1sdp"
 
-                        <EditText
-                            android:id="@+id/etCustomerName"
+                            android:layout_marginTop="@dimen/_29sdp"
+                            android:background="@color/white_dark" />
+
+                        <TextView
+                            android:id="@+id/tvCustomerDetails"
                             style="@style/TextView12ssp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/line4"
+                            android:layout_marginTop="@dimen/_12sdp"
+                            android:fontFamily="@font/latosemibold"
+                            android:text="@string/CustomerDetails" />
+
+                        <RelativeLayout
+                            android:id="@+id/rlCustomerDetails"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_25sdp"
-                            android:background="@drawable/rect_back_with_corner"
-                            android:fontFamily="@font/latoregular"
-                            android:hint="@string/CustomerName"
-                            android:imeOptions="actionNext"
-                            android:inputType="text"
-                            android:minHeight="@dimen/_40sdp"
-                            android:padding="@dimen/_10sdp"
-                            android:singleLine="true"
-                            android:textColorHint="@color/colorHint" />
-
-                        <EditText
-                            android:id="@+id/etCustomerMobileno"
-                            style="@style/TextView12ssp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/etCustomerName"
-                            android:layout_marginTop="@dimen/_11sdp"
-                            android:background="@drawable/rect_back_with_corner"
-                            android:fontFamily="@font/latoregular"
-                            android:hint="@string/CustomerMobileNo"
-                            android:imeOptions="actionNext"
-                            android:inputType="number"
-                            android:maxLength="10"
-                            android:minHeight="@dimen/_40sdp"
-                            android:padding="@dimen/_10sdp"
-                            android:textColorHint="@color/colorHint" />
-
-                        <EditText
-                            android:id="@+id/etPincode"
-                            style="@style/TextView12ssp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/etCustomerMobileno"
-                            android:layout_marginTop="@dimen/_11sdp"
-                            android:background="@drawable/rect_back_with_corner"
-                            android:fontFamily="@font/latoregular"
-                            android:hint="@string/pinCode"
-                            android:imeOptions="actionNext"
-                            android:inputType="number"
-                            android:maxLength="6"
-                            android:minHeight="@dimen/_40sdp"
-                            android:padding="@dimen/_10sdp"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/colorHint" />
-
-                        <EditText
-                            android:id="@+id/etAddLine1"
-                            style="@style/TextView12ssp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/etPincode"
-                            android:layout_marginTop="@dimen/_11sdp"
-                            android:background="@drawable/rect_back_with_corner"
-                            android:fontFamily="@font/latoregular"
-                            android:hint="@string/address_line_one"
-                            android:imeOptions="actionNext"
-                            android:inputType="text"
-                            android:minHeight="@dimen/_40sdp"
-                            android:padding="@dimen/_10sdp"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/colorHint" />
-
-                        <EditText
-                            android:id="@+id/etAddLine2"
-                            style="@style/TextView12ssp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/etAddLine1"
-                            android:layout_marginTop="@dimen/_11sdp"
-                            android:background="@drawable/rect_back_with_corner"
-                            android:fontFamily="@font/latoregular"
-                            android:hint="@string/address_line_two"
-                            android:imeOptions="actionNext"
-                            android:inputType="text"
-                            android:minHeight="@dimen/_40sdp"
-                            android:padding="@dimen/_10sdp"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/colorHint" />
-
-                        <EditText
-                            android:id="@+id/etLocality"
-                            style="@style/TextView12ssp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/etAddLine2"
-                            android:layout_marginTop="@dimen/_11sdp"
-                            android:background="@drawable/rect_back_with_corner"
-                            android:fontFamily="@font/latoregular"
-                            android:hint="@string/Locality"
-                            android:imeOptions="actionNext"
-                            android:inputType="text"
-                            android:minHeight="@dimen/_40sdp"
-                            android:padding="@dimen/_10sdp"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/colorHint" />
-
-                        <EditText
-                            android:id="@+id/etCity"
-                            style="@style/TextView12ssp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/etLocality"
-                            android:layout_marginTop="@dimen/_11sdp"
-                            android:background="@drawable/rect_back_with_corner"
-                            android:fontFamily="@font/latoregular"
-                            android:hint="@string/City"
-                            android:imeOptions="actionNext"
-                            android:inputType="text"
-                            android:minHeight="@dimen/_40sdp"
-                            android:padding="@dimen/_10sdp"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/colorHint" />
-
-                        <EditText
-                            android:id="@+id/etState"
-                            style="@style/TextView12ssp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/etCity"
-                            android:layout_marginTop="@dimen/_11sdp"
-                            android:background="@drawable/rect_back_with_corner"
-                            android:fontFamily="@font/latoregular"
-                            android:hint="@string/state"
-                            android:imeOptions="actionDone"
-                            android:inputType="text"
-                            android:minHeight="@dimen/_40sdp"
-                            android:padding="@dimen/_10sdp"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/colorHint" />
+                            android:layout_below="@+id/tvCustomerDetails"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="@dimen/_23sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginRight="@dimen/_22sdp">
 
 
+                            <EditText
+                                android:id="@+id/etCustomerName"
+                                style="@style/TextView12ssp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_25sdp"
+                                android:background="@drawable/rect_back_with_corner"
+                                android:fontFamily="@font/latoregular"
+                                android:hint="@string/CustomerName"
+                                android:imeOptions="actionNext"
+                                android:inputType="text"
+                                android:minHeight="@dimen/_40sdp"
+                                android:padding="@dimen/_10sdp"
+                                android:singleLine="true"
+                                android:textColorHint="@color/colorHint" />
+
+                            <EditText
+                                android:id="@+id/etCustomerMobileno"
+                                style="@style/TextView12ssp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/etCustomerName"
+                                android:layout_marginTop="@dimen/_11sdp"
+                                android:background="@drawable/rect_back_with_corner"
+                                android:fontFamily="@font/latoregular"
+                                android:hint="@string/CustomerMobileNo"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:maxLength="10"
+                                android:minHeight="@dimen/_40sdp"
+                                android:padding="@dimen/_10sdp"
+                                android:textColorHint="@color/colorHint" />
+
+                            <EditText
+                                android:id="@+id/etPincode"
+                                style="@style/TextView12ssp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/etCustomerMobileno"
+                                android:layout_marginTop="@dimen/_11sdp"
+                                android:background="@drawable/rect_back_with_corner"
+                                android:fontFamily="@font/latoregular"
+                                android:hint="@string/pinCode"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:maxLength="6"
+                                android:minHeight="@dimen/_40sdp"
+                                android:padding="@dimen/_10sdp"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/colorHint" />
+
+                            <EditText
+                                android:id="@+id/etAddLine1"
+                                style="@style/TextView12ssp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/etPincode"
+                                android:layout_marginTop="@dimen/_11sdp"
+                                android:background="@drawable/rect_back_with_corner"
+                                android:fontFamily="@font/latoregular"
+                                android:hint="@string/address_line_one"
+                                android:imeOptions="actionNext"
+                                android:inputType="text"
+                                android:minHeight="@dimen/_40sdp"
+                                android:padding="@dimen/_10sdp"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/colorHint" />
+
+                            <EditText
+                                android:id="@+id/etAddLine2"
+                                style="@style/TextView12ssp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/etAddLine1"
+                                android:layout_marginTop="@dimen/_11sdp"
+                                android:background="@drawable/rect_back_with_corner"
+                                android:fontFamily="@font/latoregular"
+                                android:hint="@string/address_line_two"
+                                android:imeOptions="actionNext"
+                                android:inputType="text"
+                                android:minHeight="@dimen/_40sdp"
+                                android:padding="@dimen/_10sdp"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/colorHint" />
+
+                            <EditText
+                                android:id="@+id/etLocality"
+                                style="@style/TextView12ssp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/etAddLine2"
+                                android:layout_marginTop="@dimen/_11sdp"
+                                android:background="@drawable/rect_back_with_corner"
+                                android:fontFamily="@font/latoregular"
+                                android:hint="@string/Locality"
+                                android:imeOptions="actionNext"
+                                android:inputType="text"
+                                android:minHeight="@dimen/_40sdp"
+                                android:padding="@dimen/_10sdp"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/colorHint" />
+
+                            <EditText
+                                android:id="@+id/etCity"
+                                style="@style/TextView12ssp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/etLocality"
+                                android:layout_marginTop="@dimen/_11sdp"
+                                android:background="@drawable/rect_back_with_corner"
+                                android:fontFamily="@font/latoregular"
+                                android:hint="@string/City"
+                                android:imeOptions="actionNext"
+                                android:inputType="text"
+                                android:minHeight="@dimen/_40sdp"
+                                android:padding="@dimen/_10sdp"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/colorHint" />
+
+                            <EditText
+                                android:id="@+id/etState"
+                                style="@style/TextView12ssp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/etCity"
+                                android:layout_marginTop="@dimen/_11sdp"
+                                android:background="@drawable/rect_back_with_corner"
+                                android:fontFamily="@font/latoregular"
+                                android:hint="@string/state"
+                                android:imeOptions="actionDone"
+                                android:inputType="text"
+                                android:minHeight="@dimen/_40sdp"
+                                android:padding="@dimen/_10sdp"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/colorHint" />
+
+
+                        </RelativeLayout>
                     </RelativeLayout>
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPlaceOrder"
                         style="@style/TextView12ssp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/rlCustomerDetails"
+                        android:layout_below="@id/rlAddress"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="@dimen/_24sdp"
                         android:layout_marginBottom="@dimen/_10sdp"

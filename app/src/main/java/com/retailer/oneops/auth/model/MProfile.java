@@ -8,6 +8,7 @@ import lombok.Data;
 public class MProfile {
     private String shopName;
     private List<MDealsIn> dealsIn;
+    private List<MAddress> address;
     private String gstin;
     private String panNumber;
     private String email;

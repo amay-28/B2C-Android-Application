@@ -42,5 +42,18 @@ public interface Constant {
     String CATEGORY_ID = "category_id";
     String IMAGES = "images";
     String DATA = "data";
+    String PRODUCT_ID = "productId";
+    String PRODUCT_VARIANT_ID = "productVariantId";
+    String PAYMENT_MODE = "payment_mode";
+    String PAYMENT_CONFIRMED = "payment_confirmed";
+    String ORDER_TYPE = "order_type";
+    String ORDER_DELIVERY_ADDRESS = "order_delivery_address_type";
+    String ORDER_LINES = "order_lines";
 
+    String ONLINE = "ONLINE";
+    String RETAILER_TO_CUSTOMER_VIRTUAL_INVENTORY = "RETAILER_TO_CUSTOMER_VIRTUAL_INVENTORY";
+    String RETAILER_TO_CUSTOMER_PHYSICAL_INVENTORY = "RETAILER_TO_CUSTOMER_PHYSICAL_INVENTORY";
+    String DIRECT_COURIER_TO_CUSTOMER = "DIRECT_COURIER_TO_CUSTOMER";
+    String STORE_PICKUP = "STORE_PICKUP";
+    String HOME_DELIVERY_BY_STORE = "HOME_DELIVERY_BY_STORE";
 }

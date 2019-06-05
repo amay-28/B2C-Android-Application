@@ -10,5 +10,6 @@ import java.util.List;
 public interface ProductDetailViewInterface {
     void onSuccessfullyGetDetail(MProduct mProduct, String message);
     void onSuccessfullyAddToCart(MCart mCart, String message);
+    void onSuccessfullyClearCart();
     void onFailToUpdate(String errorMessage);
 }

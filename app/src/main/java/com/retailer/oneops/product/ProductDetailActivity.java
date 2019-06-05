@@ -1,6 +1,7 @@
 package com.retailer.oneops.product;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -31,7 +32,9 @@ import com.retailer.oneops.productListing.presenter.ProductListingPresenter;
 import com.retailer.oneops.productListing.viewinterface.ProductListingViewInterface;
 import com.retailer.oneops.util.CommonClickHandler;
 import com.retailer.oneops.util.Constant;
+import com.retailer.oneops.util.DialogUtil;
 import com.retailer.oneops.util.MyDialogProgress;
+import com.retailer.oneops.util.OnDialogItemClickListener;
 import com.retailer.oneops.util.Session;
 import com.retailer.oneops.util.Utils;
 
@@ -56,7 +59,8 @@ import static com.retailer.oneops.util.Constant.SORT_LOW_TO_HIGH;
 import static com.retailer.oneops.util.Constant.SORT_NEW_FIRST;
 import static com.retailer.oneops.util.Constant.VIRTUAL_INVENTORY;
 
-public class ProductDetailActivity extends AppCompatActivity implements ProductDetailViewInterface, ProductVariantAdapter.CallBack {
+public class ProductDetailActivity extends AppCompatActivity implements ProductDetailViewInterface, ProductVariantAdapter.CallBack,
+        OnDialogItemClickListener {
 
     private ActivityProductDetailBinding binding;
     private Context context;
@@ -93,7 +97,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     }
 
     public void initViews() {
-
+        session.getInventoryType();
         productDetailPresenter = new ProductDetailPresenter(productDetailViewInterface, activity);
 
         bundle = getIntent().getExtras();
@@ -115,6 +119,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
                     inventoryType = Constant.VIRTUAL_INVENTORY;
                 } else {
                     inventoryType = Constant.PHYSICAL_INVENTORY;
+                    binding.llProductVariant.setVisibility(View.GONE);
                 }
             }
 
@@ -151,7 +156,9 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
                     productDetailPresenter.addToCartTask(jsonObject);
 
                 } else {
-                    Toast.makeText(context, getString(R.string.Product_added_with_another_inventory), Toast.LENGTH_SHORT).show();
+                    DialogUtil.showInventoryChangeDialog(context, getString(R.string.TITLE_You_can_only_order_items_from),
+                            getString(R.string.MESSAGE_clear_cart), this);
+                    //Toast.makeText(context, getString(R.string.Product_added_with_another_inventory), Toast.LENGTH_SHORT).show();
                 }
 
             } else {
@@ -244,11 +251,22 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     }
 
     @Override
+    public void onSuccessfullyClearCart() {
+        session.setInventoryType(null);
+        Toast.makeText(context, getString(R.string.Your_cart_is_clear), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
     public void onFailToUpdate(String errorMessage) {
     }
 
     @Override
     public void onVariantItemClick(int position, int productVariantId) {
         this.productVariantId = productVariantId;
+    }
+
+    @Override
+    public void onDialogButtonClick(int i, int position) {
+        productDetailPresenter.clearCartTask();
     }
 }

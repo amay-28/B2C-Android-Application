@@ -115,16 +115,35 @@
                 android:hint="@string/selling_price"
                 android:imeOptions="actionNext"
                 android:inputType="number"
-                android:maxLength="30"
+                android:maxLength="5"
                 android:minHeight="@dimen/_50sdp"
                 android:paddingLeft="@dimen/_15sdp"
                 android:paddingRight="@dimen/_15sdp"
                 android:singleLine="true" />
 
             <EditText
-                android:id="@+id/etPaymentOption"
+                android:id="@+id/etCostPrice"
                 style="@style/EditText12ssp"
                 android:layout_below="@+id/etSellingPrice"
+                android:layout_marginLeft="@dimen/_34sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginRight="@dimen/_34sdp"
+                android:background="@drawable/rect_back_with_corner"
+                android:fontFamily="@font/latoregular"
+                android:hint="@string/cost_price"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="5"
+                android:minHeight="@dimen/_50sdp"
+                android:paddingLeft="@dimen/_15sdp"
+                android:paddingRight="@dimen/_15sdp"
+                android:singleLine="true" />
+
+
+            <EditText
+                android:id="@+id/etPaymentOption"
+                style="@style/EditText12ssp"
+                android:layout_below="@+id/etCostPrice"
                 android:layout_marginLeft="@dimen/_34sdp"
                 android:layout_marginTop="@dimen/_30sdp"
                 android:layout_marginRight="@dimen/_34sdp"

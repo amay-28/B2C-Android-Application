@@ -134,6 +134,10 @@ public interface APIInterface {
     @POST("cart")
     Observable<Response<ResponseData<MCart>>> addToCart(@Header("Authorization") String token,
                                                                     @Body JsonObject cartJson);
+
+    @DELETE("cart")
+    Observable<Response<String>> clearCart(@Header("Authorization") String token);
+
     @GET("cart")
     Observable<ResponseData<MCartDetail>> getCartDetails(@Header("Authorization") String token);
 

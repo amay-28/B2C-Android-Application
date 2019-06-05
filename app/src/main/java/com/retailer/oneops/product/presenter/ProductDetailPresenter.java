@@ -84,12 +84,38 @@ public class ProductDetailPresenter implements ProductDetailPresenterInterface, 
         };
     }
 
+    public DisposableObserver<retrofit2.Response<String>> clearCartObserver() {
+        return new DisposableObserver<retrofit2.Response<String>>() {
+            @Override
+            public void onNext(Response<String> response) {
+                MyDialogProgress.close(activity);
+                viewInterface.onSuccessfullyClearCart();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                MyDialogProgress.close(activity);
+                if (e instanceof HttpException)
+                    viewInterface.onFailToUpdate(Utils.errorMessageParsing(e).getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+    }
+
     private <T> Observable getObservableProductDetail(int id) {
         return APIClient.getClient(activity).create(APIInterface.class).getProductDetail(new Session(activity).getString(AUTHORIZATION_KEY), id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     private <T> Observable getObservableAddCart(JsonObject jsonObject) {
         return APIClient.getClient(activity).create(APIInterface.class).addToCart(new Session(activity).getString(AUTHORIZATION_KEY), jsonObject).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    private <T> Observable getObservableClearCart() {
+        return APIClient.getClient(activity).create(APIInterface.class).clearCart(new Session(activity).getString(AUTHORIZATION_KEY)).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override
@@ -103,5 +129,11 @@ public class ProductDetailPresenter implements ProductDetailPresenterInterface, 
         if (!MyDialogProgress.isOpen(activity))
             MyDialogProgress.open(activity);
         getObservableAddCart(jsonObject).subscribeWith(getObserverToAddCart());
+    }
+
+    @Override
+    public void clearCartTask() {
+        MyDialogProgress.open(activity);
+        getObservableClearCart().subscribeWith(clearCartObserver());
     }
 }
