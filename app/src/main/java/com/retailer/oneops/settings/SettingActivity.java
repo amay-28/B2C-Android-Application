@@ -47,6 +47,8 @@ public class SettingActivity extends AppCompatActivity implements OnDialogItemCl
         });*/
 
         binding.tvLogout.setOnClickListener(v -> performLogout());
+
+
     }
 
     private void initialization() {

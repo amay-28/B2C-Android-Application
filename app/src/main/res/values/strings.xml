@@ -259,6 +259,7 @@
     <string name="Seller_Info">Seller Info:</string>
     <string name="All">All</string>
     <string name="Please_select_a_variant">Please select a product variant</string>
+    <string name="Product_added_with_another_inventory">Product added with another inventory in cart</string>
 
     <!--checkout-->
     <string name="deliveryOptions">Delivery Options</string>

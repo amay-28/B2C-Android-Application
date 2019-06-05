@@ -30,7 +30,9 @@ import com.retailer.oneops.productListing.model.MProductVariant;
 import com.retailer.oneops.productListing.presenter.ProductListingPresenter;
 import com.retailer.oneops.productListing.viewinterface.ProductListingViewInterface;
 import com.retailer.oneops.util.CommonClickHandler;
+import com.retailer.oneops.util.Constant;
 import com.retailer.oneops.util.MyDialogProgress;
+import com.retailer.oneops.util.Session;
 import com.retailer.oneops.util.Utils;
 
 import java.util.ArrayList;
@@ -48,9 +50,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import static com.retailer.oneops.util.Constant.COMING_SOON;
+import static com.retailer.oneops.util.Constant.INVENTORY_TYPE;
 import static com.retailer.oneops.util.Constant.SORT_HIGH_TO_LOW;
 import static com.retailer.oneops.util.Constant.SORT_LOW_TO_HIGH;
 import static com.retailer.oneops.util.Constant.SORT_NEW_FIRST;
+import static com.retailer.oneops.util.Constant.VIRTUAL_INVENTORY;
 
 public class ProductDetailActivity extends AppCompatActivity implements ProductDetailViewInterface, ProductVariantAdapter.CallBack {
 
@@ -66,6 +70,8 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     private ProductVariantAdapter productVariantAdapter;
     private List<MProductVariant> productVariantList = new ArrayList<>();
     private int productVariantId = 0;
+    private String inventoryType;
+    private Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +80,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         activity = this;
         context = this;
         productDetailViewInterface = this;
+        session = new Session(context);
         setupToolbar();
         initViews();
         listener();
@@ -102,6 +109,16 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
                     binding.btnAddToInventory.setText(getString(R.string.Add_to_Cart));
                 }
             }
+            if (bundle.containsKey("isVirtualInventory")) {
+                boolean isVirtualInventory = bundle.getBoolean("isVirtualInventory");
+                if (isVirtualInventory) {
+                    inventoryType = Constant.VIRTUAL_INVENTORY;
+                } else {
+                    inventoryType = Constant.PHYSICAL_INVENTORY;
+                }
+            }
+
+
         }
 
         bindRecyclerView();
@@ -119,22 +136,41 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     public void listener() {
         binding.btnAddToInventory.setOnClickListener(v -> {
             if (isFromInventory) {
-                JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("productId", mProduct.getId());
+                if (checkInventoryInCart(inventoryType)) {
+                    JsonObject jsonObject = new JsonObject();
+                    jsonObject.addProperty("productId", mProduct.getId());
 
-                if (mProduct.getProduct_variant() != null) {
-                    if (productVariantId != 0)
-                        jsonObject.addProperty("productVariantId", productVariantId);
-                    else
-                        Toast.makeText(activity, getString(R.string.Please_select_a_variant), Toast.LENGTH_SHORT).show();
+                    if (mProduct.getProduct_variant() != null) {
+                        if (productVariantId != 0)
+                            jsonObject.addProperty("productVariantId", productVariantId);
+                        else
+                            Toast.makeText(activity, getString(R.string.Please_select_a_variant), Toast.LENGTH_SHORT).show();
+                    }
+                    //jsonObject.addProperty("quantity",mProduct.ge);
+
+                    productDetailPresenter.addToCartTask(jsonObject);
+
+                } else {
+                    Toast.makeText(context, getString(R.string.Product_added_with_another_inventory), Toast.LENGTH_SHORT).show();
                 }
-                //jsonObject.addProperty("quantity",mProduct.ge);
 
-                productDetailPresenter.addToCartTask(jsonObject);
             } else {
                 startActivity(AddToInventoryActivity.getIntent(activity, mProduct, null));
             }
         });
+
+    }
+
+    private boolean checkInventoryInCart(String inventoryType) {
+        if (session.getInventoryType() != null) {
+            if (session.getInventoryType().equalsIgnoreCase(inventoryType)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
 
     }
 
@@ -200,6 +236,10 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
     @Override
     public void onSuccessfullyAddToCart(MCart mCart, String message) {
+        if (session.getInventoryType() == null) {
+            new Session(activity).setString(INVENTORY_TYPE, inventoryType);
+        }
+
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 

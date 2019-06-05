@@ -189,7 +189,6 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
         binding.rlSort.setOnClickListener(v -> bottomSheetDialog.show());
         bottomSheetDialog.findViewById(R.id.ivCross).setOnClickListener(v -> bottomSheetDialog.dismiss());
 
-
         bottomSheetDialog.findViewById(R.id.tvWhatsNew).setOnClickListener(v -> {
             bottomSheetDialog.dismiss();
             checkLimitOffsetConditionSort();
@@ -404,7 +403,8 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
     public void onVirtualItemClick(int position, MInventory mInventory) {
         startActivity(new Intent(activity, ProductDetailActivity.class)
                 .putExtra("productId", mInventory.getProduct_id())
-                .putExtra("isFromInventory", true));
+                .putExtra("isFromInventory", true)
+                .putExtra("isVirtualInventory", true));
 
     }
 
@@ -424,7 +424,8 @@ public class MyInventoryFragment extends Fragment implements MyInventViewInterfa
     public void onPhysicalItemClick(int position, MProduct mProduct) {
         startActivity(new Intent(activity, ProductDetailActivity.class)
                 .putExtra("productId", Integer.parseInt(mProduct.getId()))
-                .putExtra("isFromInventory", true));
+                .putExtra("isFromInventory", true)
+                .putExtra("isVirtualInventory", false));
     }
 
     @Override

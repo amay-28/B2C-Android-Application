@@ -14,6 +14,7 @@ public class Session {
     private SharedPreferences.Editor prefsEditor;
     private String ALL_USER_LIST = "ALL_USER_LIST";
     private String USER_PROFILE_DATA = "USER_PROFILE_DATA";
+    private String INVENTORY_TYPE = "INVENTORY_TYPE";
     private String USER_BANK_DETAIL = "USER_BANK_DETAIL";
     private static final String PREFERENCE = "ONE_OPS_RETAILER";
 
@@ -68,6 +69,17 @@ public class Session {
         prefsEditor.putString(USER_PROFILE_DATA, json);
         prefsEditor.commit();
 
+    }
+
+    public void setInventoryType(String inventoryType) {
+        prefsEditor.putString(INVENTORY_TYPE, inventoryType);
+        prefsEditor.commit();
+
+    }
+
+    public String getInventoryType() {
+        String inventoryType = pref.getString(INVENTORY_TYPE, null);
+        return inventoryType;
     }
 
     //save Integer preferences
