@@ -9,6 +9,8 @@ import com.retailer.oneops.auth.model.MUser;
 import com.retailer.oneops.bankDetail.activity.model.MBankDetail;
 import com.retailer.oneops.checkout.model.MCart;
 import com.retailer.oneops.checkout.model.MCartDetail;
+import com.retailer.oneops.checkout.model.MOrder;
+import com.retailer.oneops.checkout.model.MOrderRequest;
 import com.retailer.oneops.dashboard.model.MBanner;
 import com.retailer.oneops.dashboard.model.MCollection;
 import com.retailer.oneops.myinventory.model.MInventory;
@@ -17,6 +19,9 @@ import com.retailer.oneops.product.model.MImageServer;
 import com.retailer.oneops.productListing.model.MProduct;
 import com.google.gson.JsonElement;
 import com.retailer.oneops.settings.model.AddService;
+
+import org.json.JSONObject;
+import org.json.JSONStringer;
 
 import java.util.List;
 import java.util.Map;
@@ -164,4 +169,7 @@ public interface APIInterface {
     Call<JsonElement> editService(@Header("Authorization") String token,
                                   @Body AddService jsonObject, @Path("id") int id);
 
+    @POST("order")
+    Observable<ResponseData<MOrder>> placeOrder(@Header("Authorization") String token,
+                                          @Body MOrderRequest mOrderRequest);
 }
