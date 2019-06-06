@@ -57,4 +57,5 @@ public interface Constant {
     String DIRECT_COURIER_TO_CUSTOMER = "DIRECT_COURIER_TO_CUSTOMER";
     String STORE_PICKUP = "STORE_PICKUP";
     String HOME_DELIVERY_BY_STORE = "HOME_DELIVERY_BY_STORE";
+    String IS_SETTING = "isSetting";
 }

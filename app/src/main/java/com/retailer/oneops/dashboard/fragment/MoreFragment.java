@@ -20,6 +20,7 @@ import com.retailer.oneops.databinding.MoreFragmentLayoutBinding;
 import com.retailer.oneops.product.AddProductActivity;
 import com.retailer.oneops.productListing.model.MProduct;
 import com.retailer.oneops.settings.SettingActivity;
+import com.retailer.oneops.util.Constant;
 import com.retailer.oneops.util.DialogUtil;
 import com.retailer.oneops.util.OnDialogItemClickListener;
 import com.retailer.oneops.util.Session;
@@ -61,7 +62,7 @@ public class MoreFragment extends Fragment implements OnDialogItemClickListener 
     private void listener() {
         binding.tvEdit.setOnClickListener(v -> startActivityForResult(new Intent(getActivity(), EditProfileActivity.class), OPEN_EDIT_PROFILE));
 
-        binding.tvAddToInventory.setOnClickListener(v -> startActivity(new Intent(getActivity(), AddProductActivity.class)));
+        binding.tvAddToInventory.setOnClickListener(v -> startActivity(new Intent(getActivity(), AddProductActivity.class).putExtra(Constant.IS_SETTING,true)));
 
         binding.rlProfile.setOnClickListener(v -> startActivity(new Intent(getActivity(), MyProfileActivity.class)));
         binding.tvSettings.setOnClickListener(v -> startActivity(new Intent(getActivity(), SettingActivity.class)));

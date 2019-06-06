@@ -29,6 +29,7 @@ import com.retailer.oneops.product.viewinterface.AddProductViewInterface;
 import com.retailer.oneops.product.viewinterface.DialogViewInterface;
 import com.retailer.oneops.productListing.model.MProduct;
 import com.retailer.oneops.util.CommonClickHandler;
+import com.retailer.oneops.util.Constant;
 import com.retailer.oneops.util.Session;
 import com.retailer.oneops.util.ShowToast;
 import com.retailer.oneops.util.Utils;
@@ -112,16 +113,8 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         binding.rvImages.setItemAnimator(new DefaultItemAnimator());
         imageAdapter = new ShowImagesAdapter(activity, setFirstImage(), this);
         binding.rvImages.setAdapter(imageAdapter);
-
-        if (bundle != null) {
-            if (bundle.containsKey("mProduct")) {
-                isEditProduct = true;
-                mProduct = (MProduct) bundle.getParcelable("mProduct");
-                setExistingData(mProduct);
-            }
-        }
-        /*if (intent != null)
-            getIntentData();*/
+        if (intent != null && !getIntent().hasExtra(Constant.IS_SETTING))
+            getIntentData();
     }
 
     public void setExistingData(MProduct mProduct) {
@@ -135,8 +128,8 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         }
     }
 
-   /* private void getIntentData() {
-        if (intent.hasExtra("mProduct")){
+    private void getIntentData() {
+        if (intent.hasExtra("mProduct")) {
             isEditProduct = true;
             mProduct = intent.getParcelableExtra("mProduct");
             if (mProduct != null) {
@@ -147,10 +140,11 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
 
 
     public static Intent getIntent(Activity activity, MProduct productModel) {
+        intent = null;
         intent = new Intent(activity, AddProductActivity.class);
         intent.putExtra("mProduct", (Parcelable) productModel);
         return intent;
-    }*/
+    }
 
     public List<MImage> setFirstImage() {
         MImage mImage;

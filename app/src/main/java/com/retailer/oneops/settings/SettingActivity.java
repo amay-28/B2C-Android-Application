@@ -10,6 +10,7 @@ import com.retailer.oneops.databinding.ActivitySettingsBinding;
 import com.retailer.oneops.product.AddProductActivity;
 import com.retailer.oneops.service.activity.AddServiceActivity;
 import com.retailer.oneops.util.CommonClickHandler;
+import com.retailer.oneops.util.Constant;
 import com.retailer.oneops.util.DialogUtil;
 import com.retailer.oneops.util.OnDialogItemClickListener;
 import com.retailer.oneops.util.Session;
@@ -40,7 +41,7 @@ public class SettingActivity extends AppCompatActivity implements OnDialogItemCl
             startActivity(new Intent(mContext, AddServiceActivity.class));
         });
 
-        binding.rlAddproducts.setOnClickListener(v -> startActivity(new Intent(mContext, AddProductActivity.class)));
+        binding.rlAddproducts.setOnClickListener(v -> startActivity(new Intent(mContext, AddProductActivity.class).putExtra(Constant.IS_SETTING,true)));
 
         /*binding.rlLogout.setOnClickListener(v -> {
             DialogUtil.showOkCancelDialog(mContext, getString(R.string.logout_popup), null);
