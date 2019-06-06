@@ -65,6 +65,7 @@
         <activity android:name=".settings.SettingActivity" />
         <activity android:name=".agent.AddAgentActivity" />
         <activity android:name=".agent.AgentListActivity" />
+        <activity android:name=".order.activity.OrderListActivity"></activity>
 
         <activity
             android:name="com.retailer.oneops.dashboard.activity.CategoryActivity"

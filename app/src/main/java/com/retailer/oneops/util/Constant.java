@@ -58,6 +58,7 @@ public interface Constant {
     String STORE_PICKUP = "STORE_PICKUP";
     String HOME_DELIVERY_BY_STORE = "HOME_DELIVERY_BY_STORE";
     String IS_SETTING = "isSetting";
+    public static String FRAGMENT_TYPE = "FRAGMENT_TYPE";
 
     public static final int ADD_AGENT = 4;
     public static final int EDIT_AGENT = 4;

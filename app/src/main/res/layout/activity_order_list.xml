@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="activity"
+            type="com.retailer.oneops.BaseActivity" />
+    </data>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".order.activity.OrderListActivity">
+
+        <include
+            android:id="@+id/inc_toolbar"
+            layout="@layout/content_toolbar" />
+
+        <LinearLayout
+            android:id="@+id/llStoreType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/inc_toolbar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/btnWholesale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/curve_back_right_flat_blue"
+                android:paddingLeft="@dimen/_10sdp"
+                android:paddingTop="@dimen/_7sdp"
+                android:paddingRight="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_7sdp"
+                android:singleLine="true"
+                android:onClick="@{activity::onClicks}"
+                android:text="@string/single_peace_store"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10ssp" />
+
+
+            <TextView
+                android:id="@+id/btnSinglePiece"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/curve_back_left_flat_grey"
+                android:paddingLeft="@dimen/_10sdp"
+                android:paddingTop="@dimen/_7sdp"
+                android:paddingRight="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_7sdp"
+                android:singleLine="true"
+                android:text="@string/wholesale_store"
+                android:textAllCaps="false"
+                android:onClick="@{activity::onClicks}"
+                android:textColor="@color/color_grey_text"
+                android:textSize="@dimen/_10ssp" />
+
+
+        </LinearLayout>
+
+        <com.retailer.oneops.util.NonSwipeableViewPager
+            android:id="@+id/pagerOrder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/llStoreType"
+            android:layout_marginTop="@dimen/_15sdp" />
+    </RelativeLayout>
+</layout>

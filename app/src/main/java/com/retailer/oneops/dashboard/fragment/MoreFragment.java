@@ -17,6 +17,7 @@ import com.retailer.oneops.bankDetail.activity.BankDetailActivity;
 import com.retailer.oneops.dashboard.activity.EditProfileActivity;
 import com.retailer.oneops.dashboard.activity.MyProfileActivity;
 import com.retailer.oneops.databinding.MoreFragmentLayoutBinding;
+import com.retailer.oneops.order.activity.OrderListActivity;
 import com.retailer.oneops.product.AddProductActivity;
 import com.retailer.oneops.productListing.model.MProduct;
 import com.retailer.oneops.settings.SettingActivity;
@@ -66,6 +67,7 @@ public class MoreFragment extends Fragment implements OnDialogItemClickListener 
 
         binding.rlProfile.setOnClickListener(v -> startActivity(new Intent(getActivity(), MyProfileActivity.class)));
         binding.tvSettings.setOnClickListener(v -> startActivity(new Intent(getActivity(), SettingActivity.class)));
+        binding.tvOrders.setOnClickListener(v -> startActivity(new Intent(getActivity(), OrderListActivity.class)));
 
         if (new Session(activity).getUserProfile().getBankDetails() != null) {
             binding.tvBankDetails.setOnClickListener(v -> startActivity(new Intent(getActivity(), BankDetailActivity.class)));

@@ -185,4 +185,9 @@ public interface APIInterface {
 
     Call<JsonElement> getAgent(@Header("Authorization") String token,
                                @QueryMap Map<String, String> map);
+
+    @GET("order")
+    Call<JsonElement> getMyOrders(@Header("Authorization") String token,
+                                  @QueryMap Map<String, String> map);
+
 }

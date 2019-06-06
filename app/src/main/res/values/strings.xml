@@ -312,6 +312,9 @@
     <string name="agent_added_successfully">Agent added successfully</string>
     <string name="agent_updated_successfully">Agent Updated successfully</string>
 
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="msg_no_orders_found">No orders found.</string>
+
     <!--popups-->
     <string name="logout_popup">Are you sure you want to logout from the app?</string>
     <string name="delete_popup">Are you sure you want to delete it from your inventory?</string>
