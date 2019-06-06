@@ -200,7 +200,6 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutAdapt
     @Override
     public void onSuccessfulCartDetails(MCartDetail mCartDetail, String message) {
         if (mCartDetail != null && mCartDetail.getCart_lines() != null) {
-
             if (mCartDetail.getCart_lines().size() <= 0) {
                 session.setInventoryType(null);
             }

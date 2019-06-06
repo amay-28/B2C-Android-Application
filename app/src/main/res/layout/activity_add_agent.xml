@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".agent.activity.AddAgentActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <include
+            android:id="@+id/header"
+            layout="@layout/header_with_back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_34sdp"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_marginRight="@dimen/_34sdp">
+
+            <EditText
+                android:id="@+id/etName"
+                style="@style/TextView12ssp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:background="@drawable/bg_rect_with_corner"
+                android:backgroundTint="@color/grey_light"
+                android:hint="@string/name"
+                android:inputType="text"
+                android:maxLength="30"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/colorHint"
+
+
+                />
+
+            <EditText
+                android:id="@+id/etMobileNo"
+                style="@style/TextView12ssp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/etName"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:background="@drawable/bg_rect_with_corner"
+                android:backgroundTint="@color/grey_light"
+                android:hint="@string/mobile_no"
+                android:inputType="number"
+                android:maxLength="10"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/colorHint"
+
+                />
+
+            <TextView
+                android:id="@+id/tvUploadImage"
+                style="@style/TextView12ssp"
+                android:layout_below="@+id/etMobileNo"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:fontFamily="@font/latoregular"
+                android:text="@string/upload_image"
+                android:textColor="@color/colorHint" />
+
+            <ImageView
+                android:id="@+id/ivUploadImage"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_55sdp"
+                android:layout_below="@+id/tvUploadImage"
+                android:layout_marginTop="@dimen/_11sdp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bg_add_image" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddAgent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivUploadImage"
+                android:layout_marginTop="@dimen/_75sdp"
+                android:paddingTop="@dimen/_16sdp"
+                android:paddingBottom="@dimen/_16sdp"
+                android:text="@string/AddAgent" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</layout>

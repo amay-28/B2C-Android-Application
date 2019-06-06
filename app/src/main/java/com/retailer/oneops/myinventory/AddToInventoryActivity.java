@@ -125,7 +125,7 @@ public class AddToInventoryActivity extends AppCompatActivity implements AddToIn
 
     @Override
     public void onSuccessfullyAdd(MInventory mInventory, String message) {
-        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(activity, getString(R.string.item_added_to_your_inventory), Toast.LENGTH_LONG).show();
         Intent data = new Intent();
         setResult(RESULT_OK, data);
         finish();

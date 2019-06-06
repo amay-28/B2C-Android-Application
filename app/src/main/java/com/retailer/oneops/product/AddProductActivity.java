@@ -121,8 +121,12 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         binding.etProductName.setText(mProduct.getName());
         binding.etDescription.setText(mProduct.getDescription());
         binding.etSellingPrice.setText(mProduct.getPrice());
+        binding.etCostPrice.setText(mProduct.getCost_price());
 
         if (mProduct.getImages() != null) {
+            if (mProduct.getImages().size() >= 4) {
+                imageList.clear();
+            }
             imageList.addAll(mProduct.getImages());
             imageAdapter.notifyDataSetChanged();
         }

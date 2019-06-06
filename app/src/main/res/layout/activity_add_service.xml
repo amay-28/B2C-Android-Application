@@ -154,6 +154,7 @@
                     style="@style/material_button"
                     android:layout_below="@+id/etDescription"
                     android:layout_marginTop="@dimen/_34sdp"
+                    android:padding="@dimen/_15sdp"
                     android:onClick="@{addService::onSubmit}"
                     android:text="@string/add_service"
                     android:textAllCaps="true"

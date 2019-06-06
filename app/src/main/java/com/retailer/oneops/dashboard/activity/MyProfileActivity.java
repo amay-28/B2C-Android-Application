@@ -53,13 +53,6 @@ public class MyProfileActivity extends AppCompatActivity {
 
     private void setDetails(MUser loggedInUser) {
         if (loggedInUser != null) {
-            if (loggedInUser.getRetailerDetails().getImageUrl() != null && !loggedInUser.getRetailerDetails().getImageUrl().isEmpty())
-                Glide.with(activity)
-                        .load(loggedInUser.getRetailerDetails().getImageUrl())
-                        .apply(new RequestOptions()
-                                .placeholder(R.mipmap.avtar_gray)
-                                .error(R.mipmap.avtar_gray))
-                        .into(binding.ivProfile);
 
             binding.tvName.setText(loggedInUser.getName());
             binding.tvMobileNo.setText(loggedInUser.getMobileNumber());
@@ -75,6 +68,14 @@ public class MyProfileActivity extends AppCompatActivity {
                 binding.tvPanNumber.setText(loggedInUser.getRetailerDetails().getPanNumber());
                 binding.tvGst.setText(loggedInUser.getRetailerDetails().getGstin());
                 binding.tvGstPercent.setText(loggedInUser.getRetailerDetails().getGstPercent());
+
+                if (loggedInUser.getRetailerDetails().getImageUrl() != null && !loggedInUser.getRetailerDetails().getImageUrl().isEmpty())
+                    Glide.with(activity)
+                            .load(loggedInUser.getRetailerDetails().getImageUrl())
+                            .apply(new RequestOptions()
+                                    .placeholder(R.mipmap.avtar_gray)
+                                    .error(R.mipmap.avtar_gray))
+                            .into(binding.ivProfile);
             }
         }
     }

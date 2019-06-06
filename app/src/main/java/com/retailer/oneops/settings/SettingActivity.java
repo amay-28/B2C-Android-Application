@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.retailer.oneops.R;
+import com.retailer.oneops.agent.AgentListActivity;
 import com.retailer.oneops.auth.activity.LoginActivity;
 import com.retailer.oneops.databinding.ActivitySettingsBinding;
 import com.retailer.oneops.product.AddProductActivity;
@@ -46,6 +47,10 @@ public class SettingActivity extends AppCompatActivity implements OnDialogItemCl
         /*binding.rlLogout.setOnClickListener(v -> {
             DialogUtil.showOkCancelDialog(mContext, getString(R.string.logout_popup), null);
         });*/
+
+        binding.rlAgents.setOnClickListener ( v -> {
+            startActivity ( new Intent ( mContext, AgentListActivity.class ) );
+        } );
 
         binding.tvLogout.setOnClickListener(v -> performLogout());
 

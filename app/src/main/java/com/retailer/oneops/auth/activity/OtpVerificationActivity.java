@@ -120,6 +120,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements OtpVie
             startActivity(new Intent(activity, DashboardActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
             Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
         } else {
+            counterClock();
             session.setIntegerSharedPreference(activity, Constant.OTP_RECEIVE_CLASS, 1);
             session.setSharedPreferenceBoolean(activity, Constant.OTP_RECEIVE, true);
             Utils.startSMSReceiver(activity);

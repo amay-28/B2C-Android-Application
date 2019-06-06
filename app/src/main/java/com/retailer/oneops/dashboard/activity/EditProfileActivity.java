@@ -77,13 +77,6 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
 
     private void setDetails() {
         if (loggedInUser != null) {
-            if (loggedInUser.getRetailerDetails().getImageUrl() != null && !loggedInUser.getRetailerDetails().getImageUrl().isEmpty())
-                Glide.with(activity)
-                        .load(loggedInUser.getRetailerDetails().getImageUrl())
-                        .apply(new RequestOptions()
-                                .placeholder(R.mipmap.avtar_gray)
-                                .error(R.mipmap.avtar_gray))
-                        .into(binding.imgUser);
 
             binding.etName.setText(loggedInUser.getName());
             binding.etMobileNo.setText(loggedInUser.getMobileNumber());
@@ -99,6 +92,14 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
                 binding.etPanNumber.setText(loggedInUser.getRetailerDetails().getPanNumber());
                 binding.etGst.setText(loggedInUser.getRetailerDetails().getGstin());
                 binding.etGstPercent.setText(loggedInUser.getRetailerDetails().getGstPercent());
+
+                if (loggedInUser.getRetailerDetails().getImageUrl() != null && !loggedInUser.getRetailerDetails().getImageUrl().isEmpty())
+                    Glide.with(activity)
+                            .load(loggedInUser.getRetailerDetails().getImageUrl())
+                            .apply(new RequestOptions()
+                                    .placeholder(R.mipmap.avtar_gray)
+                                    .error(R.mipmap.avtar_gray))
+                            .into(binding.imgUser);
             }
         }
     }

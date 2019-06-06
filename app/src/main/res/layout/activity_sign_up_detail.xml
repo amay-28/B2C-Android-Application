@@ -216,11 +216,23 @@
                         android:hint="@string/gst"
                         android:imeOptions="actionNext"
                         android:inputType="textPersonName"
-                        android:maxLength="30"
+                        android:maxLength="15"
                         android:minHeight="@dimen/_50sdp"
                         android:paddingStart="@dimen/_10sdp"
                         android:paddingEnd="@dimen/_10sdp"
                         android:singleLine="true" />
+
+
+                    <Spinner
+                        android:id="@+id/spinnerGstPercent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rect_back_with_corner"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:minHeight="@dimen/_50sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:spinnerMode="dropdown" />
 
                     <EditText
                         android:id="@+id/etPanNo"
@@ -230,7 +242,7 @@
                         android:hint="@string/pan_no_optional"
                         android:imeOptions="actionNext"
                         android:inputType="textPersonName"
-                        android:maxLength="30"
+                        android:maxLength="10"
                         android:minHeight="@dimen/_50sdp"
                         android:paddingStart="@dimen/_10sdp"
                         android:paddingEnd="@dimen/_10sdp"

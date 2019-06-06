@@ -24,10 +24,12 @@ import com.retailer.oneops.auth.util.Categoryutil;
 import com.retailer.oneops.auth.viewinterface.SignUpDetailViewInterface;
 import com.retailer.oneops.databinding.ActivitySignUpDetailBinding;
 import com.retailer.oneops.util.Constant;
+import com.retailer.oneops.util.CustomSpinnerAdapter;
 import com.retailer.oneops.util.ShowToast;
 import com.retailer.oneops.util.ValidationUtil;
 import com.google.android.material.chip.Chip;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +42,9 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
     private Map<String, String> map = new HashMap<>();
     private List<MCategory> categoryList = new ArrayList<>();
     private CategoryAdapter categoryAdapter;
+    private CustomSpinnerAdapter spinnerAdapter;
     private MProfile mProfile = new MProfile();
+    private String[] gstPercentageArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +53,12 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
         binding = DataBindingUtil.setContentView(activity, R.layout.activity_sign_up_detail);
         initialization();
         listner();
+        bindSpinner();
     }
 
     private void initialization() {
         signUpDetailPresenter = new SignUpDetailPresenter(this, activity);
+        gstPercentageArray = getResources().getStringArray(R.array.gst_type_array);
         map.put(LEVEL, ZERO);
         map.put(LIMIT, INFINITE_LIMIT);
         signUpDetailPresenter.loadCategoryTask(map);
@@ -108,6 +114,12 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
         });
     }
 
+
+    private void bindSpinner() {
+        spinnerAdapter = new CustomSpinnerAdapter(activity, gstPercentageArray);
+        binding.spinnerGstPercent.setAdapter(spinnerAdapter);
+    }
+
     private boolean validation() {
         Resources resources = getResources();
         if (TextUtils.isEmpty(binding.etShopName.getText().toString().trim())) {
@@ -130,6 +142,9 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
             return false;
         } else if (binding.rbYes.isChecked() && !ValidationUtil.isValidGST(binding.etGstNo.getText().toString().trim())) {
             Toast.makeText(activity, resources.getString(R.string.please_enter_valid_gst), Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (binding.rbYes.isChecked() && (binding.spinnerGstPercent.getSelectedItemPosition() == 0)) {
+            Toast.makeText(activity, resources.getString(R.string.select_valid_gst_percent), Toast.LENGTH_SHORT).show();
             return false;
         } else if (binding.rbYes.isChecked() &&
                 !TextUtils.isEmpty(binding.etPanNo.getText().toString().trim()) &&
@@ -155,6 +170,7 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
         mProfile.setCity(binding.etCity.getText().toString());
         mProfile.setState(binding.etState.getText().toString());
         mProfile.setGstin(binding.etGstNo.getText().toString());
+        mProfile.setGstPercent(binding.spinnerGstPercent.getSelectedItem().toString().trim());
         mProfile.setPanNumber(binding.etPanNo.getText().toString());
         List<MProfile.MDealsIn> dealsInList = new ArrayList<>();
         if (!categoryList.isEmpty()) {

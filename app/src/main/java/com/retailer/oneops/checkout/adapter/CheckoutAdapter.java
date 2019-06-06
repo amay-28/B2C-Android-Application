@@ -61,6 +61,10 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
         holder.binding.tvPrice.setText(mProduct.getPrice());
         holder.binding.tvSellingPrice.setText(mProduct.getCost_price());
         holder.binding.tvQty.setText("" + mCart.getQuantity());
+        if (mCart.getProduct_variant() != null && mCart.getProduct_variant().getAttributes() != null) {
+            holder.binding.tvAttributeHead.setText(mCart.getProduct_variant().getAttributes().get(0).getName() + ":");
+            holder.binding.tvAttribute.setText(mCart.getProduct_variant().getAttributes().get(0).getValue().getName());
+        }
 
         double actualPrice = Double.parseDouble(mProduct.getCost_price());
         double discountedPrice = Double.parseDouble(mProduct.getPrice());
@@ -71,6 +75,17 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
             Glide.with(activity)
                     .load(mProduct.getImages().get(0).getUrl())
                     .into(holder.binding.ivProduct);
+        }
+
+        if (mProduct.getCategory() != null
+                && mProduct.getCategory().getParent() != null && mProduct.getCategory().getParent().getParent() != null) {
+            holder.binding.tvCategory.setText(mProduct.getCategory().getParent().getParent().getName());
+        } else if (mProduct.getCategory() != null && mProduct.getCategory().getParent() != null) {
+            holder.binding.tvCategory.setText(mProduct.getCategory().getParent().getName());
+        } else if (mProduct.getCategory() != null) {
+            holder.binding.tvCategory.setText(mProduct.getCategory().getName());
+        } else {
+            holder.binding.tvCategory.setText("NA");
         }
 
         holder.binding.cardViewRoot.setOnClickListener(v -> callBack.onProductItemClick(position, mProduct));

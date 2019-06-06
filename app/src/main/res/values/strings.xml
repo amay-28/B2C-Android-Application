@@ -49,6 +49,7 @@
     <string name="please_enter_city">Please enter City</string>
     <string name="please_enter_state">Please enter State</string>
     <string name="please_enter_about_the_shop">Please enter something about shop</string>
+    <string name="select_valid_gst_percent">Select Valid GST %</string>
     <string name="please_enter_pan_number">Please enter PAN Number</string>
     <string name="please_enter_valid_pan_number">Please enter valid PAN Number</string>
     <string name="please_enter_gst">Please enter GST</string>
@@ -191,6 +192,14 @@
         <item>Saving Account</item>
     </array>
 
+    <string-array name="gst_type_array">
+        <item>Select GST %</item>
+        <item>5%</item>
+        <item>18%</item>
+        <item>28%</item>
+        <item>32%</item>
+    </string-array>
+
     <string name="Add_Bank_Details">Add Bank Details</string>
     <string name="Update_Bank_Details">Update Bank Details</string>
     <string name="No_Product_Found">No Product Found</string>
@@ -267,6 +276,7 @@
     <string name="Your_cart_is_clear">Your cart is now empty, you can continue shopping with any inventory</string>
     <string name="choose_product_from_same_inventory">Choose product from same inventory</string>
 
+
     <!--checkout-->
     <string name="deliveryOptions">Delivery Options</string>
     <string name="store_pick_up">Store Pick Up</string>
@@ -291,8 +301,22 @@
     <string name="Order_detail">Order Detail</string>
     <string name="Checkout">Checkout</string>
     <string name="label_category">Category:</string>
+
+    <string name="AddAgent">Add Agent</string>
+    <string name="please_select_agent_image">Please Upload Agent Image</string>
+    <string name="your_agents">Your Agents</string>
+    <string name="msg_no_agent_list">Oops! No Agent Available</string>
+    <string name="search">Search</string>
+    <string name="agent_added_successfully">Agent added successfully</string>
+    <string name="agent_updated_successfully">Agent Updated successfully</string>
+
     <!--popups-->
     <string name="logout_popup">Are you sure you want to logout from the app?</string>
     <string name="delete_popup">Are you sure you want to delete it from your inventory?</string>
     <string name="delete_from_bag">Are you sure you want to delete it from your bag?</string>
+
+    <!--Successful messages-->
+    <string name="item_successfully_added_to_cart">Item successfully added to cart</string>
+    <string name="item_added_to_your_inventory">Item added to your inventory</string>
+
 </resources>

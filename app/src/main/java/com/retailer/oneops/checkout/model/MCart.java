@@ -1,6 +1,9 @@
 package com.retailer.oneops.checkout.model;
 
 import com.retailer.oneops.productListing.model.MProduct;
+import com.retailer.oneops.productListing.model.MProductVariant;
+
+import java.util.List;
 
 import lombok.Data;
 
@@ -14,4 +17,5 @@ public class MCart {
     private String created_at;
     private String updated_at;
     private MProduct product;
+    private MProductVariant product_variant;
 }

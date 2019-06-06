@@ -99,6 +99,7 @@ public class AddServiceActivity extends AppCompatActivity implements DialogViewI
 
     private void initialization() {
         binding.header.setHandler(new CommonClickHandler(activity));
+        binding.header.tvMainHeading.setText(R.string.add_service);
         binding.setAddService(this);
         dialogPresenter = new DialogPresenter(this, activity);
         map.put("level", ZERO);

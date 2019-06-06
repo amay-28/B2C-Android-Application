@@ -2,6 +2,7 @@ package com.retailer.oneops.apiCalling;
 
 
 import com.google.gson.JsonObject;
+import com.retailer.oneops.agent.model.AddAgent;
 import com.retailer.oneops.auth.model.MCategory;
 import com.retailer.oneops.auth.model.MProfile;
 import com.retailer.oneops.auth.model.MSignUp;
@@ -172,4 +173,16 @@ public interface APIInterface {
     @POST("order")
     Observable<ResponseData<MOrder>> placeOrder(@Header("Authorization") String token,
                                           @Body MOrderRequest mOrderRequest);
+
+
+    @POST("retailer/agent")
+    Call<JsonElement> addAgent(@Header("Authorization") String token,
+                               @Body AddAgent jsonObject);
+    @PUT("retailer/agent/{id}")
+    Call<JsonElement> editAgent(@Header("Authorization") String token,
+                                @Body AddAgent jsonObject, @Path("id") int id);
+    @GET("retailer/agent")
+
+    Call<JsonElement> getAgent(@Header("Authorization") String token,
+                               @QueryMap Map<String, String> map);
 }

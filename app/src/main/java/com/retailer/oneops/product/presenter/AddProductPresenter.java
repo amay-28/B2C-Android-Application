@@ -10,6 +10,7 @@ import com.retailer.oneops.product.model.MImageServer;
 import com.retailer.oneops.product.presenterinterface.AddProductPresenterInterface;
 import com.retailer.oneops.product.viewinterface.AddProductViewInterface;
 import com.retailer.oneops.util.Constant;
+import com.retailer.oneops.util.MyDialogProgress;
 import com.retailer.oneops.util.Session;
 import com.retailer.oneops.util.Utils;
 import com.google.gson.Gson;
@@ -39,6 +40,7 @@ public class AddProductPresenter implements AddProductPresenterInterface, Consta
         return new DisposableObserver<ResponseData<MAddProduct>>() {
             @Override
             public void onNext(ResponseData<MAddProduct> response) {
+                MyDialogProgress.close(activity);
                 Gson gson = new Gson();
                 String s = gson.toJson(response.getData());
                 Type type = new TypeToken<MAddProduct>() {
@@ -51,6 +53,7 @@ public class AddProductPresenter implements AddProductPresenterInterface, Consta
 
             @Override
             public void onError(Throwable e) {
+                MyDialogProgress.close(activity);
                 if (e instanceof HttpException)
                     viewInterface.onFailToUpdate(Utils.errorMessageParsing(e).getMessage());
             }
@@ -87,22 +90,18 @@ public class AddProductPresenter implements AddProductPresenterInterface, Consta
     }
 
     private <T> Observable getObservableForAddProduct(MAddProduct mAddProduct) {
+        MyDialogProgress.open(activity);
         return APIClient.getClient(activity).create(APIInterface.class).addProduct(new Session(activity).getString(AUTHORIZATION_KEY), mAddProduct).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     private <T> Observable getObservableForEditProduct(MAddProduct mAddProduct, int id) {
+        MyDialogProgress.open(activity);
         return APIClient.getClient(activity).create(APIInterface.class).editProduct(new Session(activity).getString(AUTHORIZATION_KEY), mAddProduct, id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     private <T> Observable getObservableImage(List<MultipartBody.Part> files) {
         return APIClient.getClient(activity).create(APIInterface.class).uploadImages(new Session(activity).getString(AUTHORIZATION_KEY),
                 files).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-    }
-
-    private <T> Observable getDeleteInventoryObservable(int id) {
-        return APIClient.getClient(activity).create(APIInterface.class)
-                .deletePhysicalInventory(new Session(activity).getString(AUTHORIZATION_KEY), id)
-                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override
