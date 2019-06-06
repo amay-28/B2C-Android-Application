@@ -42,8 +42,8 @@ public class PhysicalInventoryAdapter extends RecyclerView.Adapter<PhysicalInven
         strikeThroughText(holder.binding.tvSellingPrice);
         holder.binding.tvProductName.setText(mProduct.getName());
         holder.binding.tvProductDescription.setText(mProduct.getDescription());
-        holder.binding.tvPrice.setText(mProduct.getPrice());
-        holder.binding.tvSellingPrice.setText(mProduct.getCost_price());
+        holder.binding.tvPrice.setText("Rs. " +mProduct.getPrice());
+        holder.binding.tvSellingPrice.setText("Rs. " +mProduct.getCost_price());
 
         if (mProduct.getCategory() != null
                 && mProduct.getCategory().getParent() != null && mProduct.getCategory().getParent().getParent() != null) {

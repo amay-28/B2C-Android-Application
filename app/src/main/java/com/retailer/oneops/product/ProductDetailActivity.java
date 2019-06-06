@@ -165,8 +165,8 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         binding.tvProductName.setText(mProduct.getName());
         binding.tvProductDescription.setText(mProduct.getDescription());
         binding.tvProductDetail.setText(mProduct.getDescription());
-        binding.tvSellingPrice.setText(mProduct.getPrice());
-        binding.tvMrp.setText(mProduct.getCost_price());
+        binding.tvSellingPrice.setText("Rs. " + mProduct.getPrice());
+        binding.tvMrp.setText("Rs. " +mProduct.getCost_price());
 
         double actualPrice = Double.parseDouble(mProduct.getCost_price());
         double discountedPrice = Double.parseDouble(mProduct.getPrice());
@@ -217,7 +217,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         }
         setupViewPager(binding.viewPager, imageList);
 
-        if (! (mProduct.getProduct_variant() != null && mProduct.getProduct_variant().size() > 0)) {
+        if (!(mProduct.getProduct_variant() != null && mProduct.getProduct_variant().size() > 0)) {
             binding.llProductVariant.setVisibility(View.GONE);
         }
         setExistingData(mProduct);

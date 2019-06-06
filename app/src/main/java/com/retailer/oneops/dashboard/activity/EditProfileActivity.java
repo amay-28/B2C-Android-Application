@@ -22,10 +22,12 @@ import com.retailer.oneops.dashboard.viewinterface.EditProfileViewInterface;
 import com.retailer.oneops.databinding.ActivityEditProfileBinding;
 import com.retailer.oneops.util.CommonClickHandler;
 import com.retailer.oneops.util.Constant;
+import com.retailer.oneops.util.CustomSpinnerAdapter;
 import com.retailer.oneops.util.MarshmallowPermission;
 import com.retailer.oneops.util.MyDialogProgress;
 import com.retailer.oneops.util.Session;
 import com.retailer.oneops.util.Utils;
+import com.retailer.oneops.util.ValidationUtil;
 import com.retailer.oneops.util.WebService;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -48,7 +50,9 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     MProfile retailerDetails = new MProfile();
     private Uri imageURI;
     private String profileImageURL = "";
+    private CustomSpinnerAdapter spinnerAdapter;
     private MarshmallowPermission marshmallowPermission;
+    private String[] gstPercentageArray;
 
     @Override
     public void onResume() {
@@ -65,6 +69,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     }
 
     private void initialization() {
+        gstPercentageArray = getResources().getStringArray(R.array.gst_type_array);
         marshmallowPermission = new MarshmallowPermission(activity);
         loggedInUser = new Session(activity).getUserProfile();
         binding.header.setHandler(new CommonClickHandler(activity));
@@ -72,7 +77,12 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         editProfilePresenter = new EditProfilePresenter(this, activity);
         setDetails();
         listeners();
+        bindSpinner();
+    }
 
+    private void bindSpinner() {
+        spinnerAdapter = new CustomSpinnerAdapter(activity, gstPercentageArray);
+        binding.spinnerGstPercent.setAdapter(spinnerAdapter);
     }
 
     private void setDetails() {
@@ -91,7 +101,16 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
                 binding.etAboutShop.setText(loggedInUser.getRetailerDetails().getAboutShop());
                 binding.etPanNumber.setText(loggedInUser.getRetailerDetails().getPanNumber());
                 binding.etGst.setText(loggedInUser.getRetailerDetails().getGstin());
-                binding.etGstPercent.setText(loggedInUser.getRetailerDetails().getGstPercent());
+
+                String gstPercent = loggedInUser.getRetailerDetails().getGstPercent();
+                int selectedPosition = 0;
+                for (int i = 0; i < gstPercentageArray.length; i++) {
+                    if (gstPercentageArray[i].equals(gstPercent)) {
+                        selectedPosition = i;
+                    }
+                }
+
+                binding.spinnerGstPercent.setSelection(selectedPosition);
 
                 if (loggedInUser.getRetailerDetails().getImageUrl() != null && !loggedInUser.getRetailerDetails().getImageUrl().isEmpty())
                     Glide.with(activity)
@@ -152,19 +171,17 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         } else if (binding.etAboutShop.getText().toString().trim().length() < 3) {
             Utils.ShowToast(activity, resources.getString(R.string.about_shop_length), 0);
             return false;
-        } else if (TextUtils.isEmpty(binding.etPanNumber.getText().toString().trim())) {
-            Utils.ShowToast(activity, resources.getString(R.string.please_enter_pan_number), 0);
-            return false;
-        } else if (binding.etPanNumber.getText().toString().trim().length() < 2) {
-            Utils.ShowToast(activity, resources.getString(R.string.pan_number_length), 0);
+        } else if (TextUtils.isEmpty(binding.etPanNumber.getText().toString().trim()) &&
+                !ValidationUtil.isValidPAN(binding.etPanNumber.getText().toString().trim())) {
+            Utils.ShowToast(activity, resources.getString(R.string.please_enter_valid_pan_number), 0);
             return false;
         } else if (TextUtils.isEmpty(binding.etGst.getText().toString().trim())) {
             Utils.ShowToast(activity, resources.getString(R.string.please_enter_gst), 0);
             return false;
-        } else if (binding.etGst.getText().toString().trim().length() < 2) {
-            Utils.ShowToast(activity, resources.getString(R.string.gst_length), 0);
+        } else if (!ValidationUtil.isValidGST(binding.etGst.getText().toString().trim())) {
+            Utils.ShowToast(activity, resources.getString(R.string.please_enter_valid_gst), 0);
             return false;
-        } else if (TextUtils.isEmpty(binding.etGstPercent.getText().toString().trim())) {
+        } else if (binding.spinnerGstPercent.getSelectedItemPosition() == 0) {
             Utils.ShowToast(activity, resources.getString(R.string.please_enter_gst_percent), 0);
             return false;
         }
@@ -193,7 +210,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         retailerDetails.setAboutShop(binding.etAboutShop.getText().toString());
         retailerDetails.setPanNumber(binding.etPanNumber.getText().toString());
         retailerDetails.setGstin(binding.etGst.getText().toString());
-        retailerDetails.setGstPercent(binding.etGstPercent.getText().toString());
+        retailerDetails.setGstPercent(binding.spinnerGstPercent.getSelectedItem().toString().trim());
         // retailerDetails.setPostalCode("452003");
 
         //mUser.setRetailerDetails(retailerDetails);
@@ -246,8 +263,8 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         binding.etPanNumber.setTextColor(getResources().getColor(R.color.colorHint));
         binding.etGst.setEnabled(false);
         binding.etGst.setTextColor(getResources().getColor(R.color.colorHint));
-        binding.etGstPercent.setEnabled(false);
-        binding.etGstPercent.setTextColor(getResources().getColor(R.color.colorHint));
+        //binding.etGstPercent.setEnabled(false);
+        // binding.etGstPercent.setTextColor(getResources().getColor(R.color.colorHint));
     }
 
     private void businessEdit() {
@@ -272,8 +289,8 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         binding.etPanNumber.setTextColor(getResources().getColor(R.color.black));
         binding.etGst.setEnabled(true);
         binding.etGst.setTextColor(getResources().getColor(R.color.black));
-        binding.etGstPercent.setEnabled(true);
-        binding.etGstPercent.setTextColor(getResources().getColor(R.color.black));
+        //binding.etGstPercent.setEnabled(true);
+        //binding.etGstPercent.setTextColor(getResources().getColor(R.color.black));
     }
 
     public void EnableRuntimePermission() {

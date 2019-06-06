@@ -180,6 +180,8 @@
     <string name="Sort">Sort</string>
     <string name="Filters">Filters</string>
     <string name="Add_Product">Add Product</string>
+    <string name="Edit_Product">Edit Product</string>
+    <string name="Update_Product">Update Product</string>
 
     <string name="please_enter_valid_account_no">Please enter valid Account No.</string>
     <string name="please_enter_valid_account_holder_name">Please enter valid Name</string>

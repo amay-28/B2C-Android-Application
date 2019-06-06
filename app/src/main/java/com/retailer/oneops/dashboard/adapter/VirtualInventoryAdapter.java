@@ -44,8 +44,9 @@ public class VirtualInventoryAdapter extends RecyclerView.Adapter<VirtualInvento
         strikeThroughText(holder.binding.tvSellingPrice);
         holder.binding.tvProductName.setText(mInventory.getProduct().getName());
         holder.binding.tvProductDescription.setText(mInventory.getProduct().getDescription());
-        holder.binding.tvPrice.setText(mInventory.getProduct().getPrice());
-        holder.binding.tvSellingPrice.setText(mInventory.getProduct().getCost_price());
+        holder.binding.tvPrice.setText("Rs. " + mInventory.getProduct().getPrice());
+        holder.binding.tvSellingPrice.setText("Rs. " + mInventory.getProduct().getCost_price());
+        holder.binding.tvCategory.setText(mInventory.getProduct().getCategory().getName());
 
         double actualPrice = Double.parseDouble(mInventory.getProduct().getCost_price());
         double discountedPrice = Double.parseDouble(mInventory.getProduct().getPrice());

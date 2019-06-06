@@ -120,8 +120,8 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
     public void setExistingData(MProduct mProduct) {
         binding.etProductName.setText(mProduct.getName());
         binding.etDescription.setText(mProduct.getDescription());
-        binding.etSellingPrice.setText(mProduct.getPrice());
-        binding.etCostPrice.setText(mProduct.getCost_price());
+        binding.etSellingPrice.setText("Rs. " + mProduct.getPrice());
+        binding.etCostPrice.setText("Rs. " + mProduct.getCost_price());
 
         if (mProduct.getImages() != null) {
             if (mProduct.getImages().size() >= 4) {
@@ -134,6 +134,8 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
 
     private void getIntentData() {
         if (intent.hasExtra("mProduct")) {
+            binding.header.tvMainHeading.setText(R.string.Edit_Product);
+            binding.btnSubmit.setText(R.string.Update_Product);
             isEditProduct = true;
             mProduct = intent.getParcelableExtra("mProduct");
             if (mProduct != null) {

@@ -58,8 +58,8 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
         strikeThroughText(holder.binding.tvSellingPrice);
         holder.binding.tvProductName.setText(mProduct.getName());
         holder.binding.tvProductDescription.setText(mProduct.getDescription());
-        holder.binding.tvPrice.setText(mProduct.getPrice());
-        holder.binding.tvSellingPrice.setText(mProduct.getCost_price());
+        holder.binding.tvPrice.setText("Rs. " +mProduct.getPrice());
+        holder.binding.tvSellingPrice.setText("Rs. " +mProduct.getCost_price());
         holder.binding.tvQty.setText("" + mCart.getQuantity());
         if (mCart.getProduct_variant() != null && mCart.getProduct_variant().getAttributes() != null) {
             holder.binding.tvAttributeHead.setText(mCart.getProduct_variant().getAttributes().get(0).getName() + ":");

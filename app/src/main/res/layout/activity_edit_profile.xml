@@ -272,6 +272,7 @@
                     android:textColor="@color/colorHint"
                     android:singleLine="true" />
 
+<!--
                 <EditText
                     android:id="@+id/etGstPercent"
                     style="@style/EditText12ssp"
@@ -286,6 +287,18 @@
                     android:padding="@dimen/_15sdp"
                     android:textColor="@color/colorHint"
                     android:singleLine="true" />
+-->
+
+                <Spinner
+                    android:id="@+id/spinnerGstPercent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:background="@drawable/rect_back_with_corner"
+                    android:minHeight="@dimen/_50sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:spinnerMode="dropdown"/>
 
                 <Button
                     android:id="@+id/btnSubmit"

@@ -44,8 +44,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         strikeThroughText(holder.binding.tvMrp);
         holder.binding.tvProductName.setText(mProduct.getName());
         holder.binding.tvProductDescription.setText(mProduct.getDescription());
-        holder.binding.tvSellingPrice.setText(mProduct.getPrice());
-        holder.binding.tvMrp.setText(mProduct.getCost_price());
+        holder.binding.tvSellingPrice.setText("Rs. " + mProduct.getPrice());
+        holder.binding.tvMrp.setText("Rs. " + mProduct.getCost_price());
 
         double actualPrice = Double.parseDouble(mProduct.getCost_price());
         double discountedPrice = Double.parseDouble(mProduct.getPrice());

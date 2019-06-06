@@ -12,6 +12,7 @@ import com.google.gson.JsonObject;
 import com.retailer.oneops.R;
 import com.retailer.oneops.auth.model.MCategory;
 import com.retailer.oneops.auth.model.MSignUp;
+import com.retailer.oneops.auth.model.MUser;
 import com.retailer.oneops.auth.presenter.LoginPresenter;
 import com.retailer.oneops.databinding.ActivityAddToInventoryDialogBinding;
 import com.retailer.oneops.databinding.ActivityDialogBinding;
@@ -20,6 +21,7 @@ import com.retailer.oneops.myinventory.presenter.AddToInventoryPresenter;
 import com.retailer.oneops.myinventory.viewinterface.AddToInventViewInterface;
 import com.retailer.oneops.product.adapter.DialogListAdapter;
 import com.retailer.oneops.productListing.model.MProduct;
+import com.retailer.oneops.util.Session;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +41,7 @@ public class AddToInventoryActivity extends AppCompatActivity implements AddToIn
     private MProduct mProduct;
     private AddToInventoryPresenter presenter;
     private MInventory mInventory = new MInventory();
+    private MUser loggedInUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +57,12 @@ public class AddToInventoryActivity extends AppCompatActivity implements AddToIn
     }
 
     private void initialization() {
+        loggedInUser = new Session(activity).getUserProfile();
         presenter = new AddToInventoryPresenter(this, activity);
+
+        if (loggedInUser != null && loggedInUser.getRetailerDetails() != null) {
+            binding.tvGST.setText(loggedInUser.getRetailerDetails().getGstPercent());
+        }
     }
 
     private void listener() {
@@ -112,8 +120,8 @@ public class AddToInventoryActivity extends AppCompatActivity implements AddToIn
         binding.btnSave.setText(getString(R.string.save));
         binding.tvProductName.setText(mInventory.getProduct().getName());
         binding.tvProductDescription.setText(mInventory.getProduct().getDescription());
-        binding.tvSellingPrice.setText(mInventory.getProduct().getPrice());
-        binding.tvPrice.setText(mInventory.getProduct().getCost_price());
+        binding.tvSellingPrice.setText("Rs. " + mInventory.getProduct().getPrice());
+        binding.tvPrice.setText("Rs. " + mInventory.getProduct().getCost_price());
         binding.etMargin.setText(String.valueOf(mInventory.getMargin()));
 
         if (mInventory.getProduct().getImages() != null) {

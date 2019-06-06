@@ -92,6 +92,7 @@
                     android:id="@+id/tvViewAll"
                     style="@style/TextView12ssp"
                     android:textColor="@color/yellow"
+                    android:visibility="gone"
                     android:text="@string/view_all"/>
             </LinearLayout>
 
