@@ -323,5 +323,9 @@
     <!--Successful messages-->
     <string name="item_successfully_added_to_cart">Item successfully added to cart</string>
     <string name="item_added_to_your_inventory">Item added to your inventory</string>
+    <string name="bank_detail_updated_successfully">Bank detail updated successfully</string>
+    <string name="bank_detail_added_successfully">Bank detail added successfully</string>
 
+    <string name="No_Category_available">No Category available</string>
+    <string name="Choose_Category">Choose Category</string>
 </resources>

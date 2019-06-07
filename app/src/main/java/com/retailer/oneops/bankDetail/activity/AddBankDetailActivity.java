@@ -29,6 +29,7 @@ public class AddBankDetailActivity extends AppCompatActivity implements BankDeta
     private CustomSpinnerAdapter spinnerAdapter;
     private String accountTypeArray[];
     private MBankDetail savedBankDetail;
+    private boolean isEdit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class AddBankDetailActivity extends AppCompatActivity implements BankDeta
         //initialize Spinner
         bindSpinner();
         initialization();
-        listner();
+        listener();
     }
 
     /**
@@ -52,7 +53,7 @@ public class AddBankDetailActivity extends AppCompatActivity implements BankDeta
         binding.etAccountType.setAdapter(spinnerAdapter);
     }
 
-    private void listner() {
+    private void listener() {
         binding.btnUpload.setOnClickListener(view -> addBankDetailRequestObject());
     }
 
@@ -70,6 +71,7 @@ public class AddBankDetailActivity extends AppCompatActivity implements BankDeta
     private void setExistingData() {
         binding.header.tvMainHeading.setText(R.string.Update_Bank_Details);
         binding.btnUpload.setText("Update");
+        isEdit = true;
         binding.etAccountHolderName.setText(savedBankDetail.getAccountHolderName());
         binding.etAccountNumber.setText(savedBankDetail.getAccountNumber());
         binding.etIFSCCode.setText(savedBankDetail.getIfscCode());
@@ -112,6 +114,11 @@ public class AddBankDetailActivity extends AppCompatActivity implements BankDeta
 
     @Override
     public void onSuccessfulUploadBankDetails(MBankDetail mBankDetail, String message) {
+        if (isEdit)
+            Toast.makeText(activity, getString(R.string.bank_detail_updated_successfully), Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(activity, getString(R.string.bank_detail_added_successfully), Toast.LENGTH_LONG).show();
+
         Intent intent = new Intent(activity, DashboardActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
