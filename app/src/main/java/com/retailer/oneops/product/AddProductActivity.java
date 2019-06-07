@@ -248,6 +248,10 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
             return false;
         }
 
+       /* for (MImage mImage : imageList) {
+            mAddProduct.setImages(imageList);
+        }
+*/
         prepareData();
 
         return true;
@@ -426,6 +430,8 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
 
                 if (mImage.getFile() != null)
                     files.add(Utils.getFileRequestBody_part(WebService.FILES, mImage.getFile()));
+            } else if (mImage != null && mImage.getUrl() != null && TextUtils.isEmpty(mImage.getUrl())) {
+                files.add(Utils.getFileRequestBody_part(WebService.FILES, mImage.getFile()));
             }
         }
 
