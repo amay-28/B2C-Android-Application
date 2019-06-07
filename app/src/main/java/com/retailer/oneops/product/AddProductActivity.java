@@ -123,12 +123,15 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         binding.etDescription.setText(mProduct.getDescription());
         binding.etSellingPrice.setText("Rs. " + mProduct.getPrice());
         binding.etCostPrice.setText("Rs. " + mProduct.getCost_price());
+        imageList.clear();
 
         if (mProduct.getImages() != null) {
             if (mProduct.getImages().size() >= 4) {
                 imageList.clear();
             }
             imageList.addAll(mProduct.getImages());
+
+            setFirstImage();
             imageAdapter.notifyDataSetChanged();
         }
     }
@@ -208,12 +211,19 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         binding.btnSubmit.setOnClickListener(v -> {
             if (checkValidate()) {
                 if (imageAdapter.getItemCount() != 0) {
-                    CreateFileForSend(imageList);
+                    int i = CreateFileForSend(imageList);
+
+                    if (i == 0) {
+                        mAddProduct.getCategory().setIsSelected(null);
+                        mAddProduct.setCategoryId(String.valueOf(selectedCategoryId));
+                        mAddProduct.setCategory(null);
+                        if (isEditProduct)
+                            addProductPresenter.updateProductTask(mAddProduct, Integer.parseInt(mProduct.getId()));
+                    }
                 } else {
                     if (checkValidate()) addProductPresenter.addProductTask(mAddProduct);
                 }
             }
-
         });
     }
 
@@ -360,10 +370,14 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
     public void onDeleteImage(int position) {
         imageList.remove(position);
 
-        if (imageList.size() < 4 && imageList.get(imageList.size() - 1).getFile() != null)
-            setLocalImage();
+        try {
+            if (imageList.size() < 4 && (imageList.get(imageList.size() - 1).getFile() != null) || (imageList.get(imageList.size() - 1).getUrl() != null && !imageList.get(imageList.size() - 1).getUrl().isEmpty()))
+                setLocalImage();
 
-        imageAdapter.notifyDataSetChanged();
+            imageAdapter.notifyDataSetChanged();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -400,7 +414,11 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
 
     @Override
     public void onSucessfullyUpdatedImage(List<MImageServer> mImageList) {
-        mAddProduct.setImages(mImageList);
+        if (mAddProduct != null && mAddProduct.getImages() != null && mAddProduct.getImages().size() > 0) {
+            mAddProduct.getImages().addAll(mImageList);
+        } else
+            mAddProduct.setImages(mImageList);
+
         if (checkValidate()) {
             mAddProduct.getCategory().setIsSelected(null);
             mAddProduct.setCategoryId(String.valueOf(selectedCategoryId));
@@ -420,7 +438,7 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
     }
 
     // Crop image convert to file
-    public void CreateFileForSend(List<MImage> imageList) {
+    public int CreateFileForSend(List<MImage> imageList) {
         List<MultipartBody.Part> files = new ArrayList<>();
         for (MImage mImage : imageList) {
 
@@ -437,6 +455,8 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
 
         addProductPresenter.onUpdateImage(files);
         Log.d("AddProduct", "file size: " + files.size());
+
+        return files.size();
     }
 
 }

@@ -133,4 +133,13 @@ public class CheckoutPresenter implements CheckoutPresenterInterface, Constant {
         return APIClient.getClient(activity).create(APIInterface.class).placeOrder(new Session(activity).getString(AUTHORIZATION_KEY), mOrderRequest).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
+    @Override
+    public void onPlaceOrderClickNew(com.retailer.oneops.checkout.model.physical.MOrderRequest mOrderRequest) {
+        placeOrderObservable(mOrderRequest).subscribeWith(getPlaceOrderObserver());
+    }
+
+    private <T> Observable placeOrderObservable(com.retailer.oneops.checkout.model.physical.MOrderRequest mOrderRequest) {
+        return APIClient.getClient(activity).create(APIInterface.class).placeOrderPh(new Session(activity).getString(AUTHORIZATION_KEY), mOrderRequest).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
 }

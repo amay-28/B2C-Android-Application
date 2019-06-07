@@ -65,7 +65,7 @@
                     android:layout_below="@+id/etCategory"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="@drawable/bg_rect_with_corner"
-                    android:digits="012344567890"
+                    android:digits="01234456789"
                     android:fontFamily="@font/latoregular"
                     android:hint="@string/service_price"
                     android:imeOptions="actionNext"

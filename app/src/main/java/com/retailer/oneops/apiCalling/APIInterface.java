@@ -65,7 +65,7 @@ public interface APIInterface {
 
     @PUT("product/{id}")
     Observable<ResponseData> editProduct(@Header("Authorization") String token,
-                                        @Body MAddProduct mAddProduct,@Path("id") int id);
+                                         @Body MAddProduct mAddProduct, @Path("id") int id);
 
     // for withouth auth token
     @GET("categories")
@@ -127,19 +127,19 @@ public interface APIInterface {
 
     @DELETE("retailer/virtual-inventory/{id}")
     Observable<Response<String>> deleteVirtualInventory(@Header("Authorization") String token,
-                                                                        @Path("id") int id);
+                                                        @Path("id") int id);
 
     @DELETE("product/{id}")
     Observable<Response<String>> deletePhysicalInventory(@Header("Authorization") String token,
-                                                        @Path("id") int id);
+                                                         @Path("id") int id);
 
     @GET("product/{id}")
     Observable<Response<ResponseData<MProduct>>> getProductDetail(@Header("Authorization") String token,
-                                                         @Path("id") int id);
+                                                                  @Path("id") int id);
 
     @POST("cart")
     Observable<Response<ResponseData<MCart>>> addToCart(@Header("Authorization") String token,
-                                                                    @Body JsonObject cartJson);
+                                                        @Body JsonObject cartJson);
 
     @DELETE("cart")
     Observable<Response<String>> clearCart(@Header("Authorization") String token);
@@ -149,7 +149,7 @@ public interface APIInterface {
 
     @DELETE("cart/{id}")
     Observable<Response<String>> deleteCartItem(@Header("Authorization") String token,
-                                                         @Path("id") int id);
+                                                @Path("id") int id);
 
     /*Add by Sumit*/
     @Multipart
@@ -162,7 +162,6 @@ public interface APIInterface {
                                  @Body AddService jsonObject);
 
     @GET("retailer/service")
-
     Call<JsonElement> getService(@Header("Authorization") String token,
                                  @QueryMap Map<String, String> map);
 
@@ -172,17 +171,22 @@ public interface APIInterface {
 
     @POST("order")
     Observable<ResponseData<MOrder>> placeOrder(@Header("Authorization") String token,
-                                          @Body MOrderRequest mOrderRequest);
+                                                @Body MOrderRequest mOrderRequest);
+
+    @POST("order")
+    Observable<ResponseData<MOrder>> placeOrderPh(@Header("Authorization") String token,
+                                                @Body com.retailer.oneops.checkout.model.physical.MOrderRequest mOrderRequest);
 
 
     @POST("retailer/agent")
     Call<JsonElement> addAgent(@Header("Authorization") String token,
                                @Body AddAgent jsonObject);
+
     @PUT("retailer/agent/{id}")
     Call<JsonElement> editAgent(@Header("Authorization") String token,
                                 @Body AddAgent jsonObject, @Path("id") int id);
-    @GET("retailer/agent")
 
+    @GET("retailer/agent")
     Call<JsonElement> getAgent(@Header("Authorization") String token,
                                @QueryMap Map<String, String> map);
 
