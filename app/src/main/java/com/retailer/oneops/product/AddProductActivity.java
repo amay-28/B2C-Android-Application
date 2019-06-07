@@ -119,6 +119,7 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
 
     public void setExistingData(MProduct mProduct) {
         binding.etProductName.setText(mProduct.getName());
+        binding.etCategory.setText(mProduct.getCategory().getName());
         binding.etDescription.setText(mProduct.getDescription());
         binding.etSellingPrice.setText("Rs. " + mProduct.getPrice());
         binding.etCostPrice.setText("Rs. " + mProduct.getCost_price());

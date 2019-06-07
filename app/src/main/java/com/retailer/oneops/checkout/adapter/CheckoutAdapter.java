@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.retailer.oneops.R;
 import com.retailer.oneops.checkout.model.MCart;
 import com.retailer.oneops.checkout.model.MCartDetail;
@@ -72,8 +73,11 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
         holder.binding.tvDiscountPercent.setText(discountPercent + "% OFF");
 
         if (mProduct.getImages() != null && mProduct.getImages().size() > 0) {
-            Glide.with(activity)
+                Glide.with(activity)
                     .load(mProduct.getImages().get(0).getUrl())
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.ic_default_product)
+                            .error(R.drawable.ic_default_product))
                     .into(holder.binding.ivProduct);
         }
 

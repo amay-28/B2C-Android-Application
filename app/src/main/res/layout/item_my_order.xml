@@ -13,7 +13,8 @@
             android:id="@+id/rlOrderNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp">
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp">
 
             <TextView
                 android:id="@+id/tvOrderNo"
@@ -69,7 +70,7 @@
                     android:layout_width="@dimen/_95sdp"
                     android:layout_height="@dimen/_100sdp"
                     android:layout_alignParentTop="true"
-                    android:src="@drawable/dummy_men_shirt" />
+                    android:src="@drawable/ic_default_product" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -189,6 +190,7 @@
                         android:layout_marginTop="@dimen/_13sdp"
                         android:layout_toRightOf="@id/tvOrderStatusHead"
                         android:fontFamily="@font/latoregular"
+                        android:singleLine="true"
                         android:gravity="center_vertical"
                         android:text="shipped"
                         android:textColor="@color/green" />

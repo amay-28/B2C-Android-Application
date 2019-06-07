@@ -42,7 +42,7 @@
                         android:layout_width="@dimen/_95sdp"
                         android:layout_height="@dimen/_100sdp"
                         android:layout_below="@+id/ivCross"
-                        android:src="@drawable/dummy_men_shirt" />
+                        android:src="@drawable/ic_default_product" />
 
                     <RelativeLayout
                         android:id="@+id/rlDetails"

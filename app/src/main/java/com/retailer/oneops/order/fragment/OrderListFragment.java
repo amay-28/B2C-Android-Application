@@ -135,7 +135,7 @@ public class OrderListFragment extends Fragment implements APIResponse {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("limit", mLimit + "");
         hashMap.put("offset", mListService.size() + "");
-        hashMap.put("eager", "[order_lines.product.category]");
+        hashMap.put("eager", "[order_lines.product.[category,images]]");
 
         loading = false;
 

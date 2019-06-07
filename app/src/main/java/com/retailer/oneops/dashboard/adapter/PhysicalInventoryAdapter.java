@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.retailer.oneops.R;
 import com.retailer.oneops.databinding.ItemMyInventoryBinding;
 import com.retailer.oneops.productListing.model.MProduct;
@@ -63,8 +64,11 @@ public class PhysicalInventoryAdapter extends RecyclerView.Adapter<PhysicalInven
         holder.binding.tvDiscountPercent.setText(discountPercent + "% OFF");
 
         if (mProduct.getImages() != null) {
-            Glide.with(activity)
+                  Glide.with(activity)
                     .load(mProduct.getImages().get(0).getUrl())
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.ic_default_product)
+                            .error(R.drawable.ic_default_product))
                     .into(holder.binding.ivProduct);
         }
 

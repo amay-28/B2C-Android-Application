@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.JsonObject;
 import com.retailer.oneops.R;
 import com.retailer.oneops.auth.model.MCategory;
@@ -112,6 +113,9 @@ public class AddToInventoryActivity extends AppCompatActivity implements AddToIn
         if (mProduct.getImages() != null && mProduct.getImages().size() > 0) {
             Glide.with(activity)
                     .load(mProduct.getImages().get(0).getUrl())
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.ic_default_product)
+                            .error(R.drawable.ic_default_product))
                     .into(binding.ivProduct);
         }
     }
@@ -127,6 +131,9 @@ public class AddToInventoryActivity extends AppCompatActivity implements AddToIn
         if (mInventory.getProduct().getImages() != null) {
             Glide.with(activity)
                     .load(mInventory.getProduct().getImages().get(0).getUrl())
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.ic_default_product)
+                            .error(R.drawable.ic_default_product))
                     .into(binding.ivProduct);
         }
     }

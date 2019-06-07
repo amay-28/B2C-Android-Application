@@ -41,14 +41,17 @@
             android:layout_marginTop="@dimen/_50sdp"/>
 
         <TextView
+            android:id="@+id/tvNoRecordFound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/TextView14ssp"
+            style="@style/TextView12ssp"
             android:layout_marginTop="@dimen/_10sdp"
             android:fontFamily="@font/latomedium"
             android:gravity="center"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/No_Category_available"/>
+            android:layout_gravity="center"
+            android:text="@string/No_Category_available"
+            android:textColor="@color/color_grey_text"
+            android:visibility="gone"/>
 
     </androidx.cardview.widget.CardView>
     </LinearLayout>

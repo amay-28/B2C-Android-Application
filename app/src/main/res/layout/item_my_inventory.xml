@@ -45,7 +45,7 @@
                 android:layout_width="@dimen/_95sdp"
                 android:layout_height="@dimen/_100sdp"
                 android:layout_centerVertical="true"
-                android:src="@drawable/dummy_men_shirt" />
+                android:src="@drawable/ic_default_product"/>
 
             <RelativeLayout
                 android:layout_width="wrap_content"

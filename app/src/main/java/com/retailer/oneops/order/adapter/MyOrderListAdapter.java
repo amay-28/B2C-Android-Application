@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.retailer.oneops.R;
 import com.retailer.oneops.databinding.ItemMyOrderBinding;
 import com.retailer.oneops.order.model.MOrders;
@@ -61,10 +63,22 @@ public class MyOrderListAdapter extends RecyclerView.Adapter<MyOrderListAdapter.
             if (mOrders.getStatus().equalsIgnoreCase("WAITING_FOR_DISPATCH"))
                 holder.binding.tvOrderStatus.setText("Ready To Ship");
             else {
-                String orderStatus = mOrders.getStatus().replace("_", " ");
+                String orderStatus = mOrders.getStatus().replace("_", " ").toLowerCase();
                 String upperString = orderStatus.substring(0, 1).toUpperCase() + orderStatus.substring(1);
                 holder.binding.tvOrderStatus.setText(upperString);
             }
+
+            if (mOrders.getOrder_lines().get(position).getProduct().getImages() != null &&
+                    mOrders.getOrder_lines().get(position).getProduct().getImages().size() > 0) {
+                Glide.with(mContext)
+                        .load(mOrders.getOrder_lines().get(position).getProduct().getImages().get(0).getUrl())
+                        .apply(new RequestOptions()
+                                .placeholder(R.drawable.ic_default_product)
+                                .error(R.drawable.ic_default_product))
+                        .into(holder.binding.ivProduct);
+            }
+
+
             //holder.binding.tvSellingPrice.setText(mOrders.getOrder_lines().get(0).getProduct().getPrice());
             /*holder.binding.tvDiscountPercent.setText(mOrders.getOrder_lines().get(0).getProduct().g);*/
         } catch (Exception e) {

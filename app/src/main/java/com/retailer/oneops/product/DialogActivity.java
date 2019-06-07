@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.view.View;
 
 import com.retailer.oneops.R;
 import com.retailer.oneops.auth.model.MCategory;
@@ -56,6 +57,12 @@ public class DialogActivity extends AppCompatActivity implements DialogListAdapt
     private void getIntentData() {
         categoryList = getIntent().getParcelableArrayListExtra("CategoryList");
         selectedCategory = getIntent().getStringExtra("selectedCategory");
+
+        if (categoryList.size() <= 0) {
+            binding.tvNoRecordFound.setVisibility(View.VISIBLE);
+        } else {
+            binding.tvNoRecordFound.setVisibility(View.GONE);
+        }
     }
 
     public static Intent getIntent(Activity activity, List<MCategory> mCategoryList, String selectedCategory) {

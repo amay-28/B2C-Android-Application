@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.retailer.oneops.R;
 import com.retailer.oneops.databinding.ItemMyInventoryBinding;
 import com.retailer.oneops.myinventory.model.MInventory;
@@ -56,6 +57,9 @@ public class VirtualInventoryAdapter extends RecyclerView.Adapter<VirtualInvento
         if (mInventory.getProduct().getImages() != null && mInventory.getProduct().getImages().size() > 0) {
             Glide.with(activity)
                     .load(mInventory.getProduct().getImages().get(0).getUrl())
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.ic_default_product)
+                            .error(R.drawable.ic_default_product))
                     .into(holder.binding.ivProduct);
         }
 

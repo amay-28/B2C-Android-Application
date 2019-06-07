@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.retailer.oneops.R;
 import com.retailer.oneops.auth.model.MCategory;
 import com.retailer.oneops.dashboard.adapter.SubCategoryListAdapter;
@@ -55,7 +56,11 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         if (mProduct.getImages() != null && mProduct.getImages().size() > 0) {
             Glide.with(activity)
                     .load(mProduct.getImages().get(0).getUrl())
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.ic_default_product)
+                            .error(R.drawable.ic_default_product))
                     .into(holder.binding.ivImage);
+
         }
 
         holder.binding.tvAddToInventory.setOnClickListener(v -> callBack.onAddToInventoryClick(position, mProduct));
