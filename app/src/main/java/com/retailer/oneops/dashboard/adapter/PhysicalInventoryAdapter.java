@@ -13,6 +13,8 @@ import com.retailer.oneops.databinding.ItemMyInventoryBinding;
 import com.retailer.oneops.productListing.model.MProduct;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -43,8 +45,8 @@ public class PhysicalInventoryAdapter extends RecyclerView.Adapter<PhysicalInven
         strikeThroughText(holder.binding.tvSellingPrice);
         holder.binding.tvProductName.setText(mProduct.getName());
         holder.binding.tvProductDescription.setText(mProduct.getDescription());
-        holder.binding.tvPrice.setText("Rs. " +mProduct.getPrice());
-        holder.binding.tvSellingPrice.setText("Rs. " +mProduct.getCost_price());
+        holder.binding.tvPrice.setText("Rs. " + mProduct.getPrice());
+        holder.binding.tvSellingPrice.setText("Rs. " + mProduct.getCost_price());
 
         if (mProduct.getCategory() != null
                 && mProduct.getCategory().getParent() != null && mProduct.getCategory().getParent().getParent() != null) {
@@ -64,7 +66,7 @@ public class PhysicalInventoryAdapter extends RecyclerView.Adapter<PhysicalInven
         holder.binding.tvDiscountPercent.setText(discountPercent + "% OFF");
 
         if (mProduct.getImages() != null) {
-                  Glide.with(activity)
+            Glide.with(activity)
                     .load(mProduct.getImages().get(0).getUrl())
                     .apply(new RequestOptions()
                             .placeholder(R.drawable.ic_default_product)
@@ -112,4 +114,5 @@ public class PhysicalInventoryAdapter extends RecyclerView.Adapter<PhysicalInven
         }
         return Math.round(discountPercent);
     }
+
 }

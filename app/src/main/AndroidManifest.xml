@@ -61,11 +61,14 @@
         <activity android:name="com.retailer.oneops.productListing.ProductListingActivity" />
         <activity android:name="com.retailer.oneops.bankDetail.activity.BankDetailActivity" />
         <activity android:name=".product.ProductDetailActivity" />
-        <activity android:name=".checkout.CheckoutActivity" />
+
         <activity android:name=".settings.SettingActivity" />
         <activity android:name=".agent.AddAgentActivity" />
         <activity android:name=".agent.AgentListActivity" />
         <activity android:name=".order.activity.OrderListActivity"></activity>
+
+        <activity android:name=".checkout.CheckoutActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
 
         <activity
             android:name="com.retailer.oneops.dashboard.activity.CategoryActivity"

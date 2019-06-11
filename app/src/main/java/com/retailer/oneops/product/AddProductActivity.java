@@ -42,6 +42,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -118,11 +120,12 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
     }
 
     public void setExistingData(MProduct mProduct) {
+        selectedCategoryId = Integer.parseInt(mProduct.getCategoryId());
         binding.etProductName.setText(mProduct.getName());
         binding.etCategory.setText(mProduct.getCategory().getName());
         binding.etDescription.setText(mProduct.getDescription());
-        binding.etSellingPrice.setText("Rs. " + mProduct.getPrice());
-        binding.etCostPrice.setText("Rs. " + mProduct.getCost_price());
+        binding.etSellingPrice.setText(mProduct.getPrice());
+        binding.etCostPrice.setText(mProduct.getCost_price());
         imageList.clear();
 
         if (mProduct.getImages() != null) {
@@ -133,6 +136,22 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
 
             setFirstImage();
             imageAdapter.notifyDataSetChanged();
+        }
+
+        if (mProduct.getCategory() != null
+                && mProduct.getCategory().getParent() != null && mProduct.getCategory().getParent().getParent() != null) {
+            binding.etCategory.setText(mProduct.getCategory().getParent().getParent().getName());
+            //prepareSubCategoryListFromCategory(mProduct.getCategory().getParent());
+
+            if (mProduct.getCategory() != null && mProduct.getCategory().getParent() != null) {
+                binding.etSubCategory.setText(mProduct.getCategory().getParent().getName());
+               // prepareSubSubCategoryListFromCategory(mProduct.getCategory());
+
+                if (mProduct.getCategory() != null) {
+                    binding.etSubSubCategory.setText(mProduct.getCategory().getName());
+                }
+
+            }
         }
     }
 
@@ -282,21 +301,12 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         if (resultCode == RESULT_OK) {
             if (requestCode == OPEN_DIALOG_FOR_CATEGORY) {
                 mCategory = data.getParcelableExtra("MCategory");
-                selectedCategoryId = Integer.parseInt(mCategory.getId());
-                binding.etCategory.setText(mCategory.getName());
-                binding.etSubCategory.setText("");
-                binding.etSubSubCategory.setText("");
-
-                subCategoryList = getSubCategoryList(mCategory);
-
+                prepareSubCategoryListFromCategory(mCategory);
             }
 
             if (requestCode == OPEN_DIALOG_FOR_SUBCATEGORY) {
                 mCategory = data.getParcelableExtra("MCategory");
-                selectedCategoryId = Integer.parseInt(mCategory.getId());
-                binding.etSubCategory.setText(mCategory.getName());
-
-                subSubCategoryList = getSubCategoryList(mCategory);
+                prepareSubSubCategoryListFromCategory(mCategory);
             }
 
             if (requestCode == OPEN_DIALOG_FOR_SUBSUBCATEGORY) {
@@ -338,6 +348,21 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         }
     }
 
+    public void prepareSubCategoryListFromCategory(MCategory category) {
+        selectedCategoryId = Integer.parseInt(category.getId());
+        binding.etCategory.setText(category.getName());
+        binding.etSubCategory.setText("");
+        binding.etSubSubCategory.setText("");
+
+        subCategoryList = getSubCategoryList(category);
+    }
+
+    public void prepareSubSubCategoryListFromCategory(MCategory category) {
+        selectedCategoryId = Integer.parseInt(category.getId());
+        binding.etSubCategory.setText(category.getName());
+
+        subSubCategoryList = getSubCategoryList(category);
+    }
 
     @Override
     public void onSuccessfullyGetCategoryList(List<MCategory> mCategoryList, String message) {
@@ -459,4 +484,15 @@ public class AddProductActivity extends AppCompatActivity implements DialogViewI
         return files.size();
     }
 
+/*    public String getPriceFromString(String inputString) {
+        String price = "";
+        Pattern p = Pattern.compile("\\d+");
+        Matcher m = p.matcher(inputString);
+        while (m.find()) {
+            System.out.println(m.group());
+            price = m.group();
+        }
+
+        return price;
+    }*/
 }

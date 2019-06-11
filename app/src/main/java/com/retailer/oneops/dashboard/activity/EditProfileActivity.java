@@ -75,9 +75,10 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         binding.header.setHandler(new CommonClickHandler(activity));
         binding.header.tvMainHeading.setText(R.string.txt_editprofile);
         editProfilePresenter = new EditProfilePresenter(this, activity);
-        setDetails();
+
         listeners();
         bindSpinner();
+        setDetails();
     }
 
     private void bindSpinner() {
@@ -119,6 +120,8 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
                                     .placeholder(R.mipmap.avtar_gray)
                                     .error(R.mipmap.avtar_gray))
                             .into(binding.imgUser);
+
+
             }
         }
     }
@@ -171,7 +174,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         } else if (binding.etAboutShop.getText().toString().trim().length() < 3) {
             Utils.ShowToast(activity, resources.getString(R.string.about_shop_length), 0);
             return false;
-        } else if (TextUtils.isEmpty(binding.etPanNumber.getText().toString().trim()) &&
+        } else if (!TextUtils.isEmpty(binding.etPanNumber.getText().toString().trim()) &&
                 !ValidationUtil.isValidPAN(binding.etPanNumber.getText().toString().trim())) {
             Utils.ShowToast(activity, resources.getString(R.string.please_enter_valid_pan_number), 0);
             return false;

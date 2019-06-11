@@ -25,13 +25,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:focusable="true">
+                android:layout_marginRight="@dimen/_10sdp">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvCartItems"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true"/>
 
                 <TextView
                     android:id="@+id/tvDeliveryOptions"
@@ -55,8 +55,7 @@
                     <RadioGroup
                         android:id="@+id/radioGroup"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center">
+                        android:layout_height="wrap_content">
 
                         <RadioButton
                             android:id="@+id/rbStorePickup"
@@ -74,7 +73,6 @@
                             style="@android:style/Widget.CompoundButton.CheckBox"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_10sdp"
                             android:layout_toRightOf="@id/rbStorePickup"
                             android:backgroundTint="@color/green"
                             android:fontFamily="@font/latosemibold"

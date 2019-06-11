@@ -254,6 +254,7 @@
     <string name="Add_to_Inventory">Add to Inventory</string>
     <string name="Add_to_Cart">Add to Cart</string>
     <string name="Product_Description">Product Description</string>
+    <string name="Product_Detail">Product Detail</string>
     <string name="Select_product_variant">Select product variant</string>
     <string name="Fit">Fit</string>
     <string name="Transparency">Transparency</string>

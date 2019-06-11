@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
+import com.crystal.crystalrangeseekbar.interfaces.OnSeekbarChangeListener;
 import com.retailer.oneops.R;
 import com.retailer.oneops.agent.AgentListActivity;
 import com.retailer.oneops.auth.activity.LoginActivity;
@@ -54,7 +56,7 @@ public class SettingActivity extends AppCompatActivity implements OnDialogItemCl
 
         binding.tvLogout.setOnClickListener(v -> performLogout());
 
-
+        binding.rangeBar.setOnRangeSeekbarChangeListener((minValue, maxValue) -> binding.tvRangeKm.setText(String.valueOf(maxValue)));
     }
 
     private void initialization() {

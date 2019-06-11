@@ -549,12 +549,13 @@
 
 
                     <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
-                        android:id="@+id/rangebar"
+                        android:id="@+id/rangeBar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/km"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:max="10"
+                        app:max_value="10"
                         app:bar_color="@color/colorBar"
                         app:bar_highlight_color="@color/yellow"
                         app:corner_radius="16"
@@ -566,10 +567,12 @@
 
 
                     <TextView
-                        android:id="@+id/ra"
+                        android:id="@+id/tvRangeKm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/km" />
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_below="@id/rangeBar" />
+
                 </RelativeLayout>
 
                 <View

@@ -95,8 +95,7 @@
                                     android:fontFamily="@font/latobold"
                                     android:maxLines="2"
                                     android:text="Kook N Keech"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/_13ssp" />
+                                    android:textColor="@color/black"/>
 
 
                                 <TextView
@@ -234,7 +233,7 @@
                             android:layout_below="@+id/btnAddToInventory"
                             android:layout_marginTop="@dimen/_22sdp"
                             android:fontFamily="@font/latosemibold"
-                            android:text="@string/Product_Description"
+                            android:text="@string/Product_Detail"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_13ssp" />
 

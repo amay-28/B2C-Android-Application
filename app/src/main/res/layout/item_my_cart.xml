@@ -131,7 +131,7 @@
                     android:fontFamily="@font/latoregular"
                     android:singleLine="true"
                     android:textColor="@color/color_light_text"
-                    android:text="name: " />
+                    android:text="" />
 
                 <TextView
                     android:id="@+id/tvAttribute"
@@ -145,7 +145,7 @@
                     android:fontFamily="@font/latoregular"
                     android:singleLine="true"
                     android:textColor="@color/color_light_text"
-                    android:text="yes" />
+                    android:text="" />
 
 
                 <TextView
