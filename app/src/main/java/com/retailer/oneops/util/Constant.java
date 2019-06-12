@@ -9,6 +9,7 @@ public interface Constant {
     String YES = "YES";
     String NO = "NO";
     String MOBILE_NO = "MOBILE_NO";
+    String NAME = "NAME";
     String AUTHORIZATION_KEY = "AUTHORIZATION_KEY";
     String INVENTORY_TYPE = "INVENTORY_TYPE";
     String PHYSICAL_INVENTORY = "PHYSICAL_INVENTORY";

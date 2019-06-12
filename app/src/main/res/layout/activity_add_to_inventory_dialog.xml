@@ -72,78 +72,100 @@
                             android:text="Men Regular Fit Blue Shirt"
                             android:textColor="@color/color_light_text" />
 
-
-                        <TextView
-                            android:id="@+id/tvLengthHead"
-                            style="@style/TextView10ssp"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:id="@+id/llVariant1"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tvProductDescription"
                             android:layout_marginTop="@dimen/_8sdp"
-                            android:fontFamily="@font/latomedium"
-                            android:text="@string/Length" />
+                            android:weightSum="1">
 
-                        <TextView
-                            android:id="@+id/tvLength"
-                            style="@style/TextView10ssp"
-                            android:layout_width="wrap_content"
+
+                            <TextView
+                                android:id="@+id/tvLengthHead"
+                                style="@style/TextView10ssp"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".5"
+                                android:fontFamily="@font/latomedium"
+                                android:text="@string/Length" />
+
+                            <TextView
+                                android:id="@+id/tvLength"
+                                style="@style/TextView10ssp"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".5"
+                                android:layout_toRightOf="@+id/tvLengthHead"
+                                android:fontFamily="@font/latoregular"
+                                android:text="Cotton"
+                                android:textColor="@color/color_grey_text" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/llVariant2"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/tvProductDescription"
-                            android:layout_marginLeft="@dimen/_15sdp"
-                            android:layout_marginTop="@dimen/_8sdp"
-                            android:layout_toRightOf="@+id/tvLengthHead"
-                            android:fontFamily="@font/latoregular"
-                            android:text="Cotton"
-                            android:textColor="@color/color_grey_text" />
-
-
-                        <TextView
-                            android:id="@+id/tvSizeAndFitHead"
-                            style="@style/TextView10ssp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/tvLengthHead"
+                            android:layout_below="@+id/llVariant1"
                             android:layout_marginTop="@dimen/_5sdp"
-                            android:fontFamily="@font/latomedium"
-                            android:singleLine="true"
-                            android:text="@string/size_and_fit" />
+                            android:orientation="horizontal"
+                            android:weightSum="1">
 
-                        <TextView
-                            android:id="@+id/tvSizeAndFit"
-                            style="@style/TextView10ssp"
-                            android:layout_width="wrap_content"
+                            <TextView
+                                android:id="@+id/tvSizeAndFitHead"
+                                style="@style/TextView10ssp"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".5"
+                                android:fontFamily="@font/latomedium"
+                                android:singleLine="true"
+                                android:text="@string/size_and_fit" />
+
+                            <TextView
+                                android:id="@+id/tvSizeAndFit"
+                                style="@style/TextView10ssp"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".5"
+                                android:fontFamily="@font/latoregular"
+                                android:text="Slim Fit"
+                                android:textColor="@color/color_grey_text" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llVariant3"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/tvLength"
-                            android:layout_marginLeft="@dimen/_13sdp"
+                            android:layout_below="@+id/llVariant2"
                             android:layout_marginTop="@dimen/_5sdp"
-                            android:layout_toRightOf="@+id/tvSizeAndFitHead"
-                            android:fontFamily="@font/latoregular"
-                            android:text="Slim Fit"
-                            android:textColor="@color/color_grey_text" />
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/tvMaterialHead"
+                                style="@style/TextView10ssp"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".5"
+                                android:fontFamily="@font/latomedium"
+                                android:text="@string/Material" />
+
+                            <TextView
+                                android:id="@+id/tvMaterial"
+                                style="@style/TextView10ssp"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".5"
+                                android:fontFamily="@font/latoregular"
+                                android:text="Regular"
+                                android:textColor="@color/color_grey_text" />
 
 
-                        <TextView
-                            android:id="@+id/tvMaterialHead"
-                            style="@style/TextView10ssp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/tvSizeAndFitHead"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:fontFamily="@font/latomedium"
-                            android:text="@string/Material" />
+                        </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/tvMaterial"
-                            style="@style/TextView10ssp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/tvSizeAndFitHead"
-                            android:layout_marginLeft="@dimen/_13sdp"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:layout_toRightOf="@+id/tvMaterialHead"
-                            android:fontFamily="@font/latoregular"
-                            android:text="Regular"
-                            android:textColor="@color/color_grey_text" />
 
                     </RelativeLayout>
 
@@ -168,8 +190,8 @@
                     android:layout_below="@+id/priceHead"
                     android:layout_marginTop="@dimen/_7sdp"
                     android:fontFamily="@font/latomedium"
-                    android:textColor="@color/color_grey_text"
-                    android:text="Rs." />
+                    android:text="Rs."
+                    android:textColor="@color/color_grey_text" />
 
                 <TextView
                     android:id="@+id/tvPrice"
@@ -177,12 +199,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/priceHead"
-                    android:layout_toRightOf="@+id/tvPriceRs"
-                    android:layout_marginTop="@dimen/_7sdp"
                     android:layout_marginLeft="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_toRightOf="@+id/tvPriceRs"
                     android:fontFamily="@font/latomedium"
-                    android:textColor="@color/color_grey_text"
-                    android:text="" />
+                    android:text=""
+                    android:textColor="@color/color_grey_text" />
 
                 <TextView
                     android:id="@+id/yourMarginHead"
@@ -202,8 +224,8 @@
                     android:layout_below="@+id/yourMarginHead"
                     android:layout_marginTop="@dimen/_7sdp"
                     android:fontFamily="@font/latomedium"
-                    android:textColor="@color/color_grey_text"
-                    android:text="Rs." />
+                    android:text="Rs."
+                    android:textColor="@color/color_grey_text" />
 
                 <EditText
                     android:id="@+id/etMargin"
@@ -211,13 +233,13 @@
                     android:layout_width="@dimen/_70sdp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/yourMarginHead"
+                    android:layout_marginLeft="@dimen/_3sdp"
                     android:layout_toRightOf="@+id/tvMarginRs"
                     android:fontFamily="@font/latomedium"
                     android:inputType="number"
                     android:maxLength="4"
-                    android:layout_marginLeft="@dimen/_3sdp"
-                    android:textColor="@color/color_grey_text"
-                    android:text="" />
+                    android:text=""
+                    android:textColor="@color/color_grey_text" />
 
                 <TextView
                     android:id="@+id/SellingPriceHead"
@@ -242,8 +264,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_15sdp"
                         android:fontFamily="@font/latomedium"
-                        android:textColor="@color/color_grey_text"
-                        android:text="GST: Rs." />
+                        android:text="GST: Rs."
+                        android:textColor="@color/color_grey_text" />
 
 
                     <TextView
@@ -251,12 +273,12 @@
                         style="@style/TextView12ssp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/tvGSTRs"
                         android:layout_marginLeft="@dimen/_3sdp"
                         android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_toRightOf="@+id/tvGSTRs"
                         android:fontFamily="@font/latomedium"
-                        android:textColor="@color/color_grey_text"
-                        android:text="" />
+                        android:text=""
+                        android:textColor="@color/color_grey_text" />
 
 
                 </RelativeLayout>
@@ -269,8 +291,8 @@
                     android:layout_below="@+id/SellingPriceHead"
                     android:layout_marginTop="@dimen/_7sdp"
                     android:fontFamily="@font/latomedium"
-                    android:textColor="@color/color_grey_text"
-                    android:text="Rs." />
+                    android:text="Rs."
+                    android:textColor="@color/color_grey_text" />
 
                 <TextView
                     android:id="@+id/tvSellingPrice"
@@ -278,22 +300,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/SellingPriceHead"
+                    android:layout_marginLeft="@dimen/_3sdp"
                     android:layout_marginTop="@dimen/_7sdp"
                     android:layout_toRightOf="@+id/tvSpRs"
                     android:fontFamily="@font/latomedium"
-                    android:layout_marginLeft="@dimen/_3sdp"
-                    android:textColor="@color/color_grey_text"
-                    android:text="" />
+                    android:text=""
+                    android:textColor="@color/color_grey_text" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnSave"
                     style="@style/material_button"
-                    android:layout_marginTop="@dimen/_30sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:layout_marginLeft="@dimen/_40sdp"
-                    android:layout_marginRight="@dimen/_40sdp"
-                    android:backgroundTint="@color/yellow"
                     android:layout_below="@+id/tvSellingPrice"
+                    android:layout_marginLeft="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:layout_marginRight="@dimen/_40sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:backgroundTint="@color/yellow"
                     android:text="@string/Add_to_your_Inventory"
                     android:textSize="@dimen/_12ssp"
                     app:cornerRadius="@dimen/_3sdp" />

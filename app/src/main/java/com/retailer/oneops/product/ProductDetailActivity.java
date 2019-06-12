@@ -225,7 +225,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
     @Override
     public void onSuccessfullyAddToCart(MCart mCart, String message) {
-        Toast.makeText(context, getString(R.string.item_successfully_added_to_cart), Toast.LENGTH_LONG).show();
+        Toast.makeText(context, getString(R.string.product_successfully_added_to_your_cart), Toast.LENGTH_LONG).show();
 
         if (session.getInventoryType() == null) {
             new Session(activity).setString(INVENTORY_TYPE, inventoryType);

@@ -45,12 +45,16 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
     private CustomSpinnerAdapter spinnerAdapter;
     private MProfile mProfile = new MProfile();
     private String[] gstPercentageArray;
+    private Bundle bundle;
+    private int mobileNumber;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = this;
         binding = DataBindingUtil.setContentView(activity, R.layout.activity_sign_up_detail);
+        bundle = getIntent().getExtras();
         initialization();
         listner();
         bindSpinner();
@@ -68,6 +72,16 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
         categoryList.add(mCategory);
         categoryAdapter = new CategoryAdapter(activity, R.layout.row_spinner_text, categoryList);
         binding.spnCategory.setAdapter(categoryAdapter);
+
+        if (bundle != null) {
+            if (bundle.containsKey(MOBILE_NO)) {
+                mobileNumber = bundle.getInt(MOBILE_NO);
+            }
+            if (bundle.containsKey(NAME)) {
+                username = bundle.getString(NAME);
+            }
+
+        }
     }
 
     private void listner() {
@@ -105,9 +119,11 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.rbYes) {
                     binding.etGstNo.setVisibility(View.VISIBLE);
+                    binding.spinnerGstPercent.setVisibility(View.VISIBLE);
                     binding.etPanNo.setVisibility(View.VISIBLE);
                 } else {
                     binding.etGstNo.setVisibility(View.GONE);
+                    binding.spinnerGstPercent.setVisibility(View.GONE);
                     binding.etPanNo.setVisibility(View.GONE);
                 }
             }
@@ -159,18 +175,24 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
     }
 
     private void prepareData() {
-        /*List<MAddress> addressList = new ArrayList<>();
-        MAddress mAddress = new MAddress();*/
+        List<MAddress> addressList = new ArrayList<>();
+        MAddress mAddress = new MAddress();
+        mAddress.setName(username);
+        mAddress.setMobileNumber(String.valueOf(mobileNumber));
+        mAddress.setAddressLine1(binding.etAddressOne.getText().toString());
+        mAddress.setAddressLine2(binding.etAddressTwo.getText().toString());
+        mAddress.setCity(binding.etCity.getText().toString());
+        mAddress.setState(binding.etState.getText().toString());
+        addressList.add(mAddress);
+
+        mProfile.setAddress(addressList);
+
         // have to add more fields
         mProfile.setShopName(binding.etShopName.getText().toString());
         mProfile.setEmail(binding.etEmail.getText().toString());
-
-        mProfile.setAddressLine1(binding.etAddressOne.getText().toString());
-        mProfile.setAddressLine2(binding.etAddressTwo.getText().toString());
-        mProfile.setCity(binding.etCity.getText().toString());
-        mProfile.setState(binding.etState.getText().toString());
         mProfile.setGstin(binding.etGstNo.getText().toString());
-        mProfile.setGstPercent(binding.spinnerGstPercent.getSelectedItem().toString().trim());
+        if (binding.spinnerGstPercent.getSelectedItemPosition() != 0)
+            mProfile.setGstPercent(binding.spinnerGstPercent.getSelectedItem().toString().trim());
         mProfile.setPanNumber(binding.etPanNo.getText().toString());
         List<MProfile.MDealsIn> dealsInList = new ArrayList<>();
         if (!categoryList.isEmpty()) {

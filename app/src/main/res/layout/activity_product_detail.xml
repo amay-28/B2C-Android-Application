@@ -46,7 +46,7 @@
                     <androidx.viewpager.widget.ViewPager
                         android:id="@+id/viewPager"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_275sdp" />
+                        android:layout_height="@dimen/_350sdp" />
 
                     <com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
                         android:id="@+id/dotsIndicator"
@@ -83,7 +83,7 @@
                                 android:id="@+id/llProductDetail"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight=".7"
+                                android:layout_weight=".8"
                                 android:orientation="vertical">
 
                                 <TextView
@@ -100,7 +100,7 @@
 
                                 <TextView
                                     android:id="@+id/tvProductDescription"
-                                    style="@style/TextView10ssp"
+                                    style="@style/TextView12ssp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
@@ -155,7 +155,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_weight=".3"
+                                android:layout_weight=".2"
                                 android:gravity="center"
                                 android:orientation="vertical">
 
@@ -167,16 +167,12 @@
                                     android:text="@string/COD_available"
                                     android:textColor="@color/green" />
 
-
                                 <com.google.android.material.button.MaterialButton
                                     android:id="@+id/btnShare"
                                     style="@style/material_button"
                                     android:layout_width="wrap_content"
-                                    android:layout_below="@+id/tvProductDescription"
-                                    android:layout_alignParentRight="true"
                                     android:layout_marginTop="@dimen/_5sdp"
                                     android:capitalize="none"
-                                    android:padding="@dimen/_7sdp"
                                     android:text="@string/Share"
                                     android:textSize="@dimen/_10ssp"
                                     app:cornerRadius="@dimen/_3sdp" />

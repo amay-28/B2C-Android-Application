@@ -48,7 +48,7 @@ public class PhysicalInventoryAdapter extends RecyclerView.Adapter<PhysicalInven
         holder.binding.tvPrice.setText("Rs. " + mProduct.getPrice());
         holder.binding.tvSellingPrice.setText("Rs. " + mProduct.getCost_price());
 
-        if (mProduct.getCategory() != null
+        /*if (mProduct.getCategory() != null
                 && mProduct.getCategory().getParent() != null && mProduct.getCategory().getParent().getParent() != null) {
             holder.binding.tvCategory.setText(mProduct.getCategory().getParent().getParent().getName());
         } else if (mProduct.getCategory() != null && mProduct.getCategory().getParent() != null) {
@@ -57,7 +57,10 @@ public class PhysicalInventoryAdapter extends RecyclerView.Adapter<PhysicalInven
             holder.binding.tvCategory.setText(mProduct.getCategory().getName());
         } else {
             holder.binding.tvCategory.setText("NA");
-        }
+        }*/
+
+        if (mProduct.getCategory() != null)
+            holder.binding.tvCategory.setText(mProduct.getCategory().getName());
 
 
         double actualPrice = Double.parseDouble(mProduct.getCost_price());

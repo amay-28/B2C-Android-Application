@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.retailer.oneops.R;
 import com.retailer.oneops.checkout.adapter.CheckoutAdapter;
 import com.retailer.oneops.checkout.model.MCart;
-import com.retailer.oneops.checkout.model.MCartDetail;
 import com.retailer.oneops.databinding.ActivityCheckoutBinding;
 import com.retailer.oneops.productListing.model.MProduct;
 
@@ -29,7 +28,7 @@ public class MyOrderActivity extends AppCompatActivity implements CheckoutAdapte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_checkout);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_checkout_old);
 
         activity = MyOrderActivity.this;
 

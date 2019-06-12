@@ -103,8 +103,8 @@
     <string name="view_all">View All</string>
     <string name="explore">Explore</string>
     <string name="product_name">Product Name</string>
-    <string name="sub_category">Sub Category</string>
-    <string name="sub_sub_category">Sub Sub Category</string>
+    <string name="sub_category">Sub-Category</string>
+    <string name="sub_sub_category">Sub Sub-Category</string>
     <string name="selling_price">Selling Price</string>
     <string name="cost_price">Cost Price</string>
     <string name="payment_options">Payment Option</string>
@@ -123,6 +123,7 @@
     <string name="error_valid_amount">Please provide valid %1$s</string>
     <string name="label_retry">Retry</string>
     <string name="label_services">Services</string>
+    <string name="label_Agent">Agents</string>
     <string name="msg_no_service_list">Oops! No service available.</string>
 
     <!-- Add_Bank_Details String -->
@@ -205,7 +206,9 @@
     <string name="Add_Bank_Details">Add Bank Details</string>
     <string name="Update_Bank_Details">Update Bank Details</string>
     <string name="No_Product_Found">No Product Found</string>
+    <string name="No_Order">No Order</string>
     <string name="No_Product_Found_message">Simply browse, create a wishlist or make a purchase.</string>
+    <string name="No_order_Found_message">Go find the products you like</string>
     <string name="CONTINUE_SHOPPING">CONTINUE SHOPPING</string>
     <string name="Retailer_account_created_successfully">Retailer account created successfully !</string>
 
@@ -236,6 +239,7 @@
     <string name="Your_Margin">Your Margin</string>
     <string name="Selling_Price">Selling Price</string>
     <string name="Please_enter_your_margin">Please enter your margin</string>
+    <string name="margin_should_be_less_than_selling_price">Margin should be less than selling price</string>
     <!--name (max length is 25 AND minimum is 3)
     mobile (max length is 10 AND minimum is 10)
     shop name (max length is 30 AND minimum is 3)
@@ -322,10 +326,11 @@
     <string name="delete_from_bag">Are you sure you want to delete it from your bag?</string>
 
     <!--Successful messages-->
-    <string name="item_successfully_added_to_cart">Item successfully added to cart</string>
+    <string name="product_successfully_added_to_your_cart">Product is successfully added to your cart</string>
     <string name="item_added_to_your_inventory">Item added to your inventory</string>
     <string name="bank_detail_updated_successfully">Bank detail updated successfully</string>
     <string name="bank_detail_added_successfully">Bank detail added successfully</string>
+    <string name="order_has_been_placed_successfully">You order has been placed successfully</string>
 
     <string name="No_Category_available">No Category available</string>
     <string name="Choose_Category">Choose Category</string>

@@ -189,6 +189,9 @@ public class AddAgentActivity extends AppCompatActivity implements APIResponse {
             Utils.showToast(activity, getString(R.string.agent_updated_successfully));
         }
         MyDialogProgress.close(activity);
+
+        Intent data = new Intent();
+        setResult(RESULT_OK, data);
         finish();
     }
 

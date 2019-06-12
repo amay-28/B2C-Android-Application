@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context=".order.activity.ActivityCheckoutShopkeeper">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,11 +15,9 @@
             layout="@layout/header_with_back" />
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/header"
-            android:visibility="gone">
+            android:layout_below="@+id/header">
 
 
             <RelativeLayout
@@ -25,13 +25,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:focusableInTouchMode="true">
+                android:layout_marginRight="@dimen/_10sdp">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvCartItems"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true"/>
 
                 <TextView
                     android:id="@+id/tvDeliveryOptions"
@@ -55,8 +55,7 @@
                     <RadioGroup
                         android:id="@+id/radioGroup"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center">
+                        android:layout_height="wrap_content">
 
                         <RadioButton
                             android:id="@+id/rbStorePickup"
@@ -74,7 +73,6 @@
                             style="@android:style/Widget.CompoundButton.CheckBox"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_10sdp"
                             android:layout_toRightOf="@id/rbStorePickup"
                             android:backgroundTint="@color/green"
                             android:fontFamily="@font/latosemibold"
@@ -463,7 +461,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_no_order_found" />
+                android:src="@drawable/ic_no_product_found" />
 
             <TextView
                 style="@style/TextView14ssp"
@@ -472,7 +470,7 @@
                 android:layout_marginTop="@dimen/_30sdp"
                 android:fontFamily="@font/latomedium"
                 android:gravity="center"
-                android:text="@string/No_Order"
+                android:text="@string/No_Product_Found"
                 android:textColor="@color/colorPrimary" />
 
             <TextView
@@ -482,7 +480,7 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:fontFamily="@font/latoregular"
                 android:gravity="center"
-                android:text="@string/No_order_Found_message"
+                android:text="@string/No_Product_Found_message"
                 android:textColor="@color/color_grey_text" />
 
 

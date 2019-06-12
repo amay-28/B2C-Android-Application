@@ -104,7 +104,8 @@ public class OtpVerificationActivity extends AppCompatActivity implements OtpVie
         MyDialogProgress.close(activity);
         // do waht u want after signup
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(activity, SignUpDetailActivity.class));
+        startActivity(new Intent(activity, SignUpDetailActivity.class).putExtra(MOBILE_NO,getIntent().getStringExtra(MOBILE_NO))
+                .putExtra(NAME, getIntent().getStringExtra(NAME)));
     }
 
     @Override

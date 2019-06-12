@@ -89,7 +89,9 @@ public class SignUpInitialActivity extends AppCompatActivity implements SignUpVi
     @Override
     public void onSucessfullySignUp(MUser mUser, String message) {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(activity, OtpVerificationActivity.class).putExtra(IS_FROM_SIGNUP, YES).putExtra(MOBILE_NO, mUser.getMobileNumber()));
+        startActivity(new Intent(activity, OtpVerificationActivity.class).putExtra(IS_FROM_SIGNUP, YES)
+                .putExtra(MOBILE_NO, mUser.getMobileNumber())
+                .putExtra(NAME, mUser.getName()));
     }
 
     @Override

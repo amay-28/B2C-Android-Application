@@ -91,7 +91,6 @@ public class CheckoutPresenter implements CheckoutPresenterInterface, Constant {
             public void onError(Throwable e) {
                 if (e instanceof HttpException)
                     checkoutViewInterface.onFailedListing(Utils.errorMessageParsing(e).getMessage());
-
             }
 
             @Override

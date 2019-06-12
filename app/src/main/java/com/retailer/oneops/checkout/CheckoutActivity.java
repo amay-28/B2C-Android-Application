@@ -13,53 +13,30 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.retailer.oneops.R;
 import com.retailer.oneops.auth.model.MAddress;
 import com.retailer.oneops.checkout.adapter.CheckoutAdapter;
 import com.retailer.oneops.checkout.model.MCart;
 import com.retailer.oneops.checkout.model.MCartDetail;
 import com.retailer.oneops.checkout.model.MOrder;
-import com.retailer.oneops.checkout.model.MOrderLines;
 import com.retailer.oneops.checkout.model.MOrderLinesRequest;
 import com.retailer.oneops.checkout.model.MOrderRequest;
 import com.retailer.oneops.checkout.presenter.CheckoutPresenter;
 import com.retailer.oneops.checkout.viewinterface.CheckoutViewInterface;
-import com.retailer.oneops.dashboard.viewinterface.MyInventViewInterface;
 import com.retailer.oneops.databinding.ActivityCheckoutBinding;
-import com.retailer.oneops.databinding.MyInventoryFragmentBinding;
-import com.retailer.oneops.myinventory.model.MInventory;
-import com.retailer.oneops.productListing.adapter.ProductListAdapter;
 import com.retailer.oneops.productListing.model.MProduct;
-import com.retailer.oneops.productListing.model.MProductVariant;
-import com.retailer.oneops.productListing.presenter.ProductListingPresenter;
-import com.retailer.oneops.productListing.viewinterface.ProductListingViewInterface;
 import com.retailer.oneops.util.CommonClickHandler;
 import com.retailer.oneops.util.DialogUtil;
 import com.retailer.oneops.util.OnDialogItemClickListener;
 import com.retailer.oneops.util.Session;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.retailer.oneops.util.Constant.CUSTOMER_ADDRESS;
 import static com.retailer.oneops.util.Constant.DIRECT_COURIER_TO_CUSTOMER;
 import static com.retailer.oneops.util.Constant.HOME_DELIVERY_BY_STORE;
 import static com.retailer.oneops.util.Constant.ONLINE;
-import static com.retailer.oneops.util.Constant.ORDER_DELIVERY_ADDRESS;
-import static com.retailer.oneops.util.Constant.ORDER_LINES;
-import static com.retailer.oneops.util.Constant.ORDER_TYPE;
-import static com.retailer.oneops.util.Constant.PAYMENT_CONFIRMED;
-import static com.retailer.oneops.util.Constant.PAYMENT_MODE;
 import static com.retailer.oneops.util.Constant.PHYSICAL_INVENTORY;
-import static com.retailer.oneops.util.Constant.PRODUCT_ID;
-import static com.retailer.oneops.util.Constant.PRODUCT_VARIANT_ID;
 import static com.retailer.oneops.util.Constant.RETAILER_TO_CUSTOMER_PHYSICAL_INVENTORY;
 import static com.retailer.oneops.util.Constant.RETAILER_TO_CUSTOMER_VIRTUAL_INVENTORY;
 import static com.retailer.oneops.util.Constant.STORE_PICKUP;
@@ -148,6 +125,8 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutAdapt
                 placeOrderClick(orderType, deliveryType);
             }
         });
+
+        binding.btnContinue.setOnClickListener(v -> finish());
     }
 
     public boolean checkValidateForAddress() {
@@ -238,15 +217,27 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutAdapt
             binding.tvTotalMrp.setText("Rs. " + String.valueOf(calculateMrp(mrpList)));
             binding.tvGrandTotal.setText("Rs. " + calculateGrandTotal(calculateMrp(mrpList),
                     10, 20));
+
+            if (!mrpList.isEmpty()) {
+                binding.nestedScrollView.setVisibility(View.VISIBLE);
+                binding.llNoRecordFind.setVisibility(View.GONE);
+            } else {
+                binding.nestedScrollView.setVisibility(View.GONE);
+                binding.llNoRecordFind.setVisibility(View.VISIBLE);
+            }
+
         } else {
+            binding.nestedScrollView.setVisibility(View.GONE);
+            binding.llNoRecordFind.setVisibility(View.VISIBLE);
             session.setInventoryType(null);
         }
     }
 
+
     @Override
     public void onSuccessfulPlaceOrder(MOrder mOrder, String message) {
         finish();
-        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(activity, getString(R.string.order_has_been_placed_successfully), Toast.LENGTH_SHORT).show();
     }
 
     public MOrderLinesRequest setCartListForCheckout(int productId, int productVariantId) {

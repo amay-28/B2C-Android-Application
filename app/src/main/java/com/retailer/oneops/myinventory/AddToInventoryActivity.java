@@ -67,10 +67,16 @@ public class AddToInventoryActivity extends AppCompatActivity implements AddToIn
     }
 
     private void listener() {
+
         binding.ivCross.setOnClickListener(v -> finish());
         binding.btnSave.setOnClickListener(v -> {
+            int margin = Integer.parseInt(binding.etMargin.getText().toString());
+            int sellingPrice = Integer.parseInt(mProduct.getPrice());
+
             if (TextUtils.isEmpty(binding.etMargin.getText().toString().trim())) {
                 Toast.makeText(activity, getResources().getString(R.string.Please_enter_your_margin), Toast.LENGTH_LONG).show();
+            } else if (margin > sellingPrice) {
+                Toast.makeText(activity, getResources().getString(R.string.margin_should_be_less_than_selling_price), Toast.LENGTH_LONG).show();
             } else {
                 if (mProduct != null) {
                     JsonObject jsonObject = new JsonObject();
