@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.retailer.oneops.R;
 import com.retailer.oneops.databinding.ItemMyOrderBinding;
+import com.retailer.oneops.order.activity.OrderDetailActivity;
 import com.retailer.oneops.order.model.MOrders;
 import com.retailer.oneops.settings.model.MServiceResponse;
 import com.retailer.oneops.util.Constant;
@@ -59,7 +60,7 @@ public class MyOrderListAdapter extends RecyclerView.Adapter<MyOrderListAdapter.
             MOrders mOrders = mOrderList.get(position);
             strikeThroughText(holder.binding.tvSellingPrice);
             holder.binding.tvOrderNumber.setText(mOrders.getId() + "");
-//if(mOrders.getOrder_lines()!=null&&!mOrders.getOrder_lines().isEmpty()){
+            //if(mOrders.getOrder_lines()!=null&&!mOrders.getOrder_lines().isEmpty()){
             holder.binding.tvProductName.setText(mOrders.getOrder_lines().get(0).getProduct().getName());
             holder.binding.tvProductDescription.setText(mOrders.getOrder_lines().get(0).getProduct().getDescription());
 
@@ -101,6 +102,8 @@ public class MyOrderListAdapter extends RecyclerView.Adapter<MyOrderListAdapter.
 
             setOrderStatus(holder.binding.tvOrderStatusHead, mOrders);
 
+            holder.binding.tvOrderDetail.setOnClickListener(v ->
+                    mContext.startActivity(OrderDetailActivity.getIntent(mContext, mOrders)));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -116,8 +119,8 @@ public class MyOrderListAdapter extends RecyclerView.Adapter<MyOrderListAdapter.
 
 
         SpannableString styledText = new SpannableString(orderstatus);
-        styledText.setSpan(new TextAppearanceSpan(mContext, R.style.CategorySpanableString1), 0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        styledText.setSpan(new TextAppearanceSpan(mContext, R.style.CategorySpanableString2), 13, orderstatus.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        styledText.setSpan(new TextAppearanceSpan(mContext, R.style.CategorySpannableString1), 0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        styledText.setSpan(new TextAppearanceSpan(mContext, R.style.CategorySpannableString2), 13, orderstatus.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         tvOrderStatusHead.setText(styledText);
 
     }

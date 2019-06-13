@@ -51,6 +51,8 @@ public interface Constant {
     String ORDER_DELIVERY_ADDRESS = "order_delivery_address_type";
     String ORDER_LINES = "order_lines";
     String CUSTOMER_ADDRESS = "customer_address";
+    String IS_TWO_DAY = "isTwoDay";
+    String REFUND_POLICY="REFUND_POLICY";
 
     String ONLINE = "ONLINE";
     String RETAILER_TO_CUSTOMER_VIRTUAL_INVENTORY = "RETAILER_TO_CUSTOMER_VIRTUAL_INVENTORY";

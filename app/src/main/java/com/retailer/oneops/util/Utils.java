@@ -65,6 +65,8 @@ import retrofit2.adapter.rxjava2.HttpException;
 
 public class Utils implements Constant {
     private static String newToken;
+    public static final SimpleDateFormat fullDateTimeFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+    public static final SimpleDateFormat orderDetailDateFormat = new SimpleDateFormat("EEEE, MMMM dd, yyyy");
 
     public static void printHashKey(Activity activity) {
 
@@ -155,6 +157,22 @@ public class Utils implements Constant {
         RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData(key, file.getName(), requestFile);
         return body;
+    }
+
+
+    public static String displayDateReview(String strdate) {
+
+        String displayDate = "NA";
+        Date date = null;
+        try {
+            date = fullDateTimeFormat.parse(strdate);
+// Log.d(TAG, "date" + date);
+            displayDate = orderDetailDateFormat.format(date);
+//Log.d(TAG, "displayDate 12hr: " + displayDate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return displayDate;
     }
 
     public static String[] getSplitedString(String inputString, String splitKeyWord) {

@@ -67,6 +67,7 @@
         <activity android:name=".agent.AgentListActivity" />
         <activity android:name=".order.activity.OrderListActivity" />
         <activity android:name=".activity.WebViewActivity" />
+        <activity android:name=".order.activity.OrderDetailActivity" />
 
         <activity
             android:name=".checkout.CheckoutActivity"
@@ -105,6 +106,10 @@
 
         <activity
             android:name="com.retailer.oneops.product.DialogActivity"
+            android:theme="@style/TransparentBackground" />
+
+        <activity
+            android:name="com.retailer.oneops.settings.SetAmountActivity"
             android:theme="@style/TransparentBackground" />
 
         <activity

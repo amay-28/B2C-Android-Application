@@ -41,6 +41,7 @@ public class LoginPresenter implements LoginPresenterInterface, Constant {
                         new Session(activity).setString(IS_LOGIN, YES);
                         new Session(activity).setString(AUTHORIZATION_KEY, BEARER + response.headers().get("AuthToken"));
                         new Session(activity).setUserProfile(response.body().getData());
+                        new Session(activity).setSharedPreferenceBoolean(activity, Constant.REFUND_POLICY, response.body().getData().getPolicy().isTwoDay());
                     }
                     viewInterface.onSucessfullyLogin(response.body().getData(), response.body().getMessage());
                 } else {

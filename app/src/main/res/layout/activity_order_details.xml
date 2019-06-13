@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context=".OrderDetail">
+
+    <RelativeLayout
+        android:id="@+id/layout4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar1"
+            layout="@layout/header_with_back">
+
+        </include>
+
+        <!--add latomedium for 14ssp in style tag-->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar1"
+
+            >
+
+            <RelativeLayout
+                android:id="@+id/layout5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/_16sdp"
+                android:paddingRight="@dimen/_16sdp"
+
+
+                >
+
+                <TextView
+                    android:id="@+id/orderno"
+                    style="@style/TextView12ssp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:fontFamily="@font/latosemibold"
+                    android:text="@string/orderno" />
+
+                <TextView
+                    android:id="@+id/orderNoValue"
+                    style="@style/TextView12ssp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_toRightOf="@id/orderno"
+                    android:fontFamily="@font/latomedium"
+                    android:text="100097002255" />
+
+                <TextView
+                    android:id="@+id/orderplaced"
+                    style="@style/TextView12ssp"
+                    android:layout_below="@id/orderno"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:fontFamily="@font/latosemibold"
+                    android:text="@string/orderplaced" />
+
+                <TextView
+                    android:id="@+id/orderPlacedDate"
+                    style="@style/TextView12ssp"
+                    android:layout_below="@id/orderno"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_toRightOf="@id/orderplaced"
+                    android:fontFamily="@font/latomedium"
+                    android:text="Wednesday, Febrary 20, 2019" />
+
+                <View
+                    android:id="@+id/greyline1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_below="@+id/orderplaced"
+                    android:layout_marginTop="@dimen/_17sdp"
+                    android:background="@color/divider_line" />
+
+                <TextView
+                    android:id="@+id/pricedetail"
+                    style="@style/TextView12ssp"
+                    android:layout_below="@id/orderplaced"
+                    android:layout_marginTop="@dimen/_32sdp"
+                    android:fontFamily="@font/latosemibold"
+                    android:text="@string/pricedetails" />
+
+                <TextView
+                    android:id="@+id/mrp"
+                    style="@style/TextView12ssp"
+                    android:layout_below="@id/pricedetail"
+                    android:layout_marginLeft="@dimen/_26sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:fontFamily="@font/latosemibold"
+                    android:text="@string/MRP" />
+
+                <TextView
+                    android:id="@+id/tvmrpValue"
+                    style="@style/TextView12ssp"
+                    android:layout_below="@id/pricedetail"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginRight="@dimen/_13sdp"
+                    android:fontFamily="@font/latomedium"
+                    android:text="Rs.1,259" />
+
+                <TextView
+                    android:id="@+id/gst"
+                    style="@style/TextView12ssp"
+                    android:layout_below="@id/mrp"
+                    android:layout_alignLeft="@id/mrp"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:fontFamily="@font/latosemibold"
+                    android:text="@string/gstcolon" />
+
+                <TextView
+                    android:id="@+id/tvGstValue"
+                    style="@style/TextView12ssp"
+                    android:layout_below="@id/mrp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:layout_marginRight="@dimen/_13sdp"
+                    android:fontFamily="@font/latomedium"
+                    android:text="Rs.10" />
+
+                <TextView
+                    android:id="@+id/orderdiscount"
+                    style="@style/TextView12ssp"
+                    android:layout_below="@id/gst"
+                    android:layout_alignLeft="@id/mrp"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:fontFamily="@font/latosemibold"
+                    android:text="@string/orderdiscount" />
+
+                <TextView
+                    android:id="@+id/tvOrderDiscountValue"
+                    style="@style/TextView12ssp"
+                    android:layout_below="@id/gst"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:layout_marginRight="@dimen/_13sdp"
+                    android:fontFamily="@font/latomedium"
+                    android:text="-Rs.840" />
+
+                <TextView
+                    android:id="@+id/sellingprice"
+                    style="@style/TextView12ssp"
+                    android:layout_below="@id/orderdiscount"
+                    android:layout_alignLeft="@id/mrp"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:fontFamily="@font/latosemibold"
+                    android:text="@string/selligpricecolon" />
+
+                <TextView
+                    android:id="@+id/tvSellingPriceValue"
+                    style="@style/TextView12ssp"
+                    android:layout_below="@id/orderdiscount"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:layout_marginRight="@dimen/_13sdp"
+                    android:fontFamily="@font/latomedium"
+                    android:text="Rs.1,259" />
+
+                <View
+                    android:id="@+id/greyline2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_below="@+id/sellingprice"
+                    android:layout_marginTop="@dimen/_9sdp"
+                    android:background="@color/divider_line" />
+
+                <TextView
+                    android:id="@+id/total"
+                    style="@style/TextView12ssp"
+                    android:layout_below="@id/sellingprice"
+                    android:layout_alignLeft="@id/mrp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:fontFamily="@font/latosemibold"
+                    android:text="@string/total" />
+
+                <View
+                    android:id="@+id/greyline3"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_below="@+id/total"
+                    android:layout_marginTop="@dimen/_19sdp"
+                    android:background="@color/divider_line" />
+
+                <TextView
+                    android:id="@+id/tvTotalValue"
+                    style="@style/TextView12ssp"
+                    android:layout_below="@id/sellingprice"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:layout_marginRight="@dimen/_13sdp"
+                    android:fontFamily="@font/latomedium"
+                    android:text="Rs.1,269" />
+
+                <TextView
+                    android:id="@+id/shippingadd"
+                    style="@style/TextView12ssp"
+                    android:layout_below="@id/greyline3"
+                    android:layout_alignLeft="@id/pricedetail"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:fontFamily="@font/latosemibold"
+                    android:text="@string/shippingaddress" />
+
+                <ImageView
+                    android:id="@+id/location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/shippingadd"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_22sdp"
+                    android:src="@drawable/ic_map_view" />
+
+                <TextView
+                    android:id="@+id/gotomapview"
+                    style="@style/TextView12ssp"
+                    android:layout_below="@id/location"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:fontFamily="@font/latosemibold"
+                    android:text="@string/gotomapview"
+                    android:textSize="@dimen/_8sdp" />
+
+                <TextView
+                    android:id="@+id/tvCustomerName"
+                    style="@style/TextView12ssp"
+                    android:layout_below="@id/gotomapview"
+                    android:layout_alignLeft="@id/pricedetail"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:fontFamily="@font/latosemibold"
+                    android:text="Name" />
+
+                <TextView
+                    android:id="@+id/tvAddress"
+                    style="@style/TextView12ssp"
+                    android:layout_below="@id/tvCustomerName"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/latomedium"
+                    android:text="616, Shekhar Central Palasia Square \nIndore- 452001" />
+
+                <View
+                    android:id="@+id/greyline4"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_below="@+id/tvAddress"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:background="@color/divider_line" />
+
+                <TextView
+                    android:id="@+id/paymentmode"
+                    style="@style/TextView12ssp"
+                    android:layout_below="@id/tvAddress"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="@dimen/_28sdp"
+                    android:fontFamily="@font/latosemibold"
+                    android:text="@string/paymentmode" />
+
+                <TextView
+                    android:id="@+id/tvPaymentMode"
+                    style="@style/TextView12ssp"
+                    android:layout_below="@id/paymentmode"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/latomedium"
+                    android:text="@string/cod" />
+
+                <RelativeLayout
+                    android:id="@+id/layout6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvPaymentMode"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="@dimen/_21sdp">
+
+                    <ImageView
+                        android:id="@+id/ivProductImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_7sdp"
+                        android:src="@drawable/ic_default_product" />
+
+                    <TextView
+                        android:id="@+id/tvProductName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/ivProductImage"
+                        android:layout_marginLeft="@dimen/_13sdp"
+                        android:layout_toRightOf="@+id/ivProductImage"
+                        android:fontFamily="@font/latosemibold"
+                        android:text="Kook and Keech"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp" />
+
+                    <TextView
+                        android:id="@+id/tvProductDescription"
+                        style="@style/EditText10ssp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvProductName"
+                        android:layout_alignLeft="@+id/tvProductName"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/latoregular"
+                        android:text="Men Regular Fit Blue Shirt" />
+
+                    <TextView
+                        android:id="@+id/tvProductQuantity"
+                        style="@style/EditText10ssp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvProductDescription"
+                        android:layout_alignLeft="@+id/tvProductName"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:fontFamily="@font/latoregular"
+                        android:text="Qty: 1" />
+
+                    <TextView
+                        android:id="@+id/priceAfterDiscount"
+                        style="@style/TextView12ssp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvProductQuantity"
+                        android:layout_alignLeft="@id/tvProductName"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:fontFamily="@font/latomedium"
+                        android:text="Rs.1,259"
+                        />
+
+                    <TextView
+                        android:id="@+id/priceBeforeDiscount"
+                        style="@style/EditText10ssp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/priceAfterDiscount"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_toRightOf="@+id/priceAfterDiscount"
+                        android:fontFamily="@font/latoregular"
+                        android:text="Rs.2009"
+                        android:textColor="@color/color_light_text"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/discount"
+                        style="@style/TextView10ssp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/priceAfterDiscount"
+                        android:layout_marginLeft="@dimen/_6sdp"
+                        android:layout_toRightOf="@+id/priceBeforeDiscount"
+                        android:fontFamily="@font/latomedium"
+                        android:text="40% OFF"
+                        android:textColor="@color/green" />
+
+                    <TextView
+                        android:id="@+id/orderstatus"
+                        style="@style/TextView10ssp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/priceAfterDiscount"
+                        android:layout_alignLeft="@+id/tvProductName"
+                        android:layout_marginTop="@dimen/_11sdp"
+                        android:fontFamily="@font/latomedium"
+                        android:text="@string/orderstatus" />
+
+                    <TextView
+                        android:id="@+id/tvOrderStatusValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/priceAfterDiscount"
+                        android:layout_marginLeft="@dimen/_4sdp"
+                        android:layout_marginTop="@dimen/_11sdp"
+                        android:layout_toRightOf="@id/orderstatus"
+                        android:text="@string/shipped"
+                        android:textColor="@color/green" />
+
+                </RelativeLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button"
+                    style="@style/material_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layout6"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_28sdp"
+                    android:padding="@dimen/_15sdp"
+                    android:layout_marginLeft="@dimen/_50sdp"
+                    android:layout_marginRight="@dimen/_50sdp"
+                    android:text="@string/delivered"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/white"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/button"
+                    android:layout_marginTop="@dimen/_10sdp" />
+
+
+            </RelativeLayout>
+
+        </ScrollView>
+    </RelativeLayout>
+
+</layout>

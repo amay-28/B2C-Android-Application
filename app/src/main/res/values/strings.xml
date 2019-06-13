@@ -231,7 +231,10 @@
     <string name="enable">Enable Hyper Local</string>
     <string name="setminamount">Set your minimum order amount </string>
     <string name="agents">Agents</string>
-
+    <string name="two_days_refund_policy">2 Days Refund Policy</string>
+    <string name="seven_days_refund_policy">7 Days Refund Policy</string>
+    <string name="select_refund_policy">Select Refund Policy</string>
+    <string name="refund_policy_selected">Refund Policy Selected Successfully</string>
 
     <string name="Length">Length</string>
     <string name="size_and_fit">Size &amp; Fit</string>
@@ -241,6 +244,7 @@
     <string name="Selling_Price">Selling Price</string>
     <string name="Please_enter_your_margin">Please enter your margin</string>
     <string name="margin_should_be_less_than_selling_price">Margin should be less than selling price</string>
+    <string name="Enter_Minimum_Amount">Enter Minimum Amount</string>
     <!--name (max length is 25 AND minimum is 3)
     mobile (max length is 10 AND minimum is 10)
     shop name (max length is 30 AND minimum is 3)
@@ -335,4 +339,23 @@
 
     <string name="No_Category_available">No Category available</string>
     <string name="Choose_Category">Choose Category</string>
+
+    <!--<Order Details>-->
+    <string name="orderdetails">Order Detail</string>
+    <string name="orderno">Order No:</string>
+    <string name="orderplaced">Order Placed</string>
+    <string name="pricedetails">Price Detail:</string>
+    <string name="orderdiscount">Order Discount:</string>
+    <string name="shippingaddress">Shipping Address:</string>
+    <string name="paymentmode">Payment Mode:</string>
+    <string name="delivered">DELIVERED TO CUSTOMER</string>
+    <string name="orderstatus">Order Status:</string>
+    <string name="shipped">Shipped</string>
+    <string name="gotomapview">Go to Map View</string>
+    <string name="gstcolon">GST:</string>
+    <string name="selligpricecolon">Selling Price:</string>
+    <string name="Total">Total</string>
+    <string name="MRP">MRP:</string>
+    <string name="Order_Detail">Order Detail</string>
+
 </resources>

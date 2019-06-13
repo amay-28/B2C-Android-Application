@@ -78,13 +78,13 @@ public class ServiceListAdapter extends RecyclerView.Adapter<ServiceListAdapter.
             if (mServiceResponse.getCategory().getName() != null && !mServiceResponse.getCategory().getName().isEmpty()) {
                 String values = mContext.getString(R.string.label_category) + " " + mServiceResponse.getCategory().getName();
                 SpannableString styledText = new SpannableString(values);
-                styledText.setSpan(new TextAppearanceSpan(mContext, R.style.CategorySpanableString), 0, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                styledText.setSpan(new TextAppearanceSpan(mContext, R.style.CategorySpanableString1), 9, values.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                styledText.setSpan(new TextAppearanceSpan(mContext, R.style.CategorySpannableString), 0, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                styledText.setSpan(new TextAppearanceSpan(mContext, R.style.CategorySpannableString1), 9, values.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 tvCategory.setText(styledText);
             } else {
                 String values = mContext.getString(R.string.label_category);
                 SpannableString styledText = new SpannableString(values);
-                styledText.setSpan(new TextAppearanceSpan(mContext, R.style.CategorySpanableString), 0, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                styledText.setSpan(new TextAppearanceSpan(mContext, R.style.CategorySpannableString), 0, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 tvCategory.setText(styledText);
             }
     }

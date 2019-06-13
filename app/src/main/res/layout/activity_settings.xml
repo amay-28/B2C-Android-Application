@@ -212,7 +212,7 @@
                     android:background="@color/divider_line" />
 
                 <RelativeLayout
-                    android:id="@+id/rl_minorderamount"
+                    android:id="@+id/rlMinimumOrder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp">
@@ -381,7 +381,7 @@
                     android:background="@color/divider_line" />
 
                 <RelativeLayout
-                    android:id="@+id/rl_setyourreturnrefundpolicy"
+                    android:id="@+id/rlRefundReturn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp">

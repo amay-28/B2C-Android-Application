@@ -194,4 +194,8 @@ public interface APIInterface {
     Call<JsonElement> getMyOrders(@Header("Authorization") String token,
                                   @QueryMap Map<String, String> map);
 
+    @PUT("retailer/policy")
+    Call<JsonElement> setRefundPolicy(@Header("Authorization") String token,
+                                      @Body JsonObject jsonObject);
+
 }

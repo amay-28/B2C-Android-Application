@@ -1,6 +1,7 @@
 package com.retailer.oneops.auth.model;
 
 import com.retailer.oneops.bankDetail.activity.model.MBankDetail;
+import com.retailer.oneops.settings.model.MPolicy;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class MUser {
     private String created_at;
     private String updated_at;
     private MUserType userType;
+    private MPolicy policy;
     //extra params for detailde info
     private MProfile retailerDetails;
     private MBankDetail bankDetails;

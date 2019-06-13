@@ -312,15 +312,15 @@
     </style>
 
 
-    <style name="CategorySpanableString1">
+    <style name="CategorySpannableString1">
         <item name="android:textColor">@color/black</item>
     </style>
 
-    <style name="CategorySpanableString2">
+    <style name="CategorySpannableString2">
         <item name="android:textColor">@color/green</item>
     </style>
 
-    <style name="CategorySpanableString">
+    <style name="CategorySpannableString">
         <item name="android:textColor">@color/color_light_text</item>
     </style>
 </resources>
