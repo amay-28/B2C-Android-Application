@@ -105,7 +105,7 @@ public class AgentListActivity extends AppCompatActivity implements APIResponse 
 
 
     private void initialization() {
-        Utils.setUpToolbarWithColor(mContext, binding.incToolbar.toolbarActionbar, binding.incToolbar.toolbarTitle, getString(R.string.label_Agent));
+        Utils.setUpToolbarWithColor(mContext, binding.incToolbar.toolbarActionbar, binding.incToolbar.toolbarTitle, getString(R.string.label_Your_Agent));
     }
 
     private void listeners() {

@@ -67,6 +67,7 @@
 
                 <ImageView
                     android:id="@+id/ivProduct"
+                    android:scaleType="centerCrop"
                     android:layout_width="@dimen/_95sdp"
                     android:layout_height="@dimen/_100sdp"
                     android:layout_alignParentTop="true"
@@ -81,14 +82,30 @@
                     android:layout_toRightOf="@id/ivProduct">
 
                     <TextView
+                        android:id="@+id/tvTag"
+                        android:textColor="@color/white"
+                        android:background="@drawable/bg_physical_inventory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Physical Inventory"
+                        android:paddingRight="@dimen/_4sdp"
+                        android:paddingLeft="@dimen/_4sdp"
+                        android:paddingTop="@dimen/_2sdp"
+                        android:paddingBottom="@dimen/_2sdp"
+                        android:textSize="@dimen/_8ssp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:layout_below="@id/tvTag"
                         android:id="@+id/tvProductName"
                         style="@style/TextView12ssp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:maxLines="2"
                         android:ellipsize="end"
                         android:fontFamily="@font/latosemibold"
+                        android:maxLines="2"
                         android:text="Kook N Keech"
+                        android:textSize="@dimen/_13ssp"
                         android:textColor="@color/black" />
 
                     <TextView
@@ -112,11 +129,11 @@
                         android:layout_marginTop="@dimen/_5sdp"
                         android:fontFamily="@font/latoregular"
                         android:singleLine="true"
-                        android:text="@string/category"
+                        android:text="@string/Qty"
                         android:textColor="@color/color_light_text" />
 
                     <TextView
-                        android:id="@+id/tvCategory"
+                        android:id="@+id/tv_quantity"
                         style="@style/TextView10ssp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -125,75 +142,62 @@
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_toRightOf="@+id/tvCategoryHead"
                         android:fontFamily="@font/latoregular"
-                        android:singleLine="true"
-                        android:text="@string/category" />
+                        android:singleLine="true" />
 
-
-                    <TextView
-                        android:id="@+id/tvPrice"
-                        style="@style/TextView12ssp"
+                    <RelativeLayout
+                        android:id="@+id/rlprice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tvCategoryHead"
-                        android:layout_marginTop="@dimen/_11sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:fontFamily="@font/latomedium"
-                        android:text="Rs.1,259"
-                        android:textColor="@color/black" />
+                        android:layout_marginTop="@dimen/_5sdp">
 
-                    <TextView
-                        android:id="@+id/tvSellingPrice"
-                        style="@style/TextView10ssp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/tvCategory"
-                        android:layout_marginTop="@dimen/_13sdp"
-                        android:layout_marginBottom="9dp"
-                        android:layout_toRightOf="@id/tvPrice"
-                        android:fontFamily="@font/latoregular"
-                        android:text="Rs 2,099"
-                        android:textColor="@color/color_grey_text"
-                        android:visibility="gone" />
+                        <TextView
+                            android:id="@+id/tvPrice"
+                            style="@style/TextView12ssp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                           android:layout_centerVertical="true"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:fontFamily="@font/latomedium"
+                            android:text="Rs.1,259"
+                            android:textColor="@color/black" />
 
-                    <TextView
-                        android:id="@+id/tvDiscountPercent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/tvCategory"
-                        android:layout_marginLeft="6.2dp"
-                        android:layout_marginTop="@dimen/_13sdp"
-                        android:layout_toRightOf="@id/tvSellingPrice"
-                        android:text="40% OFF"
-                        android:textColor="@color/green"
-                        android:textSize="@dimen/_10ssp"
-                        android:visibility="gone" />
+                        <TextView
+                            android:id="@+id/tvSellingPrice"
+                            style="@style/TextView10ssp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                           android:layout_centerVertical="true"
+                            android:layout_marginBottom="9dp"
+                            android:layout_toRightOf="@id/tvPrice"
+                            android:fontFamily="@font/latoregular"
+                            android:gravity="center_vertical"
+                            android:text="Rs 2,099"
+                            android:textColor="@color/color_grey_text" />
+
+                        <TextView
+                            android:id="@+id/tvDiscountPercent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="6.2dp"
+                            android:layout_toRightOf="@id/tvSellingPrice"
+                            android:text="40% OFF"
+                            android:textColor="@color/green"
+                            android:textSize="@dimen/_10ssp" />
+                    </RelativeLayout>
 
                     <TextView
                         android:id="@+id/tvOrderStatusHead"
                         style="@style/TextView12ssp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/tvPrice"
-                        android:layout_marginTop="@dimen/_11sdp"
+                        android:layout_below="@id/rlprice"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:layout_marginRight="@dimen/_10sdp"
                         android:fontFamily="@font/latomedium"
-                        android:text="@string/order_status"
                         android:textColor="@color/black" />
 
-                    <TextView
-                        android:id="@+id/tvOrderStatus"
-                        style="@style/TextView10ssp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/tvPrice"
-                        android:layout_centerVertical="true"
-                        android:layout_marginTop="@dimen/_13sdp"
-                        android:layout_toRightOf="@id/tvOrderStatusHead"
-                        android:fontFamily="@font/latoregular"
-                        android:singleLine="true"
-                        android:gravity="center_vertical"
-                        android:text="shipped"
-                        android:textColor="@color/green" />
                 </RelativeLayout>
 
 

@@ -60,10 +60,6 @@ public class MyProfileActivity extends AppCompatActivity {
 
             if (loggedInUser.getRetailerDetails() != null) {
                 binding.tvShopName.setText(loggedInUser.getRetailerDetails().getShopName());
-                binding.tvAddLine1.setText(loggedInUser.getRetailerDetails().getAddressLine1());
-                binding.tvAddLine2.setText(loggedInUser.getRetailerDetails().getAddressLine2());
-                binding.tvCity.setText(loggedInUser.getRetailerDetails().getCity());
-                binding.tvState.setText(loggedInUser.getRetailerDetails().getState());
                 binding.tvAboutShop.setText(loggedInUser.getRetailerDetails().getAboutShop());
                 binding.tvPanNumber.setText(loggedInUser.getRetailerDetails().getPanNumber());
                 binding.tvGst.setText(loggedInUser.getRetailerDetails().getGstin());
@@ -77,6 +73,14 @@ public class MyProfileActivity extends AppCompatActivity {
                                     .error(R.mipmap.avtar_gray))
                             .into(binding.ivProfile);
             }
+
+            if (loggedInUser.getAddress() != null) {
+                binding.tvAddLine1.setText(loggedInUser.getAddress().get(0).getAddressLine1());
+                binding.tvAddLine2.setText(loggedInUser.getAddress().get(0).getAddressLine2());
+                binding.tvCity.setText(loggedInUser.getAddress().get(0).getCity());
+                binding.tvState.setText(loggedInUser.getAddress().get(0).getState());
+            }
+
         }
     }
 

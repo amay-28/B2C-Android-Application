@@ -10,7 +10,7 @@ import lombok.Data;
 public class MOrderRequest {
     private String payment_mode;
     private String payment_confirmed;
-    private String addressId;
+    private int addressId;
     private MAddress customer_address;
     private String order_type;
     private String order_delivery_address_type;

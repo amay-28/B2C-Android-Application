@@ -48,6 +48,7 @@
     <string name="please_enter_address">Please enter address</string>
     <string name="please_enter_city">Please enter City</string>
     <string name="please_enter_state">Please enter State</string>
+    <string name="please_enter_pincode">Please enter Pincode</string>
     <string name="please_enter_about_the_shop">Please enter something about shop</string>
     <string name="select_valid_gst_percent">Select Valid GST %</string>
     <string name="please_enter_pan_number">Please enter PAN Number</string>
@@ -123,7 +124,7 @@
     <string name="error_valid_amount">Please provide valid %1$s</string>
     <string name="label_retry">Retry</string>
     <string name="label_services">Services</string>
-    <string name="label_Agent">Agents</string>
+    <string name="label_Your_Agent">Your Agents</string>
     <string name="msg_no_service_list">Oops! No service available.</string>
 
     <!-- Add_Bank_Details String -->

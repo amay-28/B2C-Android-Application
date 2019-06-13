@@ -46,7 +46,7 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
     private MProfile mProfile = new MProfile();
     private String[] gstPercentageArray;
     private Bundle bundle;
-    private int mobileNumber;
+    private String mobileNumber;
     private String username;
 
     @Override
@@ -75,7 +75,7 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
 
         if (bundle != null) {
             if (bundle.containsKey(MOBILE_NO)) {
-                mobileNumber = bundle.getInt(MOBILE_NO);
+                mobileNumber = bundle.getString(MOBILE_NO);
             }
             if (bundle.containsKey(NAME)) {
                 username = bundle.getString(NAME);
@@ -153,6 +153,9 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
         } else if (TextUtils.isEmpty(binding.etState.getText().toString().trim())) {
             Toast.makeText(activity, resources.getString(R.string.please_enter_state), Toast.LENGTH_SHORT).show();
             return false;
+        } else if (TextUtils.isEmpty(binding.etPincode.getText().toString().trim())) {
+            Toast.makeText(activity, resources.getString(R.string.please_enter_pincode), Toast.LENGTH_SHORT).show();
+            return false;
         } else if (binding.rbYes.isChecked() && TextUtils.isEmpty(binding.etGstNo.getText().toString().trim())) {
             Toast.makeText(activity, resources.getString(R.string.please_enter_gst), Toast.LENGTH_SHORT).show();
             return false;
@@ -178,11 +181,12 @@ public class SignUpDetailActivity extends AppCompatActivity implements SignUpDet
         List<MAddress> addressList = new ArrayList<>();
         MAddress mAddress = new MAddress();
         mAddress.setName(username);
-        mAddress.setMobileNumber(String.valueOf(mobileNumber));
+        mAddress.setMobileNumber(mobileNumber);
         mAddress.setAddressLine1(binding.etAddressOne.getText().toString());
         mAddress.setAddressLine2(binding.etAddressTwo.getText().toString());
         mAddress.setCity(binding.etCity.getText().toString());
         mAddress.setState(binding.etState.getText().toString());
+        mAddress.setPostalCode(binding.etPincode.getText().toString());
         addressList.add(mAddress);
 
         mProfile.setAddress(addressList);

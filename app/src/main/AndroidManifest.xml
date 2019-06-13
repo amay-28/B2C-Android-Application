@@ -65,11 +65,13 @@
         <activity android:name=".settings.SettingActivity" />
         <activity android:name=".agent.AddAgentActivity" />
         <activity android:name=".agent.AgentListActivity" />
-        <activity android:name=".order.activity.OrderListActivity"></activity>
+        <activity android:name=".order.activity.OrderListActivity" />
+        <activity android:name=".activity.WebViewActivity" />
 
-        <activity android:name=".checkout.CheckoutActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".checkout.CheckoutActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
 
         <activity
             android:name="com.retailer.oneops.dashboard.activity.CategoryActivity"

@@ -22,5 +22,6 @@ public class MOrders {
     private String updated_at;
     private List<MOrderLines> order_lines;
     private MCustomerAddress customer_address;
+    private String order_type;
 
 }

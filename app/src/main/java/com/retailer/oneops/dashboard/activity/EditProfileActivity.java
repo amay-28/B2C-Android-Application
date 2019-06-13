@@ -95,10 +95,6 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
 
             if (loggedInUser.getRetailerDetails() != null) {
                 binding.etShopName.setText(loggedInUser.getRetailerDetails().getShopName());
-                binding.etAddLine1.setText(loggedInUser.getRetailerDetails().getAddressLine1());
-                binding.etAddLine2.setText(loggedInUser.getRetailerDetails().getAddressLine2());
-                binding.etCity.setText(loggedInUser.getRetailerDetails().getCity());
-                binding.etState.setText(loggedInUser.getRetailerDetails().getState());
                 binding.etAboutShop.setText(loggedInUser.getRetailerDetails().getAboutShop());
                 binding.etPanNumber.setText(loggedInUser.getRetailerDetails().getPanNumber());
                 binding.etGst.setText(loggedInUser.getRetailerDetails().getGstin());
@@ -123,7 +119,18 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
 
 
             }
+
+            if (loggedInUser.getAddress() != null) {
+                binding.etAddLine1.setText(loggedInUser.getAddress().get(0).getAddressLine1());
+                binding.etAddLine2.setText(loggedInUser.getAddress().get(0).getAddressLine2());
+                binding.etCity.setText(loggedInUser.getAddress().get(0).getCity());
+                binding.etState.setText(loggedInUser.getAddress().get(0).getState());
+            }
         }
+
+
+        binding.spinnerGstPercent.setEnabled(false);
+        binding.spinnerGstPercent.setClickable(false);
     }
 
     private void listeners() {
@@ -266,8 +273,9 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         binding.etPanNumber.setTextColor(getResources().getColor(R.color.colorHint));
         binding.etGst.setEnabled(false);
         binding.etGst.setTextColor(getResources().getColor(R.color.colorHint));
-        //binding.etGstPercent.setEnabled(false);
-        // binding.etGstPercent.setTextColor(getResources().getColor(R.color.colorHint));
+        binding.spinnerGstPercent.setEnabled(false);
+        binding.spinnerGstPercent.setClickable(false);
+        //binding.spinnerGstPercent.setTextColor(getResources().getColor(R.color.colorHint));
     }
 
     private void businessEdit() {
@@ -292,8 +300,10 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         binding.etPanNumber.setTextColor(getResources().getColor(R.color.black));
         binding.etGst.setEnabled(true);
         binding.etGst.setTextColor(getResources().getColor(R.color.black));
-        //binding.etGstPercent.setEnabled(true);
-        //binding.etGstPercent.setTextColor(getResources().getColor(R.color.black));
+        binding.spinnerGstPercent.setEnabled(true);
+        binding.spinnerGstPercent.setClickable(true);
+
+        //binding.spinnerGstPercent.setTextColor(getResources().getColor(R.color.black));
     }
 
     public void EnableRuntimePermission() {

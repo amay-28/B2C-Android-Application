@@ -2,6 +2,8 @@ package com.retailer.oneops.auth.model;
 
 import com.retailer.oneops.bankDetail.activity.model.MBankDetail;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -24,6 +26,7 @@ public class MUser {
     //extra params for detailde info
     private MProfile retailerDetails;
     private MBankDetail bankDetails;
+    private List<MAddress> address;
 
     @Data
     public static class MUserType {

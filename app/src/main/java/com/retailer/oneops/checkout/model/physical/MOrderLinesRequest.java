@@ -5,4 +5,5 @@ import lombok.Data;
 @Data
 public class MOrderLinesRequest {
     private int productId;
+    private int quantity;
 }

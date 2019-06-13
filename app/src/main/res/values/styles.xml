@@ -315,6 +315,11 @@
     <style name="CategorySpanableString1">
         <item name="android:textColor">@color/black</item>
     </style>
+
+    <style name="CategorySpanableString2">
+        <item name="android:textColor">@color/green</item>
+    </style>
+
     <style name="CategorySpanableString">
         <item name="android:textColor">@color/color_light_text</item>
     </style>

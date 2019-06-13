@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ public class HomeFragment extends Fragment implements Constant, HomeViewInterfac
     private HomeFragmentLayoutBinding binding;
     private List<MCategory> superCategoryList = new ArrayList<>();
     private List<MCategory> categoryList = new ArrayList<>();
+    private List<MCategory> allCategoryList = new ArrayList<>();
     private List<MBanner> bannerList = new ArrayList<>();
     private List<MCollection> collectionList = new ArrayList<>();
     private SuperCategoryListHomeAdapter superCategoryListAdapter;
@@ -140,6 +142,8 @@ public class HomeFragment extends Fragment implements Constant, HomeViewInterfac
                     this.categoryList.addAll(mCategory.getChildren());
             }
             superCategoryListAdapter.notifyDataSetChanged();
+
+            allCategoryList.addAll(this.categoryList);
             if (this.categoryList != null) categoryListAdapter.notifyDataSetChanged();
         }
     }
@@ -181,8 +185,10 @@ public class HomeFragment extends Fragment implements Constant, HomeViewInterfac
     public void onCategoryItemClick(int position, MCategory mCategory) {
         this.categoryList.clear();
         if (position == 0) {
-            this.superCategoryList.clear();
-            homePresenter.getCategoryListTask(map);
+            /*this.superCategoryList.clear();
+            homePresenter.getCategoryListTask(map);*/
+            this.categoryList.addAll(allCategoryList);
+            if (this.categoryList != null) categoryListAdapter.notifyDataSetChanged();
         } else {
             this.categoryList.addAll(mCategory.getChildren());
             if (this.categoryList != null) categoryListAdapter.notifyDataSetChanged();

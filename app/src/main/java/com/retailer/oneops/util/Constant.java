@@ -60,6 +60,7 @@ public interface Constant {
     String HOME_DELIVERY_BY_STORE = "HOME_DELIVERY_BY_STORE";
     String IS_SETTING = "isSetting";
     public static String FRAGMENT_TYPE = "FRAGMENT_TYPE";
+    String PHYSICAL_INVENTORY_ = "Physical Inventory";
 
     public static final int ADD_AGENT = 4;
     public static final int EDIT_AGENT = 4;

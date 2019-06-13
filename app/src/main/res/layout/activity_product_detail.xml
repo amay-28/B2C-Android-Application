@@ -229,7 +229,7 @@
                             android:layout_below="@+id/btnAddToInventory"
                             android:layout_marginTop="@dimen/_22sdp"
                             android:fontFamily="@font/latosemibold"
-                            android:text="@string/Product_Detail"
+                            android:text="@string/Product_Description"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_13ssp" />
 
@@ -367,7 +367,7 @@
                             android:layout_below="@+id/view1"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:fontFamily="@font/latosemibold"
-                            android:text="@string/Product_Description"
+                            android:text="@string/Product_Detail"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_13ssp" />
 

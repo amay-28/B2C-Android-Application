@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.interfaces.OnSeekbarChangeListener;
 import com.retailer.oneops.R;
+import com.retailer.oneops.activity.WebViewActivity;
 import com.retailer.oneops.agent.AgentListActivity;
 import com.retailer.oneops.auth.activity.LoginActivity;
 import com.retailer.oneops.databinding.ActivitySettingsBinding;
@@ -44,19 +45,35 @@ public class SettingActivity extends AppCompatActivity implements OnDialogItemCl
             startActivity(new Intent(mContext, AddServiceActivity.class));
         });
 
-        binding.rlAddproducts.setOnClickListener(v -> startActivity(new Intent(mContext, AddProductActivity.class).putExtra(Constant.IS_SETTING,true)));
+        binding.rlAddproducts.setOnClickListener(v -> startActivity(new Intent(mContext, AddProductActivity.class).putExtra(Constant.IS_SETTING, true)));
 
         /*binding.rlLogout.setOnClickListener(v -> {
             DialogUtil.showOkCancelDialog(mContext, getString(R.string.logout_popup), null);
         });*/
 
-        binding.rlAgents.setOnClickListener ( v -> {
-            startActivity ( new Intent ( mContext, AgentListActivity.class ) );
-        } );
+        binding.rlAgents.setOnClickListener(v -> {
+            startActivity(new Intent(mContext, AgentListActivity.class));
+        });
 
         binding.tvLogout.setOnClickListener(v -> performLogout());
 
-        binding.rangeBar.setOnRangeSeekbarChangeListener((minValue, maxValue) -> binding.tvRangeKm.setText(String.valueOf(maxValue)));
+        binding.rangeBar.setOnRangeSeekbarChangeListener((minValue, maxValue) -> {
+            binding.tvMinValue.setText(String.valueOf(minValue) + " KM");
+            binding.tvMaxValue.setText(String.valueOf(maxValue) + " KM");
+        });
+
+        binding.rlSetyourcancellationpolicy.setOnClickListener(v -> {
+            startActivity(new Intent(mContext, WebViewActivity.class).putExtra("url", "https://www.google.com"));
+        });
+        binding.tvTc.setOnClickListener(v -> {
+            startActivity(new Intent(mContext, WebViewActivity.class).putExtra("url", "https://www.google.com"));
+        });
+        binding.rlPrivacy.setOnClickListener(v -> {
+            startActivity(new Intent(mContext, WebViewActivity.class).putExtra("url", "https://www.google.com"));
+        });
+        binding.rlContact.setOnClickListener(v -> {
+            startActivity(new Intent(mContext, WebViewActivity.class).putExtra("url", "https://www.google.com"));
+        });
     }
 
     private void initialization() {

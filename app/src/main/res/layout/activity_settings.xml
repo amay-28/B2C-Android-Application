@@ -57,7 +57,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/_5sdp" />
 
@@ -85,7 +84,6 @@
                         android:layout_centerVertical="true"
                         android:layout_toStartOf="@id/sw_enable"
                         android:drawableStart="@drawable/ic_settings_shop"
-                        android:drawablePadding="@dimen/_19sdp"
                         android:text="@string/enable" />
 
                     <androidx.appcompat.widget.SwitchCompat
@@ -507,8 +505,7 @@
                         android:layout_marginStart="0dp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:fontFamily="@font/latosemibold"
-                        android:text="@string/delivery"
-                         />
+                        android:text="@string/delivery" />
 
                     <TextView
                         android:id="@+id/min"
@@ -529,7 +526,7 @@
                         android:text="Max Range" />
 
                     <TextView
-                        android:id="@+id/km"
+                        android:id="@+id/tvMinValue"
                         style="@style/TextView10ssp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -539,6 +536,7 @@
                         android:text="0 Km" />
 
                     <TextView
+                        android:id="@+id/tvMaxValue"
                         style="@style/TextView10ssp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -552,7 +550,7 @@
                         android:id="@+id/rangeBar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/km"
+                        android:layout_below="@id/tvMinValue"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:max="10"
                         app:max_value="10"
@@ -679,7 +677,6 @@
                         style="@style/SettingsStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_4sdp"
                         android:drawableStart="@drawable/ic_logout"
                         android:drawableEnd="@drawable/ic_side_arrow"
                         android:text="@string/logout" />

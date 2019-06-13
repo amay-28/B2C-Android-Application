@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.retailer.oneops.R;
 import com.retailer.oneops.auth.model.MAddress;
+import com.retailer.oneops.auth.model.MUser;
 import com.retailer.oneops.checkout.adapter.CheckoutAdapter;
 import com.retailer.oneops.checkout.model.MCart;
 import com.retailer.oneops.checkout.model.MCartDetail;
@@ -56,6 +57,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutAdapt
     private String deliveryType = DIRECT_COURIER_TO_CUSTOMER;
     private String orderType = "";
     private Session session;
+    private MUser loggedInUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutAdapt
     }
 
     private void initialization() {
+        loggedInUser = session.getUserProfile();
         binding.header.setHandler(new CommonClickHandler(activity));
         binding.header.tvMainHeading.setText(R.string.Checkout);
 
@@ -153,19 +156,26 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutAdapt
 
     public void placeOrderClick(String orderType, String deliveryType) {
         if (session.getInventoryType() != null && session.getInventoryType().equalsIgnoreCase("PHYSICAL_INVENTORY")) {
-          sendWithoutVarient();
+            sendWithoutVarient();
         } else {
             MOrderRequest mOrderRequest = new MOrderRequest();
-            mOrderRequest.setAddressId(null);
             mOrderRequest.setPayment_mode(ONLINE);
             mOrderRequest.setPayment_confirmed("true");
             mOrderRequest.setOrder_type(orderType);
             mOrderRequest.setOrder_delivery_address_type(deliveryType);
             mOrderRequest.setOrder_lines(orderLinesList);
-            mOrderRequest.setCustomer_address(getCustomerAddressObject());
+            if (deliveryType.equalsIgnoreCase(STORE_PICKUP)) {
+                mOrderRequest.setAddressId(loggedInUser.getAddress().get(0).getId());
+            } else if (deliveryType.equalsIgnoreCase(HOME_DELIVERY_BY_STORE)){
+                mOrderRequest.setAddressId(loggedInUser.getAddress().get(0).getId());
+                mOrderRequest.setCustomer_address(getCustomerAddressObject());
+            } else {
+                mOrderRequest.setCustomer_address(getCustomerAddressObject());
+            }
+
             checkoutPresenter.onPlaceOrderClick(mOrderRequest);
 
-            if(orderLinesList.get(0).getProductVariantId()==0)
+            if (orderLinesList.get(0).getProductVariantId() == 0)
                 sendWithoutVarient();
         }
 
@@ -187,7 +197,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutAdapt
         MAddress mAddress = new MAddress();
         mAddress.setName(binding.etCustomerName.getText().toString().trim());
         mAddress.setMobileNumber(binding.etCustomerMobileno.getText().toString().trim());
-        mAddress.setPincode(Integer.parseInt(binding.etPincode.getText().toString().trim()));
+        mAddress.setPostalCode(binding.etPincode.getText().toString().trim());
         mAddress.setAddressLine1(binding.etAddLine1.getText().toString().trim());
         mAddress.setAddressLine2(binding.etAddLine2.getText().toString().trim());
         mAddress.setLocality(binding.etLocality.getText().toString().trim());
@@ -208,10 +218,10 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutAdapt
 
             List<Integer> mrpList = new ArrayList<>();
             for (int i = 0; i < mCartDetail.getCart_lines().size(); i++) {
-                mrpList.add(Integer.valueOf(mCartDetail.getCart_lines().get(i).getProduct().getPrice()));
-                orderLinesList.add(setCartListForCheckout(mCartDetail.getCart_lines().get(i).getProductId(),
-                        mCartDetail.getCart_lines().get(i).getProductVariantId()));
-                orderLinesListPh.add(setCartListForCheckoutPh(mCartDetail.getCart_lines().get(i).getProductId()));
+                MCart mCart = mCartDetail.getCart_lines().get(i);
+                mrpList.add((Integer.valueOf(mCart.getProduct().getPrice())) * mCart.getQuantity());
+                orderLinesList.add(setCartListForCheckout(mCart.getProductId(), mCart.getProductVariantId(), mCart.getQuantity()));
+                orderLinesListPh.add(setCartListForCheckoutPh(mCart.getProductId(), mCart.getQuantity()));
             }
 
             binding.tvTotalMrp.setText("Rs. " + String.valueOf(calculateMrp(mrpList)));
@@ -240,9 +250,10 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutAdapt
         Toast.makeText(activity, getString(R.string.order_has_been_placed_successfully), Toast.LENGTH_SHORT).show();
     }
 
-    public MOrderLinesRequest setCartListForCheckout(int productId, int productVariantId) {
+    public MOrderLinesRequest setCartListForCheckout(int productId, int productVariantId, int quantity) {
         MOrderLinesRequest mOrderLines = new MOrderLinesRequest();
         mOrderLines.setProductId(productId);
+        mOrderLines.setQuantity(quantity);
 
         if (productVariantId != 0)
             mOrderLines.setProductVariantId(productVariantId);
@@ -250,9 +261,10 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutAdapt
         return mOrderLines;
     }
 
-    public com.retailer.oneops.checkout.model.physical.MOrderLinesRequest setCartListForCheckoutPh(int productId) {
+    public com.retailer.oneops.checkout.model.physical.MOrderLinesRequest setCartListForCheckoutPh(int productId, int quantity) {
         com.retailer.oneops.checkout.model.physical.MOrderLinesRequest mOrderLines = new com.retailer.oneops.checkout.model.physical.MOrderLinesRequest();
         mOrderLines.setProductId(productId);
+        mOrderLines.setQuantity(quantity);
 
 
         return mOrderLines;
